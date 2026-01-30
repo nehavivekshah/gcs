@@ -877,19 +877,19 @@
               var uniqueBranches = new Set();
               var branchesMap = {};
 
+              $.each(data, function (key, val) {
                 if (val.branch_name) {
                   if (!uniqueBranches.has(val.branch_name)) {
                     uniqueBranches.add(val.branch_name);
                     branchOptions += '<option value="' + val.branch_name + '">' + val.branch_name + '</option>';
                   }
                 } else {
-                   if (!uniqueBranches.has('Main Branch')) {
+                  if (!uniqueBranches.has('Main Branch')) {
                     uniqueBranches.add('Main Branch');
                     branchOptions += '<option value="Main Branch">Main Branch</option>';
                   }
                 }
               });
-              }
               $('#contactBranchFilter').html(branchOptions);
 
               $('#contactTable tbody').html(html);
