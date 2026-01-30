@@ -274,8 +274,8 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modal-content-premium">
         <div class="modal-header modal-header-premium">
-          <h5 class="modal-title modal-title-premium">Contacts for <span id="contactCustomerName" class="fw-bold"></span>
-          </h5>
+          <h5 class="modal-title modal-title-premium">Contacts for&nbsp;<span id="contactCustomerName"
+              class="fw-bold"></span></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-4">
