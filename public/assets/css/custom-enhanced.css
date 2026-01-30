@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #006666;
-  --primary-gradient: linear-gradient(135deg, #006666 0%, #008080 100%);
-  --primary-hover-gradient: linear-gradient(135deg, #004d4d 0%, #006666 100%);
+  --primary-color: #c70204;
+  --primary-gradient: linear-gradient(135deg, #c70204 0%, #e60000 100%);
+  --primary-hover-gradient: linear-gradient(135deg, #a30000 0%, #c70204 100%);
   --secondary-color: #34495e;
   --bg-light: #f8f9fa;
   --text-dark: #2c3e50;
@@ -11,7 +11,7 @@
   --card-hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   --input-bg: #ffffff;
   --input-border: #dfe6e9;
-  --input-focus-border: #006666;
+  --input-focus-border: #c70204;
 }
 
 body {
