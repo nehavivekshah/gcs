@@ -70,7 +70,7 @@
                           </button>
 
                           <div class="dropdown">
-                            <button class="btn btn-sm-custom btn-outline-custom p-0" type="button" data-bs-toggle="dropdown"
+                            <button class="btn btn-sm-custom btn-outline-custom" type="button" data-bs-toggle="dropdown"
                               aria-expanded="false" data-bs-boundary="viewport">
                               <i class="icon-more-alt" style="font-size: 18px; transform: rotate(90deg); color: #666;"></i>
                             </button>

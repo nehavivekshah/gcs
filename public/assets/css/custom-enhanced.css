@@ -310,7 +310,8 @@ body {
 /* --- Dropdown --- */
 
 ul.dropdown-menu.dropdown-menu-end {
-  box-shadow: -22px -1px 5px #00000038 !important;
+  transform: translate(-25px, -27px);
+  box-shadow: 0 -1px 5px #00000038 !important;
 }
 
 .dropdown-menu .dropdown-item {
