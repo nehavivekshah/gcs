@@ -8,57 +8,59 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    function __construct(protected CustomerService $customerService) {}
+    function __construct(protected CustomerService $customerService)
+    {
+    }
 
     function index()
     {
 
-        $customerList  = $this->customerService->index();
-        $stateList  = $this->customerService->getState();
-        $cityList  = $this->customerService->getCity();
-        $areaList  = $this->customerService->getArea();
+        $customerList = $this->customerService->index();
+        $stateList = $this->customerService->getState();
+        $cityList = $this->customerService->getCity();
+        $areaList = $this->customerService->getArea();
         return view('backend.customer.customer-list', compact('customerList', 'stateList', 'cityList', 'areaList'));
     }
 
     function create()
     {
 
-        $areaList  = $this->customerService->getArea();
-        $coordinateList  = $this->customerService->getCoordinateUser();
+        $areaList = $this->customerService->getArea();
+        $coordinateList = $this->customerService->getCoordinateUser();
 
         return view('backend.customer.add-customer', compact('areaList', 'coordinateList'));
     }
 
     public function store(Request $req)
     {
-        $customer_name       = $req->customer_name;
-        $customer_type       = $req->customer_type;
-        $customer_category   = $req->customer_category;
-        $contact_person      = $req->contact_person;
-        $mobile_no           = $req->mobile_no;
-        $email               = $req->email;
-        $website             = $req->website;
+        $customer_name = $req->customer_name;
+        $customer_type = $req->customer_type;
+        $customer_category = $req->customer_category;
+        $contact_person = $req->contact_person;
+        $mobile_no = $req->mobile_no;
+        $email = $req->email;
+        $website = $req->website;
 
-        $address_line_1      = $req->address_line_1;
-        $address_line_2      = $req->address_line_2;
+        $address_line_1 = $req->address_line_1;
+        $address_line_2 = $req->address_line_2;
 
-        $state_id            = $req->state_id;
-        $city_id             = $req->city_id;
-        $area_id             = $req->area_id;
-        $pincode             = $req->pincode;
+        $state_id = $req->state_id;
+        $city_id = $req->city_id;
+        $area_id = $req->area_id;
+        $pincode = $req->pincode;
 
-        $phone_1             = $req->phone_1;
-        $phone_2             = $req->phone_2;
+        $phone_1 = $req->phone_1;
+        $phone_2 = $req->phone_2;
 
-        $gst                 = $req->gst;
-        $pan                 = $req->pan;
-        $vat                 = $req->vat;
-        $cst                 = $req->cst;
+        $gst = $req->gst;
+        $pan = $req->pan;
+        $vat = $req->vat;
+        $cst = $req->cst;
 
-        $fax                 = $req->fax;
-        $credit_days         = $req->credit_days;
-        $date_of_birth       = $req->date_of_birth;
-        $ac_key              = $req->ac_key;
+        $fax = $req->fax;
+        $credit_days = $req->credit_days;
+        $date_of_birth = $req->date_of_birth;
+        $ac_key = $req->ac_key;
         $created_by = session('user_name', 'Guest');
 
         $lastCustomer = $this->customerService->getCustomerId();
@@ -66,36 +68,36 @@ class CustomerController extends Controller
         $customer_code = 'GCS-' . $nextId;
 
         $data = [
-            'customer_name'      => $customer_name,
-            'customer_type'      => $customer_type,
-            'customer_category'  => $customer_category,
-            'contact_person'     => $contact_person,
-            'customer_code'      => $customer_code,
-            'mobile_no'          => $mobile_no,
-            'email'              => $email,
-            'website'            => $website,
+            'customer_name' => $customer_name,
+            'customer_type' => $customer_type,
+            'customer_category' => $customer_category,
+            'contact_person' => $contact_person,
+            'customer_code' => $customer_code,
+            'mobile_no' => $mobile_no,
+            'email' => $email,
+            'website' => $website,
 
-            'address_line_1'     => $address_line_1,
-            'address_line_2'     => $address_line_2,
+            'address_line_1' => $address_line_1,
+            'address_line_2' => $address_line_2,
 
-            'state_id'           => $state_id,
-            'city_id'            => $city_id,
-            'area_id'            => $area_id,
-            'pincode'            => $pincode,
+            'state_id' => $state_id,
+            'city_id' => $city_id,
+            'area_id' => $area_id,
+            'pincode' => $pincode,
 
-            'phone_1'            => $phone_1,
-            'phone_2'            => $phone_2,
+            'phone_1' => $phone_1,
+            'phone_2' => $phone_2,
 
-            'gst'                => $gst,
-            'pan'                => $pan,
-            'vat'                => $vat,
-            'cst'                => $cst,
+            'gst' => $gst,
+            'pan' => $pan,
+            'vat' => $vat,
+            'cst' => $cst,
 
-            'fax'                => $fax,
-            'credit_days'        => $credit_days,
-            'date_of_birth'      => $date_of_birth,
-            'ac_key'             => $ac_key,
-            'created_by'         => $created_by
+            'fax' => $fax,
+            'credit_days' => $credit_days,
+            'date_of_birth' => $date_of_birth,
+            'ac_key' => $ac_key,
+            'created_by' => $created_by
         ];
 
         $this->customerService->store($data);
@@ -110,10 +112,10 @@ class CustomerController extends Controller
         $customers = $this->customerService->edit($uuid);
         $area_id = $customers->area_id;
         $areaDetail = $this->customerService->getAreaById($area_id);
-        $areaList  = $this->customerService->getArea();
+        $areaList = $this->customerService->getArea();
         $cityList = $this->customerService->getCityId($areaDetail->city_id);
         $stateList = $this->customerService->getStateId($areaDetail->state_id);
-        $coordinateList  = $this->customerService->getCoordinateUser();
+        $coordinateList = $this->customerService->getCoordinateUser();
 
         return view('backend/customer/edit-customer', compact('customers', 'stateList', 'cityList', 'areaList', 'coordinateList'));
     }
@@ -121,56 +123,56 @@ class CustomerController extends Controller
     function update(Request $req, $uuid)
     {
 
-        $customer_name       = $req->customer_name;
-        $customer_type       = $req->customer_type;
-        $customer_category   = $req->customer_category;
-        $contact_person      = $req->contact_person;
-        $mobile_no           = $req->mobile_no;
-        $email               = $req->email;
-        $website             = $req->website;
-        $address_line_1      = $req->address_line_1;
-        $address_line_2      = $req->address_line_2;
-        $state_id            = $req->state_id;
-        $city_id             = $req->city_id;
-        $area_id             = $req->area_id;
-        $pincode             = $req->pincode;
-        $phone_1             = $req->phone_1;
-        $phone_2             = $req->phone_2;
-        $gst                 = $req->gst;
-        $pan                 = $req->pan;
-        $vat                 = $req->vat;
-        $cst                 = $req->cst;
-        $fax                 = $req->fax;
-        $credit_days         = $req->credit_days;
-        $date_of_birth       = $req->date_of_birth;
-        $ac_key              = $req->ac_key;
+        $customer_name = $req->customer_name;
+        $customer_type = $req->customer_type;
+        $customer_category = $req->customer_category;
+        $contact_person = $req->contact_person;
+        $mobile_no = $req->mobile_no;
+        $email = $req->email;
+        $website = $req->website;
+        $address_line_1 = $req->address_line_1;
+        $address_line_2 = $req->address_line_2;
+        $state_id = $req->state_id;
+        $city_id = $req->city_id;
+        $area_id = $req->area_id;
+        $pincode = $req->pincode;
+        $phone_1 = $req->phone_1;
+        $phone_2 = $req->phone_2;
+        $gst = $req->gst;
+        $pan = $req->pan;
+        $vat = $req->vat;
+        $cst = $req->cst;
+        $fax = $req->fax;
+        $credit_days = $req->credit_days;
+        $date_of_birth = $req->date_of_birth;
+        $ac_key = $req->ac_key;
         $modified_by = session('user_name', 'Guest');
 
         $data = [
-            'customer_name'      => $customer_name,
-            'customer_type'      => $customer_type,
-            'customer_category'  => $customer_category,
-            'contact_person'     => $contact_person,
-            'mobile_no'          => $mobile_no,
-            'email'              => $email,
-            'website'            => $website,
-            'address_line_1'     => $address_line_1,
-            'address_line_2'     => $address_line_2,
-            'state_id'           => $state_id,
-            'city_id'            => $city_id,
-            'area_id'            => $area_id,
-            'pincode'            => $pincode,
-            'phone_1'            => $phone_1,
-            'phone_2'            => $phone_2,
-            'gst'                => $gst,
-            'pan'                => $pan,
-            'vat'                => $vat,
-            'cst'                => $cst,
-            'fax'                => $fax,
-            'credit_days'        => $credit_days,
-            'date_of_birth'      => $date_of_birth,
-            'ac_key'             => $ac_key,
-            'modified_by'         => $modified_by
+            'customer_name' => $customer_name,
+            'customer_type' => $customer_type,
+            'customer_category' => $customer_category,
+            'contact_person' => $contact_person,
+            'mobile_no' => $mobile_no,
+            'email' => $email,
+            'website' => $website,
+            'address_line_1' => $address_line_1,
+            'address_line_2' => $address_line_2,
+            'state_id' => $state_id,
+            'city_id' => $city_id,
+            'area_id' => $area_id,
+            'pincode' => $pincode,
+            'phone_1' => $phone_1,
+            'phone_2' => $phone_2,
+            'gst' => $gst,
+            'pan' => $pan,
+            'vat' => $vat,
+            'cst' => $cst,
+            'fax' => $fax,
+            'credit_days' => $credit_days,
+            'date_of_birth' => $date_of_birth,
+            'ac_key' => $ac_key,
+            'modified_by' => $modified_by
         ];
 
         $update = $this->customerService->update($uuid, $data);
@@ -206,39 +208,39 @@ class CustomerController extends Controller
     public function addCustomerBranch(Request $req)
     {
 
-        $customer_uuid   = $req->customer_uuid;
-        $customer_id     = $req->customer_id;
-        $branch_name     = $req->branch_name;
-        $contact_person  = $req->contact_person;
-        $mobile_no       = $req->mobile_no;
-        $customer_code   = $req->customer_code;
-        $email           = $req->email;
-        $phone           = $req->phone;
-        $address_line_1  = $req->address_line_1;
-        $address_line_2  = $req->address_line_2;
-        $state_id        = $req->state_id;
-        $city_id         = $req->city_id;
-        $area_id         = $req->area_id;
-        $pincode         = $req->pincode;
-        $fax             = $req->fax;
+        $customer_uuid = $req->customer_uuid;
+        $customer_id = $req->customer_id;
+        $branch_name = $req->branch_name;
+        $contact_person = $req->contact_person;
+        $mobile_no = $req->mobile_no;
+        $customer_code = $req->customer_code;
+        $email = $req->email;
+        $phone = $req->phone;
+        $address_line_1 = $req->address_line_1;
+        $address_line_2 = $req->address_line_2;
+        $state_id = $req->state_id;
+        $city_id = $req->city_id;
+        $area_id = $req->area_id;
+        $pincode = $req->pincode;
+        $fax = $req->fax;
         $created_by = session('user_name', 'Guest');
 
         $data = [
-            'customer_id'     => $customer_id,
-            'branch_name'     => $branch_name,
-            'contact_person'  => $contact_person,
-            'mobile_no'       => $mobile_no,
-            'customer_code'   => $customer_code,
-            'email'           => $email,
-            'phone'           => $phone,
-            'address_line_1'  => $address_line_1,
-            'address_line_2'  => $address_line_2,
-            'state_id'        => $state_id,
-            'city_id'         => $city_id,
-            'area_id'         => $area_id,
-            'pincode'         => $pincode,
-            'fax'             => $fax,
-            'created_by'      => $created_by
+            'customer_id' => $customer_id,
+            'branch_name' => $branch_name,
+            'contact_person' => $contact_person,
+            'mobile_no' => $mobile_no,
+            'customer_code' => $customer_code,
+            'email' => $email,
+            'phone' => $phone,
+            'address_line_1' => $address_line_1,
+            'address_line_2' => $address_line_2,
+            'state_id' => $state_id,
+            'city_id' => $city_id,
+            'area_id' => $area_id,
+            'pincode' => $pincode,
+            'fax' => $fax,
+            'created_by' => $created_by
         ];
 
         $this->customerService->addCustomerBranch($data);
@@ -249,37 +251,37 @@ class CustomerController extends Controller
     function editCustomerBranch(Request $req)
     {
 
-        $id              = $req->branch_id;
-        $branch_name     = $req->branch_name;
-        $contact_person  = $req->contact_person;
-        $mobile_no       = $req->mobile_no;
-        $customer_code   = $req->customer_code;
-        $email           = $req->email;
-        $phone           = $req->phone;
-        $address_line_1  = $req->address_line_1;
-        $address_line_2  = $req->address_line_2;
-        $state_id        = $req->state_id;
-        $city_id         = $req->city_id;
-        $area_id         = $req->area_id;
-        $pincode         = $req->pincode;
-        $fax             = $req->fax;
+        $id = $req->branch_id;
+        $branch_name = $req->branch_name;
+        $contact_person = $req->contact_person;
+        $mobile_no = $req->mobile_no;
+        $customer_code = $req->customer_code;
+        $email = $req->email;
+        $phone = $req->phone;
+        $address_line_1 = $req->address_line_1;
+        $address_line_2 = $req->address_line_2;
+        $state_id = $req->state_id;
+        $city_id = $req->city_id;
+        $area_id = $req->area_id;
+        $pincode = $req->pincode;
+        $fax = $req->fax;
         $modified_by = session('user_name', 'Guest');
 
         $data = [
-            'branch_name'     => $branch_name,
-            'contact_person'  => $contact_person,
-            'mobile_no'       => $mobile_no,
-            'customer_code'   => $customer_code,
-            'email'           => $email,
-            'phone'           => $phone,
-            'address_line_1'  => $address_line_1,
-            'address_line_2'  => $address_line_2,
-            'state_id'        => $state_id,
-            'city_id'         => $city_id,
-            'area_id'         => $area_id,
-            'pincode'         => $pincode,
-            'fax'             => $fax,
-            'modified_by'      => $modified_by
+            'branch_name' => $branch_name,
+            'contact_person' => $contact_person,
+            'mobile_no' => $mobile_no,
+            'customer_code' => $customer_code,
+            'email' => $email,
+            'phone' => $phone,
+            'address_line_1' => $address_line_1,
+            'address_line_2' => $address_line_2,
+            'state_id' => $state_id,
+            'city_id' => $city_id,
+            'area_id' => $area_id,
+            'pincode' => $pincode,
+            'fax' => $fax,
+            'modified_by' => $modified_by
         ];
 
         $update = $this->customerService->editCustomerBranch($id, $data);
@@ -371,23 +373,23 @@ class CustomerController extends Controller
     public function addCustomerAmcProduct(Request $request)
     {
         // Collect form inputs
-        $customer_id        = $request->customer_id;
-        $branch_id          = $request->branch_id;
-        $amc_product_id     = $request->amc_product_id;
-        $product_type       = $request->product_type;
-        $product_category   = $request->product_category;
-        $department         = $request->department;
-        $user_name          = $request->user_name;
-        $description        = $request->description;
-        $quantity           = $request->quantity;
-        $created_by         = session('user_name', 'Guest');
+        $customer_id = $request->customer_id;
+        $branch_id = $request->branch_id;
+        $amc_product_id = $request->amc_product_id;
+        $product_type = $request->product_type;
+        $product_category = $request->product_category;
+        $department = $request->department;
+        $user_name = $request->user_name;
+        $description = $request->description;
+        $quantity = $request->quantity;
+        $created_by = session('user_name', 'Guest');
 
         // Convert dates from "d M Y" (Flatpickr) to "Y-m-d" (MySQL)
-        $amc_start_date     = $request->amc_start_date ? date('Y-m-d', strtotime($request->amc_start_date)) : null;
-        $amc_end_date       = $request->amc_end_date ? date('Y-m-d', strtotime($request->amc_end_date)) : null;
-        $service_date_1     = $request->service_date_1 ? date('Y-m-d', strtotime($request->service_date_1)) : null;
-        $service_date_2     = $request->service_date_2 ? date('Y-m-d', strtotime($request->service_date_2)) : null;
-        $service_date_3     = $request->service_date_3 ? date('Y-m-d', strtotime($request->service_date_3)) : null;
+        $amc_start_date = $request->amc_start_date ? date('Y-m-d', strtotime($request->amc_start_date)) : null;
+        $amc_end_date = $request->amc_end_date ? date('Y-m-d', strtotime($request->amc_end_date)) : null;
+        $service_date_1 = $request->service_date_1 ? date('Y-m-d', strtotime($request->service_date_1)) : null;
+        $service_date_2 = $request->service_date_2 ? date('Y-m-d', strtotime($request->service_date_2)) : null;
+        $service_date_3 = $request->service_date_3 ? date('Y-m-d', strtotime($request->service_date_3)) : null;
 
         // Service engineers
         $service_engineer_1 = $request->service_engineer_1;
@@ -396,24 +398,24 @@ class CustomerController extends Controller
 
         // Prepare data array
         $data = [
-            'customer_id'        => $customer_id,
-            'branch_id'          => $branch_id,
-            'amc_product_id'     => $amc_product_id,
-            'product_type'       => $product_type,
-            'product_category'   => $product_category,
-            'department'         => $department,
-            'user_name'          => $user_name,
-            'description'        => $description,
-            'amc_start_date'     => $amc_start_date,
-            'amc_end_date'       => $amc_end_date,
-            'service_date_1'     => $service_date_1,
+            'customer_id' => $customer_id,
+            'branch_id' => $branch_id,
+            'amc_product_id' => $amc_product_id,
+            'product_type' => $product_type,
+            'product_category' => $product_category,
+            'department' => $department,
+            'user_name' => $user_name,
+            'description' => $description,
+            'amc_start_date' => $amc_start_date,
+            'amc_end_date' => $amc_end_date,
+            'service_date_1' => $service_date_1,
             'service_engineer_1' => $service_engineer_1,
-            'service_date_2'     => $service_date_2,
+            'service_date_2' => $service_date_2,
             'service_engineer_2' => $service_engineer_2,
-            'service_date_3'     => $service_date_3,
+            'service_date_3' => $service_date_3,
             'service_engineer_3' => $service_engineer_3,
-            'quantity'           => $quantity,
-            'created_by'         => $created_by,
+            'quantity' => $quantity,
+            'created_by' => $created_by,
         ];
 
         // Call your service to save
@@ -423,7 +425,7 @@ class CustomerController extends Controller
             'admin.customer.amc.product.list',
             [
                 'customer_id' => $customer_id,
-                'branch_id'   => $branch_id,
+                'branch_id' => $branch_id,
                 'amc_product_id' => $amc_product_id
             ]
         )->with('success', 'Product added successfully');
@@ -433,24 +435,24 @@ class CustomerController extends Controller
     function editCustomerAmcProduct(Request $request)
     {
 
-        $id                 = $request->id;
-        $customer_id        = $request->customer_id;
-        $branch_id          = $request->branch_id;
-        $amc_product_id     = $request->amc_product_id;
-        $product_type       = $request->product_type;
-        $product_category   = $request->product_category;
-        $department         = $request->department;
-        $user_name          = $request->user_name;
-        $description        = $request->description;
-        $quantity           = $request->quantity;
-        $modified_by         = session('user_name', 'Guest');
+        $id = $request->id;
+        $customer_id = $request->customer_id;
+        $branch_id = $request->branch_id;
+        $amc_product_id = $request->amc_product_id;
+        $product_type = $request->product_type;
+        $product_category = $request->product_category;
+        $department = $request->department;
+        $user_name = $request->user_name;
+        $description = $request->description;
+        $quantity = $request->quantity;
+        $modified_by = session('user_name', 'Guest');
 
         // Convert dates from "d M Y" (Flatpickr) to "Y-m-d" (MySQL)
-        $amc_start_date     = $request->amc_start_date ? date('Y-m-d', strtotime($request->amc_start_date)) : null;
-        $amc_end_date       = $request->amc_end_date ? date('Y-m-d', strtotime($request->amc_end_date)) : null;
-        $service_date_1     = $request->service_date_1 ? date('Y-m-d', strtotime($request->service_date_1)) : null;
-        $service_date_2     = $request->service_date_2 ? date('Y-m-d', strtotime($request->service_date_2)) : null;
-        $service_date_3     = $request->service_date_3 ? date('Y-m-d', strtotime($request->service_date_3)) : null;
+        $amc_start_date = $request->amc_start_date ? date('Y-m-d', strtotime($request->amc_start_date)) : null;
+        $amc_end_date = $request->amc_end_date ? date('Y-m-d', strtotime($request->amc_end_date)) : null;
+        $service_date_1 = $request->service_date_1 ? date('Y-m-d', strtotime($request->service_date_1)) : null;
+        $service_date_2 = $request->service_date_2 ? date('Y-m-d', strtotime($request->service_date_2)) : null;
+        $service_date_3 = $request->service_date_3 ? date('Y-m-d', strtotime($request->service_date_3)) : null;
 
         // Service engineers
         $service_engineer_1 = $request->service_engineer_1;
@@ -459,21 +461,21 @@ class CustomerController extends Controller
 
         // Prepare data array
         $data = [
-            'product_type'       => $product_type,
-            'product_category'   => $product_category,
-            'department'         => $department,
-            'user_name'          => $user_name,
-            'description'        => $description,
-            'amc_start_date'     => $amc_start_date,
-            'amc_end_date'       => $amc_end_date,
-            'service_date_1'     => $service_date_1,
+            'product_type' => $product_type,
+            'product_category' => $product_category,
+            'department' => $department,
+            'user_name' => $user_name,
+            'description' => $description,
+            'amc_start_date' => $amc_start_date,
+            'amc_end_date' => $amc_end_date,
+            'service_date_1' => $service_date_1,
             'service_engineer_1' => $service_engineer_1,
-            'service_date_2'     => $service_date_2,
+            'service_date_2' => $service_date_2,
             'service_engineer_2' => $service_engineer_2,
-            'service_date_3'     => $service_date_3,
+            'service_date_3' => $service_date_3,
             'service_engineer_3' => $service_engineer_3,
-            'quantity'           => $quantity,
-            'modified_by'         => $modified_by,
+            'quantity' => $quantity,
+            'modified_by' => $modified_by,
         ];
 
         $update = $this->customerService->editCustomerProduct($id, $data);
@@ -483,7 +485,7 @@ class CustomerController extends Controller
                 'admin.customer.amc.product.list',
                 [
                     'customer_id' => $customer_id,
-                    'branch_id'   => $branch_id,
+                    'branch_id' => $branch_id,
                     'amc_product_id' => $amc_product_id
                 ]
             )->with('success', 'Product update successfully');
@@ -492,7 +494,7 @@ class CustomerController extends Controller
                 'admin.customer.amc.product.list',
                 [
                     'customer_id' => $customer_id,
-                    'branch_id'   => $branch_id,
+                    'branch_id' => $branch_id,
                     'amc_product_id' => $amc_product_id
                 ]
             )->with('success', 'Product not update');
@@ -503,7 +505,7 @@ class CustomerController extends Controller
     function DeleteCustomerAmcProduct($uuid)
     {
 
-        $productDetails  = $this->customerService->customerProductById($uuid);
+        $productDetails = $this->customerService->customerProductById($uuid);
         $customer_id = $productDetails->customer_id;
         $branch_id = $productDetails->branch_id;
         $amc_product_id = $productDetails->amc_product_id;
@@ -511,11 +513,11 @@ class CustomerController extends Controller
         $delete = $this->customerService->deleteCustomerProduct($uuid);
 
         if ($delete) {
-            return  redirect()->route(
+            return redirect()->route(
                 'admin.customer.amc.product.list',
                 [
                     'customer_id' => $customer_id,
-                    'branch_id'   => $branch_id,
+                    'branch_id' => $branch_id,
                     'amc_product_id' => $amc_product_id
                 ]
             )->with('success', 'Product not update');
@@ -524,7 +526,7 @@ class CustomerController extends Controller
                 'admin.customer.amc.product.list',
                 [
                     'customer_id' => $customer_id,
-                    'branch_id'   => $branch_id,
+                    'branch_id' => $branch_id,
                     'amc_product_id' => $amc_product_id
                 ]
             )->with('success', 'Product not update');
@@ -543,25 +545,27 @@ class CustomerController extends Controller
     public function addCustomerContact(Request $req)
     {
 
-        $customer_uuid   = $req->customer_uuid;
-        $customer_id     = $req->customer_id;
-        $contact_name     = $req->contact_name;
-        $department     = $req->department;
-        $designation     = $req->designation;
-        $mobile_no     = $req->mobile_no;
-        $email_id     = $req->email_id;
-        $date_of_birth     = $req->date_of_birth;
+        $customer_uuid = $req->customer_uuid;
+        $customer_id = $req->customer_id;
+        $branch_id = $req->branch_id;
+        $contact_name = $req->contact_name;
+        $department = $req->department;
+        $designation = $req->designation;
+        $mobile_no = $req->mobile_no;
+        $email_id = $req->email_id;
+        $date_of_birth = $req->date_of_birth;
         $created_by = session('user_name', 'Guest');
 
         $data = [
-            'customer_id'     => $customer_id,
-            'contact_name'    => $contact_name,
-            'department'      => $department,
-            'designation'      => $designation,
-            'mobile_no'       => $mobile_no,
-            'email_id'        => $email_id,
-            'date_of_birth'   => $date_of_birth,
-            'created_by'      => $created_by
+            'customer_id' => $customer_id,
+            'branch_id' => $branch_id,
+            'contact_name' => $contact_name,
+            'department' => $department,
+            'designation' => $designation,
+            'mobile_no' => $mobile_no,
+            'email_id' => $email_id,
+            'date_of_birth' => $date_of_birth,
+            'created_by' => $created_by
         ];
 
         $this->customerService->addCustomerContact($data);
@@ -572,23 +576,25 @@ class CustomerController extends Controller
     function editCustomerContact(Request $req)
     {
 
-        $id     = $req->id;
-        $contact_name     = $req->contact_name;
-        $department     = $req->department;
-        $designation     = $req->designation;
-        $mobile_no     = $req->mobile_no;
-        $email_id     = $req->email_id;
-        $date_of_birth     = $req->date_of_birth;
+        $id = $req->id;
+        $contact_name = $req->contact_name;
+        $department = $req->department;
+        $designation = $req->designation;
+        $mobile_no = $req->mobile_no;
+        $email_id = $req->email_id;
+        $date_of_birth = $req->date_of_birth;
         $modified_by = session('user_name', 'Guest');
+        $branch_id = $req->branch_id; // Added this line
 
         $data = [
-            'contact_name'    => $contact_name,
-            'department'      => $department,
-            'designation'      => $designation,
-            'mobile_no'       => $mobile_no,
-            'email_id'        => $email_id,
-            'date_of_birth'   => $date_of_birth,
-            'modified_by'      => $modified_by
+            'branch_id' => $branch_id, // Modified this line
+            'contact_name' => $contact_name,
+            'department' => $department,
+            'designation' => $designation,
+            'mobile_no' => $mobile_no,
+            'email_id' => $email_id,
+            'date_of_birth' => $date_of_birth,
+            'modified_by' => $modified_by
         ];
 
 
@@ -603,13 +609,14 @@ class CustomerController extends Controller
         $customer_id = $customerBranch->customer_id;
         $branch_id = $customerBranch->id;
         $customer = $this->customerService->getCustomerById($customer_id);
-        $customerBranchContact = $this->customerService->getCustomerBranchContact($customer_id,$branch_id);
+        $customerBranchContact = $this->customerService->getCustomerBranchContact($customer_id, $branch_id);
 
-        return view('backend.customer.customer-branch-contact-list', compact('customer','customerBranch', 'customerBranchContact'));
-        
+        return view('backend.customer.customer-branch-contact-list', compact('customer', 'customerBranch', 'customerBranchContact'));
+
     }
 
-    function addCustomerBranchContact(Request $request){
+    function addCustomerBranchContact(Request $request)
+    {
 
         $uuid = $request->uuid;
         $customer_id = $request->customer_id;
@@ -620,13 +627,19 @@ class CustomerController extends Controller
         $designation = $request->designation;
         $created_by = session('user_name', 'Guest');
 
-        $data = ['customer_id' => $customer_id, 'branch_id' => $branch_id,
-                'contact_name' => $contact_name, 'mobile_no' => $mobile_no,
-                'email_id' => $email_id,'designation' => $designation, 'created_by' => $created_by];
+        $data = [
+            'customer_id' => $customer_id,
+            'branch_id' => $branch_id,
+            'contact_name' => $contact_name,
+            'mobile_no' => $mobile_no,
+            'email_id' => $email_id,
+            'designation' => $designation,
+            'created_by' => $created_by
+        ];
 
         $this->customerService->addCustomerBranchContact($data);
 
-        return redirect()->route('admin.customer.branch.contact',['uuid' => $uuid]);
+        return redirect()->route('admin.customer.branch.contact', ['uuid' => $uuid]);
 
     }
 }

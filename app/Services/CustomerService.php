@@ -19,7 +19,9 @@ use App\Models\CustomerBranchContact;
 class CustomerService
 {
 
-     function __construct(protected CustomerRepository $customerRepository) {}
+     function __construct(protected CustomerRepository $customerRepository)
+     {
+     }
 
      public function index()
      {
@@ -66,9 +68,13 @@ class CustomerService
           return Area::select('id', 'uuid', 'city_id', 'area')->where('city_id', $id)->get();
      }
 
-     public function getCustomerContact($customer_id){
+     public function getCustomerContact($customer_id)
+     {
 
-          return CustomerContact::select('customer_contacts.*')->where('customer_id', $customer_id)->get();
+          return CustomerContact::select('customer_contacts.*', 'customer_branches.branch_name')
+               ->leftJoin('customer_branches', 'customer_branches.id', '=', 'customer_contacts.branch_id')
+               ->where('customer_contacts.customer_id', $customer_id)
+               ->get();
      }
 
      public function getCustomerBranch($customer_id)
@@ -218,7 +224,8 @@ class CustomerService
           return CustomerContact::where('id', $id)->update($data);
      }
 
-     function getCustomerBranchContact($customer_id,$branch_id){
+     function getCustomerBranchContact($customer_id, $branch_id)
+     {
           return CustomerBranchContact::select('customer_branch_contacts.*')->where(['customer_id' => $customer_id, 'branch_id' => $branch_id])->get();
      }
 
