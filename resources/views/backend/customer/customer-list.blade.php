@@ -624,10 +624,10 @@
 
 @push('scripts')
 
-  <link rel="stylesheet" href="{{ asset('assets/css/vendors/select2.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/assets/css/vendors/select2.css') }}">
 
   <!-- Select2 JS -->
-  <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
+  <script src="{{ asset('public/assets/js/select2/select2.full.min.js') }}"></script>
 
   <script>
     $(document).ready(function () {
