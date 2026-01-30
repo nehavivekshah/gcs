@@ -213,7 +213,11 @@ body {
   font-size: 1.25rem;
   display: flex;
   align-items: center;
-  color: white;
+  color: white !important;
+}
+
+.modal-title-premium i {
+  color: white !important;
 }
 
 .btn-close-white {
