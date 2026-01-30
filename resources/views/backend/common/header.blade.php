@@ -2,12 +2,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description"
-  content="Riho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+  content="GCS admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
 <meta name="keywords"
-  content="admin template, Riho admin template, dashboard template, flat admin template, responsive admin template, web app">
+  content="admin template, GCS admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="pixelstrap">
-<link rel="icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
-<link rel="shortcut icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
+<!-- <link rel="icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon"> -->
 <title>GCS - CRM</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
