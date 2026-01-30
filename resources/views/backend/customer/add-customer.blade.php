@@ -7,6 +7,12 @@
         <div class="col-6">
           <h4>Add Customer</h4>
         </div>
+        <div class="col-6">
+          <ol class="breadcrumb justify-content-end">
+            <li class="breadcrumb-item"><a href="{{ route('admin.customer.index') }}">Customer List</a></li>
+            <li class="breadcrumb-item active">Add Customer</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
@@ -14,207 +20,181 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xl-12">
-        <div class="card card-premium height-equal">
-          <div class="card-body">
+        <div class="card card-premium">
+          <div class="card-body p-4">
 
-            <form class="row g-3 needs-validation custom-input" novalidate method="post"
-              action="{{ route('admin.customer.store') }}">
+            <form class="row g-4 needs-validation" novalidate method="post" action="{{ route('admin.customer.store') }}">
               @csrf
 
-              <div class="row gy-3">
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
-                </div>
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Customer Name</label>
-                  <input type="text" class="form-control form-control-premium" name="customer_name"
-                    value="{{ old('customer_name') }}">
-                  <div class="invalid-feedback">@error('customer_name') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Customer Type</label>
-                  <select class="form-control form-control-premium" name="customer_type">
-                    <option value="">Select Type</option>
-                    <option value="GCS">GCS</option>
-                    <option value="NON GCS">NON GCS</option>
-                  </select>
-                  <div class="invalid-feedback">@error('customer_type') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Customer Category</label>
-                  <select class="form-control form-control-premium" name="customer_category">
-                    <option value="">Select Category</option>
-                    <option value="Corporate">Corporate</option>
-                    <option value="Semi-Corporate">Semi-Corporate</option>
-                    <option value="In-House">In-House</option>
-                  </select>
-                  <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
-                </div>
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Contact Person</label>
-                  <input type="text" class="form-control form-control-premium" name="contact_person"
-                    value="{{ old('contact_person') }}">
-                  <div class="invalid-feedback">@error('contact_person') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Mobile No</label>
-                  <input type="text" class="form-control form-control-premium" name="mobile_no"
-                    value="{{ old('mobile_no') }}">
-                  <div class="invalid-feedback">@error('mobile_no') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Email</label>
-                  <input type="email" class="form-control form-control-premium" name="email" value="{{ old('email') }}">
-                  <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
-                </div>
-                <div class="col-6">
-                  <label class="form-label form-label-premium">Address Line 1</label>
-                  <input type="text" class="form-control form-control-premium" name="address_line_1"
-                    value="{{ old('address_line_1') }}">
-                  <div class="invalid-feedback">@error('address_line_1') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-6">
-                  <label class="form-label form-label-premium">Address Line 2</label>
-                  <input type="text" class="form-control form-control-premium" name="address_line_2"
-                    value="{{ old('address_line_2') }}">
-                  <div class="invalid-feedback">@error('address_line_2') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-map me-2"></i>Location</h5>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Area</label>
-                  <select class="form-control form-control-premium select2" id="area_id" name="area_id">
-                    <option value="">Select Area</option>
-                    @foreach($areaList as $areas)
-                      <option value="{{ $areas->id }}">{{ $areas->area }}</option>
-                    @endforeach
-                  </select>
-                  <div class="invalid-feedback">@error('area_id') {{ $message }} @enderror</div>
-                </div>
-
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">City</label>
-                  <select class="form-control form-control-premium select2" id="city_id" name="city_id">
-                    <option value="">Select City</option>
-                  </select>
-                  <div class="invalid-feedback">@error('city_id') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">State</label>
-                  <select class="form-control form-control-premium select2" id="state_id" name="state_id">
-                    <option value="">Select State</option>
-
-                  </select>
-                  <div class="invalid-feedback">@error('state_id') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Pincode</label>
-                  <input type="text" class="form-control form-control-premium" name="pincode"
-                    value="{{ old('pincode') }}">
-                  <div class="invalid-feedback">@error('pincode') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-headphone-alt me-2"></i>Communication</h5>
-                </div>
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Phone 1</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_1"
-                    value="{{ old('phone_1') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Phone 2</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_2"
-                    value="{{ old('phone_2') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Website</label>
-                  <input type="text" class="form-control form-control-premium" name="website"
-                    value="{{ old('website') }}">
-                </div>
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-file-text me-2"></i>Tax Details</h5>
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">GST</label>
-                  <input type="text" class="form-control form-control-premium" name="gst" value="{{ old('gst') }}">
-                </div>
-                <!-- <div class="col-4">
-                  <label class="form-label form-label-premium">PAN</label>
-                  <input type="text" class="form-control form-control-premium" name="pan" value="{{ old('pan') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">VAT</label>
-                  <input type="text" class="form-control form-control-premium" name="vat" value="{{ old('vat') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">CST</label>
-                  <input type="text" class="form-control form-control-premium" name="cst" value="{{ old('cst') }}">
-                </div> -->
-
-                <div class="col-12">
-                  <h5 class="section-title"><i class="icon-menu me-2"></i>Other Details</h5>
-                </div>
-                <!-- <div class="col-4">
-                  <label class="form-label form-label-premium">Fax</label>
-                  <input type="text" class="form-control form-control-premium" name="fax" value="{{ old('fax') }}">
-                </div> -->
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Credit Days</label>
-                  <input type="text" class="form-control form-control-premium" name="credit_days"
-                    value="{{ old('credit_days') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Date of Birth</label>
-                  <input type="date" class="form-control form-control-premium" name="date_of_birth"
-                    value="{{ old('date_of_birth') }}">
-                </div>
-
-                <div class="col-4">
-                  <label class="form-label form-label-premium">Account Key</label>
-                  <select class="form-control form-control-premium" name="ac_key">
-                    <option value="">Select</option>
-                    @foreach($coordinateList as $coordinate)
-                      <option value="{{ $coordinate->id }}">{{ $coordinate->outlook_email }}</option>
-                    @endforeach
-                  </select>
-                </div>
-
+              <!-- Basic Info -->
+              <div class="col-12">
+                <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
               </div>
 
+              <div class="col-md-4">
+                <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-premium" name="customer_name"
+                  value="{{ old('customer_name') }}" placeholder="Enter customer name" required>
+                <div class="invalid-feedback">@error('customer_name') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Customer Type</label>
+                <select class="form-control form-control-premium" name="customer_type">
+                  <option value="">Select Type</option>
+                  <option value="GCS">GCS</option>
+                  <option value="NON GCS">NON GCS</option>
+                </select>
+                <div class="invalid-feedback">@error('customer_type') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Customer Category</label>
+                <select class="form-control form-control-premium" name="customer_category">
+                  <option value="">Select Category</option>
+                  <option value="Corporate">Corporate</option>
+                  <option value="Semi-Corporate">Semi-Corporate</option>
+                  <option value="In-House">In-House</option>
+                </select>
+                <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+              </div>
+
+              <!-- Contact Details -->
               <div class="col-12 mt-4">
-                <div class="d-flex justify-content-end">
-                  <button class="btn btn-primary-custom btn-lg">
-                    Submit
-                  </button>
+                <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Contact Person</label>
+                <input type="text" class="form-control form-control-premium" name="contact_person"
+                  value="{{ old('contact_person') }}" placeholder="Person name">
+                <div class="invalid-feedback">@error('contact_person') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Mobile No</label>
+                <input type="text" class="form-control form-control-premium" name="mobile_no"
+                  value="{{ old('mobile_no') }}" placeholder="10-digit mobile number">
+                <div class="invalid-feedback">@error('mobile_no') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Email</label>
+                <input type="email" class="form-control form-control-premium" name="email" value="{{ old('email') }}"
+                  placeholder="example@domain.com">
+                <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
+              </div>
+
+              <!-- Address -->
+              <div class="col-12 mt-4">
+                <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Address Line 1</label>
+                <textarea class="form-control form-control-premium" name="address_line_1" rows="2"
+                  placeholder="Street, building, etc.">{{ old('address_line_1') }}</textarea>
+                <div class="invalid-feedback">@error('address_line_1') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Address Line 2</label>
+                <textarea class="form-control form-control-premium" name="address_line_2" rows="2"
+                  placeholder="Landmark, area, etc.">{{ old('address_line_2') }}</textarea>
+                <div class="invalid-feedback">@error('address_line_2') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Area</label>
+                <select class="form-control form-control-premium select2" id="area_id" name="area_id">
+                  <option value="">Select Area</option>
+                  @foreach($areaList as $areas)
+                    <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+                  @endforeach
+                </select>
+                <div class="invalid-feedback">@error('area_id') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">City</label>
+                <select class="form-control form-control-premium select2" id="city_id" name="city_id">
+                  <option value="">Select City</option>
+                </select>
+                <div class="invalid-feedback">@error('city_id') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">State</label>
+                <select class="form-control form-control-premium select2" id="state_id" name="state_id">
+                  <option value="">Select State</option>
+                </select>
+                <div class="invalid-feedback">@error('state_id') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Pincode</label>
+                <input type="text" class="form-control form-control-premium" name="pincode" value="{{ old('pincode') }}"
+                  placeholder="6-digit pincode">
+                <div class="invalid-feedback">@error('pincode') {{ $message }} @enderror</div>
+              </div>
+
+              <!-- Communication -->
+              <div class="col-12 mt-4">
+                <h5 class="section-title"><i class="icon-headphone-alt me-2"></i>Communication</h5>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Phone 1</label>
+                <input type="text" class="form-control form-control-premium" name="phone_1" value="{{ old('phone_1') }}">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Phone 2</label>
+                <input type="text" class="form-control form-control-premium" name="phone_2" value="{{ old('phone_2') }}">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label-premium">Website</label>
+                <input type="text" class="form-control form-control-premium" name="website" value="{{ old('website') }}"
+                  placeholder="www.website.com">
+              </div>
+
+              <!-- Other Details -->
+              <div class="col-12 mt-4">
+                <h5 class="section-title"><i class="icon-menu me-2"></i>Other Details</h5>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">GST No</label>
+                <input type="text" class="form-control form-control-premium" name="gst" value="{{ old('gst') }}">
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Credit Days</label>
+                <input type="number" class="form-control form-control-premium" name="credit_days"
+                  value="{{ old('credit_days') }}">
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Date of Birth</label>
+                <input type="date" class="form-control form-control-premium" name="date_of_birth"
+                  value="{{ old('date_of_birth') }}">
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Account Key</label>
+                <select class="form-control form-control-premium" name="ac_key">
+                  <option value="">Select Account</option>
+                  @foreach($coordinateList as $coordinate)
+                    <option value="{{ $coordinate->id }}">{{ $coordinate->outlook_email }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="col-12 mt-5">
+                <div class="d-flex justify-content-end gap-2">
+                  <a href="{{ route('admin.customer.index') }}" class="btn btn-outline-custom px-4">Cancel</a>
+                  <button class="btn btn-primary-custom px-4">Submit Customer</button>
                 </div>
               </div>
 
@@ -282,6 +262,5 @@
 
     });
   </script>
-
 
 @endpush

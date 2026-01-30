@@ -1,105 +1,89 @@
 :root {
   --primary-color: #bf0103;
-  --primary-hover: #9e0002;
-  --secondary-color: #6c757d;
-  --bg-soft: #f8f9fa;
-  --text-dark: #2b2b2b;
-  --text-muted: #6c757d;
-  --border-radius: 12px;
+  --primary-hover: #a00103;
+  --secondary-color: #333;
+  --bg-light: #f4f7f6;
+  --text-dark: #2c3e50;
+  --border-radius: 8px;
   --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --input-focus-shadow: 0 0 0 0.25rem rgba(191, 1, 3, 0.15);
-  --transition-speed: 0.3s;
 }
 
-/* --- General Utilities --- */
-.text-primary-custom {
-  color: var(--primary-color) !important;
-}
-
-.bg-primary-custom {
-  background-color: var(--primary-color) !important;
-  color: #fff;
-}
-
-/* --- Buttons --- */
-.btn-primary-custom {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-weight: 500;
-  transition: all var(--transition-speed) ease;
-  box-shadow: 0 2px 5px rgba(191, 1, 3, 0.2);
-}
-
-.btn-primary-custom:hover {
-  background-color: var(--primary-hover);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(191, 1, 3, 0.3);
-}
-
-.btn-sm-custom {
-  padding: 5px 12px;
-  font-size: 0.875rem;
-  border-radius: 6px;
+body {
+  font-family: 'Montserrat', sans-serif !important;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
 }
 
 /* --- Cards --- */
 .card-premium {
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
+  transition: transform 0.2s;
   background: #fff;
-  transition: transform var(--transition-speed);
 }
 
 .card-premium .card-header {
-  background: transparent;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  padding: 20px 25px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
 }
 
-.card-premium .card-body {
-  padding: 25px;
+/* --- Buttons --- */
+.btn-primary-custom {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  box-shadow: 0 4px 10px rgba(191, 1, 3, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-sm-custom {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+
+.btn-outline-custom {
+  background-color: transparent !important;
+  border: 1px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  border-radius: 6px;
+}
+
+.btn-outline-custom:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
 }
 
 /* --- Forms --- */
+.form-label-premium {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
 .form-control-premium {
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 10px 15px;
-  transition: all var(--transition-speed);
-  background-color: #fff;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
 }
 
 .form-control-premium:focus {
   border-color: var(--primary-color);
-  box-shadow: var(--input-focus-shadow);
-}
-
-.form-label-premium {
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-}
-
-.section-title {
-  color: var(--primary-color);
-  font-weight: 600;
-  font-size: 1.1rem;
-  border-bottom: 2px solid rgba(191, 1, 3, 0.1);
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.section-title i {
-  margin-right: 10px;
+  box-shadow: 0 0 0 3px rgba(191, 1, 3, 0.1);
 }
 
 /* --- Tables --- */
@@ -107,14 +91,15 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  margin-bottom: 1rem;
 }
 
 .table-premium thead th {
-  background-color: var(--bg-soft);
-  color: var(--text-dark);
+  background-color: #f8f9fa;
+  color: #555;
   font-weight: 600;
+  border-bottom: 2px solid #eee;
   padding: 15px;
-  border-bottom: 2px solid #e0e0e0;
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
@@ -123,57 +108,53 @@
 .table-premium tbody td {
   padding: 15px;
   vertical-align: middle;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f1f1f1;
   color: #444;
+  font-size: 0.95rem;
 }
 
 .table-premium tbody tr:hover {
-  background-color: #fffcfc; /* Very subtle tint of red/white */
+  background-color: #fff8f8; /* Very subtle tint of primary */
+}
+
+.table-premium tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* --- Modals --- */
 .modal-content-premium {
   border: none;
-  border-radius: var(--border-radius);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .modal-header-premium {
   background-color: var(--primary-color);
   color: white;
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  padding: 20px 25px;
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  border-bottom: none;
 }
 
 .modal-title-premium {
   font-weight: 600;
 }
 
-/* --- Misc --- */
-.page-title h4 {
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.section-title {
+  color: var(--primary-color);
   font-weight: 700;
-  color: var(--text-dark);
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #eee;
+  display: flex;
+  align-items: center;
 }
 
-.breadcrumb-custom {
-  background: transparent;
-  padding: 0;
-}
-
-/* --- Select2 Overrides --- */
-.select2-container--default .select2-selection--single {
-  border: 1px solid #e0e0e0 !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 45px !important;
-}
-
-.select2-container--default .select2-selection--single:focus {
-  border-color: var(--primary-color) !important;
+.breadcrumb .btn-primary-custom {
+    margin-left: 10px;
 }
