@@ -877,17 +877,18 @@
               var uniqueBranches = new Set();
               var branchesMap = {};
 
-              $.each(data, function (key, val) {
-                if (val.branch_name && val.branch_id) {
-                  if (!uniqueBranches.has(val.branch_id)) {
-                    uniqueBranches.add(val.branch_id);
-                    branchesMap[val.branch_id] = val.branch_name;
+                if (val.branch_name) {
+                  if (!uniqueBranches.has(val.branch_name)) {
+                    uniqueBranches.add(val.branch_name);
+                    branchOptions += '<option value="' + val.branch_name + '">' + val.branch_name + '</option>';
+                  }
+                } else {
+                   if (!uniqueBranches.has('Main Branch')) {
+                    uniqueBranches.add('Main Branch');
+                    branchOptions += '<option value="Main Branch">Main Branch</option>';
                   }
                 }
               });
-
-              for (const [id, name] of Object.entries(branchesMap)) {
-                branchOptions += '<option value="' + name + '">' + name + '</option>';
               }
               $('#contactBranchFilter').html(branchOptions);
 
