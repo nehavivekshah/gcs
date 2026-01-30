@@ -6,8 +6,8 @@
 <meta name="keywords"
   content="admin template, Riho admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="pixelstrap">
-<link rel="icon" href="{{ url('public/assets/images/favicon.png') }}" type="image/x-icon">
-<link rel="shortcut icon" href="{{ url('public/assets/images/favicon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
 <title>GCS - CRM</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

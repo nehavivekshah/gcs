@@ -14,9 +14,10 @@
       </div>
     </form>
     <div class="header-logo-wrapper col-auto p-0">
-      <div class="logo-wrapper"> <a href="index.html"><img class="img-fluid for-light"
-            src="{{ url('public/assets/images/logo/logo_dark') }}"" alt=" logo-light"><img class="img-fluid for-dark"
-            src="{{ url('public/assets/images/logo/logo') }}"" alt=" logo-dark"></a></div>
+      <div class="logo-wrapper"> <a href="{{ route('admin.dashboard') }}"><img class="img-fluid for-light"
+            src="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" alt="logo-light"><img
+            class="img-fluid for-dark" src="{{ url('public/assets/images/logo/gcs-icon-light.png') }}"
+            alt="logo-dark"></a></div>
       <div class="toggle-sidebar"> <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
     </div>
     <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">

@@ -174,7 +174,7 @@
   <div class="login-wrapper">
     <div class="login-card">
       <div class="logo-section">
-        <img src="{{ url('public/assets/images/logo/dashboard-logo.jpeg') }}" alt="Logo">
+        <img src="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" alt="Logo">
       </div>
 
       <div class="welcome-text">
@@ -233,6 +233,8 @@
   <script src="{{ url('public/assets/js/icons/feather-icon/feather-icon.js') }}"></script>
   <script src="{{ url('public/assets/js/config.js') }}"></script>
   <script src="{{ url('public/assets/js/script.js') }}"></script>
+  <link rel="icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" type="image/x-icon">
 
 </body>
 
