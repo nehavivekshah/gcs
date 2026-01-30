@@ -642,4 +642,58 @@ class CustomerController extends Controller
         return redirect()->route('admin.customer.branch.contact', ['uuid' => $uuid]);
 
     }
+
+    // AJAX Product Methods
+    public function getProducts(Request $request)
+    {
+        $products = $this->customerService->getAllCustomerProducts($request->customer_id);
+        return response()->json(['status' => true, 'data' => $products]);
+    }
+
+    public function addProduct(Request $request)
+    {
+        $data = $request->except('_token', 'id');
+        $data['created_by'] = session('user_name', 'Guest');
+
+        // Date formatting if needed (basic check)
+        $dateFields = ['amc_start_date', 'amc_end_date', 'service_date_1', 'service_date_2', 'service_date_3'];
+        foreach ($dateFields as $field) {
+            if (isset($data[$field]) && !empty($data[$field])) {
+                $data[$field] = date('Y-m-d', strtotime($data[$field]));
+            } else {
+                $data[$field] = null;
+            }
+        }
+
+        $create = $this->customerService->addCustomerProduct($data);
+        return response()->json(['status' => (bool) $create, 'message' => $create ? 'Product added successfully' : 'Failed to add product']);
+    }
+
+    public function editProduct(Request $request)
+    {
+        $id = $request->id;
+        $data = $request->except('_token', 'id', 'customer_id', 'created_at', 'updated_at', 'uuid'); // Exclude safe fields
+        $data['modified_by'] = session('user_name', 'Guest');
+
+        // Date formatting
+        $dateFields = ['amc_start_date', 'amc_end_date', 'service_date_1', 'service_date_2', 'service_date_3'];
+        foreach ($dateFields as $field) {
+            if (isset($data[$field]) && !empty($data[$field])) {
+                $data[$field] = date('Y-m-d', strtotime($data[$field]));
+            } else {
+                // Use array_key_exists to avoid overwriting existing nulls if key is missing? 
+                // Usually form sends empty string for cleared dates.
+                $data[$field] = null;
+            }
+        }
+
+        $update = $this->customerService->editCustomerProduct($id, $data);
+        return response()->json(['status' => (bool) $update, 'message' => $update ? 'Product updated successfully' : 'Failed to update product']);
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        $delete = $this->customerService->deleteCustomerProduct($request->uuid);
+        return response()->json(['status' => (bool) $delete, 'message' => $delete ? 'Product deleted successfully' : 'Failed to delete product']);
+    }
 }

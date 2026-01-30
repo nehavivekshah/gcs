@@ -30,13 +30,13 @@ use App\Http\Controllers\backend\CustomerController;
 Route::get('/', function () {
     return redirect()->route('admin.login');
 });
-Route::get('admin/login', [HomeController::class,'login'])->name('admin.login');
-Route::post('admin/usercheck', [HomeController::class,'userCheck'])->name('admin.user.check');
-Route::get('admin/logout', [HomeController::class,'Logout'])->name('admin.logout');
+Route::get('admin/login', [HomeController::class, 'login'])->name('admin.login');
+Route::post('admin/usercheck', [HomeController::class, 'userCheck'])->name('admin.user.check');
+Route::get('admin/logout', [HomeController::class, 'Logout'])->name('admin.logout');
 
-Route::get('admin/dashboard', [HomeController::class,'dashboard'])->name('admin.dashboard');
+Route::get('admin/dashboard', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
-Route::prefix('admin/user')->name('admin.user.')->controller(UserController::class)->group(function(){
+Route::prefix('admin/user')->name('admin.user.')->controller(UserController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -49,7 +49,7 @@ Route::prefix('admin/user')->name('admin.user.')->controller(UserController::cla
 
 
 // Amc Product Master 
-Route::prefix('admin/amc-product')->name('admin.amc-product.')->controller(AmcProductController::class)->group(function(){
+Route::prefix('admin/amc-product')->name('admin.amc-product.')->controller(AmcProductController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -62,7 +62,7 @@ Route::prefix('admin/amc-product')->name('admin.amc-product.')->controller(AmcPr
 
 
 // Area Master 
-Route::prefix('admin/area')->name('admin.area.')->controller(AreaController::class)->group(function(){
+Route::prefix('admin/area')->name('admin.area.')->controller(AreaController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -76,7 +76,7 @@ Route::prefix('admin/area')->name('admin.area.')->controller(AreaController::cla
 });
 
 // Engineer Master 
-Route::prefix('admin/engineer')->name('admin.engineer.')->controller(EngineerController::class)->group(function(){
+Route::prefix('admin/engineer')->name('admin.engineer.')->controller(EngineerController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -88,7 +88,7 @@ Route::prefix('admin/engineer')->name('admin.engineer.')->controller(EngineerCon
 });
 
 // Product Type Master 
-Route::prefix('admin/manufacture')->name('admin.manufacture.')->controller(ManufactureController::class)->group(function(){
+Route::prefix('admin/manufacture')->name('admin.manufacture.')->controller(ManufactureController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -100,7 +100,7 @@ Route::prefix('admin/manufacture')->name('admin.manufacture.')->controller(Manuf
 });
 
 // Product Accessories Master 
-Route::prefix('admin/product-accessories')->name('admin.product-accessories.')->controller(ProductAccessoriesController::class)->group(function(){
+Route::prefix('admin/product-accessories')->name('admin.product-accessories.')->controller(ProductAccessoriesController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -113,7 +113,7 @@ Route::prefix('admin/product-accessories')->name('admin.product-accessories.')->
 
 
 // Product Type Master 
-Route::prefix('admin/product-type')->name('admin.product-type.')->controller(ProductTypeController::class)->group(function(){
+Route::prefix('admin/product-type')->name('admin.product-type.')->controller(ProductTypeController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -126,7 +126,7 @@ Route::prefix('admin/product-type')->name('admin.product-type.')->controller(Pro
 
 
 // State Master 
-Route::prefix('admin/state')->name('admin.state.')->controller(StateController::class)->group(function(){
+Route::prefix('admin/state')->name('admin.state.')->controller(StateController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -139,7 +139,7 @@ Route::prefix('admin/state')->name('admin.state.')->controller(StateController::
 
 
 // City Master 
-Route::prefix('admin/city')->name('admin.city.')->controller(CityController::class)->group(function(){
+Route::prefix('admin/city')->name('admin.city.')->controller(CityController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -151,7 +151,7 @@ Route::prefix('admin/city')->name('admin.city.')->controller(CityController::cla
 });
 
 // Product Type Master 
-Route::prefix('admin/user-type')->name('admin.user-type.')->controller(UserTypeController::class)->group(function(){
+Route::prefix('admin/user-type')->name('admin.user-type.')->controller(UserTypeController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -163,7 +163,7 @@ Route::prefix('admin/user-type')->name('admin.user-type.')->controller(UserTypeC
 });
 
 // Year Master 
-Route::prefix('admin/year')->name('admin.year.')->controller(YearController::class)->group(function(){
+Route::prefix('admin/year')->name('admin.year.')->controller(YearController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -175,7 +175,7 @@ Route::prefix('admin/year')->name('admin.year.')->controller(YearController::cla
 });
 
 // Product Master 
-Route::prefix('admin/product')->name('admin.product.')->controller(ProductController::class)->group(function(){
+Route::prefix('admin/product')->name('admin.product.')->controller(ProductController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -190,7 +190,7 @@ Route::prefix('admin/product')->name('admin.product.')->controller(ProductContro
 });
 
 // SupplierMaster 
-Route::prefix('admin/supplier')->name('admin.supplier.')->controller(SupplierController::class)->group(function(){
+Route::prefix('admin/supplier')->name('admin.supplier.')->controller(SupplierController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -200,11 +200,11 @@ Route::prefix('admin/supplier')->name('admin.supplier.')->controller(SupplierCon
     Route::get('/{uuid}', 'destroy')->name('delete');
     Route::post('/area-city', 'getAreaCities')->name('area.city');
     Route::post('/state-city', 'getStateCities')->name('state.city');
-    Route::get('/view/{uuid}','view')->name('view');
-    Route::post('/add-supplier-branch','addSupplierBranch')->name('add.branch');
+    Route::get('/view/{uuid}', 'view')->name('view');
+    Route::post('/add-supplier-branch', 'addSupplierBranch')->name('add.branch');
     Route::post('/get-supplier-branch', 'getSupplierBranch')->name('get.supplier.branch');
     Route::post('/edit-supplier-branch', 'editSupplierBranch')->name('edit.supplier.branch');
-    Route::post('/add-supplier-contact','addSupplierContact')->name('add.contact');
+    Route::post('/add-supplier-contact', 'addSupplierContact')->name('add.contact');
     Route::post('/get-supplier-contact', 'getSupplierContact')->name('get.supplier.contact');
     Route::post('/edit-supplier-contact', 'editSupplierContact')->name('edit.supplier.contact');
     Route::get('/delete-supplier-contact/{uuid}', 'deleteSupplierContact')->name('delete.supplier.contact');
@@ -214,7 +214,7 @@ Route::prefix('admin/supplier')->name('admin.supplier.')->controller(SupplierCon
 
 
 // Customer Master 
-Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerController::class)->group(function(){
+Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerController::class)->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -226,12 +226,12 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
     Route::post('/state-city', 'getStateCities')->name('state.city');
     Route::post('/city-area', 'getCityArea')->name('city.area');
     Route::post('/get-customer-branch', 'getCustomerBranch')->name('get.customer.branch');
-    Route::post('/add-customer-branch','addCustomerBranch')->name('add.branch');
+    Route::post('/add-customer-branch', 'addCustomerBranch')->name('add.branch');
     Route::post('/edit-customer-branch', 'editCustomerBranch')->name('edit.customer.branch');
 
     Route::post('/get-customer-contact', 'getCustomerContact')->name('get.customer.contact');
-    Route::post('/add-customer-contact','addCustomerContact')->name('add.contact');
-    Route::post('/edit-customer-contact','editCustomerContact')->name('edit.contact');
+    Route::post('/add-customer-contact', 'addCustomerContact')->name('add.contact');
+    Route::post('/edit-customer-contact', 'editCustomerContact')->name('edit.contact');
 
     Route::get('/customer-amc-product/{uuid}', 'CustomerAmcProduct')->name('amc.product');
     Route::get('/customer-amc-product-list/{customer_id}/{branch_id}/{amc_product_id}', 'getCustomerAmcProduct')->name('amc.product.list');
@@ -241,9 +241,16 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
 
     Route::get('/customer-branch-contact/{uuid}', 'CustomerBranchContact')->name('branch.contact');
     Route::post('/add-customer-branch-contact', 'addCustomerBranchContact')->name('add.branch.contact');
+
+    // AJAX Product Routes
+    Route::post('/get-products', 'getProducts')->name('get.products');
+    Route::post('/add-product', 'addProduct')->name('add.product');
+    Route::post('/edit-product', 'editProduct')->name('edit.product');
+    Route::post('/delete-product', 'deleteProduct')->name('delete.product');
+    Route::get('/get-product-form-data', 'getProductFormData')->name('get.product.form.data');
 });
 
-Route::get('admin/clear-cache', function() {
+Route::get('admin/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');

@@ -63,6 +63,12 @@
                             Branch
                           </button>
 
+                          <button type="button" class="btn btn-sm-custom btn-outline-custom viewProductBtn"
+                            data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
+                            data-customer-name="{{ $customers->customer_name }}">
+                            Product
+                          </button>
+
                           <button type="button" class="btn btn-sm-custom btn-outline-custom viewContactBtn"
                             data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
                             data-customer-name="{{ $customers->customer_name }}">
@@ -642,6 +648,274 @@
     </div>
   </div>
 
+
+  <!-- Product List Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content modal-content-premium">
+        <div class="modal-header modal-header-premium">
+          <h5 class="modal-title modal-title-premium">Products for&nbsp;<span id="productCustomerName"
+              class="fw-bold"></span></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h6 class="mb-0 fw-bold text-dark">Product List</h6>
+            <button type="button" class="btn btn-sm-custom btn-primary-custom" id="addProductBtn">
+              <i class="icon-plus me-1"></i> Add Product
+            </button>
+          </div>
+          <div class="table-responsive custom-scrollbar">
+            <table class="table table-premium table-striped" id="productTable">
+              <thead>
+                <tr>
+                  <th>Sr.no</th>
+                  <th>Product Name</th>
+                  <th>Serial No</th>
+                  <th>Branch</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content modal-content-premium">
+        <div class="modal-header modal-header-premium">
+          <h5 class="modal-title modal-title-premium">Add Product</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="addProductForm">
+            <input type="hidden" id="add_product_customer_id" name="customer_id">
+
+            <!-- Row 1 -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label class="form-label-premium">Branch</label>
+                <select class="form-control form-control-premium select2" id="add_prod_branch_id" name="branch_id"
+                  required style="width:100%">
+                  <option value="">Select Branch</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">AMC Product</label>
+                <select class="form-control form-control-premium select2" id="add_prod_amc_product_id"
+                  name="amc_product_id" required style="width:100%">
+                  <option value="">Select Product</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Quantity</label>
+                <input type="number" class="form-control form-control-premium" name="quantity" value="1">
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label class="form-label-premium">Product Type</label>
+                <input type="text" class="form-control form-control-premium" name="product_type">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Product Category</label>
+                <input type="text" class="form-control form-control-premium" name="product_category">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Department</label>
+                <input type="text" class="form-control form-control-premium" name="department">
+              </div>
+            </div>
+
+            <!-- Row 3 Description/User -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-8">
+                <label class="form-label-premium">Description / Serial No.</label>
+                <input type="text" class="form-control form-control-premium" name="description">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">User Name</label>
+                <input type="text" class="form-control form-control-premium" name="user_name">
+              </div>
+            </div>
+
+            <hr>
+            <h6 class="fw-bold mb-3">Service Dates & Engineers</h6>
+
+            <!-- Dates & Engineers -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <label class="form-label-premium">AMC Start Date</label>
+                <input type="date" class="form-control form-control-premium" name="amc_start_date">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">AMC End Date</label>
+                <input type="date" class="form-control form-control-premium" name="amc_end_date">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <label class="form-label-premium">Service Date 1</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_1">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">Engineer 1</label>
+                <select class="form-control form-control-premium select2" id="add_prod_eng_1" name="service_engineer_1"
+                  style="width:100%">
+                  <option value="">Select Engineer</option>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Service Date 2</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_2">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">Engineer 2</label>
+                <select class="form-control form-control-premium select2" id="add_prod_eng_2" name="service_engineer_2"
+                  style="width:100%">
+                  <option value="">Select Engineer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary-custom" id="saveProductBtn">Save Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content modal-content-premium">
+        <div class="modal-header modal-header-premium">
+          <h5 class="modal-title modal-title-premium">Edit Product</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="editProductForm">
+            <input type="hidden" id="edit_product_id" name="id">
+
+            <!-- Row 1 -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label class="form-label-premium">Branch</label>
+                <select class="form-control form-control-premium select2" id="edit_prod_branch_id" name="branch_id"
+                  required style="width:100%">
+                  <option value="">Select Branch</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">AMC Product</label>
+                <select class="form-control form-control-premium select2" id="edit_prod_amc_product_id"
+                  name="amc_product_id" required style="width:100%">
+                  <option value="">Select Product</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Quantity</label>
+                <input type="number" class="form-control form-control-premium" id="edit_prod_quantity" name="quantity">
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label class="form-label-premium">Product Type</label>
+                <input type="text" class="form-control form-control-premium" id="edit_prod_type" name="product_type">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Product Category</label>
+                <input type="text" class="form-control form-control-premium" id="edit_prod_category"
+                  name="product_category">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">Department</label>
+                <input type="text" class="form-control form-control-premium" id="edit_prod_department" name="department">
+              </div>
+            </div>
+
+            <!-- Row 3 Description/User -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-8">
+                <label class="form-label-premium">Description / Serial No.</label>
+                <input type="text" class="form-control form-control-premium" id="edit_prod_description"
+                  name="description">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-premium">User Name</label>
+                <input type="text" class="form-control form-control-premium" id="edit_prod_user_name" name="user_name">
+              </div>
+            </div>
+
+            <hr>
+            <h6 class="fw-bold mb-3">Service Dates & Engineers</h6>
+
+            <!-- Dates & Engineers -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <label class="form-label-premium">AMC Start Date</label>
+                <input type="date" class="form-control form-control-premium" id="edit_prod_amc_start"
+                  name="amc_start_date">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">AMC End Date</label>
+                <input type="date" class="form-control form-control-premium" id="edit_prod_amc_end" name="amc_end_date">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-3">
+                <label class="form-label-premium">Service Date 1</label>
+                <input type="date" class="form-control form-control-premium" id="edit_prod_sdate_1" name="service_date_1">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">Engineer 1</label>
+                <select class="form-control form-control-premium select2" id="edit_prod_eng_1" name="service_engineer_1"
+                  style="width:100%">
+                  <option value="">Select Engineer</option>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label-premium">Service Date 2</label>
+                <input type="date" class="form-control form-control-premium" id="edit_prod_sdate_2" name="service_date_2">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label-premium">Engineer 2</label>
+                <select class="form-control form-control-premium select2" id="edit_prod_eng_2" name="service_engineer_2"
+                  style="width:100%">
+                  <option value="">Select Engineer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary-custom" id="updateProductBtn">Update Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 
@@ -963,6 +1237,251 @@
 
         $('#contactModal').modal('hide');
         $('#editContactModal').modal('show');
+      });
+
+    });
+  </script>
+
+
+  <!-- Product Management JS -->
+  <script>
+    $(document).ready(function () {
+      var prodCustomerId = '';
+      var prodCustomerUuid = '';
+
+      // Helper to load dropdowns
+      function loadProductDropdowns(targetModal) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.product.form.data') }}",
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              // Populate AMC Products
+              var amcOpts = '<option value="">Select Product</option>';
+              $.each(res.amc_products, function (k, v) {
+                amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
+              });
+              $(targetModal).find('select[name="amc_product_id"]').html(amcOpts);
+
+              // Populate Engineers
+              var engOpts = '<option value="">Select Engineer</option>';
+              $.each(res.engineers, function (k, v) {
+                engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
+              });
+              $(targetModal).find('select[name="service_engineer_1"]').html(engOpts);
+              $(targetModal).find('select[name="service_engineer_2"]').html(engOpts);
+              // Engineer 3 if needed
+            }
+          }
+        });
+      }
+
+      // Helper to fetch Branches for specific customer
+      function loadCustomerBranches(customerId, targetModal) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.branch') }}",
+          type: "POST",
+          data: {
+            customer_id: customerId,
+            _token: "{{ csrf_token() }}"
+          },
+          dataType: "json",
+          success: function (res) {
+            if (res.status == true) {
+              var options = '<option value="">Select Branch</option>';
+              $.each(res.data, function (key, val) {
+                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
+              });
+              $(targetModal).find('select[name="branch_id"]').html(options);
+            }
+          }
+        });
+      }
+
+      // 1. View Product List
+      $(document).on('click', '.viewProductBtn', function () {
+        prodCustomerId = $(this).data('customer-id');
+        prodCustomerUuid = $(this).data('customer-uuid');
+        var customerName = $(this).data('customer-name');
+
+        $('#productCustomerName').text(customerName);
+        $('#productTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
+        $('#productModal').modal('show');
+
+        loadProducts(prodCustomerId);
+      });
+
+      function loadProducts(customerId) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.products') }}",
+          type: 'POST',
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            if (res.status) {
+              var html = '';
+              if (res.data.length > 0) {
+                $.each(res.data, function (k, v) {
+                  html += '<tr>' +
+                    '<td>' + (k + 1) + '</td>' +
+                    '<td>' + (v.product_name ?? '-') + '</td>' + // Joined in service
+                    '<td>' + (v.description ?? '-') + '</td>' +
+                    '<td>' + (v.branch_id ?? '-') + '</td>' + // Ideal: Join branch name
+                    '<td>' + (v.product_type ?? '-') + '</td>' + // Using Type column placeholder
+                    '<td>' +
+                    '<div class="d-flex gap-2">' +
+                    '<button class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                    '<button class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>';
+                });
+              } else {
+                html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
+              }
+              $('#productTable tbody').html(html);
+            }
+          }
+        });
+      }
+
+      // 2. Open Add Modal
+      $('#addProductBtn').click(function () {
+        $('#productModal').modal('hide');
+        $('#addProductModal').modal('show');
+
+        // Set Hidden ID
+        $('#add_product_customer_id').val(prodCustomerId);
+
+        // Reset Form
+        $('#addProductForm')[0].reset();
+        $('.select2').val('').trigger('change');
+
+        // Load Data
+        loadProductDropdowns('#addProductModal');
+        loadCustomerBranches(prodCustomerId, '#addProductModal');
+      });
+
+      // 3. Save Product
+      $('#saveProductBtn').click(function (e) {
+        e.preventDefault();
+        // Validate form? (HTML5 required works if button type submit)
+        // But we are using ajax.
+        // Using basic serialization
+        var formData = $('#addProductForm').serialize();
+        formData += '&_token={{ csrf_token() }}';
+
+        $.ajax({
+          url: "{{ route('admin.customer.add.product') }}",
+          type: 'POST',
+          data: formData,
+          success: function (res) {
+            if (res.status) {
+              // Success
+              $('#addProductModal').modal('hide');
+              $('#productModal').modal('show');
+              loadProducts(prodCustomerId);
+              // Optional: Show toast
+            } else {
+              alert('Error: ' + res.message);
+            }
+          },
+          error: function (err) {
+            console.error(err);
+            alert('An error occurred');
+          }
+        });
+      });
+
+      // 4. Edit Product
+      $(document).on('click', '.editProductBtn', function () {
+        var data = $(this).data('data');
+
+        $('#productModal').modal('hide');
+        $('#editProductModal').modal('show');
+
+        // Load Dropdowns first then set value
+        // We need async handling or just load and set.
+        // For simplicity, calling load then setting values after delay or blindly.
+        // ideally we wait.
+        // Let's load dropdowns and assume they populate. 
+        // Setting values in Select2 requires option to exist.
+
+        // Trigger Load
+        loadProductDropdowns('#editProductModal');
+        loadCustomerBranches(prodCustomerId, '#editProductModal');
+
+        // Set Values
+        $('#edit_product_id').val(data.id);
+        $('#edit_prod_quantity').val(data.quantity);
+        $('#edit_prod_type').val(data.product_type);
+        $('#edit_prod_category').val(data.product_category);
+        $('#edit_prod_department').val(data.department);
+        $('#edit_prod_description').val(data.description);
+        $('#edit_prod_user_name').val(data.user_name);
+        $('#edit_prod_amc_start').val(data.amc_start_date);
+        $('#edit_prod_amc_end').val(data.amc_end_date);
+        $('#edit_prod_sdate_1').val(data.service_date_1);
+        $('#edit_prod_sdate_2').val(data.service_date_2);
+
+        // Select2 Values - Need a timeout or callback if data loading is async
+        // Helper function is async ajax.
+        // Quick fix: Set timeout
+        setTimeout(function () {
+          $('#edit_prod_branch_id').val(data.branch_id).trigger('change');
+          $('#edit_prod_amc_product_id').val(data.amc_product_id).trigger('change');
+          $('#edit_prod_eng_1').val(data.service_engineer_1).trigger('change');
+          $('#edit_prod_eng_2').val(data.service_engineer_2).trigger('change');
+        }, 1000);
+      });
+
+      // 5. Update Product
+      $('#updateProductBtn').click(function (e) {
+        e.preventDefault();
+        var formData = $('#editProductForm').serialize();
+        formData += '&_token={{ csrf_token() }}';
+
+        $.ajax({
+          url: "{{ route('admin.customer.edit.product') }}",
+          type: 'POST',
+          data: formData,
+          success: function (res) {
+            if (res.status) {
+              $('#editProductModal').modal('hide');
+              $('#productModal').modal('show');
+              loadProducts(prodCustomerId);
+            } else {
+              alert('Error: ' + res.message);
+            }
+          }
+        });
+      });
+
+      // 6. Delete Product
+      $(document).on('click', '.deleteProductBtn', function () {
+        if (confirm('Are you sure you want to delete this product?')) {
+          var uuid = $(this).data('uuid');
+          $.ajax({
+            url: "{{ route('admin.customer.delete.product') }}",
+            type: 'POST',
+            data: { uuid: uuid, _token: "{{ csrf_token() }}" },
+            success: function (res) {
+              if (res.status) {
+                loadProducts(prodCustomerId);
+              } else {
+                alert('Error: ' + res.message);
+              }
+            }
+          });
+        }
+      });
+
+      // Initialize Select2 in new modals
+      $('#addProductModal .select2').select2({
+        dropdownParent: $('#addProductModal')
+      });
+      $('#editProductModal .select2').select2({
+        dropdownParent: $('#editProductModal')
       });
 
     });

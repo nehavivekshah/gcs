@@ -183,6 +183,14 @@ class CustomerService
                ->where(['customer_id' => $customer_id, 'branch_id' => $branch_id, 'amc_product_id' => $amc_product_id])->get();
      }
 
+     public function getAllCustomerProducts($customer_id)
+     {
+          return CustomerProduct::select('customer_products.*', 'amc_products.amc_product as product_name')
+               ->leftJoin('amc_products', 'amc_products.id', '=', 'customer_products.amc_product_id')
+               ->where('customer_id', $customer_id)
+               ->get();
+     }
+
      public function getCoordinateUser()
      {
           return UserCredential::select('id', 'user_name', 'outlook_email')->where('user_type', 4)->get();
