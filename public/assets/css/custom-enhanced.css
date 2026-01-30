@@ -213,6 +213,7 @@ body {
   font-size: 1.25rem;
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .btn-close-white {
@@ -283,6 +284,21 @@ body {
   border-radius: 4px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
+
+/* --- Loader --- */
+.loader-wrapper .loader4 {
+  color: var(--primary-color) !important;
+}
+
+/* --- Sidebar --- */
+.sidebar-wrapper .sidebar-main .sidebar-links {
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100vh - 120px) !important;
+  /* Adjust based on header/logo height */
+}
+
+.sidebar-wrapper .sidebar-main .sidebar-links .sidebar-list:last-child {
+  margin-top: auto !important;
+  padding-bottom: 20px;
 }
