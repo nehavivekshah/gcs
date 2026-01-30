@@ -891,57 +891,58 @@
           });
 
           $('#contactModal').modal('show');
+
+          // Fetch Branches for the dropdowns in Add/Edit Contact
+          $.ajax({
+            url: "{{ route('admin.customer.get.customer.branch') }}",
+            type: "POST",
+            data: {
+              customer_id: customerId,
+              _token: "{{ csrf_token() }}"
+            },
+            dataType: "json",
+            success: function (res) {
+              if (res.status == true) {
+                var options = '<option value="">Select Branch</option>';
+                $.each(res.data, function (key, val) {
+                  options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
+                });
+                $('#add_contact_branch_id').html(options);
+                $('#edit_contact_branch_id').html(options);
+              }
+            }
+          });
         });
 
         // Branch Filter Logic
-        $('#contactBranchFilter').on('change', function () {
+        $('#contactBranchFilter').off('change').on('change', function () {
           var selectedBranch = $(this).val().toLowerCase();
           $('#contactTable tbody tr').filter(function () {
             $(this).toggle($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(selectedBranch) > -1)
           });
-        });     // Fetch Branches for the dropdowns in Add/Edit Contact
-        $.ajax({
-          url: "{{ route('admin.customer.get.customer.branch') }}",
-          type: "POST",
-          data: {
-            customer_id: customerId,
-            _token: "{{ csrf_token() }}"
-          },
-          dataType: "json",
-          success: function (res) {
-            if (res.status == true) {
-              var options = '<option value="">Select Branch</option>';
-              $.each(res.data, function (key, val) {
-                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
-              });
-              $('#add_contact_branch_id').html(options);
-              $('#edit_contact_branch_id').html(options);
-            }
-          }
         });
-      });
 
-      $('#addContactBtn').click(function () {
-        $('#contactModal').modal('hide');
-        $('#addContactModal').modal('show');
-      });
-
-      $(document).on('click', '.editContactBtn', function () {
-        var data = $(this).data('data');
-        $('#edit_id').val(data.id);
-        $('#edit_contact_name').val(data.contact_name);
-        $('#edit_department').val(data.department);
-        $('#edit_designation').val(data.designation);
-        $('#edit_mobile').val(data.mobile_no);
-        $('#edit_email_id').val(data.email_id);
-        $('#edit_dob').val(data.date_of_birth);
-        $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
-
-        $('#contactModal').modal('hide');
-        $('#editContactModal').modal('show');
-      });
-
+        $('#addContactBtn').click(function () {
+          $('#contactModal').modal('hide');
+          $('#addContactModal').modal('show');
         });
+
+        $(document).on('click', '.editContactBtn', function () {
+          var data = $(this).data('data');
+          $('#edit_id').val(data.id);
+          $('#edit_contact_name').val(data.contact_name);
+          $('#edit_department').val(data.department);
+          $('#edit_designation').val(data.designation);
+          $('#edit_mobile').val(data.mobile_no);
+          $('#edit_email_id').val(data.email_id);
+          $('#edit_dob').val(data.date_of_birth);
+          $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
+
+          $('#contactModal').modal('hide');
+          $('#editContactModal').modal('show');
+        });
+
+      });
     </script>
 
   @endpush
