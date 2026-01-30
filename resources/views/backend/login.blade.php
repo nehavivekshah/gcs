@@ -174,7 +174,7 @@
   <div class="login-wrapper">
     <div class="login-card">
       <div class="logo-section">
-        <img src="{{ url('public/assets/images/logo/gcs-icon-light.png') }}" alt="Logo">
+        <img src="{{ url('public/assets/images/logo/dashboard-logo.jpeg') }}" alt="Logo">
       </div>
 
       <div class="welcome-text">
