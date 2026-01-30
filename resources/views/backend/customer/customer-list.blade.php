@@ -711,8 +711,6 @@
               var data = res.data;
               if (data.length > 0) {
                 $.each(data, function (key, val) {
-                  var deleteUrl = "{{ route('admin.customer.delete.customer.branch', ['uuid' => ':uuid']) }}";
-                  deleteUrl = deleteUrl.replace(':uuid', val.uuid);
                   html += '<tr>' +
                     '<td>' + (key + 1) + '</td>' +
                     '<td>' + val.branch_name + '</td>' +
@@ -729,7 +727,6 @@
                     '<td class="text-center">' +
                     '<div class="d-flex align-items-center gap-2 justify-content-center">' +
                     '<button type="button" class="btn btn-sm-custom btn-outline-primary editBranchBtn" data-data=\'' + JSON.stringify(val) + '\'><i class="icon-pencil"></i></button>' +
-                    '<a href="' + deleteUrl + '" class="btn btn-sm-custom btn-outline-danger" onclick="return confirm(\'Are you sure?\')"><i class="icon-trash"></i></a>' +
                     '</div>' +
                     '</td>' +
                     '</tr>';
