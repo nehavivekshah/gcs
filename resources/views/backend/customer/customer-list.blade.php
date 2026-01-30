@@ -853,7 +853,7 @@
                   html += '<tr>' +
                     '<td>' + (key + 1) + '</td>' +
                     '<td>' + val.contact_name + '</td>' +
-                    '<td>' + (val.branch_name ?? '-') + '</td>' +
+                    '<td>' + (val.branch_name ?? 'Main Branch') + '</td>' +
                     '<td>' + (val.department ?? '-') + '</td>' +
                     '<td>' + (val.designation ?? '-') + '</td>' +
                     '<td>' + (val.date_of_birth ?? '-') + '</td>' +
