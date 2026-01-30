@@ -815,10 +815,17 @@
       });
 
       // Contact Modal
+      var currentCustomerId = '';
+      var currentCustomerUuid = '';
+
       $(document).on('click', '.viewContactBtn', function () {
         var customerId = $(this).data('customer-id');
+        var customerUuid = $(this).data('customer-uuid'); // Assuming you have this data attribute, checking line 720 next
         var customerName = $(this).data('customer-name');
-        var customerUuid = $(this).data('customer-uuid');
+
+        // Store for Add Contact
+        currentCustomerId = customerId;
+        currentCustomerUuid = customerUuid;
 
         $('#contactCustomerName').text(customerName);
         $('#addcontactCustomerName').text(customerName);
@@ -913,13 +920,13 @@
         });
       });
 
-        // Initialize Select2 for the Branch Filter in the modal
-        $('#contactBranchFilter').select2({
-            placeholder: "All Branches",
-            allowClear: true,
-            dropdownParent: $('#contactModal'),
-            width: '100%'
-        });
+      // Initialize Select2 for the Branch Filter in the modal
+      $('#contactBranchFilter').select2({
+        placeholder: "All Branches",
+        allowClear: true,
+        dropdownParent: $('#contactModal'),
+        width: '100%'
+      });
 
       // Branch Filter Logic
       $('#contactBranchFilter').off('change').on('change', function () {
@@ -930,6 +937,14 @@
       });
 
       $('#addContactBtn').click(function () {
+        // Set hidden fields
+        $('#contact_customer_id').val(currentCustomerId);
+        $('#contact_customer_uuid').val(currentCustomerUuid);
+
+        // Reset form and select2
+        $('#addBranchForm')[0].reset();
+        $('#add_contact_branch_id').val('').trigger('change');
+
         $('#contactModal').modal('hide');
         $('#addContactModal').modal('show');
       });

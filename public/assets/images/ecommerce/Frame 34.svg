@@ -16,7 +16,7 @@
 </filter>
 <linearGradient id="paint0_linear_159_140" x1="11.8634" y1="8.54834" x2="34.583" y2="26.5831" gradientUnits="userSpaceOnUse">
 <stop stop-color="#118787"/>
-<stop offset="1" stop-color="#006666"/>
+<stop offset="1" stop-color="#d40306"/>
 </linearGradient>
 <linearGradient id="paint1_linear_159_140" x1="17.8266" y1="13.573" x2="22.905" y2="22.1617" gradientUnits="userSpaceOnUse">
 <stop stop-color="white"/>
@@ -24,3 +24,4 @@
 </linearGradient>
 </defs>
 </svg>
+

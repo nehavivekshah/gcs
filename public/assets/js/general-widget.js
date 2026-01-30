@@ -434,7 +434,7 @@ var options = {
         shadeIntensity: 0.2,
     },
   }, 
-    colors:['#006666', '#006666'],
+    colors:['#d40306', '#d40306'],
     chart: {
     height: 145,
     type: 'area',
@@ -494,7 +494,7 @@ var options = {
   chart: { 
   type: 'area'
 },
-colors: ['#006666','#FFAE1A'],
+colors: ['#d40306','#FFAE1A'],
 chart: {
   height: 350,
   type: 'area',
@@ -587,7 +587,7 @@ var options = {
     name: 'Revenue',
     data: [40, 55, 35, 50, 61, 45, 50, 20, 50 , 85 ,50, 100]
   },],
-    colors:['#006666', '#E6E9EB'],
+    colors:['#d40306', '#E6E9EB'],
     chart: {
     type: 'bar', 
     height: 160,

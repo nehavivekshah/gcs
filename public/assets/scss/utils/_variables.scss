@@ -6,7 +6,7 @@ $body-color: #F5F5F5;
 $main-body-color: #F5F5F5;
 
 // Theme colors variables 
-$primary-color: #006666; 
+$primary-color: #d40306; 
 $secondary-color: #FE6A49; 
 $success-color: #00AC46;
 $info-color : #173878; 
@@ -53,13 +53,13 @@ $light-dark: #EAEBF2;
 $info-light: #44C6C6;
 $light-txt-color : #86909C; 
 // gradient colors 
-$gradient-primary: linear-gradient(26deg, var(--theme-deafult) 0%, #006666 100%);
+$gradient-primary: linear-gradient(26deg, var(--theme-deafult) 0%, #d40306 100%);
 $gradient-bg-primary: linear-gradient(103.75deg, #173878 -13.9%, var(--theme-deafult) 79.68%);
 $gradient-card-bg-primary: radial-gradient(circle, rgba(27,174,174,1) 2%, rgba(26,148,148,1) 50%, rgba(4,143,143,1) 100%);;
 $gradient-landing-color : linear-gradient(180deg, #24B5B5 0%, #228585 100%);
 
 // light colors 
-$primary-light-color: #006666;
+$primary-light-color: #d40306;
 $secondary-light-color: #FE6A49;   
 $warning-light-color: #FFAE1A; 
 $danger-light-color: #FE6A49; 

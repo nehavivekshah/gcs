@@ -11,7 +11,7 @@
       hoverColor: !1,
       regionStyle: {
         initial: {
-          fill: "#006666",
+          fill: "#d40306",
         },
       },
       backgroundColor: "transparent",
@@ -87,3 +87,4 @@
     "use strict";
     maps.VectorMap.init();
   })(window.jQuery);
+

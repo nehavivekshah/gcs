@@ -1151,7 +1151,7 @@
     plotOptions: {
       candlestick: {
         colors: {
-          upward: '#006666',
+          upward: '#d40306',
           downward: '#FE6A49'
         }
       }
@@ -2145,3 +2145,4 @@
     });
   }, 3000);
 })(jQuery);
+

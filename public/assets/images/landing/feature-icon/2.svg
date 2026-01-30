@@ -4,7 +4,7 @@
 <defs>
 <linearGradient id="paint0_linear_357_8337" x1="3.86339" y1="0.548336" x2="26.583" y2="18.5831" gradientUnits="userSpaceOnUse">
 <stop stop-color="#118787"/>
-<stop offset="1" stop-color="#006666"/>
+<stop offset="1" stop-color="#d40306"/>
 </linearGradient>
 <linearGradient id="paint1_linear_357_8337" x1="9.82575" y1="5.57296" x2="14.9042" y2="14.1617" gradientUnits="userSpaceOnUse">
 <stop stop-color="white"/>
@@ -12,3 +12,4 @@
 </linearGradient>
 </defs>
 </svg>
+

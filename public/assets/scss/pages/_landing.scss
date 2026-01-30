@@ -28,7 +28,7 @@ html:hover {
 
     .cursor-outer {
       transform: scale(1.4);
-      border-color: #006666;
+      border-color: #d40306;
       opacity: 1;
     }
   }
@@ -56,7 +56,7 @@ html:hover {
   display: block;
   width: 80%;
   height: 80%;
-  background: #006666;
+  background: #d40306;
   border-radius: 50%;
   transition: transform .4s $ease-out-quint, opacity .4s $ease-out-quart;
 }
@@ -65,10 +65,10 @@ html:hover {
   display: block;
   width: 70%;
   height: 70%;
-  border: 1px solid rgba(#006666, 1);
+  border: 1px solid rgba(#d40306, 1);
   border-radius: 50%;
   box-sizing: border-box;
-  box-shadow: 0px 0px 4px 4px rgba(#006666, 0.22);
+  box-shadow: 0px 0px 4px 4px rgba(#d40306, 0.22);
   transition: border .4s $ease-out-quart, transform .4s $ease-out-quint, opacity .4s $ease-out-quart;
 }
 
@@ -1792,7 +1792,7 @@ $landing-color : var(--theme-deafult);
 
   .buy-btn {
     font-size: 16px; 
-    background: linear-gradient(90deg, #006666 -18.33%, #006666 62.78%);
+    background: linear-gradient(90deg, #d40306 -18.33%, #d40306 62.78%);
     border-radius: 7px;
     padding: 11px 39px; 
     margin-left: 10px;
@@ -2676,7 +2676,7 @@ footer {
     h5 {
       font-weight: 700;
       font-family: $font-Montserrat;
-      color: #006666;
+      color: #d40306;
     }
 
     h4 {
