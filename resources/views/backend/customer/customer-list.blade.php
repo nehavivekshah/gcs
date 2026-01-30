@@ -71,7 +71,7 @@
 
                           <div class="dropdown">
                             <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                              data-bs-display="static">
+                              data-bs-boundary="viewport">
                               <i class="icon-more-alt" style="font-size: 18px; transform: rotate(90deg); color: #666;"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
