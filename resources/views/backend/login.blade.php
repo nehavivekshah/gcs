@@ -73,6 +73,7 @@
 
     .logo-section img {
       height: 60px;
+      width: 100%;
       object-fit: contain;
     }
 
