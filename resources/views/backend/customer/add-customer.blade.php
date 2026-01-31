@@ -177,9 +177,29 @@
                   <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
                 </div>
 
+                <!-- BASIC INFO -->
                 <div class="col-md-3">
                   <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control form-control-premium" name="customer_name" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Customer Type</label>
+                  <select class="form-control form-control-premium" name="customer_type">
+                    <option value="">Select Type</option>
+                    <option value="GCS">GCS</option>
+                    <option value="NON GCS">NON GCS</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Customer Category</label>
+                  <select class="form-control form-control-premium" name="customer_category">
+                    <option value="">Select Category</option>
+                    <option value="A">Category A</option>
+                    <option value="B">Category B</option>
+                    <option value="C">Category C</option>
+                  </select>
                 </div>
 
                 <div class="col-md-3">
@@ -193,12 +213,8 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label-premium">Customer Type</label>
-                  <select class="form-control form-control-premium" name="customer_type">
-                    <option value="">Select Type</option>
-                    <option value="GCS">GCS</option>
-                    <option value="NON GCS">NON GCS</option>
-                  </select>
+                  <label class="form-label-premium">Date of Birth</label>
+                  <input type="date" class="form-control form-control-premium" name="date_of_birth">
                 </div>
 
                 <div class="col-12 mt-4">
@@ -211,28 +227,31 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label-premium">Mobile No</label>
-                  <input type="text" class="form-control form-control-premium" name="mobile_no">
+                  <label class="form-label-premium">Mobile No <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="mobile_no" required>
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_1" value="">
+                  <input type="text" class="form-control form-control-premium" name="phone_1">
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 2</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_2" value="">
+                  <input type="text" class="form-control form-control-premium" name="phone_2">
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Email</label>
                   <input type="email" class="form-control form-control-premium" name="email">
                 </div>
-
                 <div class="col-md-3">
-                  <label class="form-label-premium">Date of Birth</label>
-                  <input type="date" class="form-control form-control-premium" name="date_of_birth">
+                  <label class="form-label-premium">Website</label>
+                  <input type="text" class="form-control form-control-premium" name="website">
+                </div>
+
+                <div class="col-12 mt-4">
+                  <h5 class="section-title"><i class="icon-briefcase me-2"></i>Financial & Account Info</h5>
                 </div>
 
                 <div class="col-md-3">
@@ -240,26 +259,23 @@
                   <input type="text" class="form-control form-control-premium" name="gst">
                 </div>
 
-                <!-- <div class="col-md-3">
-                        <label class="form-label-premium">PAN No</label>
-                        <input type="text" class="form-control form-control-premium" name="pan">
-                      </div> -->
-
                 <div class="col-md-3">
-                  <label class="form-label-premium">Website</label>
-                  <input type="text" class="form-control form-control-premium" name="website">
+                  <label class="form-label-premium">PAN No</label>
+                  <input type="text" class="form-control form-control-premium" name="pan">
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Credit Days</label>
-                  <input type="number" class="form-control form-control-premium" name="credit_days" value="">
+                  <input type="number" class="form-control form-control-premium" name="credit_days">
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Co-ordinator</label>
-                  <select class="form-control form-control-premium" name="coordinator">
-                    <option value="">Select Account</option>
-                    <option value="2">vivek@gamil.com</option>
+                  <select class="form-control form-control-premium select2" name="ac_key">
+                    <option value="">Select Coordinator</option>
+                    @foreach($coordinateList as $user)
+                      <option value="{{ $user->id }}">{{ $user->name ?? $user->user_name }}</option>
+                    @endforeach
                   </select>
                 </div>
 
