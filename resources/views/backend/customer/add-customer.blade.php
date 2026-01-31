@@ -184,8 +184,8 @@
 
                 <!-- BASIC INFO -->
                 <div class="col-md-3">
-                  <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control form-control-premium" name="customer_name" required>
+                  <label class="form-label-premium">Company Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="company_name" required>
                 </div>
 
                 <div class="col-md-3">
@@ -195,30 +195,6 @@
                     <option value="GCS">GCS</option>
                     <option value="NON GCS">NON GCS</option>
                   </select>
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Department</label>
-                  <input type="text" name="department" class="form-control form-control-premium">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Designation <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control form-control-premium" name="customer_designation" required>
-                </div>
-
-                <div class="col-12 mt-4">
-                  <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Contact Person</label>
-                  <input type="text" class="form-control form-control-premium" name="contact_person">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Mobile No <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control form-control-premium" name="mobile_no" required>
                 </div>
 
                 <div class="col-md-3">
@@ -232,6 +208,35 @@
                 </div>
 
                 <div class="col-md-3">
+                  <label class="form-label-premium">Website</label>
+                  <input type="text" class="form-control form-control-premium" name="website">
+                </div>
+
+                <div class="col-12 mt-4">
+                  <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Contact Person</label>
+                  <input type="text" class="form-control form-control-premium" name="contact_person">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Department</label>
+                  <input type="text" name="department" class="form-control form-control-premium">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Designation <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="customer_designation" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Mobile No <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="mobile_no" required>
+                </div>
+
+                <div class="col-md-3">
                   <label class="form-label-premium">Email</label>
                   <input type="email" class="form-control form-control-premium" name="email">
                 </div>
@@ -239,11 +244,6 @@
                 <div class="col-md-3">
                   <label class="form-label-premium">Date of Birth</label>
                   <input type="date" class="form-control form-control-premium" name="date_of_birth">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Website</label>
-                  <input type="text" class="form-control form-control-premium" name="website">
                 </div>
 
                 <div class="col-12 mt-4">
