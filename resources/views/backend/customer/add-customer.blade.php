@@ -408,7 +408,7 @@
               </div>
               <div class="mt-4 text-end">
                 <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
-                <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4">Finish</a>
+                <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4 me-2">Finish</a>
               </div>
             </div>
 
