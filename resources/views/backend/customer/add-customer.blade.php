@@ -105,6 +105,11 @@
     .btn-outline-primary-custom {
       color: #bf0103;
       border-color: #bf0103;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
     }
 
     .btn-outline-primary-custom:hover {
@@ -418,9 +423,9 @@
   <!-- Add Branch Modal -->
   <div class="modal fade" id="addBranchModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+      <div class="modal-content modal-content-premium">
         <div class="modal-header modal-header-premium">
-          <h5 class="modal-title">Add Branch</h5>
+          <h5 class="modal-title modal-title-premium">Add Branch</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
@@ -449,6 +454,11 @@
                 <input type="email" name="email" class="form-control">
               </div>
 
+              <div class="col-md-12">
+                <label class="form-label">Address</label>
+                <textarea name="address_line_1" class="form-control" rows="2"></textarea>
+              </div>
+
               <div class="col-md-6">
                 <label class="form-label">Area</label>
                 <select name="area_id" id="modal_branch_area" class="form-control select2-modal">
@@ -473,11 +483,6 @@
                 </select>
               </div>
 
-              <div class="col-md-12">
-                <label class="form-label">Address</label>
-                <textarea name="address_line_1" class="form-control" rows="2"></textarea>
-              </div>
-
             </div>
           </form>
         </div>
@@ -492,9 +497,9 @@
   <!-- Add Contact Modal -->
   <div class="modal fade" id="addContactModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+      <div class="modal-content modal-content-premium">
         <div class="modal-header modal-header-premium">
-          <h5 class="modal-title">Add Contact</h5>
+          <h5 class="modal-title modal-title-premium">Add Contact</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
@@ -538,9 +543,9 @@
   <!-- Add Product Modal -->
   <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+      <div class="modal-content modal-content-premium">
         <div class="modal-header modal-header-premium">
-          <h5 class="modal-title">Add Product</h5>
+          <h5 class="modal-title modal-title-premium">Add Product</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
