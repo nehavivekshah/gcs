@@ -56,15 +56,15 @@
               </div>
 
               <!-- <div class="col-md-4">
-                                                                          <label class="form-label-premium">Customer Category</label>
-                                                                          <select class="form-control form-control-premium" name="customer_category">
-                                                                            <option value="">Select Category</option>
-                                                                            <option value="Corporate">Corporate</option>
-                                                                            <option value="Semi-Corporate">Semi-Corporate</option>
-                                                                            <option value="In-House">In-House</option>
-                                                                          </select>
-                                                                          <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                                                                        </div> -->
+                                                                              <label class="form-label-premium">Customer Category</label>
+                                                                              <select class="form-control form-control-premium" name="customer_category">
+                                                                                <option value="">Select Category</option>
+                                                                                <option value="Corporate">Corporate</option>
+                                                                                <option value="Semi-Corporate">Semi-Corporate</option>
+                                                                                <option value="In-House">In-House</option>
+                                                                              </select>
+                                                                              <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+                                                                            </div> -->
 
               <!-- Contact Details -->
               <div class="col-12 mt-4">
@@ -310,18 +310,101 @@
                       <textarea name="address_line_2" class="form-control form-control-premium" rows="2"></textarea>
                     </div>
                   </div>
-                  
-                  <!-- Branch Details -->
+
+                  <!-- Contact Details -->
                   <div class="col-12 mt-4">
-                    <h5 class="section-title"><i class="icon-menu me-2"></i>Branch Details</h5>
+                    <h5 class="section-title"><i class="icon-menu me-2"></i>Contact Details</h5>
                   </div>
 
-                  
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Branch</label>
+                      <select class="form-control form-control-premium select2" name="branch_id"
+                        id="add_contact_branch_id">
+                        <option value="">Select Branch</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Name <span class="text-danger">*</span></label>
+                      <input type="text" name="contact_name" class="form-control form-control-premium" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Department</label>
+                      <input type="text" name="department" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Designation</label>
+                      <input type="text" name="designation" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Mobile No</label>
+                      <input type="text" name="mobile_no" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Email</label>
+                      <input type="email" name="email_id" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Date Of Birth</label>
+                      <input type="date" name="date_of_birth" class="form-control form-control-premium">
+                    </div>
+                  </div>
+
+                  <!-- Products Details -->
+                  <div class="col-12 mt-4">
+                    <h5 class="section-title"><i class="icon-menu me-2"></i>Products Details</h5>
+                  </div>
+
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Branch</label>
+                      <select class="form-control form-control-premium select2" name="branch_id"
+                        id="edit_contact_branch_id">
+                        <option value="">Select Branch</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Name</label>
+                      <input type="text" id="edit_contact_name" name="contact_name"
+                        class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Department</label>
+                      <input type="text" id="edit_department" name="department" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Designation</label>
+                      <input type="text" id="edit_designation" name="designation"
+                        class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Mobile No</label>
+                      <input type="text" id="edit_mobile" name="mobile_no" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Email</label>
+                      <input type="email" id="edit_email_id" name="email_id" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Date Of Birth</label>
+                      <input type="date" id="edit_dob" name="date_of_birth" class="form-control form-control-premium">
+                    </div>
+                  </div>
 
                   <!-- <div class="mt-4 text-end">
-                      <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary-custom">Save Branch</button>
-                    </div> -->
+                          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary-custom">Save Branch</button>
+                        </div> -->
                 </form>
               </div>
 
