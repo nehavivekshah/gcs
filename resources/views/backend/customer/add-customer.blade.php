@@ -31,11 +31,16 @@
                 <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control form-control-premium" name="customer_name"
                   value="{{ old('customer_name') }}" placeholder="Enter customer name" required>
                 <div class="invalid-feedback">@error('customer_name') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Department</label>
+                <input type="text" name="department" class="form-control form-control-premium">
               </div>
 
               <div class="col-md-4">
@@ -56,15 +61,15 @@
               </div>
 
               <!-- <div class="col-md-4">
-                                                                              <label class="form-label-premium">Customer Category</label>
-                                                                              <select class="form-control form-control-premium" name="customer_category">
-                                                                                <option value="">Select Category</option>
-                                                                                <option value="Corporate">Corporate</option>
-                                                                                <option value="Semi-Corporate">Semi-Corporate</option>
-                                                                                <option value="In-House">In-House</option>
-                                                                              </select>
-                                                                              <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                                                                            </div> -->
+                                                                                    <label class="form-label-premium">Customer Category</label>
+                                                                                    <select class="form-control form-control-premium" name="customer_category">
+                                                                                      <option value="">Select Category</option>
+                                                                                      <option value="Corporate">Corporate</option>
+                                                                                      <option value="Semi-Corporate">Semi-Corporate</option>
+                                                                                      <option value="In-House">In-House</option>
+                                                                                    </select>
+                                                                                    <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+                                                                                  </div> -->
 
               <!-- Contact Details -->
               <div class="col-12 mt-4">
@@ -402,9 +407,9 @@
                   </div>
 
                   <!-- <div class="mt-4 text-end">
-                          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary-custom">Save Branch</button>
-                        </div> -->
+                                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary-custom">Save Branch</button>
+                              </div> -->
                 </form>
               </div>
 
