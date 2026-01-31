@@ -310,11 +310,18 @@
                       <textarea name="address_line_2" class="form-control form-control-premium" rows="2"></textarea>
                     </div>
                   </div>
+                  
+                  <!-- Branch Details -->
+                  <div class="col-12 mt-4">
+                    <h5 class="section-title"><i class="icon-menu me-2"></i>Branch Details</h5>
+                  </div>
+
+                  
 
                   <!-- <div class="mt-4 text-end">
-                                                          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                                                          <button type="submit" class="btn btn-primary-custom">Save Branch</button>
-                                                        </div> -->
+                      <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary-custom">Save Branch</button>
+                    </div> -->
                 </form>
               </div>
 
