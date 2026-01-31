@@ -184,7 +184,7 @@
 
                 <!-- BASIC INFO -->
                 <div class="col-md-3">
-                  <label class="form-label-premium">Company Name <span class="text-danger">*</span></label>
+                  <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control form-control-premium" name="customer_name" required>
                 </div>
 
@@ -198,18 +198,13 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label-premium">Phone 1</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_1">
+                  <label class="form-label-premium">Department</label>
+                  <input type="text" name="department" class="form-control form-control-premium">
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label-premium">Phone 2</label>
-                  <input type="text" class="form-control form-control-premium" name="phone_2">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Website</label>
-                  <input type="text" class="form-control form-control-premium" name="website">
+                  <label class="form-label-premium">Designation <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="customer_designation" required>
                 </div>
 
                 <div class="col-12 mt-4">
@@ -222,18 +217,18 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label class="form-label-premium">Department</label>
-                  <input type="text" name="department" class="form-control form-control-premium">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="form-label-premium">Designation <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control form-control-premium" name="customer_designation" required>
-                </div>
-
-                <div class="col-md-3">
                   <label class="form-label-premium">Mobile No <span class="text-danger">*</span></label>
                   <input type="text" class="form-control form-control-premium" name="mobile_no" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Phone 1</label>
+                  <input type="text" class="form-control form-control-premium" name="phone_1">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Phone 2</label>
+                  <input type="text" class="form-control form-control-premium" name="phone_2">
                 </div>
 
                 <div class="col-md-3">
@@ -244,6 +239,11 @@
                 <div class="col-md-3">
                   <label class="form-label-premium">Date of Birth</label>
                   <input type="date" class="form-control form-control-premium" name="date_of_birth">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Website</label>
+                  <input type="text" class="form-control form-control-premium" name="website">
                 </div>
 
                 <div class="col-12 mt-4">
@@ -796,10 +796,10 @@
           success: function (res) {
             if (res.status) {
               // Add to table
-              var branchName = form.find('input[name="branch_name"]').val();
-              var contact = form.find('input[name="contact_person"]').val();
-              var mobile = form.find('input[name="mobile_no"]').val();
-              var city = form.find('#modal_branch_city option:selected').text();
+              var branchName = $('input[name="branch_name"]').val();
+              var contact = $('input[name="contact_person"]').val();
+              var mobile = $('input[name="mobile_no"]').val();
+              var city = $('#modal_branch_city option:selected').text();
               var branchId = res.branch_id || Date.now(); // Fallback
 
               savedBranches.push({ id: branchId, name: branchName });
@@ -832,10 +832,10 @@
           dataType: 'json',
           success: function (res) {
             if (res.status) {
-              var name = form.find('input[name="contact_name"]').val();
-              var branchName = form.find('.select-branch option:selected').text();
-              var desig = form.find('input[name="designation"]').val();
-              var mob = form.find('input[name="mobile_no"]').val();
+              var name = $('input[name="contact_name"]').val();
+              var branchName = $('.select-branch option:selected').text();
+              var desig = $('input[name="designation"]').val();
+              var mob = $('input[name="mobile_no"]').val();
 
               $('#contactTable .empty-row').hide();
               $('#contactTable tbody').append('<tr><td>' + name + '</td><td>' + branchName + '</td><td>' + desig + '</td><td>' + mob + '</td></tr>');
@@ -863,10 +863,10 @@
           dataType: 'json',
           success: function (res) {
             if (res.status) {
-              var prodName = form.find('select[name="amc_product_id"] option:selected').text();
-              var branchName = form.find('.select-branch option:selected').text();
-              var type = form.find('#product_type option:selected').text(); // Changed to select text for better readability if needed, or val
-              var qty = form.find('input[name="quantity"]').val();
+              var prodName = $('select[name="amc_product_id"] option:selected').text();
+              var branchName = $('#productForm .select-branch option:selected').text();
+              var type = $('input[name="product_type"]').val();
+              var qty = $('input[name="quantity"]').val();
 
               $('#productTable .empty-row').hide();
               $('#productTable tbody').append('<tr><td>' + prodName + '</td><td>' + branchName + '</td><td>' + type + '</td><td>' + qty + '</td></tr>');
