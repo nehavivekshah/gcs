@@ -101,8 +101,8 @@ class CustomerController extends Controller
             'website' => $website,
 
             // Added missing fields
-            // 'department' => $department,
-            // 'designation' => $designation,
+            'department' => $department,
+            'designation' => $designation,
 
             'address_line_1' => $address_line_1,
             'address_line_2' => $address_line_2,
@@ -134,7 +134,8 @@ class CustomerController extends Controller
                 'status' => true,
                 'message' => 'Customer added successfully',
                 'customer_id' => $customer->id,
-                'uuid' => $customer->uuid ?? null
+                'uuid' => $customer->uuid ?? null,
+                'customer_code' => $customer->customer_code
             ]);
         }
 
@@ -260,6 +261,14 @@ class CustomerController extends Controller
         $pincode = $req->pincode;
         $fax = $req->fax;
         $created_by = session('user_name', 'Guest');
+
+        // Fetch customer_code if missing
+        if (empty($customer_code) && $customer_id) {
+            $cust = $this->customerService->getCustomerById($customer_id);
+            if ($cust) {
+                $customer_code = $cust->customer_code;
+            }
+        }
 
         $data = [
             'customer_id' => $customer_id,
