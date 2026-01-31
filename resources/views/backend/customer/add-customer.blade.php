@@ -320,6 +320,19 @@
                   </select>
                 </div>
 
+                <div class="col-md-3">
+                  <label class="form-label-premium">MSME Registered?</label>
+                  <div class="form-check form-switch mt-2">
+                    <input class="form-check-input" type="checkbox" id="is_msme" name="is_msme" value="1">
+                    <label class="form-check-label" for="is_msme">Yes</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3 d-none" id="msme_div">
+                  <label class="form-label-premium">MSME Number</label>
+                  <input type="text" class="form-control form-control-premium" name="msme_no" id="msme_no">
+                </div>
+
                 <div class="col-12 mt-4 text-end">
                   <button type="button" class="btn btn-primary-custom px-4" id="btn-save-step-1">Save & Next</button>
                 </div>
@@ -730,6 +743,16 @@
           placeholder: 'Select an option',
           allowClear: true
         });
+      });
+
+      // --- MSME Toggle Logic ---
+      $('#is_msme').change(function() {
+        if ($(this).is(':checked')) {
+          $('#msme_div').removeClass('d-none');
+        } else {
+          $('#msme_div').addClass('d-none');
+          $('#msme_no').val('');
+        }
       });
 
       // --- STEP 1 LOGIC ---
