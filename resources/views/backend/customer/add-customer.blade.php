@@ -215,12 +215,12 @@
                   <input type="text" class="form-control form-control-premium" name="mobile_no">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
                   <input type="text" class="form-control form-control-premium" name="phone_1" value="">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label class="form-label-premium">Phone 2</label>
                   <input type="text" class="form-control form-control-premium" name="phone_2" value="">
                 </div>
@@ -241,9 +241,9 @@
                 </div>
 
                 <!-- <div class="col-md-3">
-                                          <label class="form-label-premium">PAN No</label>
-                                          <input type="text" class="form-control form-control-premium" name="pan">
-                                        </div> -->
+                        <label class="form-label-premium">PAN No</label>
+                        <input type="text" class="form-control form-control-premium" name="pan">
+                      </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Website</label>
