@@ -483,6 +483,11 @@
                 </select>
               </div>
 
+              <div class="col-md-6">
+                <label class="form-label-premium">Pincode</label>
+                <input type="text" name="pincode" id="edit_pincode" class="form-control form-control-premium">
+              </div>
+
             </div>
           </form>
         </div>
