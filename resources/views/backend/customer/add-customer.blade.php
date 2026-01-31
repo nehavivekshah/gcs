@@ -89,6 +89,38 @@
         transform: translateY(0);
       }
     }
+
+    /* Premium Styles */
+    .btn-primary-custom {
+      background-color: #bf0103;
+      border-color: #bf0103;
+      color: #fff;
+    }
+
+    .btn-primary-custom:hover {
+      background-color: #a00103;
+      border-color: #a00103;
+    }
+
+    .btn-outline-primary-custom {
+      color: #bf0103;
+      border-color: #bf0103;
+    }
+
+    .btn-outline-primary-custom:hover {
+      background-color: #bf0103;
+      color: #fff;
+    }
+
+    .modal-header-premium {
+      background-color: #bf0103;
+      color: #fff;
+      border-bottom: none;
+    }
+
+    .modal-header-premium .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+    }
   </style>
 
   <div class="container-fluid">
@@ -193,6 +225,21 @@
                   <input type="date" class="form-control form-control-premium" name="date_of_birth">
                 </div>
 
+                <div class="col-md-3">
+                  <label class="form-label-premium">GST No</label>
+                  <input type="text" class="form-control form-control-premium" name="gst">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">PAN No</label>
+                  <input type="text" class="form-control form-control-premium" name="pan">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Website</label>
+                  <input type="text" class="form-control form-control-premium" name="website">
+                </div>
+
                 <div class="col-12 mt-4">
                   <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
                 </div>
@@ -248,7 +295,8 @@
             <div id="step-content-2" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Branch List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addBranchModal">+
+                <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
+                  data-bs-target="#addBranchModal">+
                   Add Branch</button>
               </div>
               <div class="table-responsive">
@@ -278,8 +326,8 @@
             <div id="step-content-3" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Contact List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addContactModal"
-                  onclick="prepareContactModal()">+ Add Contact</button>
+                <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
+                  data-bs-target="#addContactModal" onclick="prepareContactModal()">+ Add Contact</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="contactTable">
@@ -308,8 +356,8 @@
             <div id="step-content-4" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Product List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addProductModal"
-                  onclick="prepareProductModal()">+ Add Product</button>
+                <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
+                  data-bs-target="#addProductModal" onclick="prepareProductModal()">+ Add Product</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="productTable">
@@ -346,9 +394,9 @@
   <div class="modal fade" id="addBranchModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
+        <div class="modal-header modal-header-premium">
           <h5 class="modal-title">Add Branch</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <form id="branchForm">
@@ -410,7 +458,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="btn-save-branch">Save</button>
+          <button type="button" class="btn btn-primary-custom" id="btn-save-branch">Save</button>
         </div>
       </div>
     </div>
@@ -420,9 +468,9 @@
   <div class="modal fade" id="addContactModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
+        <div class="modal-header modal-header-premium">
           <h5 class="modal-title">Add Contact</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <form id="contactForm">
@@ -456,7 +504,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="btn-save-contact">Save</button>
+          <button type="button" class="btn btn-primary-custom" id="btn-save-contact">Save</button>
         </div>
       </div>
     </div>
@@ -466,9 +514,9 @@
   <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
+        <div class="modal-header modal-header-premium">
           <h5 class="modal-title">Add Product</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <form id="productForm">
@@ -517,7 +565,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="btn-save-product">Save</button>
+          <button type="button" class="btn btn-primary-custom" id="btn-save-product">Save</button>
         </div>
       </div>
     </div>

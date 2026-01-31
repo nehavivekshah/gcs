@@ -34,6 +34,23 @@ class CustomerController extends Controller
 
     public function store(Request $req)
     {
+        // Validation
+        $validator = \Validator::make($req->all(), [
+            'customer_name' => 'required',
+            'mobile_no' => 'required|unique:customers,mobile_no',
+            'email' => 'nullable|email|unique:customers,email',
+        ]);
+
+        if ($validator->fails()) {
+            if ($req->wantsJson()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $validator->errors()->first()
+                ]);
+            }
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $customer_name = $req->customer_name;
         $customer_type = $req->customer_type;
         $customer_category = $req->customer_category;
@@ -41,6 +58,10 @@ class CustomerController extends Controller
         $mobile_no = $req->mobile_no;
         $email = $req->email;
         $website = $req->website;
+
+        // Missing fields from view
+        $department = $req->department;
+        $designation = $req->customer_designation; // Mapped from view input name
 
         $address_line_1 = $req->address_line_1;
         $address_line_2 = $req->address_line_2;
@@ -78,6 +99,10 @@ class CustomerController extends Controller
             'email' => $email,
             'website' => $website,
 
+            // Added missing fields
+            'department' => $department,
+            'designation' => $designation,
+
             'address_line_1' => $address_line_1,
             'address_line_2' => $address_line_2,
 
@@ -108,7 +133,7 @@ class CustomerController extends Controller
                 'status' => true,
                 'message' => 'Customer added successfully',
                 'customer_id' => $customer->id,
-                'uuid' => $customer->uuid ?? null // Assuming service returns the model or we might need to fetch it.
+                'uuid' => $customer->uuid ?? null
             ]);
         }
 
