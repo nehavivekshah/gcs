@@ -101,8 +101,8 @@ class CustomerController extends Controller
             'website' => $website,
 
             // Added missing fields
-            'department' => $department,
-            'designation' => $designation,
+            // 'department' => $department,
+            // 'designation' => $designation,
 
             'address_line_1' => $address_line_1,
             'address_line_2' => $address_line_2,
@@ -249,14 +249,7 @@ class CustomerController extends Controller
         $branch_name = $req->branch_name;
         $contact_person = $req->contact_person;
         $mobile_no = $req->mobile_no;
-        $mobile_no = $req->mobile_no;
-
         $customer_code = $req->customer_code;
-        if (empty($customer_code)) {
-            $cust = $this->customerService->getCustomerById($customer_id);
-            $customer_code = $cust ? $cust->customer_code : null;
-        }
-
         $email = $req->email;
         $phone = $req->phone;
         $address_line_1 = $req->address_line_1;
