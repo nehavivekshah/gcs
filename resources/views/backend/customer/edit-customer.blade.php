@@ -58,6 +58,18 @@
                   <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
                 </div>
 
+                <div class="col-4">
+                  <label class="form-label form-label-premium">Department</label>
+                  <input type="text" class="form-control form-control-premium" name="department"
+                    value="{{ $customers->department }}">
+                </div>
+
+                <div class="col-4">
+                  <label class="form-label form-label-premium">Designation</label>
+                  <input type="text" class="form-control form-control-premium" name="customer_designation"
+                    value="{{ $customers->designation }}">
+                </div>
+
                 <div class="col-12">
                   <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
                 </div>
@@ -181,27 +193,27 @@
                   <h5 class="section-title"><i class="icon-file-text me-2"></i>Tax Details</h5>
                 </div>
                 <!-- <div class="col-4">
-                    <label class="form-label form-label-premium">PAN</label>
-                    <input type="text" class="form-control form-control-premium" name="pan" value="{{ $customers->pan }}">
-                  </div>
+                      <label class="form-label form-label-premium">PAN</label>
+                      <input type="text" class="form-control form-control-premium" name="pan" value="{{ $customers->pan }}">
+                    </div>
 
-                  <div class="col-4">
-                    <label class="form-label form-label-premium">VAT</label>
-                    <input type="text" class="form-control form-control-premium" name="vat" value="{{ $customers->vat }}">
-                  </div>
+                    <div class="col-4">
+                      <label class="form-label form-label-premium">VAT</label>
+                      <input type="text" class="form-control form-control-premium" name="vat" value="{{ $customers->vat }}">
+                    </div>
 
-                  <div class="col-4">
-                    <label class="form-label form-label-premium">CST</label>
-                    <input type="text" class="form-control form-control-premium" name="cst" value="{{ $customers->cst }}">
-                  </div> -->
+                    <div class="col-4">
+                      <label class="form-label form-label-premium">CST</label>
+                      <input type="text" class="form-control form-control-premium" name="cst" value="{{ $customers->cst }}">
+                    </div> -->
 
                 <div class="col-12">
                   <h5 class="section-title"><i class="icon-menu me-2"></i>Other Details</h5>
                 </div>
                 <!-- <div class="col-4">
-                    <label class="form-label form-label-premium">Fax</label>
-                    <input type="text" class="form-control form-control-premium" name="fax" value="{{ $customers->fax }}">
-                  </div> -->
+                      <label class="form-label form-label-premium">Fax</label>
+                      <input type="text" class="form-control form-control-premium" name="fax" value="{{ $customers->fax }}">
+                    </div> -->
 
                 <div class="col-4">
                   <label class="form-label form-label-premium">Credit Days</label>

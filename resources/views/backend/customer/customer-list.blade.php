@@ -89,6 +89,8 @@
                                   data-customer_type="{{ $customers->customer_type }}"
                                   data-customer_category="{{ $customers->customer_category }}"
                                   data-contact_person="{{ $customers->contact_person }}"
+                                  data-department="{{ $customers->department }}"
+                                  data-designation="{{ $customers->designation }}"
                                   data-mobile_no="{{ $customers->mobile_no }}" data-email="{{ $customers->email }}"
                                   data-website="{{ $customers->website }}"
                                   data-address_line_1="{{ $customers->address_line_1 }}"
@@ -154,8 +156,16 @@
                 <span class="fw-semibold" id="v_customer_name"></span>
               </div>
               <div class="col-md-6">
-                <small class="text-muted d-block">Customer Degination</small>
-                <span class="fw-semibold" id="v_customer_degination"></span>
+                <small class="text-muted d-block">Customer Code</small>
+                <span class="fw-semibold" id="v_customer_code"></span>
+              </div>
+              <div class="col-md-6">
+                <small class="text-muted d-block">Designation</small>
+                <span class="fw-semibold" id="v_designation"></span>
+              </div>
+              <div class="col-md-6">
+                <small class="text-muted d-block">Department</small>
+                <span class="fw-semibold" id="v_department"></span>
               </div>
               <div class="col-md-6">
                 <small class="text-muted d-block">Mobile</small>
@@ -936,6 +946,8 @@
 
         $('#v_customer_name').text($(this).data('customer_name'));
         $('#v_customer_code').text($(this).data('customer_code'));
+        $('#v_designation').text($(this).data('designation'));
+        $('#v_department').text($(this).data('department'));
         $('#v_mobile_no').text($(this).data('mobile_no'));
         $('#v_contact_person').text($(this).data('contact_person'));
         $('#v_email').text($(this).data('email'));
