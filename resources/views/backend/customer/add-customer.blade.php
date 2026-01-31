@@ -56,15 +56,15 @@
               </div>
 
               <!-- <div class="col-md-4">
-                                <label class="form-label-premium">Customer Category</label>
-                                <select class="form-control form-control-premium" name="customer_category">
-                                  <option value="">Select Category</option>
-                                  <option value="Corporate">Corporate</option>
-                                  <option value="Semi-Corporate">Semi-Corporate</option>
-                                  <option value="In-House">In-House</option>
-                                </select>
-                                <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                              </div> -->
+                                    <label class="form-label-premium">Customer Category</label>
+                                    <select class="form-control form-control-premium" name="customer_category">
+                                      <option value="">Select Category</option>
+                                      <option value="Corporate">Corporate</option>
+                                      <option value="Semi-Corporate">Semi-Corporate</option>
+                                      <option value="In-House">In-House</option>
+                                    </select>
+                                    <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+                                  </div> -->
 
               <!-- Contact Details -->
               <div class="col-12 mt-4">
@@ -196,6 +196,90 @@
                     <option value="{{ $coordinate->id }}">{{ $coordinate->outlook_email }}</option>
                   @endforeach
                 </select>
+              </div>
+
+              <!-- Branch Details -->
+              <div class="col-12 mt-4">
+                <h5 class="section-title"><i class="icon-menu me-2"></i>Branch Details</h5>
+              </div>
+
+              <div class="col-12">
+                <form id="addBranchForm" method="post" action="{{ route('admin.customer.add.branch') }}">
+                  @csrf
+                  <input type="hidden" name="customer_uuid" id="branch_customer_uuid">
+                  <input type="hidden" name="customer_id" id="branch_customer_id">
+
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Branch Name <span class="text-danger">*</span></label>
+                      <input type="text" name="branch_name" class="form-control form-control-premium" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Contact Person</label>
+                      <input type="text" name="contact_person" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Mobile No</label>
+                      <input type="text" name="mobile_no" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Email</label>
+                      <input type="email" name="email" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Phone</label>
+                      <input type="text" name="phone" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Area</label>
+                      <select name="area_id" id="branch_area_id" class="form-control select2">
+                        <option value="">Select Area</option>
+                        @foreach($areaList as $areas)
+                          <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">City <span class="text-danger">*</span></label>
+                      <select name="city_id" id="branch_city_id" class="form-control select2" required>
+                        <option value="">Select City</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">State <span class="text-danger">*</span></label>
+                      <select name="state_id" id="branch_state_id" class="form-control select2" required>
+                        <option value="">Select State</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label-premium">Pincode</label>
+                      <input type="text" name="pincode" class="form-control form-control-premium">
+                    </div>
+
+                    <div class="col-md-12">
+                      <label class="form-label-premium">Address Line 1</label>
+                      <textarea name="address_line_1" class="form-control form-control-premium" rows="2"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label class="form-label-premium">Address Line 2</label>
+                      <textarea name="address_line_2" class="form-control form-control-premium" rows="2"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mt-4 text-end">
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary-custom">Save Branch</button>
+                  </div>
+                </form>
               </div>
 
               <div class="col-12 mt-5">

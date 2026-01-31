@@ -154,6 +154,10 @@
                 <span class="fw-semibold" id="v_customer_name"></span>
               </div>
               <div class="col-md-6">
+                <small class="text-muted d-block">Customer Degination</small>
+                <span class="fw-semibold" id="v_customer_degination"></span>
+              </div>
+              <div class="col-md-6">
                 <small class="text-muted d-block">Mobile</small>
                 <span id="v_mobile_no"></span>
               </div>
