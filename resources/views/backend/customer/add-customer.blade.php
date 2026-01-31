@@ -450,6 +450,16 @@
               </div>
 
               <div class="col-md-6">
+                <label class="form-label-premium">Department</label>
+                <input type="text" name="department" class="form-control form-control-premium">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Designation</label>
+                <input type="text" name="designation" class="form-control">
+              </div>
+
+              <div class="col-md-6">
                 <label class="form-label">Mobile No</label>
                 <input type="text" name="mobile_no" class="form-control">
               </div>
@@ -457,6 +467,11 @@
               <div class="col-md-6">
                 <label class="form-label">Email</label>
                 <input type="email" name="email" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Date Of Birth</label>
+                <input type="date" name="date_of_birth" class="form-control form-control-premium">
               </div>
 
               <div class="col-md-12">
