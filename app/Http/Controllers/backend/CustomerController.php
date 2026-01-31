@@ -28,8 +28,9 @@ class CustomerController extends Controller
         $areaList = $this->customerService->getArea();
         $coordinateList = $this->customerService->getCoordinateUser();
         $amcProductList = $this->customerService->getAmcProduct();
+        $engineerList = $this->customerService->getEngineer();
 
-        return view('backend.customer.add-customer', compact('areaList', 'coordinateList', 'amcProductList'));
+        return view('backend.customer.add-customer', compact('areaList', 'coordinateList', 'amcProductList', 'engineerList'));
     }
 
     public function store(Request $req)

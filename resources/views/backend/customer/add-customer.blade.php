@@ -607,13 +607,58 @@
               </div>
 
               <div class="col-md-6">
-                <label class="form-label">AMC Start Date</label>
-                <input type="date" name="amc_start_date" class="form-control">
+                <label class="form-label-premium">AMC Start Date</label>
+                <input type="date" class="form-control form-control-premium" name="amc_start_date">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label">AMC End Date</label>
-                <input type="date" name="amc_end_date" class="form-control">
+                <label class="form-label-premium">AMC End Date</label>
+                <input type="date" class="form-control form-control-premium" name="amc_end_date">
+              </div>
+
+              <!-- SERVICE 1 -->
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Date 1</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_1">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 1</label>
+                <select name="service_engineer_1" class="form-control form-control-premium select2-modal">
+                  <option value="">Select Engineer</option>
+                  @foreach($engineerList as $eng)
+                    <option value="{{ $eng->id }}">{{ $eng->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <!-- SERVICE 2 -->
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Date 2</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_2">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 2</label>
+                <select name="service_engineer_2" class="form-control form-control-premium select2-modal">
+                  <option value="">Select Engineer</option>
+                  @foreach($engineerList as $eng)
+                    <option value="{{ $eng->id }}">{{ $eng->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <!-- SERVICE 3 -->
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Date 3</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_3">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 3</label>
+                <select name="service_engineer_3" class="form-control form-control-premium select2-modal">
+                  <option value="">Select Engineer</option>
+                  @foreach($engineerList as $eng)
+                    <option value="{{ $eng->id }}">{{ $eng->name }}</option>
+                  @endforeach
+                </select>
               </div>
 
             </div>
