@@ -572,12 +572,18 @@
 
               <div class="col-md-6">
                 <label class="form-label-premium">Product Type</label>
-                <input type="text" class="form-control form-control-premium" name="product_type">
+                <select name="product_type" id="product_type" class="form-control">
+                  <option value="AMC">AMC</option>
+                  <option value="Non-AMC">Non AMC</option>
+                </select>
               </div>
 
               <div class="col-md-6">
                 <label class="form-label-premium">Product Category</label>
-                <input type="text" class="form-control form-control-premium" name="product_category">
+                <select name="product_category" id="product_category" class="form-control">
+                  <option value="Comprehensive">Comprehensive</option>
+                  <option value="Non-Comprehensive">Non-Comprehensive</option>
+                </select>
               </div>
 
               <div class="col-md-6">
@@ -587,17 +593,17 @@
 
               <div class="col-md-6">
                 <label class="form-label">Qty</label>
-                <input type="number" name="quantity" class="form-control" value="1">
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label-premium">Description / Serial No.</label>
-                <input type="text" class="form-control form-control-premium" name="description">
+                <input type="number" name="quantity" class="form-control form-control-premium" value="1">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label-premium">User Name</label>
                 <input type="text" class="form-control form-control-premium" name="user_name">
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label-premium">Description / Serial No.</label>
+                <textarea class="form-control form-control-premium" name="description"></textarea>
               </div>
 
               <div class="col-md-6">
