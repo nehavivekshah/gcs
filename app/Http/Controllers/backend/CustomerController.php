@@ -100,8 +100,8 @@ class CustomerController extends Controller
             'website' => $website,
 
             // Added missing fields
-            'department' => $department,
-            'designation' => $designation,
+            // 'department' => $department,
+            // 'designation' => $designation,
 
             'address_line_1' => $address_line_1,
             'address_line_2' => $address_line_2,
