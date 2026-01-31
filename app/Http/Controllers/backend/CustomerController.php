@@ -83,8 +83,10 @@ class CustomerController extends Controller
         $fax = $req->fax;
         $credit_days = $req->credit_days;
         $date_of_birth = $req->date_of_birth;
-        $ac_key = $req->ac_key;
         $created_by = session('user_name', 'Guest');
+
+        $is_msme = $req->has('is_msme') ? 1 : 0;
+        $msme_no = $is_msme ? $req->msme_no : null;
 
         $lastCustomer = $this->customerService->getCustomerId();
         $nextId = $lastCustomer ? $lastCustomer->id + 1 : 1;
@@ -123,7 +125,10 @@ class CustomerController extends Controller
             'fax' => $fax,
             'credit_days' => $credit_days,
             'date_of_birth' => $date_of_birth,
+            'date_of_birth' => $date_of_birth,
             'ac_key' => $ac_key,
+            'is_msme' => $is_msme,
+            'msme_no' => $msme_no,
             'created_by' => $created_by
         ];
 
@@ -182,6 +187,10 @@ class CustomerController extends Controller
         $credit_days = $req->credit_days;
         $date_of_birth = $req->date_of_birth;
         $ac_key = $req->ac_key;
+
+        $is_msme = $req->has('is_msme') ? 1 : 0;
+        $msme_no = $is_msme ? $req->msme_no : null;
+
         $modified_by = session('user_name', 'Guest');
 
         $data = [
@@ -207,7 +216,10 @@ class CustomerController extends Controller
             'fax' => $fax,
             'credit_days' => $credit_days,
             'date_of_birth' => $date_of_birth,
+            'date_of_birth' => $date_of_birth,
             'ac_key' => $ac_key,
+            'is_msme' => $is_msme,
+            'msme_no' => $msme_no,
             'modified_by' => $modified_by
         ];
 
