@@ -40,7 +40,8 @@
 
               <div class="col-md-3">
                 <label class="form-label-premium">Department</label>
-                <input type="text" name="department" class="form-control form-control-premium">
+                <input type="text" name="department" class="form-control form-control-premium"
+                  placeholder="Enter department">
               </div>
 
               <div class="col-md-3">
@@ -61,15 +62,15 @@
               </div>
 
               <!-- <div class="col-md-4">
-                                                                                          <label class="form-label-premium">Customer Category</label>
-                                                                                          <select class="form-control form-control-premium" name="customer_category">
-                                                                                            <option value="">Select Category</option>
-                                                                                            <option value="Corporate">Corporate</option>
-                                                                                            <option value="Semi-Corporate">Semi-Corporate</option>
-                                                                                            <option value="In-House">In-House</option>
-                                                                                          </select>
-                                                                                          <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                                                                                        </div> -->
+                                                                                              <label class="form-label-premium">Customer Category</label>
+                                                                                              <select class="form-control form-control-premium" name="customer_category">
+                                                                                                <option value="">Select Category</option>
+                                                                                                <option value="Corporate">Corporate</option>
+                                                                                                <option value="Semi-Corporate">Semi-Corporate</option>
+                                                                                                <option value="In-House">In-House</option>
+                                                                                              </select>
+                                                                                              <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+                                                                                            </div> -->
 
               <!-- Contact Details -->
               <div class="col-12 mt-4">
@@ -407,9 +408,9 @@
                   </div>
 
                   <!-- <div class="mt-4 text-end">
-                                      <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                                      <button type="submit" class="btn btn-primary-custom">Save Branch</button>
-                                    </div> -->
+                                          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                                          <button type="submit" class="btn btn-primary-custom">Save Branch</button>
+                                        </div> -->
                 </form>
               </div>
 
