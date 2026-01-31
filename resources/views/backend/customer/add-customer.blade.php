@@ -571,13 +571,33 @@
               </div>
 
               <div class="col-md-6">
-                <label class="form-label">Product Type</label>
-                <input type="text" name="product_type" class="form-control">
+                <label class="form-label-premium">Product Type</label>
+                <input type="text" class="form-control form-control-premium" name="product_type">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Product Category</label>
+                <input type="text" class="form-control form-control-premium" name="product_category">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Department</label>
+                <input type="text" class="form-control form-control-premium" name="department">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label">Qty</label>
                 <input type="number" name="quantity" class="form-control" value="1">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Description / Serial No.</label>
+                <input type="text" class="form-control form-control-premium" name="description">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">User Name</label>
+                <input type="text" class="form-control form-control-premium" name="user_name">
               </div>
 
               <div class="col-md-6">
