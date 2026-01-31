@@ -215,6 +215,16 @@
                   <input type="text" class="form-control form-control-premium" name="mobile_no">
                 </div>
 
+                <div class="col-md-4">
+                  <label class="form-label-premium">Phone 1</label>
+                  <input type="text" class="form-control form-control-premium" name="phone_1" value="">
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label-premium">Phone 2</label>
+                  <input type="text" class="form-control form-control-premium" name="phone_2" value="">
+                </div>
+
                 <div class="col-md-3">
                   <label class="form-label-premium">Email</label>
                   <input type="email" class="form-control form-control-premium" name="email">
@@ -230,14 +240,27 @@
                   <input type="text" class="form-control form-control-premium" name="gst">
                 </div>
 
-                <div class="col-md-3">
-                  <label class="form-label-premium">PAN No</label>
-                  <input type="text" class="form-control form-control-premium" name="pan">
-                </div>
+                <!-- <div class="col-md-3">
+                                          <label class="form-label-premium">PAN No</label>
+                                          <input type="text" class="form-control form-control-premium" name="pan">
+                                        </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Website</label>
                   <input type="text" class="form-control form-control-premium" name="website">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Credit Days</label>
+                  <input type="number" class="form-control form-control-premium" name="credit_days" value="">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Co-ordinator</label>
+                  <select class="form-control form-control-premium" name="coordinator">
+                    <option value="">Select Account</option>
+                    <option value="2">vivek@gamil.com</option>
+                  </select>
                 </div>
 
                 <div class="col-12 mt-4">
