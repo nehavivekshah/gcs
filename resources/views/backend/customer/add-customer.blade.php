@@ -1,11 +1,100 @@
 @extends('backend.common.master')
 @section('main-section')
 
+  <style>
+    /* Wizard Stepper CSS */
+    .wizard-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .wizard-steps::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #e0e0e0;
+      z-index: 1;
+    }
+
+    .step-item {
+      position: relative;
+      z-index: 2;
+      background: #fff;
+      text-align: center;
+      width: 100px;
+    }
+
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      color: #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .step-item.active .step-circle {
+      border-color: #bf0103;
+      background: #bf0103;
+      color: #fff;
+    }
+
+    .step-item.completed .step-circle {
+      border-color: #bf0103;
+      background: #bf0103;
+      color: #fff;
+    }
+
+    .step-label {
+      font-size: 14px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .step-item.active .step-label,
+    .step-item.completed .step-label {
+      color: #bf0103;
+      font-weight: bold;
+    }
+
+    /* Content Transition */
+    .step-content {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
   <div class="container-fluid">
     <div class="page-title">
       <div class="row">
         <div class="col-6">
-          <h4>Add Customer</h4>
+          <h4>Add Customer Wizard</h4>
         </div>
         <div class="col-6">
           <ol class="breadcrumb justify-content-end">
@@ -23,405 +112,217 @@
         <div class="card card-premium">
           <div class="card-body p-4">
 
-            <form class="row g-4 needs-validation" novalidate method="post" action="{{ route('admin.customer.store') }}">
-              @csrf
-
-              <!-- Basic Info -->
-              <div class="col-12">
-                <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
+            <!-- Stepper -->
+            <div class="wizard-steps px-5">
+              <div class="step-item active" id="step-nav-1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Basic Info</div>
               </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-premium" name="customer_name"
-                  value="{{ old('customer_name') }}" placeholder="Enter customer name" required>
-                <div class="invalid-feedback">@error('customer_name') {{ $message }} @enderror</div>
+              <div class="step-item" id="step-nav-2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Branches</div>
               </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Department</label>
-                <input type="text" name="department" class="form-control form-control-premium"
-                  placeholder="Enter department">
+              <div class="step-item" id="step-nav-3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Contacts</div>
               </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Degination <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-premium" name="customer_designation"
-                  value="{{ old('customer_designation') }}" placeholder="Enter customer designation" required>
-                <div class="invalid-feedback">@error('customer_designation') {{ $message }} @enderror</div>
+              <div class="step-item" id="step-nav-4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Products</div>
               </div>
+            </div>
 
-              <div class="col-md-3">
-                <label class="form-label-premium">Customer Type</label>
-                <select class="form-control form-control-premium" name="customer_type">
-                  <option value="">Select Type</option>
-                  <option value="GCS">GCS</option>
-                  <option value="NON GCS">NON GCS</option>
-                </select>
-                <div class="invalid-feedback">@error('customer_type') {{ $message }} @enderror</div>
-              </div>
+            <!-- Global Hidden Customer ID (Gets populated after Step 1) -->
+            <input type="hidden" id="global_customer_id" value="">
+            <input type="hidden" id="global_customer_uuid" value="">
 
-              <!-- <div class="col-md-4">
-                                                                                              <label class="form-label-premium">Customer Category</label>
-                                                                                              <select class="form-control form-control-premium" name="customer_category">
-                                                                                                <option value="">Select Category</option>
-                                                                                                <option value="Corporate">Corporate</option>
-                                                                                                <option value="Semi-Corporate">Semi-Corporate</option>
-                                                                                                <option value="In-House">In-House</option>
-                                                                                              </select>
-                                                                                              <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-                                                                                            </div> -->
-
-              <!-- Contact Details -->
-              <div class="col-12 mt-4">
-                <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Contact Person</label>
-                <input type="text" class="form-control form-control-premium" name="contact_person"
-                  value="{{ old('contact_person') }}" placeholder="Person name">
-                <div class="invalid-feedback">@error('contact_person') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Mobile No</label>
-                <input type="text" class="form-control form-control-premium" name="mobile_no"
-                  value="{{ old('mobile_no') }}" placeholder="10-digit mobile number">
-                <div class="invalid-feedback">@error('mobile_no') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Email</label>
-                <input type="email" class="form-control form-control-premium" name="email" value="{{ old('email') }}"
-                  placeholder="example@domain.com">
-                <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Date of Birth</label>
-                <input type="date" class="form-control form-control-premium" name="dob" value="{{ old('dob') }}">
-                <div class="invalid-feedback">@error('dob') {{ $message }} @enderror</div>
-              </div>
-
-              <!-- Address -->
-              <div class="col-12 mt-4">
-                <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label-premium">Address Line 1</label>
-                <textarea class="form-control form-control-premium" name="address_line_1" rows="2"
-                  placeholder="Street, building, etc.">{{ old('address_line_1') }}</textarea>
-                <div class="invalid-feedback">@error('address_line_1') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label-premium">Address Line 2</label>
-                <textarea class="form-control form-control-premium" name="address_line_2" rows="2"
-                  placeholder="Landmark, area, etc.">{{ old('address_line_2') }}</textarea>
-                <div class="invalid-feedback">@error('address_line_2') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Area</label>
-                <select class="form-control form-control-premium select2" id="area_id" name="area_id">
-                  <option value="">Select Area</option>
-                  @foreach($areaList as $areas)
-                    <option value="{{ $areas->id }}">{{ $areas->area }}</option>
-                  @endforeach
-                </select>
-                <div class="invalid-feedback">@error('area_id') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">City</label>
-                <select class="form-control form-control-premium select2" id="city_id" name="city_id">
-                  <option value="">Select City</option>
-                </select>
-                <div class="invalid-feedback">@error('city_id') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">State</label>
-                <select class="form-control form-control-premium select2" id="state_id" name="state_id">
-                  <option value="">Select State</option>
-                </select>
-                <div class="invalid-feedback">@error('state_id') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Pincode</label>
-                <input type="text" class="form-control form-control-premium" name="pincode" value="{{ old('pincode') }}"
-                  placeholder="6-digit pincode">
-                <div class="invalid-feedback">@error('pincode') {{ $message }} @enderror</div>
-              </div>
-
-              <!-- Communication -->
-              <div class="col-12 mt-4">
-                <h5 class="section-title"><i class="icon-headphone-alt me-2"></i>Communication</h5>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Phone 1</label>
-                <input type="text" class="form-control form-control-premium" name="phone_1" value="{{ old('phone_1') }}">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Phone 2</label>
-                <input type="text" class="form-control form-control-premium" name="phone_2" value="{{ old('phone_2') }}">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Website</label>
-                <input type="text" class="form-control form-control-premium" name="website" value="{{ old('website') }}"
-                  placeholder="www.website.com">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Facebook</label>
-                <input type="text" class="form-control form-control-premium" name="facebook" value="{{ old('facebook') }}"
-                  placeholder="www.facebook.com">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Instagram</label>
-                <input type="text" class="form-control form-control-premium" name="instagram"
-                  value="{{ old('instagram') }}" placeholder="www.instagram.com">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">X Twitter</label>
-                <input type="text" class="form-control form-control-premium" name="x" value="{{ old('x') }}"
-                  placeholder="www.x.com">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">LinkedIn</label>
-                <input type="text" class="form-control form-control-premium" name="linkedin" value="{{ old('linkedin') }}"
-                  placeholder="www.linkedin.com">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label-premium">Youtube</label>
-                <input type="text" class="form-control form-control-premium" name="youtube" value="{{ old('youtube') }}"
-                  placeholder="www.youtube.com">
-              </div>
-
-              <!-- Other Details -->
-              <div class="col-12 mt-4">
-                <h5 class="section-title"><i class="icon-menu me-2"></i>Other Details</h5>
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">GST No</label>
-                <input type="text" class="form-control form-control-premium" name="gst" value="{{ old('gst') }}">
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Credit Days</label>
-                <input type="number" class="form-control form-control-premium" name="credit_days"
-                  value="{{ old('credit_days') }}">
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Date of Birth</label>
-                <input type="date" class="form-control form-control-premium" name="date_of_birth"
-                  value="{{ old('date_of_birth') }}">
-              </div>
-
-              <div class="col-md-3">
-                <label class="form-label-premium">Co-ordinator</label>
-                <select class="form-control form-control-premium" name="coordinator">
-                  <option value="">Select Account</option>
-                  @foreach($coordinateList as $coordinate)
-                    <option value="{{ $coordinate->id }}">{{ $coordinate->outlook_email }}</option>
-                  @endforeach
-                </select>
-              </div>
-
-              <!-- Branch Details -->
-              <div class="col-12 mt-4">
-                <h5 class="section-title"><i class="icon-menu me-2"></i>Branch Details</h5>
-              </div>
-
-              <div class="col-12">
-                <form id="addBranchForm" method="post" action="{{ route('admin.customer.add.branch') }}">
-                  @csrf
-                  <input type="hidden" name="customer_uuid" id="branch_customer_uuid">
-                  <input type="hidden" name="customer_id" id="branch_customer_id">
-
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Branch Name <span class="text-danger">*</span></label>
-                      <input type="text" name="branch_name" class="form-control form-control-premium" required>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Contact Person</label>
-                      <input type="text" name="contact_person" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Mobile No</label>
-                      <input type="text" name="mobile_no" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Email</label>
-                      <input type="email" name="email" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Phone</label>
-                      <input type="text" name="phone" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Area</label>
-                      <select name="area_id" id="branch_area_id" class="form-control select2">
-                        <option value="">Select Area</option>
-                        @foreach($areaList as $areas)
-                          <option value="{{ $areas->id }}">{{ $areas->area }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">City <span class="text-danger">*</span></label>
-                      <select name="city_id" id="branch_city_id" class="form-control select2" required>
-                        <option value="">Select City</option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">State <span class="text-danger">*</span></label>
-                      <select name="state_id" id="branch_state_id" class="form-control select2" required>
-                        <option value="">Select State</option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Pincode</label>
-                      <input type="text" name="pincode" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-12">
-                      <label class="form-label-premium">Address Line 1</label>
-                      <textarea name="address_line_1" class="form-control form-control-premium" rows="2"></textarea>
-                    </div>
-
-                    <div class="col-md-12">
-                      <label class="form-label-premium">Address Line 2</label>
-                      <textarea name="address_line_2" class="form-control form-control-premium" rows="2"></textarea>
-                    </div>
-                  </div>
-
-                  <!-- Contact Details -->
-                  <div class="col-12 mt-4">
-                    <h5 class="section-title"><i class="icon-menu me-2"></i>Contact Details</h5>
-                  </div>
-
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Branch</label>
-                      <select class="form-control form-control-premium select2" name="branch_id"
-                        id="add_contact_branch_id">
-                        <option value="">Select Branch</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Name <span class="text-danger">*</span></label>
-                      <input type="text" name="contact_name" class="form-control form-control-premium" required>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Department</label>
-                      <input type="text" name="department" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Designation</label>
-                      <input type="text" name="designation" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Mobile No</label>
-                      <input type="text" name="mobile_no" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Email</label>
-                      <input type="email" name="email_id" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Date Of Birth</label>
-                      <input type="date" name="date_of_birth" class="form-control form-control-premium">
-                    </div>
-                  </div>
-
-                  <!-- Products Details -->
-                  <div class="col-12 mt-4">
-                    <h5 class="section-title"><i class="icon-menu me-2"></i>Products Details</h5>
-                  </div>
-
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Branch</label>
-                      <select class="form-control form-control-premium select2" name="branch_id"
-                        id="edit_contact_branch_id">
-                        <option value="">Select Branch</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Name</label>
-                      <input type="text" id="edit_contact_name" name="contact_name"
-                        class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Department</label>
-                      <input type="text" id="edit_department" name="department" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Designation</label>
-                      <input type="text" id="edit_designation" name="designation"
-                        class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Mobile No</label>
-                      <input type="text" id="edit_mobile" name="mobile_no" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Email</label>
-                      <input type="email" id="edit_email_id" name="email_id" class="form-control form-control-premium">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label-premium">Date Of Birth</label>
-                      <input type="date" id="edit_dob" name="date_of_birth" class="form-control form-control-premium">
-                    </div>
-                  </div>
-
-                  <!-- <div class="mt-4 text-end">
-                                          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                                          <button type="submit" class="btn btn-primary-custom">Save Branch</button>
-                                        </div> -->
-                </form>
-              </div>
-
-              <div class="col-12 mt-5">
-                <div class="d-flex justify-content-end gap-2">
-                  <a href="{{ route('admin.customer.index') }}" class="btn btn-outline-custom px-4">Cancel</a>
-                  <button class="btn btn-primary-custom px-4">Submit Customer</button>
+            <!-- STEP 1: BASIC INFO -->
+            <div id="step-content-1" class="step-content active">
+              <form id="step1Form" class="row g-4 needs-validation" novalidate>
+                @csrf
+                 <div class="col-12">
+                  <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
                 </div>
-              </div>
 
-            </form>
+                <div class="col-md-3">
+                  <label class="form-label-premium">Customer Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="customer_name" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Department</label>
+                  <input type="text" name="department" class="form-control form-control-premium">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Designation <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-premium" name="customer_designation" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Customer Type</label>
+                  <select class="form-control form-control-premium" name="customer_type">
+                    <option value="">Select Type</option>
+                    <option value="GCS">GCS</option>
+                    <option value="NON GCS">NON GCS</option>
+                  </select>
+                </div>
+
+                <div class="col-12 mt-4">
+                  <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
+                </div>
+
+                 <div class="col-md-3">
+                  <label class="form-label-premium">Contact Person</label>
+                  <input type="text" class="form-control form-control-premium" name="contact_person">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Mobile No</label>
+                  <input type="text" class="form-control form-control-premium" name="mobile_no">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Email</label>
+                  <input type="email" class="form-control form-control-premium" name="email">
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Date of Birth</label>
+                  <input type="date" class="form-control form-control-premium" name="date_of_birth">
+                </div>
+
+                <div class="col-12 mt-4">
+                  <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
+                </div>
+
+                 <div class="col-md-6">
+                  <label class="form-label-premium">Address Line 1</label>
+                  <textarea class="form-control form-control-premium" name="address_line_1" rows="2"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label-premium">Address Line 2</label>
+                  <textarea class="form-control form-control-premium" name="address_line_2" rows="2"></textarea>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Area</label>
+                  <select class="form-control form-control-premium select2" id="area_id" name="area_id">
+                    <option value="">Select Area</option>
+                    @foreach($areaList as $areas)
+                      <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">City</label>
+                  <select class="form-control form-control-premium select2" id="city_id" name="city_id">
+                    <option value="">Select City</option>
+                     {{-- Populated via AJAX --}}
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">State</label>
+                  <select class="form-control form-control-premium select2" id="state_id" name="state_id">
+                    <option value="">Select State</option>
+                    {{-- Populated via AJAX --}}
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label-premium">Pincode</label>
+                  <input type="text" class="form-control form-control-premium" name="pincode">
+                </div>
+
+                <div class="col-12 mt-4 text-end">
+                   <button type="button" class="btn btn-primary-custom px-4" id="btn-save-step-1">Save & Next</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- STEP 2: BRANCHES -->
+            <div id="step-content-2" class="step-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title">Branch List</h5>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addBranchModal">+ Add Branch</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="branchTable">
+                  <thead>
+                    <tr>
+                      <th>Branch Name</th>
+                      <th>Contact Person</th>
+                      <th>Mobile</th>
+                      <th>City</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="empty-row"><td colspan="4" class="text-center">No branches added yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 text-end">
+                 {{-- <button type="button" class="btn btn-secondary me-2" onclick="goToStep(1)">Previous</button> --}}
+                 <button type="button" class="btn btn-primary-custom" onclick="goToStep(3)">Next</button>
+              </div>
+            </div>
+
+            <!-- STEP 3: CONTACTS -->
+            <div id="step-content-3" class="step-content">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title">Contact List</h5>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addContactModal" onclick="prepareContactModal()">+ Add Contact</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="contactTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Branch</th>
+                      <th>Designation</th>
+                      <th>Mobile</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <tr class="empty-row"><td colspan="4" class="text-center">No contacts added yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 text-end">
+                 <button type="button" class="btn btn-secondary me-2" onclick="goToStep(2)">Previous</button>
+                 <button type="button" class="btn btn-primary-custom" onclick="goToStep(4)">Next</button>
+              </div>
+            </div>
+
+            <!-- STEP 4: PRODUCTS -->
+            <div id="step-content-4" class="step-content">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title">Product List</h5>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addProductModal" onclick="prepareProductModal()">+ Add Product</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="productTable">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Branch</th>
+                      <th>Type</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <tr class="empty-row"><td colspan="4" class="text-center">No products added yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+               <div class="mt-4 text-end">
+                 <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
+                 <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4">Finish</a>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -429,61 +330,404 @@
     </div>
   </div>
 
+  <!-- MODALS -->
+
+  <!-- Add Branch Modal -->
+  <div class="modal fade" id="addBranchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Add Branch</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+           <form id="branchForm">
+             @csrf
+             <input type="hidden" name="customer_id" class="modal_customer_id">
+             
+             <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Branch Name <span class="text-danger">*</span></label>
+                  <input type="text" name="branch_name" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Contact Person</label>
+                  <input type="text" name="contact_person" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Mobile No</label>
+                  <input type="text" name="mobile_no" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control">
+                </div>
+
+                 <div class="col-md-6">
+                  <label class="form-label">Area</label>
+                  <select name="area_id" id="modal_branch_area" class="form-control select2-modal">
+                     <option value="">Select Area</option>
+                      @foreach($areaList as $areas)
+                      <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">City <span class="text-danger">*</span></label>
+                  <select name="city_id" id="modal_branch_city" class="form-control select2-modal" required>
+                     <option value="">Select City</option>
+                  </select>
+                </div>
+                 
+                 <div class="col-md-6">
+                  <label class="form-label">State <span class="text-danger">*</span></label>
+                  <select name="state_id" id="modal_branch_state" class="form-control select2-modal" required>
+                     <option value="">Select State</option>
+                  </select>
+                </div>
+
+                <div class="col-md-12">
+                  <label class="form-label">Address</label>
+                  <textarea name="address_line_1" class="form-control" rows="2"></textarea>
+                </div>
+
+             </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="btn-save-branch">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Add Contact Modal -->
+  <div class="modal fade" id="addContactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Add Contact</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+           <form id="contactForm">
+             @csrf
+             <input type="hidden" name="customer_id" class="modal_customer_id">
+             <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Branch <span class="text-danger">*</span></label>
+                  <select name="branch_id" class="form-control select-branch" required>
+                     <option value="">Select Branch</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Contact Name <span class="text-danger">*</span></label>
+                  <input type="text" name="contact_name" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Designation</label>
+                  <input type="text" name="designation" class="form-control">
+                </div>
+                 <div class="col-md-6">
+                  <label class="form-label">Mobile</label>
+                  <input type="text" name="mobile_no" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email_id" class="form-control">
+                </div>
+             </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="btn-save-contact">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add Product Modal -->
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Add Product</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+           <form id="productForm">
+             @csrf
+             <input type="hidden" name="customer_id" class="modal_customer_id">
+             <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Branch <span class="text-danger">*</span></label>
+                  <select name="branch_id" class="form-control select-branch" required>
+                     <option value="">Select Branch</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label">Product (AMC) <span class="text-danger">*</span></label>
+                  <select name="amc_product_id"  class="form-control select2-modal" required>
+                     <option value="">Select Product</option>
+                     @foreach($amcProductList as $prod)
+                       <option value="{{ $prod->id }}">{{ $prod->amc_product }}</option>
+                     @endforeach
+                  </select>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label">Product Type</label>
+                  <input type="text" name="product_type" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Qty</label>
+                  <input type="number" name="quantity" class="form-control" value="1">
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label">AMC Start Date</label>
+                  <input type="date" name="amc_start_date" class="form-control">
+                </div>
+
+                 <div class="col-md-6">
+                  <label class="form-label">AMC End Date</label>
+                  <input type="date" name="amc_end_date" class="form-control">
+                </div>
+
+             </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="btn-save-product">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 @endsection
 
 @push('scripts')
-
   <!-- Select2 CSS -->
   <link rel="stylesheet" href="{{ asset('public/assets/css/vendors/select2.css') }}">
-
   <!-- Select2 JS -->
   <script src="{{ asset('public/assets/js/select2/select2.full.min.js') }}"></script>
 
   <script>
-    $(document).ready(function () {
+    var savedBranches = []; 
 
-      $('.select2').select2({
-        placeholder: 'Select an option',
-        allowClear: true,
-        width: '100%'
+    $(document).ready(function () {
+      $('.select2').select2({ placeholder: 'Select an option', allowClear: true, width: '100%' });
+      
+      // Initialize modals select2
+      // Note: separate init for modals ensuring no conflict
+      $('.select2-modal').select2({ dropdownParent: $('.modal'), width: '100%' });
+      $('#addProductModal .select2-modal').select2({ dropdownParent: $('#addProductModal'), width: '100%' }); // Specific targeting
+
+      // --- STEP 1 LOGIC ---
+      $('#btn-save-step-1').click(function() {
+          var form = $('#step1Form');
+          var btn = $(this);
+          
+          if(!form[0].checkValidity()){
+              form.addClass('was-validated');
+              return;
+          }
+          
+          btn.prop('disabled', true).text('Saving...');
+
+          $.ajax({
+              url: "{{ route('admin.customer.store') }}",
+              method: "POST",
+              data: form.serialize(),
+              dataType: 'json',
+              success: function(res) {
+                  if(res.status) {
+                      $('#global_customer_id').val(res.customer_id);
+                      $('#global_customer_uuid').val(res.uuid);
+                      $('.modal_customer_id').val(res.customer_id); 
+                      
+                      // Show success
+                      // alert('Customer saved!');
+                      
+                      goToStep(2);
+                  } else {
+                      alert('Error saving customer: ' + res.message);
+                      btn.prop('disabled', false).text('Save & Next');
+                  }
+              },
+              error: function(err) {
+                  console.error(err);
+                  alert('Save failed. Check console.');
+                  btn.prop('disabled', false).text('Save & Next');
+              }
+          });
       });
 
+      // --- LOCATION AJAX (Step 1) ---
       $('#area_id').on('change', function () {
-
         var areaID = $(this).val();
         if (areaID) {
-          $.ajax({
+           fetchCityState(areaID, '#city_id', '#state_id');
+        }
+      });
+      
+      // --- LOCATION AJAX (Modal) ---
+      $('#modal_branch_area').on('change', function () {
+        var areaID = $(this).val();
+        if (areaID) {
+           fetchCityState(areaID, '#modal_branch_city', '#modal_branch_state');
+        }
+      });
+      
+      function fetchCityState(areaID, citySelector, stateSelector) {
+           $.ajax({
             url: "{{ route('admin.customer.area.city') }}",
             type: "POST",
-            data: {
-              areaID: areaID,
-              _token: "{{ csrf_token() }}"
-            },
+            data: { areaID: areaID, _token: "{{ csrf_token() }}" },
             dataType: "json",
             success: function (res) {
-
               if (res.status) {
-
-                // CITY
-                $('#city_id').empty()
-                  .append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
-
-                // STATE
-                $('#state_id').empty()
-                  .append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
+                $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
+                $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
               }
-            },
-            error: function () {
-              alert('Unable to fetch city/state');
             }
           });
-        } else {
-          $('#city_id').empty().append('<option value="">Select City</option>');
-          $('#state_id').empty().append('<option value="">Select State</option>');
-        }
+      }
+
+      // --- BRANCH MODAL SAVE ---
+      $('#btn-save-branch').click(function() {
+         var form = $('#branchForm');
+         if(!$('#global_customer_id').val()) { alert('Please save customer first.'); return; }
+         
+         $.ajax({
+             url: "{{ route('admin.customer.add.branch') }}",
+             method: "POST",
+             data: form.serialize(),
+             dataType: 'json',
+             success: function(res) {
+                 if(res.status) {
+                     // Add to table
+                     var branchName = $('input[name="branch_name"]').val();
+                     var contact = $('input[name="contact_person"]').val();
+                     var mobile = $('input[name="mobile_no"]').val();
+                     var city = $('#modal_branch_city option:selected').text();
+                     var branchId = res.branch_id || Date.now(); // Fallback
+                     
+                     savedBranches.push({id: branchId, name: branchName});
+                     
+                     $('#branchTable .empty-row').hide();
+                     $('#branchTable tbody').append('<tr><td>'+branchName+'</td><td>'+contact+'</td><td>'+mobile+'</td><td>'+city+'</td></tr>');
+                     
+                     $('#addBranchModal').modal('hide');
+                     form[0].reset();
+                     $('#modal_branch_city').empty();
+                     $('#modal_branch_state').empty();
+                 } else {
+                     alert('Failed to add branch');
+                 }
+             },
+             error: function() {
+                 alert('Error adding branch. Make sure backend supports JSON.');
+             }
+         });
+      });
+      
+       // --- CONTACT MODAL SAVE ---
+      $('#btn-save-contact').click(function() {
+         var form = $('#contactForm');
+         
+         $.ajax({
+             url: "{{ route('admin.customer.add.contact') }}",
+             method: "POST",
+             data: form.serialize(),
+             dataType: 'json',
+             success: function(res) {
+                 if(res.status) {
+                     var name = $('input[name="contact_name"]').val();
+                     var branchName = $('.select-branch option:selected').text();
+                     var desig = $('input[name="designation"]').val();
+                     var mob = $('input[name="mobile_no"]').val();
+                     
+                     $('#contactTable .empty-row').hide();
+                     $('#contactTable tbody').append('<tr><td>'+name+'</td><td>'+branchName+'</td><td>'+desig+'</td><td>'+mob+'</td></tr>');
+                     
+                     $('#addContactModal').modal('hide');
+                     form[0].reset();
+                 } else {
+                      alert('Failed to add contact');
+                 }
+             },
+             error: function() {
+                  alert('Error adding contact. Make sure backend supports JSON.');
+             }
+         });
+      });
+
+      // --- PRODUCT MODAL SAVE ---
+      $('#btn-save-product').click(function() {
+         var form = $('#productForm');
+         
+         $.ajax({
+             url: "{{ route('admin.customer.add.amc.product') }}", // Using the correct route for product add
+             method: "POST",
+             data: form.serialize(),
+             dataType: 'json',
+             success: function(res) {
+                 if(res.status) {
+                     var prodName = $('select[name="amc_product_id"] option:selected').text();
+                     var branchName = $('#productForm .select-branch option:selected').text();
+                     var type = $('input[name="product_type"]').val();
+                     var qty = $('input[name="quantity"]').val();
+                     
+                     $('#productTable .empty-row').hide();
+                     $('#productTable tbody').append('<tr><td>'+prodName+'</td><td>'+branchName+'</td><td>'+type+'</td><td>'+qty+'</td></tr>');
+                     
+                     $('#addProductModal').modal('hide');
+                     form[0].reset();
+                 } else {
+                      alert('Failed to add product: ' + res.message);
+                 }
+             },
+             error: function() {
+                  alert('Error adding product.');
+             }
+         });
       });
 
     });
-  </script>
 
+    function goToStep(step) {
+        $('.step-content').removeClass('active');
+        $('#step-content-'+step).addClass('active');
+
+        $('.step-item').removeClass('active completed');
+        for(let i=1; i<step; i++) {
+            $('#step-nav-'+i).addClass('completed');
+        }
+        $('#step-nav-'+step).addClass('active');
+    }
+    
+    function prepareContactModal() {
+        var opts = '<option value="">Select Branch</option>';
+        savedBranches.forEach(b => {
+             opts += '<option value="'+b.id+'">'+b.name+'</option>';
+        });
+        $('.select-branch').html(opts);
+    }
+    
+    function prepareProductModal() {
+        prepareContactModal();
+    }
+
+  </script>
 @endpush

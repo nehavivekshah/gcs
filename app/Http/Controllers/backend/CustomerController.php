@@ -27,8 +27,9 @@ class CustomerController extends Controller
 
         $areaList = $this->customerService->getArea();
         $coordinateList = $this->customerService->getCoordinateUser();
+        $amcProductList = $this->customerService->getAmcProduct();
 
-        return view('backend.customer.add-customer', compact('areaList', 'coordinateList'));
+        return view('backend.customer.add-customer', compact('areaList', 'coordinateList', 'amcProductList'));
     }
 
     public function store(Request $req)
@@ -100,7 +101,16 @@ class CustomerController extends Controller
             'created_by' => $created_by
         ];
 
-        $this->customerService->store($data);
+        $customer = $this->customerService->store($data);
+
+        if ($req->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Customer added successfully',
+                'customer_id' => $customer->id,
+                'uuid' => $customer->uuid ?? null // Assuming service returns the model or we might need to fetch it.
+            ]);
+        }
 
         return redirect()->route('admin.customer.index')->with('success', 'Customer added successfully');
     }
@@ -243,7 +253,15 @@ class CustomerController extends Controller
             'created_by' => $created_by
         ];
 
-        $this->customerService->addCustomerBranch($data);
+        $branch = $this->customerService->addCustomerBranch($data);
+
+        if ($req->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Branch added successfully',
+                'branch_id' => $branch->id
+            ]);
+        }
 
         return redirect()->route('admin.customer.index');
     }
@@ -419,7 +437,15 @@ class CustomerController extends Controller
         ];
 
         // Call your service to save
-        $this->customerService->addCustomerProduct($data);
+        $product = $this->customerService->addCustomerProduct($data);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Product added successfully',
+                'product_id' => $product->id
+            ]);
+        }
 
         return redirect()->route(
             'admin.customer.amc.product.list',
@@ -568,7 +594,15 @@ class CustomerController extends Controller
             'created_by' => $created_by
         ];
 
-        $this->customerService->addCustomerContact($data);
+        $contact = $this->customerService->addCustomerContact($data);
+
+        if ($req->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Contact added successfully',
+                'contact_id' => $contact->id
+            ]);
+        }
 
         return redirect()->route('admin.customer.index');
     }
