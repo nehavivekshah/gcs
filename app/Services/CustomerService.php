@@ -161,7 +161,7 @@ class CustomerService
 
      public function getCustomerById($id)
      {
-          return Customer::select('id', 'customer_name')->where('id', $id)->first();
+          return Customer::select('id', 'company_name')->where('id', $id)->first();
      }
 
      public function getBranchById($id)

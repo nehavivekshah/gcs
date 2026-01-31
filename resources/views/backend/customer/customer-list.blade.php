@@ -49,7 +49,7 @@
 
                     <tr>
                       <td>{{ $i }}</td>
-                      <td class="fw-medium">{{ $customers->customer_name }}</td>
+                      <td class="fw-medium">{{ $customers->company_name }}</td>
                       <td>{{ $customers->mobile_no }}</td>
                       <td>{{ $customers->contact_person }}</td>
                       <td>{{ $customers->email }}</td>
@@ -59,19 +59,19 @@
 
                           <button type="button" class="btn btn-sm-custom btn-outline-custom viewBranchBtn"
                             data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->customer_name }}">
+                            data-customer-name="{{ $customers->company_name }}">
                             Branch
                           </button>
 
                           <button type="button" class="btn btn-sm-custom btn-outline-custom viewProductBtn"
                             data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->customer_name }}">
+                            data-customer-name="{{ $customers->company_name }}">
                             Product
                           </button>
 
                           <button type="button" class="btn btn-sm-custom btn-outline-custom viewContactBtn"
                             data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->customer_name }}">
+                            data-customer-name="{{ $customers->company_name }}">
                             Contact
                           </button>
 
@@ -84,7 +84,7 @@
                               <li>
                                 <a class="dropdown-item viewCustomer py-2" href="javascript:void(0)"
                                   data-id="{{ $customers->id }}" data-uuid="{{ $customers->uuid }}"
-                                  data-customer_name="{{ $customers->customer_name }}"
+                                  data-company_name="{{ $customers->company_name }}"
                                   data-customer_code="{{ $customers->customer_code }}"
                                   data-customer_type="{{ $customers->customer_type }}"
                                   data-customer_category="{{ $customers->customer_category }}"
