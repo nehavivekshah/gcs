@@ -83,6 +83,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -140,7 +141,7 @@
             <div id="step-content-1" class="step-content active">
               <form id="step1Form" class="row g-4 needs-validation" novalidate>
                 @csrf
-                 <div class="col-12">
+                <div class="col-12">
                   <h5 class="section-title"><i class="icon-user me-2"></i>Basic Customer Info</h5>
                 </div>
 
@@ -172,7 +173,7 @@
                   <h5 class="section-title"><i class="icon-mobile me-2"></i>Contact Details</h5>
                 </div>
 
-                 <div class="col-md-3">
+                <div class="col-md-3">
                   <label class="form-label-premium">Contact Person</label>
                   <input type="text" class="form-control form-control-premium" name="contact_person">
                 </div>
@@ -196,7 +197,7 @@
                   <h5 class="section-title"><i class="icon-location-pin me-2"></i>Address</h5>
                 </div>
 
-                 <div class="col-md-6">
+                <div class="col-md-6">
                   <label class="form-label-premium">Address Line 1</label>
                   <textarea class="form-control form-control-premium" name="address_line_1" rows="2"></textarea>
                 </div>
@@ -220,7 +221,7 @@
                   <label class="form-label-premium">City</label>
                   <select class="form-control form-control-premium select2" id="city_id" name="city_id">
                     <option value="">Select City</option>
-                     {{-- Populated via AJAX --}}
+                    {{-- Populated via AJAX --}}
                   </select>
                 </div>
 
@@ -238,7 +239,7 @@
                 </div>
 
                 <div class="col-12 mt-4 text-end">
-                   <button type="button" class="btn btn-primary-custom px-4" id="btn-save-step-1">Save & Next</button>
+                  <button type="button" class="btn btn-primary-custom px-4" id="btn-save-step-1">Save & Next</button>
                 </div>
               </form>
             </div>
@@ -247,7 +248,8 @@
             <div id="step-content-2" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Branch List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addBranchModal">+ Add Branch</button>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addBranchModal">+
+                  Add Branch</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="branchTable">
@@ -260,21 +262,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="empty-row"><td colspan="4" class="text-center">No branches added yet.</td></tr>
+                    <tr class="empty-row">
+                      <td colspan="4" class="text-center">No branches added yet.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <div class="mt-4 text-end">
-                 {{-- <button type="button" class="btn btn-secondary me-2" onclick="goToStep(1)">Previous</button> --}}
-                 <button type="button" class="btn btn-primary-custom" onclick="goToStep(3)">Next</button>
+                {{-- <button type="button" class="btn btn-secondary me-2" onclick="goToStep(1)">Previous</button> --}}
+                <button type="button" class="btn btn-primary-custom" onclick="goToStep(3)">Next</button>
               </div>
             </div>
 
             <!-- STEP 3: CONTACTS -->
             <div id="step-content-3" class="step-content">
-               <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Contact List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addContactModal" onclick="prepareContactModal()">+ Add Contact</button>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addContactModal"
+                  onclick="prepareContactModal()">+ Add Contact</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="contactTable">
@@ -287,21 +292,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                     <tr class="empty-row"><td colspan="4" class="text-center">No contacts added yet.</td></tr>
+                    <tr class="empty-row">
+                      <td colspan="4" class="text-center">No contacts added yet.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <div class="mt-4 text-end">
-                 <button type="button" class="btn btn-secondary me-2" onclick="goToStep(2)">Previous</button>
-                 <button type="button" class="btn btn-primary-custom" onclick="goToStep(4)">Next</button>
+                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(2)">Previous</button>
+                <button type="button" class="btn btn-primary-custom" onclick="goToStep(4)">Next</button>
               </div>
             </div>
 
             <!-- STEP 4: PRODUCTS -->
             <div id="step-content-4" class="step-content">
-               <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Product List</h5>
-                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addProductModal" onclick="prepareProductModal()">+ Add Product</button>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addProductModal"
+                  onclick="prepareProductModal()">+ Add Product</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="productTable">
@@ -314,13 +322,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                     <tr class="empty-row"><td colspan="4" class="text-center">No products added yet.</td></tr>
+                    <tr class="empty-row">
+                      <td colspan="4" class="text-center">No products added yet.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-               <div class="mt-4 text-end">
-                 <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
-                 <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4">Finish</a>
+              <div class="mt-4 text-end">
+                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
+                <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4">Finish</a>
               </div>
             </div>
 
@@ -341,62 +351,62 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-           <form id="branchForm">
-             @csrf
-             <input type="hidden" name="customer_id" class="modal_customer_id">
-             
-             <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Branch Name <span class="text-danger">*</span></label>
-                  <input type="text" name="branch_name" class="form-control" required>
-                </div>
+          <form id="branchForm">
+            @csrf
+            <input type="hidden" name="customer_id" class="modal_customer_id">
 
-                <div class="col-md-6">
-                  <label class="form-label">Contact Person</label>
-                  <input type="text" name="contact_person" class="form-control">
-                </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Branch Name <span class="text-danger">*</span></label>
+                <input type="text" name="branch_name" class="form-control" required>
+              </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">Mobile No</label>
-                  <input type="text" name="mobile_no" class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Contact Person</label>
+                <input type="text" name="contact_person" class="form-control">
+              </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Mobile No</label>
+                <input type="text" name="mobile_no" class="form-control">
+              </div>
 
-                 <div class="col-md-6">
-                  <label class="form-label">Area</label>
-                  <select name="area_id" id="modal_branch_area" class="form-control select2-modal">
-                     <option value="">Select Area</option>
-                      @foreach($areaList as $areas)
-                      <option value="{{ $areas->id }}">{{ $areas->area }}</option>
-                    @endforeach
-                  </select>
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control">
+              </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">City <span class="text-danger">*</span></label>
-                  <select name="city_id" id="modal_branch_city" class="form-control select2-modal" required>
-                     <option value="">Select City</option>
-                  </select>
-                </div>
-                 
-                 <div class="col-md-6">
-                  <label class="form-label">State <span class="text-danger">*</span></label>
-                  <select name="state_id" id="modal_branch_state" class="form-control select2-modal" required>
-                     <option value="">Select State</option>
-                  </select>
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Area</label>
+                <select name="area_id" id="modal_branch_area" class="form-control select2-modal">
+                  <option value="">Select Area</option>
+                  @foreach($areaList as $areas)
+                    <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+                  @endforeach
+                </select>
+              </div>
 
-                <div class="col-md-12">
-                  <label class="form-label">Address</label>
-                  <textarea name="address_line_1" class="form-control" rows="2"></textarea>
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">City <span class="text-danger">*</span></label>
+                <select name="city_id" id="modal_branch_city" class="form-control select2-modal" required>
+                  <option value="">Select City</option>
+                </select>
+              </div>
 
-             </div>
-           </form>
+              <div class="col-md-6">
+                <label class="form-label">State <span class="text-danger">*</span></label>
+                <select name="state_id" id="modal_branch_state" class="form-control select2-modal" required>
+                  <option value="">Select State</option>
+                </select>
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Address</label>
+                <textarea name="address_line_1" class="form-control" rows="2"></textarea>
+              </div>
+
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -406,7 +416,7 @@
     </div>
   </div>
 
-   <!-- Add Contact Modal -->
+  <!-- Add Contact Modal -->
   <div class="modal fade" id="addContactModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -415,34 +425,34 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-           <form id="contactForm">
-             @csrf
-             <input type="hidden" name="customer_id" class="modal_customer_id">
-             <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Branch <span class="text-danger">*</span></label>
-                  <select name="branch_id" class="form-control select-branch" required>
-                     <option value="">Select Branch</option>
-                  </select>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Contact Name <span class="text-danger">*</span></label>
-                  <input type="text" name="contact_name" class="form-control" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Designation</label>
-                  <input type="text" name="designation" class="form-control">
-                </div>
-                 <div class="col-md-6">
-                  <label class="form-label">Mobile</label>
-                  <input type="text" name="mobile_no" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Email</label>
-                  <input type="email" name="email_id" class="form-control">
-                </div>
-             </div>
-           </form>
+          <form id="contactForm">
+            @csrf
+            <input type="hidden" name="customer_id" class="modal_customer_id">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Branch <span class="text-danger">*</span></label>
+                <select name="branch_id" class="form-control select-branch" required>
+                  <option value="">Select Branch</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Contact Name <span class="text-danger">*</span></label>
+                <input type="text" name="contact_name" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Designation</label>
+                <input type="text" name="designation" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Mobile</label>
+                <input type="text" name="mobile_no" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="email_id" class="form-control">
+              </div>
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -451,7 +461,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Add Product Modal -->
   <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -461,49 +471,49 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-           <form id="productForm">
-             @csrf
-             <input type="hidden" name="customer_id" class="modal_customer_id">
-             <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Branch <span class="text-danger">*</span></label>
-                  <select name="branch_id" class="form-control select-branch" required>
-                     <option value="">Select Branch</option>
-                  </select>
-                </div>
-                
-                <div class="col-md-6">
-                  <label class="form-label">Product (AMC) <span class="text-danger">*</span></label>
-                  <select name="amc_product_id"  class="form-control select2-modal" required>
-                     <option value="">Select Product</option>
-                     @foreach($amcProductList as $prod)
-                       <option value="{{ $prod->id }}">{{ $prod->amc_product }}</option>
-                     @endforeach
-                  </select>
-                </div>
-                
-                <div class="col-md-6">
-                  <label class="form-label">Product Type</label>
-                  <input type="text" name="product_type" class="form-control">
-                </div>
+          <form id="productForm">
+            @csrf
+            <input type="hidden" name="customer_id" class="modal_customer_id">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Branch <span class="text-danger">*</span></label>
+                <select name="branch_id" class="form-control select-branch" required>
+                  <option value="">Select Branch</option>
+                </select>
+              </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">Qty</label>
-                  <input type="number" name="quantity" class="form-control" value="1">
-                </div>
-                
-                <div class="col-md-6">
-                  <label class="form-label">AMC Start Date</label>
-                  <input type="date" name="amc_start_date" class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Product (AMC) <span class="text-danger">*</span></label>
+                <select name="amc_product_id" class="form-control select2-modal" required>
+                  <option value="">Select Product</option>
+                  @foreach($amcProductList as $prod)
+                    <option value="{{ $prod->id }}">{{ $prod->amc_product }}</option>
+                  @endforeach
+                </select>
+              </div>
 
-                 <div class="col-md-6">
-                  <label class="form-label">AMC End Date</label>
-                  <input type="date" name="amc_end_date" class="form-control">
-                </div>
+              <div class="col-md-6">
+                <label class="form-label">Product Type</label>
+                <input type="text" name="product_type" class="form-control">
+              </div>
 
-             </div>
-           </form>
+              <div class="col-md-6">
+                <label class="form-label">Qty</label>
+                <input type="number" name="quantity" class="form-control" value="1">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">AMC Start Date</label>
+                <input type="date" name="amc_start_date" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">AMC End Date</label>
+                <input type="date" name="amc_end_date" class="form-control">
+              </div>
+
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -523,210 +533,217 @@
   <script src="{{ asset('public/assets/js/select2/select2.full.min.js') }}"></script>
 
   <script>
-    var savedBranches = []; 
+    var savedBranches = [];
 
     $(document).ready(function () {
       $('.select2').select2({ placeholder: 'Select an option', allowClear: true, width: '100%' });
-      
+
       // Initialize modals select2
-      // Note: separate init for modals ensuring no conflict
-      $('.select2-modal').select2({ dropdownParent: $('.modal'), width: '100%' });
-      $('#addProductModal .select2-modal').select2({ dropdownParent: $('#addProductModal'), width: '100%' }); // Specific targeting
+      // We iterate over each modal to ensure the dropdownParent is correctly set to THAT specific modal
+      $('.modal').each(function () {
+        var $modal = $(this);
+        $modal.find('.select2-modal, .select-branch').select2({
+          dropdownParent: $modal,
+          width: '100%',
+          placeholder: 'Select an option',
+          allowClear: true
+        });
+      });
 
       // --- STEP 1 LOGIC ---
-      $('#btn-save-step-1').click(function() {
-          var form = $('#step1Form');
-          var btn = $(this);
-          
-          if(!form[0].checkValidity()){
-              form.addClass('was-validated');
-              return;
-          }
-          
-          btn.prop('disabled', true).text('Saving...');
+      $('#btn-save-step-1').click(function () {
+        var form = $('#step1Form');
+        var btn = $(this);
 
-          $.ajax({
-              url: "{{ route('admin.customer.store') }}",
-              method: "POST",
-              data: form.serialize(),
-              dataType: 'json',
-              success: function(res) {
-                  if(res.status) {
-                      $('#global_customer_id').val(res.customer_id);
-                      $('#global_customer_uuid').val(res.uuid);
-                      $('.modal_customer_id').val(res.customer_id); 
-                      
-                      // Show success
-                      // alert('Customer saved!');
-                      
-                      goToStep(2);
-                  } else {
-                      alert('Error saving customer: ' + res.message);
-                      btn.prop('disabled', false).text('Save & Next');
-                  }
-              },
-              error: function(err) {
-                  console.error(err);
-                  alert('Save failed. Check console.');
-                  btn.prop('disabled', false).text('Save & Next');
-              }
-          });
+        if (!form[0].checkValidity()) {
+          form.addClass('was-validated');
+          return;
+        }
+
+        btn.prop('disabled', true).text('Saving...');
+
+        $.ajax({
+          url: "{{ route('admin.customer.store') }}",
+          method: "POST",
+          data: form.serialize(),
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              $('#global_customer_id').val(res.customer_id);
+              $('#global_customer_uuid').val(res.uuid);
+              $('.modal_customer_id').val(res.customer_id);
+
+              // Show success
+              // alert('Customer saved!');
+
+              goToStep(2);
+            } else {
+              alert('Error saving customer: ' + res.message);
+              btn.prop('disabled', false).text('Save & Next');
+            }
+          },
+          error: function (err) {
+            console.error(err);
+            alert('Save failed. Check console.');
+            btn.prop('disabled', false).text('Save & Next');
+          }
+        });
       });
 
       // --- LOCATION AJAX (Step 1) ---
       $('#area_id').on('change', function () {
         var areaID = $(this).val();
         if (areaID) {
-           fetchCityState(areaID, '#city_id', '#state_id');
+          fetchCityState(areaID, '#city_id', '#state_id');
         }
       });
-      
+
       // --- LOCATION AJAX (Modal) ---
       $('#modal_branch_area').on('change', function () {
         var areaID = $(this).val();
         if (areaID) {
-           fetchCityState(areaID, '#modal_branch_city', '#modal_branch_state');
+          fetchCityState(areaID, '#modal_branch_city', '#modal_branch_state');
         }
       });
-      
+
       function fetchCityState(areaID, citySelector, stateSelector) {
-           $.ajax({
-            url: "{{ route('admin.customer.area.city') }}",
-            type: "POST",
-            data: { areaID: areaID, _token: "{{ csrf_token() }}" },
-            dataType: "json",
-            success: function (res) {
-              if (res.status) {
-                $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
-                $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
-              }
+        $.ajax({
+          url: "{{ route('admin.customer.area.city') }}",
+          type: "POST",
+          data: { areaID: areaID, _token: "{{ csrf_token() }}" },
+          dataType: "json",
+          success: function (res) {
+            if (res.status) {
+              $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
+              $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
             }
-          });
+          }
+        });
       }
 
       // --- BRANCH MODAL SAVE ---
-      $('#btn-save-branch').click(function() {
-         var form = $('#branchForm');
-         if(!$('#global_customer_id').val()) { alert('Please save customer first.'); return; }
-         
-         $.ajax({
-             url: "{{ route('admin.customer.add.branch') }}",
-             method: "POST",
-             data: form.serialize(),
-             dataType: 'json',
-             success: function(res) {
-                 if(res.status) {
-                     // Add to table
-                     var branchName = $('input[name="branch_name"]').val();
-                     var contact = $('input[name="contact_person"]').val();
-                     var mobile = $('input[name="mobile_no"]').val();
-                     var city = $('#modal_branch_city option:selected').text();
-                     var branchId = res.branch_id || Date.now(); // Fallback
-                     
-                     savedBranches.push({id: branchId, name: branchName});
-                     
-                     $('#branchTable .empty-row').hide();
-                     $('#branchTable tbody').append('<tr><td>'+branchName+'</td><td>'+contact+'</td><td>'+mobile+'</td><td>'+city+'</td></tr>');
-                     
-                     $('#addBranchModal').modal('hide');
-                     form[0].reset();
-                     $('#modal_branch_city').empty();
-                     $('#modal_branch_state').empty();
-                 } else {
-                     alert('Failed to add branch');
-                 }
-             },
-             error: function() {
-                 alert('Error adding branch. Make sure backend supports JSON.');
-             }
-         });
+      $('#btn-save-branch').click(function () {
+        var form = $('#branchForm');
+        if (!$('#global_customer_id').val()) { alert('Please save customer first.'); return; }
+
+        $.ajax({
+          url: "{{ route('admin.customer.add.branch') }}",
+          method: "POST",
+          data: form.serialize(),
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              // Add to table
+              var branchName = $('input[name="branch_name"]').val();
+              var contact = $('input[name="contact_person"]').val();
+              var mobile = $('input[name="mobile_no"]').val();
+              var city = $('#modal_branch_city option:selected').text();
+              var branchId = res.branch_id || Date.now(); // Fallback
+
+              savedBranches.push({ id: branchId, name: branchName });
+
+              $('#branchTable .empty-row').hide();
+              $('#branchTable tbody').append('<tr><td>' + branchName + '</td><td>' + contact + '</td><td>' + mobile + '</td><td>' + city + '</td></tr>');
+
+              $('#addBranchModal').modal('hide');
+              form[0].reset();
+              $('#modal_branch_city').empty();
+              $('#modal_branch_state').empty();
+            } else {
+              alert('Failed to add branch');
+            }
+          },
+          error: function () {
+            alert('Error adding branch. Make sure backend supports JSON.');
+          }
+        });
       });
-      
-       // --- CONTACT MODAL SAVE ---
-      $('#btn-save-contact').click(function() {
-         var form = $('#contactForm');
-         
-         $.ajax({
-             url: "{{ route('admin.customer.add.contact') }}",
-             method: "POST",
-             data: form.serialize(),
-             dataType: 'json',
-             success: function(res) {
-                 if(res.status) {
-                     var name = $('input[name="contact_name"]').val();
-                     var branchName = $('.select-branch option:selected').text();
-                     var desig = $('input[name="designation"]').val();
-                     var mob = $('input[name="mobile_no"]').val();
-                     
-                     $('#contactTable .empty-row').hide();
-                     $('#contactTable tbody').append('<tr><td>'+name+'</td><td>'+branchName+'</td><td>'+desig+'</td><td>'+mob+'</td></tr>');
-                     
-                     $('#addContactModal').modal('hide');
-                     form[0].reset();
-                 } else {
-                      alert('Failed to add contact');
-                 }
-             },
-             error: function() {
-                  alert('Error adding contact. Make sure backend supports JSON.');
-             }
-         });
+
+      // --- CONTACT MODAL SAVE ---
+      $('#btn-save-contact').click(function () {
+        var form = $('#contactForm');
+
+        $.ajax({
+          url: "{{ route('admin.customer.add.contact') }}",
+          method: "POST",
+          data: form.serialize(),
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              var name = $('input[name="contact_name"]').val();
+              var branchName = $('.select-branch option:selected').text();
+              var desig = $('input[name="designation"]').val();
+              var mob = $('input[name="mobile_no"]').val();
+
+              $('#contactTable .empty-row').hide();
+              $('#contactTable tbody').append('<tr><td>' + name + '</td><td>' + branchName + '</td><td>' + desig + '</td><td>' + mob + '</td></tr>');
+
+              $('#addContactModal').modal('hide');
+              form[0].reset();
+            } else {
+              alert('Failed to add contact');
+            }
+          },
+          error: function () {
+            alert('Error adding contact. Make sure backend supports JSON.');
+          }
+        });
       });
 
       // --- PRODUCT MODAL SAVE ---
-      $('#btn-save-product').click(function() {
-         var form = $('#productForm');
-         
-         $.ajax({
-             url: "{{ route('admin.customer.add.amc.product') }}", // Using the correct route for product add
-             method: "POST",
-             data: form.serialize(),
-             dataType: 'json',
-             success: function(res) {
-                 if(res.status) {
-                     var prodName = $('select[name="amc_product_id"] option:selected').text();
-                     var branchName = $('#productForm .select-branch option:selected').text();
-                     var type = $('input[name="product_type"]').val();
-                     var qty = $('input[name="quantity"]').val();
-                     
-                     $('#productTable .empty-row').hide();
-                     $('#productTable tbody').append('<tr><td>'+prodName+'</td><td>'+branchName+'</td><td>'+type+'</td><td>'+qty+'</td></tr>');
-                     
-                     $('#addProductModal').modal('hide');
-                     form[0].reset();
-                 } else {
-                      alert('Failed to add product: ' + res.message);
-                 }
-             },
-             error: function() {
-                  alert('Error adding product.');
-             }
-         });
+      $('#btn-save-product').click(function () {
+        var form = $('#productForm');
+
+        $.ajax({
+          url: "{{ route('admin.customer.add.amc.product') }}", // Using the correct route for product add
+          method: "POST",
+          data: form.serialize(),
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              var prodName = $('select[name="amc_product_id"] option:selected').text();
+              var branchName = $('#productForm .select-branch option:selected').text();
+              var type = $('input[name="product_type"]').val();
+              var qty = $('input[name="quantity"]').val();
+
+              $('#productTable .empty-row').hide();
+              $('#productTable tbody').append('<tr><td>' + prodName + '</td><td>' + branchName + '</td><td>' + type + '</td><td>' + qty + '</td></tr>');
+
+              $('#addProductModal').modal('hide');
+              form[0].reset();
+            } else {
+              alert('Failed to add product: ' + res.message);
+            }
+          },
+          error: function () {
+            alert('Error adding product.');
+          }
+        });
       });
 
     });
 
     function goToStep(step) {
-        $('.step-content').removeClass('active');
-        $('#step-content-'+step).addClass('active');
+      $('.step-content').removeClass('active');
+      $('#step-content-' + step).addClass('active');
 
-        $('.step-item').removeClass('active completed');
-        for(let i=1; i<step; i++) {
-            $('#step-nav-'+i).addClass('completed');
-        }
-        $('#step-nav-'+step).addClass('active');
+      $('.step-item').removeClass('active completed');
+      for (let i = 1; i < step; i++) {
+        $('#step-nav-' + i).addClass('completed');
+      }
+      $('#step-nav-' + step).addClass('active');
     }
-    
+
     function prepareContactModal() {
-        var opts = '<option value="">Select Branch</option>';
-        savedBranches.forEach(b => {
-             opts += '<option value="'+b.id+'">'+b.name+'</option>';
-        });
-        $('.select-branch').html(opts);
+      var opts = '<option value="">Select Branch</option>';
+      savedBranches.forEach(b => {
+        opts += '<option value="' + b.id + '">' + b.name + '</option>';
+      });
+      $('.select-branch').html(opts);
     }
-    
+
     function prepareProductModal() {
-        prepareContactModal();
+      prepareContactModal();
     }
 
   </script>
