@@ -39,6 +39,13 @@
               </div>
 
               <div class="col-md-4">
+                <label class="form-label-premium">Degination <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-premium" name="customer_designation"
+                  value="{{ old('customer_designation') }}" placeholder="Enter customer designation" required>
+                <div class="invalid-feedback">@error('customer_designation') {{ $message }} @enderror</div>
+              </div>
+
+              <div class="col-md-4">
                 <label class="form-label-premium">Customer Type</label>
                 <select class="form-control form-control-premium" name="customer_type">
                   <option value="">Select Type</option>
@@ -48,16 +55,16 @@
                 <div class="invalid-feedback">@error('customer_type') {{ $message }} @enderror</div>
               </div>
 
-              <div class="col-md-4">
-                <label class="form-label-premium">Customer Category</label>
-                <select class="form-control form-control-premium" name="customer_category">
-                  <option value="">Select Category</option>
-                  <option value="Corporate">Corporate</option>
-                  <option value="Semi-Corporate">Semi-Corporate</option>
-                  <option value="In-House">In-House</option>
-                </select>
-                <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
-              </div>
+              <!-- <div class="col-md-4">
+                                <label class="form-label-premium">Customer Category</label>
+                                <select class="form-control form-control-premium" name="customer_category">
+                                  <option value="">Select Category</option>
+                                  <option value="Corporate">Corporate</option>
+                                  <option value="Semi-Corporate">Semi-Corporate</option>
+                                  <option value="In-House">In-House</option>
+                                </select>
+                                <div class="invalid-feedback">@error('customer_category') {{ $message }} @enderror</div>
+                              </div> -->
 
               <!-- Contact Details -->
               <div class="col-12 mt-4">
@@ -182,8 +189,8 @@
               </div>
 
               <div class="col-md-3">
-                <label class="form-label-premium">Account Key</label>
-                <select class="form-control form-control-premium" name="ac_key">
+                <label class="form-label-premium">Co-ordinator</label>
+                <select class="form-control form-control-premium" name="coordinator">
                   <option value="">Select Account</option>
                   @foreach($coordinateList as $coordinate)
                     <option value="{{ $coordinate->id }}">{{ $coordinate->outlook_email }}</option>
