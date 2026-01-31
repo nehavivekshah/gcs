@@ -37,7 +37,7 @@ class CustomerController extends Controller
     {
         // Validation
         $validator = \Validator::make($req->all(), [
-            'customer_name' => 'required',
+            'company_name' => 'required',
             'mobile_no' => 'required|unique:customers,mobile_no',
             'email' => 'nullable|email|unique:customers,email',
         ]);
@@ -52,7 +52,7 @@ class CustomerController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $customer_name = $req->customer_name;
+        $company_name = $req->company_name;
         $customer_type = $req->customer_type;
         $customer_category = $req->customer_category;
         $contact_person = $req->contact_person;
@@ -164,7 +164,7 @@ class CustomerController extends Controller
     function update(Request $req, $uuid)
     {
 
-        $customer_name = $req->customer_name;
+        $company_name = $req->company_name;
         $customer_type = $req->customer_type;
         $customer_category = $req->customer_category;
         $contact_person = $req->contact_person;

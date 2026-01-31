@@ -19,7 +19,7 @@ class CustomerSeeder extends Seeder
             DB::table('customers')->insert([
                 'uuid' => Str::uuid(),
                 'customer_code' => 'GCS-' . rand(1000, 9999),
-                'customer_name' => 'Customer ' . Str::random(5),
+                'company_name' => 'Company ' . Str::random(5),
                 'customer_type' => 'GCS',
                 'customer_category' => 'Normal',
                 'contact_person' => 'Person ' . Str::random(5),
