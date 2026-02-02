@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Services\CustomerService;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -132,6 +133,19 @@ class CustomerController extends Controller
             'created_by' => $created_by
         ];
 
+        // Generate Unique Username
+        $baseName = preg_replace('/[^a-zA-Z0-9]/', '', $company_name);
+        $shortName = strtoupper(substr($baseName, 0, 4));
+        $suffix = 'A';
+        $username = $shortName . '-' . $suffix;
+
+        while (Customer::where('username', $username)->exists()) {
+            $suffix++;
+            $username = $shortName . '-' . $suffix;
+        }
+
+        $data['username'] = $username;
+
         $customer = $this->customerService->store($data);
 
         if ($req->wantsJson()) {
@@ -139,7 +153,8 @@ class CustomerController extends Controller
                 'status' => true,
                 'message' => 'Customer added successfully',
                 'customer_id' => $customer->id,
-                'uuid' => $customer->uuid ?? null
+                'uuid' => $customer->uuid ?? null,
+                'username' => $username
             ]);
         }
 
