@@ -496,20 +496,24 @@ class CustomerController extends Controller
             'created_by' => $created_by,
         ];
 
-        // Generate Product UIN
-        $customer = Customer::find($customer_id);
-        $amcProduct = $this->customerService->getAmcProductById($amc_product_id);
+        // Generate Product UIN if not provided
+        if ($request->product_uin) {
+            $product_uin = $request->product_uin;
+        } else {
+            $customer = Customer::find($customer_id);
+            $amcProduct = $this->customerService->getAmcProductById($amc_product_id);
 
-        // Count existing products of this type for this customer
-        $count = \App\Models\CustomerProduct::where('customer_id', $customer_id)
-            ->where('amc_product_id', $amc_product_id)
-            ->count();
-        $sequence = $count + 1;
+            // Count existing products of this type for this customer
+            $count = \App\Models\CustomerProduct::where('customer_id', $customer_id)
+                ->where('amc_product_id', $amc_product_id)
+                ->count();
+            $sequence = $count + 1;
 
-        // Clean product name (remove special chars)
-        $productName = preg_replace('/[^a-zA-Z0-9]/', '', $amcProduct->amc_product);
+            // Clean product name (remove special chars)
+            $productName = preg_replace('/[^a-zA-Z0-9]/', '', $amcProduct->amc_product);
 
-        $product_uin = ($customer->username ?? 'UNK') . '-' . $productName . '-' . $sequence;
+            $product_uin = ($customer->username ?? 'UNK') . '-' . $productName . '-' . $sequence;
+        }
 
         $data['product_uin'] = $product_uin;
 
@@ -520,7 +524,8 @@ class CustomerController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Product added successfully',
-                'product_id' => $product->id
+                'product_id' => $product->id,
+                'product_uin' => $product->product_uin
             ]);
         }
 

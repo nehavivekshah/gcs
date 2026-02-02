@@ -198,14 +198,14 @@
                 </div>
 
                 <!-- <div class="col-md-3">
-                    <label class="form-label-premium">Customer Category</label>
-                    <select class="form-control form-control-premium" name="customer_category">
-                      <option value="">Select Category</option>
-                      <option value="Corporate">Corporate</option>
-                      <option value="Semi-Corporate">Semi-Corporate</option>
-                      <option value="In-House">In-House</option>
-                    </select>
-                  </div> -->
+                                  <label class="form-label-premium">Customer Category</label>
+                                  <select class="form-control form-control-premium" name="customer_category">
+                                    <option value="">Select Category</option>
+                                    <option value="Corporate">Corporate</option>
+                                    <option value="Semi-Corporate">Semi-Corporate</option>
+                                    <option value="In-House">In-House</option>
+                                  </select>
+                                </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
@@ -659,12 +659,18 @@
               </div>
 
               <div class="col-md-6">
+                <label class="form-label-premium">Product UIN</label>
+                <input type="text" class="form-control form-control-premium" name="product_uin"
+                  placeholder="Auto-generated if empty">
+              </div>
+
+              <div class="col-md-6">
                 <label class="form-label-premium">User Name</label>
                 <input type="text" class="form-control form-control-premium" name="user_name">
               </div>
 
               <div class="col-md-12">
-                <label class="form-label-premium">Description / Serial No.</label>
+                <label class="form-label-premium">Description</label>
                 <textarea class="form-control form-control-premium" name="description"></textarea>
               </div>
 
@@ -696,11 +702,11 @@
               <!-- SERVICE 2 -->
               <div class="col-md-6">
                 <label class="form-label-premium">Service Date 2</label>
-                <input type="date" class="form-control form-control-premium" name="service_date_2">
+                <input type="date" class="form-control form-control-premium" name="service_date_2" disabled>
               </div>
               <div class="col-md-6">
                 <label class="form-label-premium">Service Engineer 2</label>
-                <select name="service_engineer_2" class="form-control form-control-premium select2-modal">
+                <select name="service_engineer_2" class="form-control form-control-premium select2-modal" disabled>
                   <option value="">Select Engineer</option>
                   @foreach($engineerList as $eng)
                     <option value="{{ $eng->id }}">{{ $eng->name }}</option>
@@ -711,11 +717,11 @@
               <!-- SERVICE 3 -->
               <div class="col-md-6">
                 <label class="form-label-premium">Service Date 3</label>
-                <input type="date" class="form-control form-control-premium" name="service_date_3">
+                <input type="date" class="form-control form-control-premium" name="service_date_3" disabled>
               </div>
               <div class="col-md-6">
                 <label class="form-label-premium">Service Engineer 3</label>
-                <select name="service_engineer_3" class="form-control form-control-premium select2-modal">
+                <select name="service_engineer_3" class="form-control form-control-premium select2-modal" disabled>
                   <option value="">Select Engineer</option>
                   @foreach($engineerList as $eng)
                     <option value="{{ $eng->id }}">{{ $eng->name }}</option>
@@ -973,6 +979,16 @@
               var type = $('#productForm select[name="product_type"]').val(); // Use select (it's a select in HTML)
               var qty = $('#productForm input[name="quantity"]').val();
               var prodId = id ? id : (res.product_id || Date.now());
+              var uin = res.product_uin || $('#productForm input[name="product_uin"]').val();
+
+              // Update fullData with generated UIN
+              var formData = form.serializeArray();
+              var uinField = formData.find(x => x.name === 'product_uin');
+              if (uinField) {
+                uinField.value = uin;
+              } else {
+                formData.push({ name: 'product_uin', value: uin });
+              }
 
               var dataObj = {
                 id: prodId,
@@ -980,7 +996,7 @@
                 branchName: branchName,
                 type: type,
                 qty: qty,
-                fullData: form.serializeArray()
+                fullData: formData
               };
 
               if (id) {
@@ -1086,7 +1102,9 @@
       $('#btn-save-product').text('Save');
       $('select[name="amc_product_id"]').val('').trigger('change');
       $('#productForm .select-branch').val('').trigger('change');
+      $('#productForm .select-branch').val('').trigger('change');
       $('#productForm input[name="quantity"]').val(1);
+      $('#productForm input[name="product_uin"]').val('');
     }
 
     // Edit Functions
@@ -1139,9 +1157,67 @@
       });
 
       $('#modal_product_id').val(item.id);
-
       $('#addProductModal').modal('show');
       $('#btn-save-product').text('Update');
+    }
+
+    // Auto-calculate Service Dates
+    $('input[name="amc_start_date"]').on('change', function () {
+      var startDate = $(this).val();
+      if (!startDate) return;
+
+      var date = new Date(startDate);
+
+      // Service Date 1: +4 months
+      date.setMonth(date.getMonth() + 4);
+      var sd1 = date.toISOString().split('T')[0];
+      $('input[name="service_date_1"]').val(sd1).trigger('change');
+
+      // Service Date 2: +4 months from SD1 (total +8)
+      date.setMonth(date.getMonth() + 4);
+      var sd2 = date.toISOString().split('T')[0];
+      $('input[name="service_date_2"]').val(sd2).trigger('change');
+
+      // Service Date 3: +4 months from SD2 (total +12)
+      date.setMonth(date.getMonth() + 4);
+      var sd3 = date.toISOString().split('T')[0];
+      $('input[name="service_date_3"]').val(sd3).trigger('change');
+    });
+
+    // Sequential Enabling Logic
+    $('input[name="service_date_1"]').on('change keyup', function () {
+      let val = $(this).val();
+      let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
+      if (val) {
+        inputs2.prop('disabled', false);
+      } else {
+        inputs2.prop('disabled', true).val('');
+      }
+      // Trigger change on dependent
+      $('input[name="service_date_2"]').trigger('change');
+    });
+
+    $('input[name="service_date_2"]').on('change keyup', function () {
+      let val = $(this).val();
+      let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
+      if (val) {
+        inputs3.prop('disabled', false);
+      } else {
+        inputs3.prop('disabled', true).val('');
+      }
+    });
+
+    // Run on modal open for Edit to check if inputs should be enabled
+    function checkServiceDateEnabling() {
+      $('input[name="service_date_1"]').trigger('change');
+      $('input[name="service_date_2"]').trigger('change');
+    }
+
+    // Hook checkServiceDateEnabling into edit and prepare buttons
+    var originalEditProduct = window.editProduct;
+    window.editProduct = function (id) {
+      if (originalEditProduct) originalEditProduct(id);
+      setTimeout(checkServiceDateEnabling, 300); // Small delay to allow restore
     }
   </script>
 @endpush
