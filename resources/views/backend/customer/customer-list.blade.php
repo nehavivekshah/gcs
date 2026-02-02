@@ -521,6 +521,7 @@
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Type</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">AMC Start</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">AMC End</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
@@ -1379,37 +1380,43 @@
       }
 
       function loadViewProducts(customerId) {
-        $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
-        $.ajax({
-          url: "{{ route('admin.customer.get.products') }}",
-          type: 'POST',
-          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
-          success: function (res) {
-            var html = '';
-            var list = (res.status !== undefined) ? res.data : res;
+            $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+            $.ajax({
+              url: "{{ route('admin.customer.get.products') }}",
+              type: 'POST',
+              data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+              success: function (res) {
+                var html = '';
+                var list = (res.status !== undefined && res.data) ? res.data : (Array.isArray(res) ? res : []);
 
-            if (Array.isArray(list) && list.length > 0) {
-              $.each(list, function (k, v) {
-                html += '<tr>' +
-                  '<td>' + (k + 1) + '</td>' +
-                  '<td>' + (v.product_name ?? '-') + '</td>' +
-                  '<td>' + (v.description ?? '-') + '</td>' +
-                  '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
-                  '<td>' + (v.product_type ?? '-') + '</td>' +
-                  '<td>' + (v.amc_start_date ?? '-') + '</td>' +
-                  '<td>' + (v.amc_end_date ?? '-') + '</td>' +
-                  '</tr>';
-              });
-            } else {
-              html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
-            }
-            $('#viewProductTable tbody').html(html);
-          },
-          error: function (err) {
-            console.error('Product Load Error', err);
-            $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center text-danger">Error loading products</td></tr>');
-          }
-        });
+                if (list.length > 0) {
+                  $.each(list, function (k, v) {
+                    html += '<tr>' +
+                      '<td>' + (k + 1) + '</td>' +
+                      '<td>' + (v.product_name ?? '-') + '</td>' +
+                      '<td>' + (v.description ?? '-') + '</td>' +
+                      '<td>' + (v.branch_id ?? '-') + '</td>' + 
+                      '<td>' + (v.product_type ?? '-') + '</td>' +
+                      '<td>' + (v.amc_start_date ?? '-') + '</td>' +
+                      '<td>' + (v.amc_end_date ?? '-') + '</td>' +
+                      '<td class="text-center">' +
+                      '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
+                      '</div>' +
+                      '</td>' +
+                      '</tr>';
+                  });
+                } else {
+                  html = '<tr><td colspan="8" class="text-center">No Products Found</td></tr>';
+                }
+                $('#viewProductTable tbody').html(html);
+              },
+              error: function (err) {
+                console.error('Product Load Error', err);
+                $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center text-danger">Error loading products</td></tr>');
+              }
+            });
       }
 
       // --- Handlers for "Add" Buttons inside View Modal ---
@@ -2033,8 +2040,15 @@
           success: function (res) {
             if (res.status) {
               $('#editProductModal').modal('hide');
-              $('#productModal').modal('show');
-              loadProducts(prodCustomerId);
+              
+              // Refresh View Product Table if View Modal is open
+              if($('#viewCustomerModal').hasClass('show')){
+                 var custId = $('#viewCustomerModal').data('id');
+                 loadViewProducts(custId);
+              } else {
+                 $('#productModal').modal('show');
+                 loadProducts(prodCustomerId);
+              }
             } else {
               alert('Error: ' + res.message);
             }
@@ -2052,7 +2066,12 @@
             data: { uuid: uuid, _token: "{{ csrf_token() }}" },
             success: function (res) {
               if (res.status) {
-                loadProducts(prodCustomerId);
+                 if($('#viewCustomerModal').hasClass('show')){
+                     var custId = $('#viewCustomerModal').data('id');
+                     loadViewProducts(custId);
+                 } else {
+                     loadProducts(prodCustomerId);
+                 }
               } else {
                 alert('Error: ' + res.message);
               }
