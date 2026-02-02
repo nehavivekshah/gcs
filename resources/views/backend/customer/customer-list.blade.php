@@ -144,21 +144,20 @@
       margin-bottom: 25px;
       border: 1px solid #e0e6ed;
       border-left: 5px solid var(--theme-default);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
     .view-label {
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: #727a85; /* darker gray for better visibility */
+      color: #727a85;
       margin-bottom: 6px;
       display: block;
       font-weight: 700;
     }
     .view-value {
-      font-size: 1.05rem; /* slightly larger */
+      font-size: 1.05rem;
       font-weight: 600;
-      color: #1b2533; /* almost black for max contrast */
+      color: #1b2533;
       word-break: break-word;
       line-height: 1.4;
     }
@@ -186,18 +185,13 @@
     }
     .info-card {
       background: #fff;
-      border: 1px solid #e0e6ed; /* distinctive border */
+      border: 1px solid #e0e6ed;
       border-radius: 12px;
       padding: 24px;
       height: 100%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-      transition: all 0.2s ease-in-out;
     }
-    .info-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      border-color: #d0d7e2;
-    }
+    /* Removed hover transform/shadow for flat design */
+    
     .nav-tabs-premium {
       border-bottom: 2px solid #eef2f7;
       gap: 12px;
@@ -215,7 +209,6 @@
     .nav-tabs-premium .nav-link.active {
       color: #fff;
       background-color: var(--theme-default);
-      box-shadow: 0 4px 12px rgba(var(--theme-default-rgb), 0.35);
     }
     .nav-tabs-premium .nav-link:hover:not(.active) {
       background-color: #e9ecef;
@@ -245,7 +238,7 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
-        <div class="modal-body p-4 bg-light">
+        <div class="modal-body p-4 bg-white">
 
           <!-- Profile Header Summary -->
           <div class="view-profile-header bg-white shadow-sm">
