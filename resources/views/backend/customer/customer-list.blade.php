@@ -212,30 +212,40 @@
     /* Modern Line Tabs with clear highlight */
     .nav-tabs-premium {
       border-bottom: 2px solid #eef2f7;
-      gap: 5px; /* Reduced gap to keep them close */
+      gap: 5px;
+      /* Reduced gap to keep them close */
       margin-bottom: 28px;
       padding-left: 0;
     }
+
     .nav-tabs-premium .nav-item {
-        margin-bottom: -2px;
+      margin-bottom: -2px;
     }
+
     .nav-tabs-premium .nav-link {
       border: none;
       border-bottom: 3px solid transparent;
-      color: #98a6ad; /* Light gray for inactive */
+      color: #98a6ad;
+      /* Light gray for inactive */
       font-weight: 600;
       padding: 12px 20px;
-      border-radius: 4px 4px 0 0; /* Slight top round */
+      border-radius: 4px 4px 0 0;
+      /* Slight top round */
       transition: all 0.2s;
       background: transparent;
       font-size: 0.95rem;
     }
+
     .nav-tabs-premium .nav-link.active {
-      color: #0b5ed7; /* Strong blue for active text */
-      background-color: #f0f7ff; /* Very light blue bg for active */
-      border-bottom-color: #0b5ed7; /* Match text */
+      color: #d40306;
+      /* Strong red for active text */
+      background-color: rgba(212, 3, 6, 0.1);
+      /* Very light red bg for active */
+      border-bottom-color: #d40306;
+      /* Match text */
       font-weight: 800;
     }
+
     .nav-tabs-premium .nav-link:hover:not(.active) {
       color: #6c757d;
       background-color: #f8f9fa;
@@ -441,6 +451,12 @@
 
             <!-- Tab 2: Branches -->
             <div class="tab-pane fade" id="branch-info" role="tabpanel" aria-labelledby="branch-tab">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="view-section-title mb-0 border-0 pb-0"><i class="icon-map-alt"></i> Branch List</h6>
+                <button class="btn btn-sm btn-primary-custom" id="btnAddBranchFromView">
+                  <i class="fa fa-plus me-1"></i> Add Branch
+                </button>
+              </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewBranchTable">
@@ -461,6 +477,12 @@
 
             <!-- Tab 3: Contacts -->
             <div class="tab-pane fade" id="contact-info" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="view-section-title mb-0 border-0 pb-0"><i class="icon-id-badge"></i> Contact List</h6>
+                <button class="btn btn-sm btn-primary-custom" id="btnAddContactFromView">
+                  <i class="fa fa-plus me-1"></i> Add Contact
+                </button>
+              </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewContactTable">
@@ -481,6 +503,12 @@
 
             <!-- Tab 4: Products -->
             <div class="tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-tab">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="view-section-title mb-0 border-0 pb-0"><i class="icon-package"></i> Product List</h6>
+                <button class="btn btn-sm btn-primary-custom" id="btnAddProductFromView">
+                  <i class="fa fa-plus me-1"></i> Add Product
+                </button>
+              </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewProductTable">
@@ -1249,6 +1277,12 @@
         $('#viewCustomerTab a:first').tab('show');
 
         var custId = $(this).data('id');
+        var custUuid = $(this).data('uuid');
+
+        // Store IDs on the modal for "Add" actions
+        $('#viewCustomerModal').data('id', custId);
+        $('#viewCustomerModal').data('uuid', custUuid);
+
         console.log('Viewing Customer ID:', custId);
 
         // Load Tabs Data
@@ -1358,6 +1392,134 @@
           }
         });
       }
+
+      // --- Handlers for "Add" Buttons inside View Modal ---
+
+      // Add Branch from View
+      $('#btnAddBranchFromView').click(function () {
+        var custId = $('#viewCustomerModal').data('id');
+        var custUuid = $('#viewCustomerModal').data('uuid');
+        var custName = $('#v_header_name').text(); // visual only
+
+        $('#branchCustomerName').text(custName); // reused ID from other modal logic? No, this is for branchModal title
+        $('#addbranchCustomerName').text(custName);
+
+        $('#branch_customer_id').val(custId);
+        $('#branch_customer_uuid').val(custUuid);
+
+        // Reset form
+        $('#addBranchForm')[0].reset();
+        $('#addBranchModal .select2').val('').trigger('change');
+
+        // We don't hide the View Modal, but since modals stack poorly, we might need to hide it or handle z-index.
+        // Bootstrap 5 supports multiple modals but backdrop might be tricky.
+        // Let's hide View modal momentarily or keep it? 
+        // User "display make hignlight", implied seamless. 
+        // Let's try opening on top. If backdrop issues, we can hide view.
+        // Safest UX: Hide View, Open Add. On Close Add, Re-open View (Manual logic needed).
+        // For now, let's just open.
+        $('#addBranchModal').modal('show');
+      });
+
+      // Add Contact from View
+      $('#btnAddContactFromView').click(function () {
+        var custId = $('#viewCustomerModal').data('id');
+        var custUuid = $('#viewCustomerModal').data('uuid');
+        var custName = $('#v_header_name').text();
+
+        $('#addcontactCustomerName').text(custName);
+
+        // Use the IDs expected by Add Contact Form
+        $('#contact_customer_id').val(custId);
+        $('#contact_customer_uuid').val(custUuid);
+
+        $('#addBranchForm')[0].reset(); // Note: ID conflict in your code (addContactModal has form id="addBranchForm")
+        // If you fixed the HTML ID, update this selector. For now, assuming provided code state:
+        // We must be careful.
+        // Let's assume the ID is unique or finding by context.
+        $('#addContactModal form').trigger('reset'); // Safer
+        $('#addContactModal .select2').val('').trigger('change');
+
+        // Fetch Branches for this customer to populate dropdown
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.branch') }}",
+          type: "POST",
+          data: { customer_id: custId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            var opts = '<option value="">Select Branch</option>';
+            if (res.data) {
+              $.each(res.data, function (k, v) {
+                opts += '<option value="' + v.id + '">' + v.branch_name + '</option>';
+              });
+            }
+            $('#add_contact_branch_id').html(opts);
+          }
+        });
+
+        $('#addContactModal').modal('show');
+      });
+
+      // Add Product from View
+      $('#btnAddProductFromView').click(function () {
+        var custId = $('#viewCustomerModal').data('id');
+
+        // Use the global vars used by Product logic if needed, or directly set inputs
+        // The existing product logic uses `prodCustomerId` var. Let's update it to be safe.
+        // Accessing the closure var might be hard if not in scope.
+        // But looking at code, `prodCustomerId` is defined inside `$(document).ready`.
+        // We are in the same ready block. So we can update it!
+
+        // Wait, are we? Yes, `$(document).ready` wraps everything.
+        // BUT `prodCustomerId` was defined in a SEPARATE `<script>` block in line 1646?
+        // No, line 1212 is one ready block. Line 1647 is ANOTHER ready block.
+        // Scopes are different. We cannot access `prodCustomerId` directly.
+
+        // We must manually populate the hidden fields for addProductForm.
+
+        $('#add_product_customer_id').val(custId);
+
+        // Also need to populate dropdowns
+        $.ajax({
+          url: "{{ route('admin.customer.get.product.form.data') }}",
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              var amcOpts = '<option value="">Select Product</option>';
+              $.each(res.amc_products, function (k, v) {
+                amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
+              });
+              $('#addProductModal').find('select[name="amc_product_id"]').html(amcOpts);
+
+              var engOpts = '<option value="">Select Engineer</option>';
+              $.each(res.engineers, function (k, v) {
+                engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
+              });
+              $('#addProductModal').find('select[name="service_engineer_1"]').html(engOpts);
+              $('#addProductModal').find('select[name="service_engineer_2"]').html(engOpts);
+            }
+          }
+        });
+
+        // Fetch branches
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.branch') }}",
+          type: "POST",
+          data: { customer_id: custId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            if (res.status == true) {
+              var options = '<option value="">Select Branch</option>';
+              $.each(res.data, function (key, val) {
+                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
+              });
+              $('#addProductModal').find('select[name="branch_id"]').html(options);
+            }
+          }
+        });
+
+        $('#addProductModal').modal('show');
+      });
+
     });
   </script>
 
