@@ -365,6 +365,7 @@
                       <th>Contact Person</th>
                       <th>Mobile</th>
                       <th>City</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -395,6 +396,7 @@
                       <th>Branch</th>
                       <th>Designation</th>
                       <th>Mobile</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -425,6 +427,7 @@
                       <th>Branch</th>
                       <th>Type</th>
                       <th>Quantity</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -460,6 +463,7 @@
           <form id="branchForm">
             @csrf
             <input type="hidden" name="customer_id" class="modal_customer_id">
+            <input type="hidden" name="branch_id" id="modal_branch_id">
 
             <div class="row g-3">
               <div class="col-md-6">
@@ -554,6 +558,7 @@
           <form id="contactForm">
             @csrf
             <input type="hidden" name="customer_id" class="modal_customer_id">
+            <input type="hidden" name="id" id="modal_contact_id">
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Branch <span class="text-danger">*</span></label>
@@ -608,6 +613,7 @@
           <form id="productForm">
             @csrf
             <input type="hidden" name="customer_id" class="modal_customer_id">
+            <input type="hidden" name="id" id="modal_product_id">
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Branch <span class="text-danger">*</span></label>
@@ -739,12 +745,13 @@
 
   <script>
     var savedBranches = [];
+    var savedContacts = [];
+    var savedProducts = [];
 
     $(document).ready(function () {
       $('.select2').select2({ placeholder: 'Select an option', allowClear: true, width: '100%' });
 
       // Initialize modals select2
-      // We iterate over each modal to ensure the dropdownParent is correctly set to THAT specific modal
       $('.modal').each(function () {
         var $modal = $(this);
         $modal.find('.select2-modal, .select-branch').select2({
@@ -787,10 +794,6 @@
               $('#global_customer_id').val(res.customer_id);
               $('#global_customer_uuid').val(res.uuid);
               $('.modal_customer_id').val(res.customer_id);
-
-              // Show success
-              // alert('Customer saved!');
-
               goToStep(2);
             } else {
               alert('Error saving customer: ' + res.message);
@@ -829,6 +832,9 @@
           dataType: "json",
           success: function (res) {
             if (res.status) {
+              // Only populate if empty or force update (ignoring if user is editing and values are set)
+              // But for simplicity we append. logic for edit needs care to not overwrite pre-filled values immediately unless user changes area.
+              // For now standard behavior.
               $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
               $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
             }
@@ -841,35 +847,58 @@
         var form = $('#branchForm');
         if (!$('#global_customer_id').val()) { alert('Please save customer first.'); return; }
 
+        var id = $('#modal_branch_id').val();
+        var url = id ? "{{ route('admin.customer.edit.customer.branch') }}" : "{{ route('admin.customer.add.branch') }}";
+
         $.ajax({
-          url: "{{ route('admin.customer.add.branch') }}",
+          url: url,
           method: "POST",
           data: form.serialize(),
           dataType: 'json',
           success: function (res) {
             if (res.status) {
-              // Add to table
-              var branchName = $('input[name="branch_name"]').val();
-              var contact = $('input[name="contact_person"]').val();
-              var mobile = $('input[name="mobile_no"]').val();
+              var branchName = $('#branchForm input[name="branch_name"]').val();
+              var contact = $('#branchForm input[name="contact_person"]').val();
+              var mobile = $('#branchForm input[name="mobile_no"]').val();
               var city = $('#modal_branch_city option:selected').text();
-              var branchId = res.branch_id || Date.now(); // Fallback
+              var branchId = id ? id : (res.branch_id || Date.now());
 
-              savedBranches.push({ id: branchId, name: branchName });
+              if (id) {
+                // Update existing
+                var idx = savedBranches.findIndex(x => x.id == id);
+                if (idx !== -1) savedBranches[idx] = {
+                  id: branchId,
+                  name: branchName,
+                  contact: contact,
+                  mobile: mobile,
+                  city: city,
+                  fullData: form.serializeArray() // Store full data for easy restore
+                };
+              } else {
+                // Add new
+                savedBranches.push({
+                  id: branchId,
+                  name: branchName,
+                  contact: contact,
+                  mobile: mobile,
+                  city: city,
+                  fullData: form.serializeArray()
+                });
+              }
 
-              $('#branchTable .empty-row').hide();
-              $('#branchTable tbody').append('<tr><td>' + branchName + '</td><td>' + contact + '</td><td>' + mobile + '</td><td>' + city + '</td></tr>');
-
+              renderBranchTable();
               $('#addBranchModal').modal('hide');
               form[0].reset();
               $('#modal_branch_city').empty();
               $('#modal_branch_state').empty();
+              $('#modal_branch_id').val('');
+              $('#btn-save-branch').text('Save');
             } else {
-              alert('Failed to add branch');
+              alert('Failed to save branch');
             }
           },
           error: function () {
-            alert('Error adding branch. Make sure backend supports JSON.');
+            alert('Error saving branch.');
           }
         });
       });
@@ -877,30 +906,51 @@
       // --- CONTACT MODAL SAVE ---
       $('#btn-save-contact').click(function () {
         var form = $('#contactForm');
+        var id = $('#modal_contact_id').val();
+        var url = id ? "{{ route('admin.customer.edit.contact') }}" : "{{ route('admin.customer.add.contact') }}";
 
         $.ajax({
-          url: "{{ route('admin.customer.add.contact') }}",
+          url: url,
           method: "POST",
           data: form.serialize(),
           dataType: 'json',
           success: function (res) {
             if (res.status) {
-              var name = $('input[name="contact_name"]').val();
-              var branchName = $('.select-branch option:selected').text();
-              var desig = $('input[name="designation"]').val();
-              var mob = $('input[name="mobile_no"]').val();
+              var name = $('#contactForm input[name="contact_name"]').val();
+              // Fix: Use scoped selector for branch select
+              var branchName = $('#contactForm .select-branch option:selected').text();
+              // Fix: Use scoped selector for designation
+              var desig = $('#contactForm input[name="designation"]').val();
+              var mob = $('#contactForm input[name="mobile_no"]').val();
+              var contactId = id ? id : (res.contact_id || Date.now());
 
-              $('#contactTable .empty-row').hide();
-              $('#contactTable tbody').append('<tr><td>' + name + '</td><td>' + branchName + '</td><td>' + desig + '</td><td>' + mob + '</td></tr>');
+              var dataObj = {
+                id: contactId,
+                name: name,
+                branchName: branchName,
+                desig: desig,
+                mob: mob,
+                fullData: form.serializeArray()
+              };
 
+              if (id) {
+                var idx = savedContacts.findIndex(x => x.id == id);
+                if (idx !== -1) savedContacts[idx] = dataObj;
+              } else {
+                savedContacts.push(dataObj);
+              }
+
+              renderContactTable();
               $('#addContactModal').modal('hide');
               form[0].reset();
+              $('#modal_contact_id').val('');
+              $('#btn-save-contact').text('Save');
             } else {
-              alert('Failed to add contact');
+              alert('Failed to save contact');
             }
           },
           error: function () {
-            alert('Error adding contact. Make sure backend supports JSON.');
+            alert('Error saving contact.');
           }
         });
       });
@@ -908,9 +958,11 @@
       // --- PRODUCT MODAL SAVE ---
       $('#btn-save-product').click(function () {
         var form = $('#productForm');
+        var id = $('#modal_product_id').val();
+        var url = id ? "{{ route('admin.customer.edit.amc.product') }}" : "{{ route('admin.customer.add.amc.product') }}";
 
         $.ajax({
-          url: "{{ route('admin.customer.add.amc.product') }}", // Using the correct route for product add
+          url: url,
           method: "POST",
           data: form.serialize(),
           dataType: 'json',
@@ -918,25 +970,79 @@
             if (res.status) {
               var prodName = $('select[name="amc_product_id"] option:selected').text();
               var branchName = $('#productForm .select-branch option:selected').text();
-              var type = $('input[name="product_type"]').val();
-              var qty = $('input[name="quantity"]').val();
+              var type = $('#productForm select[name="product_type"]').val(); // Use select (it's a select in HTML)
+              var qty = $('#productForm input[name="quantity"]').val();
+              var prodId = id ? id : (res.product_id || Date.now());
 
-              $('#productTable .empty-row').hide();
-              $('#productTable tbody').append('<tr><td>' + prodName + '</td><td>' + branchName + '</td><td>' + type + '</td><td>' + qty + '</td></tr>');
+              var dataObj = {
+                id: prodId,
+                prodName: prodName,
+                branchName: branchName,
+                type: type,
+                qty: qty,
+                fullData: form.serializeArray()
+              };
 
+              if (id) {
+                var idx = savedProducts.findIndex(x => x.id == id);
+                if (idx !== -1) savedProducts[idx] = dataObj;
+              } else {
+                savedProducts.push(dataObj);
+              }
+
+              renderProductTable();
               $('#addProductModal').modal('hide');
               form[0].reset();
+              $('#modal_product_id').val('');
+              $('#btn-save-product').text('Save');
             } else {
-              alert('Failed to add product: ' + res.message);
+              alert('Failed to save product: ' + res.message);
             }
           },
           error: function () {
-            alert('Error adding product.');
+            alert('Error saving product.');
           }
         });
       });
 
     });
+
+    function renderBranchTable() {
+      var tbody = $('#branchTable tbody');
+      tbody.empty();
+      if (savedBranches.length === 0) {
+        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No branches added yet.</td></tr>');
+      } else {
+        savedBranches.forEach(b => {
+          tbody.append('<tr><td>' + b.name + '</td><td>' + b.contact + '</td><td>' + b.mobile + '</td><td>' + b.city + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editBranch(' + b.id + ')">Edit</button></td></tr>');
+        });
+      }
+      prepareContactModal(); // Update branch list for contacts
+    }
+
+    function renderContactTable() {
+      var tbody = $('#contactTable tbody');
+      tbody.empty();
+      if (savedContacts.length === 0) {
+        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No contacts added yet.</td></tr>');
+      } else {
+        savedContacts.forEach(c => {
+          tbody.append('<tr><td>' + c.name + '</td><td>' + c.branchName + '</td><td>' + c.desig + '</td><td>' + c.mob + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editContact(' + c.id + ')">Edit</button></td></tr>');
+        });
+      }
+    }
+
+    function renderProductTable() {
+      var tbody = $('#productTable tbody');
+      tbody.empty();
+      if (savedProducts.length === 0) {
+        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No products added yet.</td></tr>');
+      } else {
+        savedProducts.forEach(p => {
+          tbody.append('<tr><td>' + p.prodName + '</td><td>' + p.branchName + '</td><td>' + p.type + '</td><td>' + p.qty + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editProduct(' + p.id + ')">Edit</button></td></tr>');
+        });
+      }
+    }
 
     function goToStep(step) {
       $('.step-content').removeClass('active');
@@ -961,5 +1067,58 @@
       prepareContactModal();
     }
 
+    // Edit Functions
+    window.editBranch = function (id) {
+      var item = savedBranches.find(x => x.id == id);
+      if (!item) return;
+
+      $('#modal_branch_id').val(item.id);
+
+      // Restore form data from saved fullData
+      var form = $('#branchForm');
+      item.fullData.forEach(field => {
+        var input = form.find('[name="' + field.name + '"]');
+        if (input.length) {
+          if (input.is(':checkbox') || input.is(':radio')) {
+            // input.prop('checked', input.val() == field.value); 
+          } else {
+            input.val(field.value).trigger('change');
+          }
+        }
+      });
+
+      $('#addBranchModal').modal('show');
+      $('#btn-save-branch').text('Update');
+    }
+
+    window.editContact = function (id) {
+      var item = savedContacts.find(x => x.id == id);
+      if (!item) return;
+
+      $('#modal_contact_id').val(item.id);
+      var form = $('#contactForm');
+      item.fullData.forEach(field => {
+        var input = form.find('[name="' + field.name + '"]');
+        if (input.length) input.val(field.value).trigger('change');
+      });
+
+      $('#addContactModal').modal('show');
+      $('#btn-save-contact').text('Update');
+    }
+
+    window.editProduct = function (id) {
+      var item = savedProducts.find(x => x.id == id);
+      if (!item) return;
+
+      $('#modal_product_id').val(item.id);
+      var form = $('#productForm');
+      item.fullData.forEach(field => {
+        var input = form.find('[name="' + field.name + '"]');
+        if (input.length) input.val(field.value).trigger('change');
+      });
+
+      $('#addProductModal').modal('show');
+      $('#btn-save-product').text('Update');
+    }
   </script>
 @endpush

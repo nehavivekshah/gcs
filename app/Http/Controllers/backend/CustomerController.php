@@ -342,6 +342,13 @@ class CustomerController extends Controller
 
         $update = $this->customerService->editCustomerBranch($id, $data);
 
+        if ($req->wantsJson()) {
+            return response()->json([
+                'status' => (bool) $update,
+                'message' => $update ? 'Branch updated successfully' : 'Failed to update branch'
+            ]);
+        }
+
         if ($update) {
             return redirect()->route('admin.customer.index')->with('success', 'Update Success ...');
         } else {
@@ -670,7 +677,14 @@ class CustomerController extends Controller
         ];
 
 
-        $this->customerService->editCustomerContact($id, $data);
+        $update = $this->customerService->editCustomerContact($id, $data);
+
+        if ($req->wantsJson()) {
+            return response()->json([
+                'status' => (bool) $update,
+                'message' => $update ? 'Contact updated successfully' : 'Failed to update contact'
+            ]);
+        }
 
         return redirect()->route('admin.customer.index');
     }
