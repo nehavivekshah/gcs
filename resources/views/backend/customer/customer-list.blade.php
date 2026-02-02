@@ -138,78 +138,94 @@
   <style>
     /* Custom Styles for View Modal */
     .view-profile-header {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      padding: 20px;
+      background: #ffffff;
+      padding: 24px;
       border-radius: 12px;
       margin-bottom: 25px;
-      border-left: 5px solid var(--theme-default); /* Uses theme color */
+      border: 1px solid #e0e6ed;
+      border-left: 5px solid var(--theme-default);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
     .view-label {
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #6c757d;
-      margin-bottom: 4px;
+      letter-spacing: 0.8px;
+      color: #727a85; /* darker gray for better visibility */
+      margin-bottom: 6px;
       display: block;
-      font-weight: 600;
+      font-weight: 700;
     }
     .view-value {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #2b3648;
+      font-size: 1.05rem; /* slightly larger */
+      font-weight: 600;
+      color: #1b2533; /* almost black for max contrast */
       word-break: break-word;
+      line-height: 1.4;
     }
     .view-section-title {
       display: flex;
       align-items: center;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #f1f2f6;
+      color: #1b2533;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #eef2f7;
     }
     .view-section-title i {
-      margin-right: 10px;
+      margin-right: 12px;
       color: var(--theme-default);
       background: rgba(var(--theme-default-rgb), 0.1);
-      padding: 8px;
+      padding: 10px;
       border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .info-card {
       background: #fff;
-      border: 1px solid #edf2f9;
+      border: 1px solid #e0e6ed; /* distinctive border */
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       height: 100%;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-      transition: transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      transition: all 0.2s ease-in-out;
     }
     .info-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border-color: #d0d7e2;
     }
     .nav-tabs-premium {
-      border-bottom: 2px solid #f1f2f6;
-      gap: 10px;
-      margin-bottom: 25px;
+      border-bottom: 2px solid #eef2f7;
+      gap: 12px;
+      margin-bottom: 28px;
     }
     .nav-tabs-premium .nav-link {
       border: none;
-      color: #6c757d;
+      color: #5c6675;
       font-weight: 600;
-      padding: 12px 20px;
+      padding: 12px 24px;
       border-radius: 8px;
       transition: all 0.3s;
+      background: #f8f9fa;
     }
     .nav-tabs-premium .nav-link.active {
       color: #fff;
       background-color: var(--theme-default);
-      box-shadow: 0 4px 10px rgba(var(--theme-default-rgb), 0.3);
+      box-shadow: 0 4px 12px rgba(var(--theme-default-rgb), 0.35);
     }
     .nav-tabs-premium .nav-link:hover:not(.active) {
-      background-color: #f8f9fa;
-      color: var(--theme-default);
+      background-color: #e9ecef;
+      color: #2b3648;
+    }
+    .table-premium thead th {
+        background-color: #f8f9fa !important;
+        color: #495057 !important;
+        font-weight: 700;
+        border-bottom: 2px solid #dee2e6;
     }
   </style>
 
