@@ -354,7 +354,7 @@
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Branch List</h5>
                 <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
-                  data-bs-target="#addBranchModal">+
+                  data-bs-target="#addBranchModal" onclick="prepareAddBranch()">+
                   Add Branch</button>
               </div>
               <div class="table-responsive">
@@ -386,7 +386,7 @@
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Contact List</h5>
                 <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
-                  data-bs-target="#addContactModal" onclick="prepareContactModal()">+ Add Contact</button>
+                  data-bs-target="#addContactModal" onclick="prepareAddContact()">+ Add Contact</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="contactTable">
@@ -417,7 +417,7 @@
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Product List</h5>
                 <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
-                  data-bs-target="#addProductModal" onclick="prepareProductModal()">+ Add Product</button>
+                  data-bs-target="#addProductModal" onclick="prepareAddProduct()">+ Add Product</button>
               </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="productTable">
@@ -1063,8 +1063,30 @@
       $('.select-branch').html(opts);
     }
 
-    function prepareProductModal() {
-      prepareContactModal();
+    function prepareAddBranch() {
+      $('#branchForm')[0].reset();
+      $('#modal_branch_id').val('');
+      $('#btn-save-branch').text('Save');
+      $('#modal_branch_city').empty().append('<option value="">Select City</option>');
+      $('#modal_branch_state').empty().append('<option value="">Select State</option>');
+      $('#modal_branch_area').val('').trigger('change');
+    }
+
+    function prepareAddContact() {
+      prepareContactModal(); // Populates branches
+      $('#contactForm')[0].reset();
+      $('#modal_contact_id').val('');
+      $('#btn-save-contact').text('Save');
+    }
+
+    function prepareAddProduct() {
+      prepareProductModal(); // Populates branches
+      $('#productForm')[0].reset();
+      $('#modal_product_id').val('');
+      $('#btn-save-product').text('Save');
+      $('select[name="amc_product_id"]').val('').trigger('change');
+      $('#productForm .select-branch').val('').trigger('change');
+      $('#productForm input[name="quantity"]').val(1);
     }
 
     // Edit Functions
