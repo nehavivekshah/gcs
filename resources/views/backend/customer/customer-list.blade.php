@@ -135,174 +135,300 @@
 
 
   <!-- View Customer Modal -->
+  <style>
+    /* Custom Styles for View Modal */
+    .view-profile-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      border-left: 5px solid var(--theme-default); /* Uses theme color */
+    }
+    .view-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6c757d;
+      margin-bottom: 4px;
+      display: block;
+      font-weight: 600;
+    }
+    .view-value {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2b3648;
+      word-break: break-word;
+    }
+    .view-section-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f2f6;
+    }
+    .view-section-title i {
+      margin-right: 10px;
+      color: var(--theme-default);
+      background: rgba(var(--theme-default-rgb), 0.1);
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .info-card {
+      background: #fff;
+      border: 1px solid #edf2f9;
+      border-radius: 12px;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .nav-tabs-premium {
+      border-bottom: 2px solid #f1f2f6;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .nav-tabs-premium .nav-link {
+      border: none;
+      color: #6c757d;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .nav-tabs-premium .nav-link.active {
+      color: #fff;
+      background-color: var(--theme-default);
+      box-shadow: 0 4px 10px rgba(var(--theme-default-rgb), 0.3);
+    }
+    .nav-tabs-premium .nav-link:hover:not(.active) {
+      background-color: #f8f9fa;
+      color: var(--theme-default);
+    }
+  </style>
+
   <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content modal-content-premium">
-        <div class="modal-header modal-header-premium">
-          <h5 class="modal-title modal-title-premium"><i class="icon-user me-2"></i>Customer Details</h5>
+      <div class="modal-content modal-content-premium border-0 overflow-hidden">
+        <div class="modal-header modal-header-premium bg-primary text-white p-4">
+          <div class="d-flex align-items-center">
+             <div class="bg-white bg-opacity-25 p-3 rounded-circle me-3">
+               <i class="icon-user fs-4 text-white"></i>
+             </div>
+             <div>
+               <h5 class="modal-title fw-bold mb-1">Customer Details</h5>
+               <p class="mb-0 opacity-75 fs-6">View complete profile information</p>
+             </div>
+          </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
-        <div class="modal-body p-4">
+        <div class="modal-body p-4 bg-light">
 
-          <ul class="nav nav-tabs border-tab" id="viewCustomerTab" role="tablist">
-            <li class="nav-item"><a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic-info"
-                role="tab" aria-selected="true">Basic Info</a></li>
-            <li class="nav-item"><a class="nav-link" id="branch-tab" data-bs-toggle="tab" href="#branch-info" role="tab"
-                aria-selected="false">Branches</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact-info" role="tab"
-                aria-selected="false">Contacts</a></li>
-            <li class="nav-item"><a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product-info" role="tab"
-                aria-selected="false">Products</a></li>
+          <!-- Profile Header Summary -->
+          <div class="view-profile-header bg-white shadow-sm">
+             <div class="row align-items-center">
+                <div class="col-md-6">
+                   <h4 class="mb-1 text-dark fw-bold" id="v_header_name">Customer Name</h4>
+                   <p class="text-muted mb-0"><i class="icon-mobile me-1"></i> <span id="v_header_mobile"></span> &nbsp;|&nbsp; <i class="icon-email me-1"></i> <span id="v_header_email"></span></p>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                   <span class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fs-6 border border-primary border-opacity-25" id="v_header_code">Code: -</span>
+                </div>
+             </div>
+          </div>
+
+          <ul class="nav nav-tabs nav-tabs-premium" id="viewCustomerTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic-info" role="tab" aria-selected="true"><i class="icon-info-alt me-2"></i>Basic Info</a></li>
+            <li class="nav-item"><a class="nav-link" id="branch-tab" data-bs-toggle="tab" href="#branch-info" role="tab" aria-selected="false"><i class="icon-map-alt me-2"></i>Branches</a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact-info" role="tab" aria-selected="false"><i class="icon-id-badge me-2"></i>Contacts</a></li>
+            <li class="nav-item"><a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product-info" role="tab" aria-selected="false"><i class="icon-package me-2"></i>Products</a></li>
           </ul>
 
           <div class="tab-content" id="viewCustomerTabContent">
-
+            
             <!-- Tab 1: Basic Info -->
             <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab">
-              <div class="pt-4">
-                <!-- Basic Info -->
-                <div class="mb-4">
-                  <h6 class="section-title">Basic Information</h6>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <small class="text-muted d-block">Customer Name</small>
-                      <span class="fw-semibold" id="v_customer_name"></span>
-                    </div>
-                    <div class="col-md-6">
-                      <small class="text-muted d-block">Customer Degination</small>
-                      <span class="fw-semibold" id="v_customer_degination"></span>
-                    </div>
-                    <div class="col-md-6">
-                      <small class="text-muted d-block">Mobile</small>
-                      <span id="v_mobile_no"></span>
-                    </div>
-                    <div class="col-md-6">
-                      <small class="text-muted d-block">Contact Person</small>
-                      <span id="v_contact_person"></span>
-                    </div>
-                    <div class="col-md-6">
-                      <small class="text-muted d-block">Email</small>
-                      <span id="v_email"></span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Address -->
-                <div class="mb-4">
-                  <h6 class="section-title">Address & Location</h6>
-                  <div class="row g-3">
-                    <div class="col-12">
-                      <small class="text-muted d-block">Address</small>
-                      <span id="v_address"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">City</small>
-                      <span id="v_city_id"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">State</small>
-                      <span id="v_state_id"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">Area</small>
-                      <span id="v_area_id"></span>
+              
+              <div class="row g-4">
+                <!-- Basic Information Card -->
+                <div class="col-lg-6">
+                  <div class="info-card">
+                    <h6 class="view-section-title"><i class="icon-user"></i> Basic Information</h6>
+                    <div class="row g-4">
+                      <div class="col-md-6">
+                        <small class="view-label">Customer Name</small>
+                        <div class="view-value" id="v_customer_name">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Designation</small>
+                        <div class="view-value" id="v_customer_degination">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Contact Person</small>
+                        <div class="view-value" id="v_contact_person">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Date of Birth</small>
+                        <div class="view-value" id="v_date_of_birth">-</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Tax Details -->
-                <div class="mb-4">
-                  <h6 class="section-title">Tax & Financial</h6>
-                  <div class="row g-3">
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">GST No</small>
-                      <span id="v_gst"></span>
+                <!-- Contact Details Card -->
+                <div class="col-lg-6">
+                  <div class="info-card">
+                    <h6 class="view-section-title"><i class="icon-headphone-alt"></i> Contact Details</h6>
+                    <div class="row g-4">
+                      <div class="col-md-6">
+                        <small class="view-label">Mobile Number</small>
+                        <div class="view-value text-primary font-code" id="v_mobile_no">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Email Address</small>
+                        <div class="view-value text-primary" id="v_email">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Phone 1</small>
+                        <div class="view-value" id="v_phone_1">-</div>
+                      </div>
+                      <div class="col-md-6">
+                        <small class="view-label">Phone 2</small>
+                        <div class="view-value" id="v_phone_2">-</div>
+                      </div>
+                      <div class="col-12">
+                         <small class="view-label">Website</small>
+                         <div class="view-value text-info" id="v_web_sites">-</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Contact Details -->
-                <div class="mb-0">
-                  <h6 class="section-title">Other Contact Info</h6>
-                  <div class="row g-3">
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">Phone 1</small>
-                      <span id="v_phone_1"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">Phone 2</small>
-                      <span id="v_phone_2"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <small class="text-muted d-block">Website</small>
-                      <span id="v_web_sites"></span>
-                    </div>
+                <!-- Address Card -->
+                <div class="col-lg-12">
+                  <div class="info-card">
+                    <h6 class="view-section-title"><i class="icon-location-pin"></i> Address & Location</h6>
+                     <div class="row g-4">
+                       <div class="col-md-8">
+                          <small class="view-label">Address</small>
+                          <div class="view-value" id="v_address">-</div>
+                       </div>
+                       <div class="col-md-4">
+                          <small class="view-label">Area</small>
+                          <div class="view-value" id="v_area_id">-</div>
+                       </div>
+                       <div class="col-md-4">
+                          <small class="view-label">City</small>
+                          <div class="view-value" id="v_city_id">-</div>
+                       </div>
+                        <div class="col-md-4">
+                          <small class="view-label">State</small>
+                          <div class="view-value" id="v_state_id">-</div>
+                       </div>
+                       <div class="col-md-4">
+                          <small class="view-label">Pincode</small>
+                          <div class="view-value" id="v_pincode">-</div>
+                       </div>
+                     </div>
                   </div>
                 </div>
+
+                <!-- Financial Card -->
+                <div class="col-lg-12">
+                   <div class="info-card">
+                      <h6 class="view-section-title"><i class="icon-receipt"></i> Tax & Financial Info</h6>
+                      <div class="row g-4">
+                         <div class="col-md-3">
+                            <small class="view-label">GST No</small>
+                            <div class="view-value font-code" id="v_gst">-</div>
+                         </div>
+                          <div class="col-md-3">
+                            <small class="view-label">PAN No</small>
+                            <div class="view-value font-code" id="v_pan">-</div>
+                         </div>
+                          <div class="col-md-3">
+                            <small class="view-label">CST No</small>
+                            <div class="view-value" id="v_cst">-</div>
+                         </div>
+                          <div class="col-md-3">
+                            <small class="view-label">VAT No</small>
+                            <div class="view-value" id="v_vat">-</div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+
               </div>
+
             </div>
 
             <!-- Tab 2: Branches -->
             <div class="tab-pane fade" id="branch-info" role="tabpanel" aria-labelledby="branch-tab">
-              <div class="pt-4">
-                <div class="table-responsive custom-scrollbar">
-                  <table class="table table-premium table-striped" id="viewBranchTable">
-                    <thead>
+               <div class="info-card p-0 overflow-hidden">
+                 <div class="table-responsive custom-scrollbar">
+                  <table class="table table-hover table-striped align-middle mb-0" id="viewBranchTable">
+                    <thead class="bg-light">
                       <tr>
-                        <th>Sr.no</th>
-                        <th>Branch Name</th>
-                        <th>Contact Person</th>
-                        <th>Mobile</th>
-                        <th>City</th>
+                        <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Branch Name</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Contact Person</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Mobile</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">City</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
                   </table>
                 </div>
-              </div>
+               </div>
             </div>
 
             <!-- Tab 3: Contacts -->
             <div class="tab-pane fade" id="contact-info" role="tabpanel" aria-labelledby="contact-tab">
-              <div class="pt-4">
-                <div class="table-responsive custom-scrollbar">
-                  <table class="table table-premium table-striped" id="viewContactTable">
-                    <thead>
+               <div class="info-card p-0 overflow-hidden">
+                 <div class="table-responsive custom-scrollbar">
+                  <table class="table table-hover table-striped align-middle mb-0" id="viewContactTable">
+                    <thead class="bg-light">
                       <tr>
-                        <th>Sr.no</th>
-                        <th>Name</th>
-                        <th>Branch</th>
-                        <th>Designation</th>
-                        <th>Mobile</th>
+                        <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Name</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Branch</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Designation</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Mobile</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
                   </table>
                 </div>
-              </div>
+               </div>
             </div>
 
             <!-- Tab 4: Products -->
             <div class="tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-tab">
-              <div class="pt-4">
-                <div class="table-responsive custom-scrollbar">
-                  <table class="table table-premium table-striped" id="viewProductTable">
-                    <thead>
+               <div class="info-card p-0 overflow-hidden">
+                 <div class="table-responsive custom-scrollbar">
+                  <table class="table table-hover table-striped align-middle mb-0" id="viewProductTable">
+                    <thead class="bg-light">
                       <tr>
-                        <th>Sr.no</th>
-                        <th>Product Name</th>
-                        <th>Serial No</th>
-                        <th>Branch</th>
-                        <th>Type</th>
-                        <th>AMC Start</th>
-                        <th>AMC End</th>
+                        <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Product Name</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Serial No</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Branch</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Type</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">AMC Start</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">AMC End</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
                   </table>
                 </div>
-              </div>
+               </div>
             </div>
 
           </div>
@@ -1016,32 +1142,38 @@
     $(document).ready(function () {
       $(document).on('click', '.viewCustomer', function () {
 
-        $('#v_customer_name').text($(this).data('customer_name'));
-        $('#v_customer_code').text($(this).data('customer_code'));
-        $('#v_mobile_no').text($(this).data('mobile_no'));
-        $('#v_contact_person').text($(this).data('contact_person'));
-        $('#v_email').text($(this).data('email'));
+        // Populate Header
+        $('#v_header_name').text($(this).data('company_name') || 'N/A');
+        $('#v_header_mobile').text($(this).data('mobile_no') || 'N/A');
+        $('#v_header_email').text($(this).data('email') || 'N/A');
+        $('#v_header_code').text('Code: ' + ($(this).data('customer_code') || 'N/A'));
+
+        // Basic Info
+        $('#v_customer_name').text($(this).data('company_name') || 'N/A');
+        $('#v_customer_degination').text($(this).data('customer_type') || 'N/A'); // Using Type as designation placeholder
+        $('#v_mobile_no').text($(this).data('mobile_no') || 'N/A');
+        $('#v_contact_person').text($(this).data('contact_person') || 'N/A');
+        $('#v_email').text($(this).data('email') || 'N/A');
+        $('#v_date_of_birth').text($(this).data('date_of_birth') || 'N/A');
 
         let address =
           ($(this).data('address_line_1') ?? '') + ' ' +
-          ($(this).data('address_line_2') ?? '') + ' - ' +
-          ($(this).data('pincode') ?? '');
+          ($(this).data('address_line_2') ?? '');
+        
+        $('#v_address').text(address || 'N/A');
+        $('#v_pincode').text($(this).data('pincode') || 'N/A');
+        $('#v_area_id').text($(this).data('area_id') || 'N/A');
+        $('#v_city_id').text($(this).data('city_id') || 'N/A');
+        $('#v_state_id').text($(this).data('state_id') || 'N/A');
 
-        $('#v_address').text(address);
-        $('#v_area_id').text($(this).data('area_id'));
-        $('#v_city_id').text($(this).data('city_id'));
-        $('#v_state_id').text($(this).data('state_id'));
+        $('#v_gst').text($(this).data('gst') || 'N/A');
+        $('#v_cst').text($(this).data('cst') || 'N/A');
+        $('#v_vat').text($(this).data('vat') || 'N/A');
+        $('#v_pan').text($(this).data('pan') || 'N/A');
 
-        $('#v_gst').text($(this).data('gst'));
-        $('#v_cst').text($(this).data('cst'));
-        $('#v_vat').text($(this).data('vat'));
-        $('#v_pan').text($(this).data('pan'));
-        $('#v_tin').text($(this).data('tin'));
-
-        $('#v_phone_1').text($(this).data('phone_1'));
-        $('#v_phone_2').text($(this).data('phone_2'));
-        $('#v_fax').text($(this).data('fax'));
-        $('#v_web_sites').text($(this).data('website'));
+        $('#v_phone_1').text($(this).data('phone_1') || 'N/A');
+        $('#v_phone_2').text($(this).data('phone_2') || 'N/A');
+        $('#v_web_sites').text($(this).data('website') || 'N/A');
 
         // Reset to first tab
         $('#viewCustomerTab a:first').tab('show');
