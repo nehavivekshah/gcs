@@ -1045,11 +1045,14 @@
 
         // Reset to first tab
         $('#viewCustomerTab a:first').tab('show');
+        
+        var custId = $(this).data('id');
+        console.log('Viewing Customer ID:', custId);
 
         // Load Tabs Data
-        loadViewBranches($(this).data('id'));
-        loadViewContacts($(this).data('id'));
-        loadViewProducts($(this).data('id'));
+        loadViewBranches(custId);
+        loadViewContacts(custId);
+        loadViewProducts(custId);
 
         $('#viewCustomerModal').modal('show');
       });
@@ -1063,11 +1066,14 @@
           data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
           success: function (res) {
             var html = '';
-            if (res.status && res.data.length > 0) {
-              $.each(res.data, function (k, v) {
+            // Handle both {status:true, data:[]} and raw []
+            var list = (res.status !== undefined) ? res.data : res;
+            
+            if (Array.isArray(list) && list.length > 0) {
+              $.each(list, function (k, v) {
                 html += '<tr>' +
                   '<td>' + (k + 1) + '</td>' +
-                  '<td>' + v.branch_name + '</td>' +
+                  '<td>' + (v.branch_name || '-') + '</td>' +
                   '<td>' + (v.contact_person ?? '-') + '</td>' +
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
                   '<td>' + (v.city_name ?? '-') + '</td>' +
@@ -1077,6 +1083,10 @@
               html = '<tr><td colspan="5" class="text-center">No Branches Found</td></tr>';
             }
             $('#viewBranchTable tbody').html(html);
+          },
+          error: function(err) {
+             console.error('Branch Load Error', err);
+             $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading branches</td></tr>');
           }
         });
       }
@@ -1089,11 +1099,13 @@
           data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
           success: function (res) {
             var html = '';
-            if (res.status && res.data.length > 0) {
-              $.each(res.data, function (k, v) {
+            var list = (res.status !== undefined) ? res.data : res;
+
+            if (Array.isArray(list) && list.length > 0) {
+              $.each(list, function (k, v) {
                 html += '<tr>' +
                   '<td>' + (k + 1) + '</td>' +
-                  '<td>' + v.contact_name + '</td>' +
+                  '<td>' + (v.contact_name || '-') + '</td>' +
                   '<td>' + (v.branch_name ?? 'Main Branch') + '</td>' +
                   '<td>' + (v.designation ?? '-') + '</td>' +
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
@@ -1103,36 +1115,46 @@
               html = '<tr><td colspan="5" class="text-center">No Contacts Found</td></tr>';
             }
             $('#viewContactTable tbody').html(html);
+          },
+          error: function(err) {
+             console.error('Contact Load Error', err);
+             $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading contacts</td></tr>');
           }
         });
       }
 
       function loadViewProducts(customerId) {
         $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
-        $.ajax({
+         $.ajax({
           url: "{{ route('admin.customer.get.products') }}",
           type: 'POST',
           data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
           success: function (res) {
             var html = '';
-            if (res.status && res.data.length > 0) {
-              $.each(res.data, function (k, v) {
-                html += '<tr>' +
-                  '<td>' + (k + 1) + '</td>' +
-                  '<td>' + (v.product_name ?? '-') + '</td>' +
-                  '<td>' + (v.description ?? '-') + '</td>' +
-                  '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
-                  '<td>' + (v.product_type ?? '-') + '</td>' +
-                  '<td>' + (v.amc_start_date ?? '-') + '</td>' +
-                  '<td>' + (v.amc_end_date ?? '-') + '</td>' +
-                  '</tr>';
-              });
+            var list = (res.status !== undefined) ? res.data : res;
+
+            if (Array.isArray(list) && list.length > 0) {
+               $.each(list, function (k, v) {
+                  html += '<tr>' +
+                    '<td>' + (k + 1) + '</td>' +
+                    '<td>' + (v.product_name ?? '-') + '</td>' +
+                    '<td>' + (v.description ?? '-') + '</td>' +
+                    '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
+                    '<td>' + (v.product_type ?? '-') + '</td>' +
+                    '<td>' + (v.amc_start_date ?? '-') + '</td>' +
+                    '<td>' + (v.amc_end_date ?? '-') + '</td>' +
+                    '</tr>';
+               });
             } else {
               html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
             }
             $('#viewProductTable tbody').html(html);
+          },
+          error: function(err) {
+             console.error('Product Load Error', err);
+             $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center text-danger">Error loading products</td></tr>');
           }
-        });
+         });
       }
     });
   </script>
