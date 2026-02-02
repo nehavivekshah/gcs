@@ -138,152 +138,205 @@
   <style>
     /* Custom Styles for View Modal */
     .view-profile-header {
-      background: #ffffff;
+      background: #fdfdfd;
       padding: 24px;
-      border-radius: 12px;
+      border-radius: 8px;
+      /* Slightly sharper corners for flat look */
       margin-bottom: 25px;
-      border: 1px solid #e0e6ed;
+      border: 1px solid #e1e7ec;
       border-left: 5px solid var(--theme-default);
     }
+
+    .view-item-wrapper {
+      border-bottom: 1px solid #f1f4f8;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .view-item-wrapper:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
     .view-label {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #727a85;
-      margin-bottom: 6px;
+      letter-spacing: 1px;
+      color: #889097;
+      margin-bottom: 4px;
       display: block;
       font-weight: 700;
     }
+
     .view-value {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #1b2533;
       word-break: break-word;
-      line-height: 1.4;
+      line-height: 1.5;
     }
+
     .view-section-title {
       display: flex;
       align-items: center;
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 800;
       color: #1b2533;
       margin-bottom: 24px;
       padding-bottom: 12px;
       border-bottom: 2px solid #eef2f7;
     }
+
     .view-section-title i {
       margin-right: 12px;
       color: var(--theme-default);
-      background: rgba(var(--theme-default-rgb), 0.1);
+      background: #f0f3f6;
+      /* Flat background */
       padding: 10px;
-      border-radius: 8px;
-      width: 40px;
-      height: 40px;
+      border-radius: 6px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
     .info-card {
       background: #fff;
-      border: 1px solid #e0e6ed;
-      border-radius: 12px;
+      border: 1px solid #e1e7ec;
+      border-radius: 8px;
       padding: 24px;
       height: 100%;
     }
-    /* Removed hover transform/shadow for flat design */
-    
+
+    /* Modern Line Tabs with clear highlight */
     .nav-tabs-premium {
       border-bottom: 2px solid #eef2f7;
-      gap: 12px;
+      gap: 5px; /* Reduced gap to keep them close */
       margin-bottom: 28px;
+      padding-left: 0;
+    }
+    .nav-tabs-premium .nav-item {
+        margin-bottom: -2px;
     }
     .nav-tabs-premium .nav-link {
       border: none;
-      color: #5c6675;
+      border-bottom: 3px solid transparent;
+      color: #98a6ad; /* Light gray for inactive */
       font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      transition: all 0.3s;
-      background: #f8f9fa;
+      padding: 12px 20px;
+      border-radius: 4px 4px 0 0; /* Slight top round */
+      transition: all 0.2s;
+      background: transparent;
+      font-size: 0.95rem;
     }
     .nav-tabs-premium .nav-link.active {
-      color: #fff;
-      background-color: var(--theme-default);
+      color: #0b5ed7; /* Strong blue for active text */
+      background-color: #f0f7ff; /* Very light blue bg for active */
+      border-bottom-color: #0b5ed7; /* Match text */
+      font-weight: 800;
     }
     .nav-tabs-premium .nav-link:hover:not(.active) {
-      background-color: #e9ecef;
-      color: #2b3648;
+      color: #6c757d;
+      background-color: #f8f9fa;
+      border-bottom-color: #dee2e6;
     }
+
+    .nav-tabs-premium i {
+      font-size: 1.1em;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
     .table-premium thead th {
-        background-color: #f8f9fa !important;
-        color: #495057 !important;
-        font-weight: 700;
-        border-bottom: 2px solid #dee2e6;
+      background-color: #f7f9fb !important;
+      color: #5d6771 !important;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #e1e7ec;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    .table-premium tbody td {
+      border-bottom: 1px solid #f1f4f8;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      color: #2b3648;
     }
   </style>
 
   <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modal-content-premium border-0 overflow-hidden">
-        <div class="modal-header modal-header-premium bg-primary text-white p-4">
+        <div class="modal-header modal-header-premium bg-white border-bottom p-4">
           <div class="d-flex align-items-center">
-             <div class="bg-white bg-opacity-25 p-3 rounded-circle me-3">
-               <i class="icon-user fs-4 text-white"></i>
-             </div>
-             <div>
-               <h5 class="modal-title fw-bold mb-1">Customer Details</h5>
-               <p class="mb-0 opacity-75 fs-6">View complete profile information</p>
-             </div>
+            <div class="bg-light p-3 rounded-circle me-3 border">
+              <i class="icon-user fs-4 text-secondary"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-1 text-dark">Customer Details</h5>
+              <p class="mb-0 text-muted fs-6">Complete profile information</p>
+            </div>
           </div>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
         <div class="modal-body p-4 bg-white">
 
           <!-- Profile Header Summary -->
           <div class="view-profile-header bg-white shadow-sm">
-             <div class="row align-items-center">
-                <div class="col-md-6">
-                   <h4 class="mb-1 text-dark fw-bold" id="v_header_name">Customer Name</h4>
-                   <p class="text-muted mb-0"><i class="icon-mobile me-1"></i> <span id="v_header_mobile"></span> &nbsp;|&nbsp; <i class="icon-email me-1"></i> <span id="v_header_email"></span></p>
-                </div>
-                <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                   <span class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fs-6 border border-primary border-opacity-25" id="v_header_code">Code: -</span>
-                </div>
-             </div>
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <h4 class="mb-1 text-dark fw-bold" id="v_header_name">Customer Name</h4>
+                <p class="text-muted mb-0"><i class="icon-mobile me-1"></i> <span id="v_header_mobile"></span>
+                  &nbsp;|&nbsp; <i class="icon-email me-1"></i> <span id="v_header_email"></span></p>
+              </div>
+              <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <span
+                  class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fs-6 border border-primary border-opacity-25"
+                  id="v_header_code">Code: -</span>
+              </div>
+            </div>
           </div>
 
           <ul class="nav nav-tabs nav-tabs-premium" id="viewCustomerTab" role="tablist">
-            <li class="nav-item"><a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic-info" role="tab" aria-selected="true"><i class="icon-info-alt me-2"></i>Basic Info</a></li>
-            <li class="nav-item"><a class="nav-link" id="branch-tab" data-bs-toggle="tab" href="#branch-info" role="tab" aria-selected="false"><i class="icon-map-alt me-2"></i>Branches</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact-info" role="tab" aria-selected="false"><i class="icon-id-badge me-2"></i>Contacts</a></li>
-            <li class="nav-item"><a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product-info" role="tab" aria-selected="false"><i class="icon-package me-2"></i>Products</a></li>
+            <li class="nav-item"><a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic-info"
+                role="tab" aria-selected="true"><i class="icon-info-alt me-2"></i>Basic Info</a></li>
+            <li class="nav-item"><a class="nav-link" id="branch-tab" data-bs-toggle="tab" href="#branch-info" role="tab"
+                aria-selected="false"><i class="icon-map-alt me-2"></i>Branches</a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact-info" role="tab"
+                aria-selected="false"><i class="icon-id-badge me-2"></i>Contacts</a></li>
+            <li class="nav-item"><a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product-info" role="tab"
+                aria-selected="false"><i class="icon-package me-2"></i>Products</a></li>
           </ul>
 
           <div class="tab-content" id="viewCustomerTabContent">
-            
+
             <!-- Tab 1: Basic Info -->
             <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab">
-              
+
               <div class="row g-4">
                 <!-- Basic Information Card -->
                 <div class="col-lg-6">
                   <div class="info-card">
                     <h6 class="view-section-title"><i class="icon-user"></i> Basic Information</h6>
-                    <div class="row g-4">
-                      <div class="col-md-6">
+                    <div class="row g-0"> <!-- g-0 for list style -->
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Customer Name</small>
                         <div class="view-value" id="v_customer_name">-</div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Designation</small>
                         <div class="view-value" id="v_customer_degination">-</div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Contact Person</small>
                         <div class="view-value" id="v_contact_person">-</div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Date of Birth</small>
                         <div class="view-value" id="v_date_of_birth">-</div>
                       </div>
@@ -295,26 +348,30 @@
                 <div class="col-lg-6">
                   <div class="info-card">
                     <h6 class="view-section-title"><i class="icon-headphone-alt"></i> Contact Details</h6>
-                    <div class="row g-4">
-                      <div class="col-md-6">
+                    <div class="row g-0">
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Mobile Number</small>
                         <div class="view-value text-primary font-code" id="v_mobile_no">-</div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-12 view-item-wrapper">
                         <small class="view-label">Email Address</small>
                         <div class="view-value text-primary" id="v_email">-</div>
                       </div>
-                      <div class="col-md-6">
-                        <small class="view-label">Phone 1</small>
-                        <div class="view-value" id="v_phone_1">-</div>
+                      <div class="col-12 view-item-wrapper">
+                        <div class="row">
+                          <div class="col-6">
+                            <small class="view-label">Phone 1</small>
+                            <div class="view-value" id="v_phone_1">-</div>
+                          </div>
+                          <div class="col-6 border-start ps-3">
+                            <small class="view-label">Phone 2</small>
+                            <div class="view-value" id="v_phone_2">-</div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-md-6">
-                        <small class="view-label">Phone 2</small>
-                        <div class="view-value" id="v_phone_2">-</div>
-                      </div>
-                      <div class="col-12">
-                         <small class="view-label">Website</small>
-                         <div class="view-value text-info" id="v_web_sites">-</div>
+                      <div class="col-12 view-item-wrapper">
+                        <small class="view-label">Website</small>
+                        <div class="view-value text-info" id="v_web_sites">-</div>
                       </div>
                     </div>
                   </div>
@@ -324,54 +381,58 @@
                 <div class="col-lg-12">
                   <div class="info-card">
                     <h6 class="view-section-title"><i class="icon-location-pin"></i> Address & Location</h6>
-                     <div class="row g-4">
-                       <div class="col-md-8">
-                          <small class="view-label">Address</small>
-                          <div class="view-value" id="v_address">-</div>
-                       </div>
-                       <div class="col-md-4">
-                          <small class="view-label">Area</small>
-                          <div class="view-value" id="v_area_id">-</div>
-                       </div>
-                       <div class="col-md-4">
-                          <small class="view-label">City</small>
-                          <div class="view-value" id="v_city_id">-</div>
-                       </div>
-                        <div class="col-md-4">
-                          <small class="view-label">State</small>
-                          <div class="view-value" id="v_state_id">-</div>
-                       </div>
-                       <div class="col-md-4">
-                          <small class="view-label">Pincode</small>
-                          <div class="view-value" id="v_pincode">-</div>
-                       </div>
-                     </div>
+                    <div class="row g-0">
+                      <div class="col-12 view-item-wrapper">
+                        <small class="view-label">Address</small>
+                        <div class="view-value" id="v_address">-</div>
+                      </div>
+                      <div class="col-12 view-item-wrapper">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <small class="view-label">Area</small>
+                            <div class="view-value" id="v_area_id">-</div>
+                          </div>
+                          <div class="col-md-3 border-start ps-md-3">
+                            <small class="view-label">City</small>
+                            <div class="view-value" id="v_city_id">-</div>
+                          </div>
+                          <div class="col-md-3 border-start ps-md-3">
+                            <small class="view-label">State</small>
+                            <div class="view-value" id="v_state_id">-</div>
+                          </div>
+                          <div class="col-md-3 border-start ps-md-3">
+                            <small class="view-label">Pincode</small>
+                            <div class="view-value" id="v_pincode">-</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <!-- Financial Card -->
                 <div class="col-lg-12">
-                   <div class="info-card">
-                      <h6 class="view-section-title"><i class="icon-receipt"></i> Tax & Financial Info</h6>
-                      <div class="row g-4">
-                         <div class="col-md-3">
-                            <small class="view-label">GST No</small>
-                            <div class="view-value font-code" id="v_gst">-</div>
-                         </div>
-                          <div class="col-md-3">
-                            <small class="view-label">PAN No</small>
-                            <div class="view-value font-code" id="v_pan">-</div>
-                         </div>
-                          <div class="col-md-3">
-                            <small class="view-label">CST No</small>
-                            <div class="view-value" id="v_cst">-</div>
-                         </div>
-                          <div class="col-md-3">
-                            <small class="view-label">VAT No</small>
-                            <div class="view-value" id="v_vat">-</div>
-                         </div>
+                  <div class="info-card">
+                    <h6 class="view-section-title"><i class="icon-receipt"></i> Tax & Financial Info</h6>
+                    <div class="row g-4">
+                      <div class="col-md-3">
+                        <small class="view-label">GST No</small>
+                        <div class="view-value font-code" id="v_gst">-</div>
                       </div>
-                   </div>
+                      <div class="col-md-3 border-start ps-md-3">
+                        <small class="view-label">PAN No</small>
+                        <div class="view-value font-code" id="v_pan">-</div>
+                      </div>
+                      <div class="col-md-3 border-start ps-md-3">
+                        <small class="view-label">CST No</small>
+                        <div class="view-value" id="v_cst">-</div>
+                      </div>
+                      <div class="col-md-3 border-start ps-md-3">
+                        <small class="view-label">VAT No</small>
+                        <div class="view-value" id="v_vat">-</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>
@@ -380,8 +441,8 @@
 
             <!-- Tab 2: Branches -->
             <div class="tab-pane fade" id="branch-info" role="tabpanel" aria-labelledby="branch-tab">
-               <div class="info-card p-0 overflow-hidden">
-                 <div class="table-responsive custom-scrollbar">
+              <div class="info-card p-0 overflow-hidden">
+                <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewBranchTable">
                     <thead class="bg-light">
                       <tr>
@@ -395,13 +456,13 @@
                     <tbody></tbody>
                   </table>
                 </div>
-               </div>
+              </div>
             </div>
 
             <!-- Tab 3: Contacts -->
             <div class="tab-pane fade" id="contact-info" role="tabpanel" aria-labelledby="contact-tab">
-               <div class="info-card p-0 overflow-hidden">
-                 <div class="table-responsive custom-scrollbar">
+              <div class="info-card p-0 overflow-hidden">
+                <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewContactTable">
                     <thead class="bg-light">
                       <tr>
@@ -415,13 +476,13 @@
                     <tbody></tbody>
                   </table>
                 </div>
-               </div>
+              </div>
             </div>
 
             <!-- Tab 4: Products -->
             <div class="tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-tab">
-               <div class="info-card p-0 overflow-hidden">
-                 <div class="table-responsive custom-scrollbar">
+              <div class="info-card p-0 overflow-hidden">
+                <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewProductTable">
                     <thead class="bg-light">
                       <tr>
@@ -437,7 +498,7 @@
                     <tbody></tbody>
                   </table>
                 </div>
-               </div>
+              </div>
             </div>
 
           </div>
@@ -1168,7 +1229,7 @@
         let address =
           ($(this).data('address_line_1') ?? '') + ' ' +
           ($(this).data('address_line_2') ?? '');
-        
+
         $('#v_address').text(address || 'N/A');
         $('#v_pincode').text($(this).data('pincode') || 'N/A');
         $('#v_area_id').text($(this).data('area_id') || 'N/A');
@@ -1186,7 +1247,7 @@
 
         // Reset to first tab
         $('#viewCustomerTab a:first').tab('show');
-        
+
         var custId = $(this).data('id');
         console.log('Viewing Customer ID:', custId);
 
@@ -1209,7 +1270,7 @@
             var html = '';
             // Handle both {status:true, data:[]} and raw []
             var list = (res.status !== undefined) ? res.data : res;
-            
+
             if (Array.isArray(list) && list.length > 0) {
               $.each(list, function (k, v) {
                 html += '<tr>' +
@@ -1225,9 +1286,9 @@
             }
             $('#viewBranchTable tbody').html(html);
           },
-          error: function(err) {
-             console.error('Branch Load Error', err);
-             $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading branches</td></tr>');
+          error: function (err) {
+            console.error('Branch Load Error', err);
+            $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading branches</td></tr>');
           }
         });
       }
@@ -1257,16 +1318,16 @@
             }
             $('#viewContactTable tbody').html(html);
           },
-          error: function(err) {
-             console.error('Contact Load Error', err);
-             $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading contacts</td></tr>');
+          error: function (err) {
+            console.error('Contact Load Error', err);
+            $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading contacts</td></tr>');
           }
         });
       }
 
       function loadViewProducts(customerId) {
         $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
-         $.ajax({
+        $.ajax({
           url: "{{ route('admin.customer.get.products') }}",
           type: 'POST',
           data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
@@ -1275,27 +1336,27 @@
             var list = (res.status !== undefined) ? res.data : res;
 
             if (Array.isArray(list) && list.length > 0) {
-               $.each(list, function (k, v) {
-                  html += '<tr>' +
-                    '<td>' + (k + 1) + '</td>' +
-                    '<td>' + (v.product_name ?? '-') + '</td>' +
-                    '<td>' + (v.description ?? '-') + '</td>' +
-                    '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
-                    '<td>' + (v.product_type ?? '-') + '</td>' +
-                    '<td>' + (v.amc_start_date ?? '-') + '</td>' +
-                    '<td>' + (v.amc_end_date ?? '-') + '</td>' +
-                    '</tr>';
-               });
+              $.each(list, function (k, v) {
+                html += '<tr>' +
+                  '<td>' + (k + 1) + '</td>' +
+                  '<td>' + (v.product_name ?? '-') + '</td>' +
+                  '<td>' + (v.description ?? '-') + '</td>' +
+                  '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
+                  '<td>' + (v.product_type ?? '-') + '</td>' +
+                  '<td>' + (v.amc_start_date ?? '-') + '</td>' +
+                  '<td>' + (v.amc_end_date ?? '-') + '</td>' +
+                  '</tr>';
+              });
             } else {
               html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
             }
             $('#viewProductTable tbody').html(html);
           },
-          error: function(err) {
-             console.error('Product Load Error', err);
-             $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center text-danger">Error loading products</td></tr>');
+          error: function (err) {
+            console.error('Product Load Error', err);
+            $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center text-danger">Error loading products</td></tr>');
           }
-         });
+        });
       }
     });
   </script>
