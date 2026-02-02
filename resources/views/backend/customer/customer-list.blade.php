@@ -136,7 +136,7 @@
 
   <!-- View Customer Modal -->
   <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modal-content-premium">
         <div class="modal-header modal-header-premium">
           <h5 class="modal-title modal-title-premium"><i class="icon-user me-2"></i>Customer Details</h5>
@@ -145,84 +145,166 @@
 
         <div class="modal-body p-4">
 
-          <!-- Basic Info -->
-          <div class="mb-4">
-            <h6 class="section-title">Basic Information</h6>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <small class="text-muted d-block">Customer Name</small>
-                <span class="fw-semibold" id="v_customer_name"></span>
-              </div>
-              <div class="col-md-6">
-                <small class="text-muted d-block">Customer Degination</small>
-                <span class="fw-semibold" id="v_customer_degination"></span>
-              </div>
-              <div class="col-md-6">
-                <small class="text-muted d-block">Mobile</small>
-                <span id="v_mobile_no"></span>
-              </div>
-              <div class="col-md-6">
-                <small class="text-muted d-block">Contact Person</small>
-                <span id="v_contact_person"></span>
-              </div>
-              <div class="col-md-6">
-                <small class="text-muted d-block">Email</small>
-                <span id="v_email"></span>
-              </div>
-            </div>
-          </div>
+          <ul class="nav nav-tabs border-tab" id="viewCustomerTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="basic-tab" data-bs-toggle="tab" href="#basic-info"
+                role="tab" aria-selected="true">Basic Info</a></li>
+            <li class="nav-item"><a class="nav-link" id="branch-tab" data-bs-toggle="tab" href="#branch-info" role="tab"
+                aria-selected="false">Branches</a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact-info" role="tab"
+                aria-selected="false">Contacts</a></li>
+            <li class="nav-item"><a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product-info" role="tab"
+                aria-selected="false">Products</a></li>
+          </ul>
 
-          <!-- Address -->
-          <div class="mb-4">
-            <h6 class="section-title">Address & Location</h6>
-            <div class="row g-3">
-              <div class="col-12">
-                <small class="text-muted d-block">Address</small>
-                <span id="v_address"></span>
-              </div>
-              <div class="col-md-4">
-                <small class="text-muted d-block">City</small>
-                <span id="v_city_id"></span>
-              </div>
-              <div class="col-md-4">
-                <small class="text-muted d-block">State</small>
-                <span id="v_state_id"></span>
-              </div>
-              <div class="col-md-4">
-                <small class="text-muted d-block">Area</small>
-                <span id="v_area_id"></span>
-              </div>
-            </div>
-          </div>
+          <div class="tab-content" id="viewCustomerTabContent">
 
-          <!-- Tax Details -->
-          <div class="mb-4">
-            <h6 class="section-title">Tax & Financial</h6>
-            <div class="row g-3">
-              <div class="col-md-4">
-                <small class="text-muted d-block">GST No</small>
-                <span id="v_gst"></span>
-              </div>
-            </div>
-          </div>
+            <!-- Tab 1: Basic Info -->
+            <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab">
+              <div class="pt-4">
+                <!-- Basic Info -->
+                <div class="mb-4">
+                  <h6 class="section-title">Basic Information</h6>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <small class="text-muted d-block">Customer Name</small>
+                      <span class="fw-semibold" id="v_customer_name"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <small class="text-muted d-block">Customer Degination</small>
+                      <span class="fw-semibold" id="v_customer_degination"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <small class="text-muted d-block">Mobile</small>
+                      <span id="v_mobile_no"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <small class="text-muted d-block">Contact Person</small>
+                      <span id="v_contact_person"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <small class="text-muted d-block">Email</small>
+                      <span id="v_email"></span>
+                    </div>
+                  </div>
+                </div>
 
-          <!-- Contact Details -->
-          <div class="mb-0">
-            <h6 class="section-title">Other Contact Info</h6>
-            <div class="row g-3">
-              <div class="col-md-4">
-                <small class="text-muted d-block">Phone 1</small>
-                <span id="v_phone_1"></span>
-              </div>
-              <div class="col-md-4">
-                <small class="text-muted d-block">Phone 2</small>
-                <span id="v_phone_2"></span>
-              </div>
-              <div class="col-md-4">
-                <small class="text-muted d-block">Website</small>
-                <span id="v_web_sites"></span>
+                <!-- Address -->
+                <div class="mb-4">
+                  <h6 class="section-title">Address & Location</h6>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <small class="text-muted d-block">Address</small>
+                      <span id="v_address"></span>
+                    </div>
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">City</small>
+                      <span id="v_city_id"></span>
+                    </div>
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">State</small>
+                      <span id="v_state_id"></span>
+                    </div>
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">Area</small>
+                      <span id="v_area_id"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tax Details -->
+                <div class="mb-4">
+                  <h6 class="section-title">Tax & Financial</h6>
+                  <div class="row g-3">
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">GST No</small>
+                      <span id="v_gst"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="mb-0">
+                  <h6 class="section-title">Other Contact Info</h6>
+                  <div class="row g-3">
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">Phone 1</small>
+                      <span id="v_phone_1"></span>
+                    </div>
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">Phone 2</small>
+                      <span id="v_phone_2"></span>
+                    </div>
+                    <div class="col-md-4">
+                      <small class="text-muted d-block">Website</small>
+                      <span id="v_web_sites"></span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Tab 2: Branches -->
+            <div class="tab-pane fade" id="branch-info" role="tabpanel" aria-labelledby="branch-tab">
+              <div class="pt-4">
+                <div class="table-responsive custom-scrollbar">
+                  <table class="table table-premium table-striped" id="viewBranchTable">
+                    <thead>
+                      <tr>
+                        <th>Sr.no</th>
+                        <th>Branch Name</th>
+                        <th>Contact Person</th>
+                        <th>Mobile</th>
+                        <th>City</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3: Contacts -->
+            <div class="tab-pane fade" id="contact-info" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="pt-4">
+                <div class="table-responsive custom-scrollbar">
+                  <table class="table table-premium table-striped" id="viewContactTable">
+                    <thead>
+                      <tr>
+                        <th>Sr.no</th>
+                        <th>Name</th>
+                        <th>Branch</th>
+                        <th>Designation</th>
+                        <th>Mobile</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 4: Products -->
+            <div class="tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-tab">
+              <div class="pt-4">
+                <div class="table-responsive custom-scrollbar">
+                  <table class="table table-premium table-striped" id="viewProductTable">
+                    <thead>
+                      <tr>
+                        <th>Sr.no</th>
+                        <th>Product Name</th>
+                        <th>Serial No</th>
+                        <th>Branch</th>
+                        <th>Type</th>
+                        <th>AMC Start</th>
+                        <th>AMC End</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -961,8 +1043,97 @@
         $('#v_fax').text($(this).data('fax'));
         $('#v_web_sites').text($(this).data('website'));
 
+        // Reset to first tab
+        $('#viewCustomerTab a:first').tab('show');
+
+        // Load Tabs Data
+        loadViewBranches($(this).data('id'));
+        loadViewContacts($(this).data('id'));
+        loadViewProducts($(this).data('id'));
+
         $('#viewCustomerModal').modal('show');
       });
+
+      // --- Helper Functions for View Modal ---
+      function loadViewBranches(customerId) {
+        $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.branch') }}",
+          type: "POST",
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            var html = '';
+            if (res.status && res.data.length > 0) {
+              $.each(res.data, function (k, v) {
+                html += '<tr>' +
+                  '<td>' + (k + 1) + '</td>' +
+                  '<td>' + v.branch_name + '</td>' +
+                  '<td>' + (v.contact_person ?? '-') + '</td>' +
+                  '<td>' + (v.mobile_no ?? '-') + '</td>' +
+                  '<td>' + (v.city_name ?? '-') + '</td>' +
+                  '</tr>';
+              });
+            } else {
+              html = '<tr><td colspan="5" class="text-center">No Branches Found</td></tr>';
+            }
+            $('#viewBranchTable tbody').html(html);
+          }
+        });
+      }
+
+      function loadViewContacts(customerId) {
+        $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.contact') }}",
+          type: "POST",
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            var html = '';
+            if (res.status && res.data.length > 0) {
+              $.each(res.data, function (k, v) {
+                html += '<tr>' +
+                  '<td>' + (k + 1) + '</td>' +
+                  '<td>' + v.contact_name + '</td>' +
+                  '<td>' + (v.branch_name ?? 'Main Branch') + '</td>' +
+                  '<td>' + (v.designation ?? '-') + '</td>' +
+                  '<td>' + (v.mobile_no ?? '-') + '</td>' +
+                  '</tr>';
+              });
+            } else {
+              html = '<tr><td colspan="5" class="text-center">No Contacts Found</td></tr>';
+            }
+            $('#viewContactTable tbody').html(html);
+          }
+        });
+      }
+
+      function loadViewProducts(customerId) {
+        $('#viewProductTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
+        $.ajax({
+          url: "{{ route('admin.customer.get.products') }}",
+          type: 'POST',
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            var html = '';
+            if (res.status && res.data.length > 0) {
+              $.each(res.data, function (k, v) {
+                html += '<tr>' +
+                  '<td>' + (k + 1) + '</td>' +
+                  '<td>' + (v.product_name ?? '-') + '</td>' +
+                  '<td>' + (v.description ?? '-') + '</td>' +
+                  '<td>' + (v.branch_id ?? '-') + '</td>' + // Note: Just displaying ID for now if name not joined
+                  '<td>' + (v.product_type ?? '-') + '</td>' +
+                  '<td>' + (v.amc_start_date ?? '-') + '</td>' +
+                  '<td>' + (v.amc_end_date ?? '-') + '</td>' +
+                  '</tr>';
+              });
+            } else {
+              html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
+            }
+            $('#viewProductTable tbody').html(html);
+          }
+        });
+      }
     });
   </script>
 
