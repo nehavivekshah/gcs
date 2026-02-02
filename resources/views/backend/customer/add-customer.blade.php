@@ -197,15 +197,15 @@
                   </select>
                 </div>
 
-                <div class="col-md-3">
-                  <label class="form-label-premium">Customer Category</label>
-                  <select class="form-control form-control-premium" name="customer_category">
-                    <option value="">Select Category</option>
-                    <option value="Corporate">Corporate</option>
-                    <option value="Semi-Corporate">Semi-Corporate</option>
-                    <option value="In-House">In-House</option>
-                  </select>
-                </div>
+                <!-- <div class="col-md-3">
+                    <label class="form-label-premium">Customer Category</label>
+                    <select class="form-control form-control-premium" name="customer_category">
+                      <option value="">Select Category</option>
+                      <option value="Corporate">Corporate</option>
+                      <option value="Semi-Corporate">Semi-Corporate</option>
+                      <option value="In-House">In-House</option>
+                    </select>
+                  </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
@@ -1094,9 +1094,6 @@
       var item = savedBranches.find(x => x.id == id);
       if (!item) return;
 
-      $('#modal_branch_id').val(item.id);
-
-      // Restore form data from saved fullData
       var form = $('#branchForm');
       item.fullData.forEach(field => {
         var input = form.find('[name="' + field.name + '"]');
@@ -1109,6 +1106,8 @@
         }
       });
 
+      $('#modal_branch_id').val(item.id);
+
       $('#addBranchModal').modal('show');
       $('#btn-save-branch').text('Update');
     }
@@ -1117,12 +1116,13 @@
       var item = savedContacts.find(x => x.id == id);
       if (!item) return;
 
-      $('#modal_contact_id').val(item.id);
       var form = $('#contactForm');
       item.fullData.forEach(field => {
         var input = form.find('[name="' + field.name + '"]');
         if (input.length) input.val(field.value).trigger('change');
       });
+
+      $('#modal_contact_id').val(item.id);
 
       $('#addContactModal').modal('show');
       $('#btn-save-contact').text('Update');
@@ -1132,12 +1132,13 @@
       var item = savedProducts.find(x => x.id == id);
       if (!item) return;
 
-      $('#modal_product_id').val(item.id);
       var form = $('#productForm');
       item.fullData.forEach(field => {
         var input = form.find('[name="' + field.name + '"]');
         if (input.length) input.val(field.value).trigger('change');
       });
+
+      $('#modal_product_id').val(item.id);
 
       $('#addProductModal').modal('show');
       $('#btn-save-product').text('Update');
