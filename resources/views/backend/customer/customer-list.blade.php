@@ -1087,7 +1087,7 @@
                 <label class="form-label-premium">Service Engineer 1</label>
                 <select name="service_engineer_1" id="add_prod_eng_1" class="form-control form-control-premium select2">
                   <option value="">Select Engineer</option>
-                   {{-- Populated via AJAX --}}
+                  {{-- Populated via AJAX --}}
                 </select>
               </div>
 
@@ -1098,7 +1098,8 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label-premium">Service Engineer 2</label>
-                <select name="service_engineer_2" id="add_prod_eng_2" class="form-control form-control-premium select2" disabled>
+                <select name="service_engineer_2" id="add_prod_eng_2" class="form-control form-control-premium select2"
+                  disabled>
                   <option value="">Select Engineer</option>
                 </select>
               </div>
@@ -1110,7 +1111,8 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label-premium">Service Engineer 3</label>
-                <select name="service_engineer_3" id="add_prod_eng_3" class="form-control form-control-premium select2" disabled>
+                <select name="service_engineer_3" id="add_prod_eng_3" class="form-control form-control-premium select2"
+                  disabled>
                   <option value="">Select Engineer</option>
                 </select>
               </div>
@@ -1464,12 +1466,15 @@
           data: { customer_id: custId, _token: "{{ csrf_token() }}" },
           success: function (res) {
             var opts = '<option value="">Select Branch</option>';
-            if (res.data) {
-              $.each(res.data, function (k, v) {
+            var list = (res.status !== undefined && res.data) ? res.data : (Array.isArray(res) ? res : []);
+
+            if (list.length > 0) {
+              $.each(list, function (k, v) {
                 opts += '<option value="' + v.id + '">' + v.branch_name + '</option>';
               });
             }
             $('#add_contact_branch_id').html(opts);
+            $('#add_contact_branch_id').trigger('change');
           }
         });
 
@@ -1506,14 +1511,14 @@
               $.each(res.amc_products, function (k, v) {
                 amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
               });
-              $('#addProductModal').find('select[name="amc_product_id"]').html(amcOpts);
+              $('#add_prod_amc_product_id').html(amcOpts).trigger('change');
 
               var engOpts = '<option value="">Select Engineer</option>';
               $.each(res.engineers, function (k, v) {
                 engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
               });
-              $('#addProductModal').find('select[name="service_engineer_1"]').html(engOpts);
-              $('#addProductModal').find('select[name="service_engineer_2"]').html(engOpts);
+              $('#add_prod_eng_1').html(engOpts).trigger('change');
+              $('#add_prod_eng_2').html(engOpts).trigger('change');
             }
           }
         });
@@ -1524,13 +1529,15 @@
           type: "POST",
           data: { customer_id: custId, _token: "{{ csrf_token() }}" },
           success: function (res) {
-            if (res.status == true) {
-              var options = '<option value="">Select Branch</option>';
-              $.each(res.data, function (key, val) {
+            var options = '<option value="">Select Branch</option>';
+            var list = (res.status !== undefined && res.data) ? res.data : (Array.isArray(res) ? res : []);
+
+            if (list.length > 0) {
+              $.each(list, function (key, val) {
                 options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
               });
-              $('#addProductModal').find('select[name="branch_id"]').html(options);
             }
+            $('#add_prod_branch_id').html(options).trigger('change');
           }
         });
 
@@ -2054,7 +2061,7 @@
         }
       });
 
-      
+
       // Initialize Select2 in new modals
       $('#addProductModal .select2').select2({
         dropdownParent: $('#addProductModal')
