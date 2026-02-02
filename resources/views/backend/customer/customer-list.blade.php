@@ -656,32 +656,47 @@
 
             <div class="row g-3">
               <div class="col-md-6">
-                <label class="form-label-premium">Branch Name <span class="text-danger">*</span></label>
-                <input type="text" name="branch_name" class="form-control form-control-premium" required>
+                <label class="form-label">Branch Name <span class="text-danger">*</span></label>
+                <input type="text" name="branch_name" class="form-control" required>
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">Contact Person</label>
-                <input type="text" name="contact_person" class="form-control form-control-premium">
+                <label class="form-label">Contact Person</label>
+                <input type="text" name="contact_person" class="form-control">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">Mobile No</label>
-                <input type="text" name="mobile_no" class="form-control form-control-premium">
+                <label class="form-label-premium">Department</label>
+                <input type="text" name="department" class="form-control form-control-premium">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">Email</label>
-                <input type="email" name="email" class="form-control form-control-premium">
+                <label class="form-label">Designation</label>
+                <input type="text" name="designation" class="form-control">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">Phone</label>
-                <input type="text" name="phone" class="form-control form-control-premium">
+                <label class="form-label">Mobile No</label>
+                <input type="text" name="mobile_no" class="form-control">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">Area</label>
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Date Of Birth</label>
+                <input type="date" name="date_of_birth" class="form-control form-control-premium">
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Address</label>
+                <textarea name="address_line_1" class="form-control" rows="2"></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Area</label>
                 <select name="area_id" id="branch_area_id" class="form-control select2">
                   <option value="">Select Area</option>
                   @foreach($areaList as $areas)
@@ -691,14 +706,14 @@
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">City <span class="text-danger">*</span></label>
+                <label class="form-label">City <span class="text-danger">*</span></label>
                 <select name="city_id" id="branch_city_id" class="form-control select2" required>
                   <option value="">Select City</option>
                 </select>
               </div>
 
               <div class="col-md-6">
-                <label class="form-label-premium">State <span class="text-danger">*</span></label>
+                <label class="form-label">State <span class="text-danger">*</span></label>
                 <select name="state_id" id="branch_state_id" class="form-control select2" required>
                   <option value="">Select State</option>
                 </select>
@@ -709,15 +724,6 @@
                 <input type="text" name="pincode" class="form-control form-control-premium">
               </div>
 
-              <div class="col-md-12">
-                <label class="form-label-premium">Address Line 1</label>
-                <textarea name="address_line_1" class="form-control form-control-premium" rows="2"></textarea>
-              </div>
-
-              <div class="col-md-12">
-                <label class="form-label-premium">Address Line 2</label>
-                <textarea name="address_line_2" class="form-control form-control-premium" rows="2"></textarea>
-              </div>
             </div>
 
             <div class="mt-4 text-end">
@@ -849,36 +855,31 @@
 
             <div class="row g-3">
               <div class="col-md-6">
-                <label class="form-label-premium">Branch</label>
-                <select class="form-control form-control-premium select2" name="branch_id" id="add_contact_branch_id">
+                <label class="form-label">Branch <span class="text-danger">*</span></label>
+                <select name="branch_id" id="add_contact_branch_id" class="form-control select2" required>
                   <option value="">Select Branch</option>
                 </select>
               </div>
               <div class="col-md-6">
-                <label class="form-label-premium">Name <span class="text-danger">*</span></label>
-                <input type="text" name="contact_name" class="form-control form-control-premium" required>
+                <label class="form-label">Contact Name <span class="text-danger">*</span></label>
+                <input type="text" name="contact_name" class="form-control" required>
               </div>
-
               <div class="col-md-6">
                 <label class="form-label-premium">Department</label>
                 <input type="text" name="department" class="form-control form-control-premium">
               </div>
-
               <div class="col-md-6">
-                <label class="form-label-premium">Designation</label>
-                <input type="text" name="designation" class="form-control form-control-premium">
+                <label class="form-label">Designation</label>
+                <input type="text" name="designation" class="form-control">
               </div>
-
               <div class="col-md-6">
-                <label class="form-label-premium">Mobile No</label>
-                <input type="text" name="mobile_no" class="form-control form-control-premium">
+                <label class="form-label">Mobile</label>
+                <input type="text" name="mobile_no" class="form-control">
               </div>
-
               <div class="col-md-6">
-                <label class="form-label-premium">Email</label>
-                <input type="email" name="email_id" class="form-control form-control-premium">
+                <label class="form-label">Email</label>
+                <input type="email" name="email_id" class="form-control">
               </div>
-
               <div class="col-md-6">
                 <label class="form-label-premium">Date Of Birth</label>
                 <input type="date" name="date_of_birth" class="form-control form-control-premium">
@@ -1009,95 +1010,111 @@
           <form id="addProductForm">
             <input type="hidden" id="add_product_customer_id" name="customer_id">
 
-            <!-- Row 1 -->
-            <div class="row g-3 mb-3">
-              <div class="col-md-4">
-                <label class="form-label-premium">Branch</label>
-                <select class="form-control form-control-premium select2" id="add_prod_branch_id" name="branch_id"
-                  required style="width:100%">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Branch <span class="text-danger">*</span></label>
+                <select name="branch_id" id="add_prod_branch_id" class="form-control select2" required>
                   <option value="">Select Branch</option>
                 </select>
               </div>
-              <div class="col-md-4">
-                <label class="form-label-premium">AMC Product</label>
-                <select class="form-control form-control-premium select2" id="add_prod_amc_product_id"
-                  name="amc_product_id" required style="width:100%">
+
+              <div class="col-md-6">
+                <label class="form-label">Product (AMC) <span class="text-danger">*</span></label>
+                <select name="amc_product_id" id="add_prod_amc_product_id" class="form-control select2" required>
                   <option value="">Select Product</option>
+                  {{-- Populated via AJAX in List View --}}
                 </select>
               </div>
-              <div class="col-md-4">
-                <label class="form-label-premium">Quantity</label>
-                <input type="number" class="form-control form-control-premium" name="quantity" value="1">
-              </div>
-            </div>
 
-            <!-- Row 2 -->
-            <div class="row g-3 mb-3">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label class="form-label-premium">Product Type</label>
-                <input type="text" class="form-control form-control-premium" name="product_type">
+                <select name="product_type" id="product_type" class="form-control">
+                  <option value="AMC">AMC</option>
+                  <option value="Non-AMC">Non AMC</option>
+                </select>
               </div>
-              <div class="col-md-4">
+
+              <div class="col-md-6">
                 <label class="form-label-premium">Product Category</label>
-                <input type="text" class="form-control form-control-premium" name="product_category">
+                <select name="product_category" id="product_category" class="form-control">
+                  <option value="Comprehensive">Comprehensive</option>
+                  <option value="Non-Comprehensive">Non-Comprehensive</option>
+                </select>
               </div>
-              <div class="col-md-4">
+
+              <div class="col-md-6">
                 <label class="form-label-premium">Department</label>
                 <input type="text" class="form-control form-control-premium" name="department">
               </div>
-            </div>
 
-            <!-- Row 3 Description/User -->
-            <div class="row g-3 mb-3">
-              <div class="col-md-8">
-                <label class="form-label-premium">Description / Serial No.</label>
-                <input type="text" class="form-control form-control-premium" name="description">
+              <div class="col-md-6">
+                <label class="form-label">Qty</label>
+                <input type="number" name="quantity" class="form-control form-control-premium" value="1">
               </div>
-              <div class="col-md-4">
+
+              <div class="col-md-6">
+                <label class="form-label-premium">Product UIN</label>
+                <input type="text" class="form-control form-control-premium" name="product_uin"
+                  placeholder="Auto-generated if empty">
+              </div>
+
+              <div class="col-md-6">
                 <label class="form-label-premium">User Name</label>
                 <input type="text" class="form-control form-control-premium" name="user_name">
               </div>
-            </div>
 
-            <hr>
-            <h6 class="fw-bold mb-3">Service Dates & Engineers</h6>
+              <div class="col-md-12">
+                <label class="form-label-premium">Description</label>
+                <textarea class="form-control form-control-premium" name="description"></textarea>
+              </div>
 
-            <!-- Dates & Engineers -->
-            <div class="row g-3 mb-3">
-              <div class="col-md-3">
+              <div class="col-md-6">
                 <label class="form-label-premium">AMC Start Date</label>
                 <input type="date" class="form-control form-control-premium" name="amc_start_date">
               </div>
-              <div class="col-md-3">
+
+              <div class="col-md-6">
                 <label class="form-label-premium">AMC End Date</label>
                 <input type="date" class="form-control form-control-premium" name="amc_end_date">
               </div>
-            </div>
 
-            <div class="row g-3 mb-3">
-              <div class="col-md-3">
+              <!-- SERVICE 1 -->
+              <div class="col-md-6">
                 <label class="form-label-premium">Service Date 1</label>
                 <input type="date" class="form-control form-control-premium" name="service_date_1">
               </div>
-              <div class="col-md-3">
-                <label class="form-label-premium">Engineer 1</label>
-                <select class="form-control form-control-premium select2" id="add_prod_eng_1" name="service_engineer_1"
-                  style="width:100%">
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 1</label>
+                <select name="service_engineer_1" id="add_prod_eng_1" class="form-control form-control-premium select2">
+                  <option value="">Select Engineer</option>
+                   {{-- Populated via AJAX --}}
+                </select>
+              </div>
+
+              <!-- SERVICE 2 -->
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Date 2</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_2" disabled>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 2</label>
+                <select name="service_engineer_2" id="add_prod_eng_2" class="form-control form-control-premium select2" disabled>
                   <option value="">Select Engineer</option>
                 </select>
               </div>
 
-              <div class="col-md-3">
-                <label class="form-label-premium">Service Date 2</label>
-                <input type="date" class="form-control form-control-premium" name="service_date_2">
+              <!-- SERVICE 3 -->
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Date 3</label>
+                <input type="date" class="form-control form-control-premium" name="service_date_3" disabled>
               </div>
-              <div class="col-md-3">
-                <label class="form-label-premium">Engineer 2</label>
-                <select class="form-control form-control-premium select2" id="add_prod_eng_2" name="service_engineer_2"
-                  style="width:100%">
+              <div class="col-md-6">
+                <label class="form-label-premium">Service Engineer 3</label>
+                <select name="service_engineer_3" id="add_prod_eng_3" class="form-control form-control-premium select2" disabled>
                   <option value="">Select Engineer</option>
                 </select>
               </div>
+
             </div>
 
             <div class="d-flex justify-content-end mt-4">
@@ -2037,12 +2054,83 @@
         }
       });
 
+      
       // Initialize Select2 in new modals
       $('#addProductModal .select2').select2({
         dropdownParent: $('#addProductModal')
       });
       $('#editProductModal .select2').select2({
         dropdownParent: $('#editProductModal')
+      });
+
+      // --- Location AJAX for Branch Modal ---
+      $('#branch_area_id').on('change', function () {
+        var areaID = $(this).val();
+        if (areaID) {
+          fetchCityState(areaID, '#branch_city_id', '#branch_state_id');
+        }
+      });
+
+      function fetchCityState(areaID, citySelector, stateSelector) {
+        $.ajax({
+          url: "{{ route('admin.customer.area.city') }}",
+          type: "POST",
+          data: { areaID: areaID, _token: "{{ csrf_token() }}" },
+          dataType: "json",
+          success: function (res) {
+            if (res.status) {
+              $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
+              $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
+            }
+          }
+        });
+      }
+
+      // --- Service Date Logic (From Add Customer) ---
+      // Auto-calculate Service Dates
+      $('input[name="amc_start_date"]').on('change', function () {
+        var startDate = $(this).val();
+        if (!startDate) return;
+
+        var date = new Date(startDate);
+
+        // Service Date 1: +4 months
+        date.setMonth(date.getMonth() + 4);
+        var sd1 = date.toISOString().split('T')[0];
+        $('input[name="service_date_1"]').val(sd1).trigger('change');
+
+        // Service Date 2: +4 months from SD1 (total +8)
+        date.setMonth(date.getMonth() + 4);
+        var sd2 = date.toISOString().split('T')[0];
+        $('input[name="service_date_2"]').val(sd2).trigger('change');
+
+        // Service Date 3: +4 months from SD2 (total +12)
+        date.setMonth(date.getMonth() + 4);
+        var sd3 = date.toISOString().split('T')[0];
+        $('input[name="service_date_3"]').val(sd3).trigger('change');
+      });
+
+      // Sequential Enabling Logic
+      $('input[name="service_date_1"]').on('change keyup', function () {
+        let val = $(this).val();
+        let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
+        if (val) {
+          inputs2.prop('disabled', false);
+        } else {
+          inputs2.prop('disabled', true).val('');
+        }
+        // Trigger change on dependent
+        $('input[name="service_date_2"]').trigger('change');
+      });
+
+      $('input[name="service_date_2"]').on('change keyup', function () {
+        let val = $(this).val();
+        let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
+        if (val) {
+          inputs3.prop('disabled', false);
+        } else {
+          inputs3.prop('disabled', true).val('');
+        }
       });
 
     });
