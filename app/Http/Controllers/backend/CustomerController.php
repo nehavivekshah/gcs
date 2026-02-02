@@ -83,6 +83,7 @@ class CustomerController extends Controller
         $fax = $req->fax;
         $credit_days = $req->credit_days;
         $date_of_birth = $req->date_of_birth;
+        $ac_key = $req->ac_key; // Added missing assignment
         $created_by = session('user_name', 'Guest');
 
         $is_msme = $req->has('is_msme') ? 1 : 0;
@@ -93,7 +94,7 @@ class CustomerController extends Controller
         $customer_code = 'GCS-' . $nextId;
 
         $data = [
-            'customer_name' => $customer_name,
+            'company_name' => $company_name, // Fixed: customer_name -> company_name and used correct variable
             'customer_type' => $customer_type,
             'customer_category' => $customer_category,
             'contact_person' => $contact_person,
@@ -103,8 +104,8 @@ class CustomerController extends Controller
             'website' => $website,
 
             // Added missing fields
-            // 'department' => $department,
-            // 'designation' => $designation,
+            'department' => $department,
+            'designation' => $designation,
 
             'address_line_1' => $address_line_1,
             'address_line_2' => $address_line_2,
@@ -124,7 +125,6 @@ class CustomerController extends Controller
 
             'fax' => $fax,
             'credit_days' => $credit_days,
-            'date_of_birth' => $date_of_birth,
             'date_of_birth' => $date_of_birth,
             'ac_key' => $ac_key,
             'is_msme' => $is_msme,
@@ -194,7 +194,7 @@ class CustomerController extends Controller
         $modified_by = session('user_name', 'Guest');
 
         $data = [
-            'customer_name' => $customer_name,
+            'company_name' => $company_name,
             'customer_type' => $customer_type,
             'customer_category' => $customer_category,
             'contact_person' => $contact_person,

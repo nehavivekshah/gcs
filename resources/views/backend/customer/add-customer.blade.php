@@ -198,6 +198,16 @@
                 </div>
 
                 <div class="col-md-3">
+                  <label class="form-label-premium">Customer Category</label>
+                  <select class="form-control form-control-premium" name="customer_category">
+                    <option value="">Select Category</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Semi-Corporate">Semi-Corporate</option>
+                    <option value="In-House">In-House</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
                   <input type="text" class="form-control form-control-premium" name="phone_1">
                 </div>
@@ -302,7 +312,7 @@
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Pan No</label>
-                  <input type="text" class="form-control form-control-premium" name="pan_no">
+                  <input type="text" class="form-control form-control-premium" name="pan">
                 </div>
 
                 <div class="col-md-3">
@@ -746,7 +756,7 @@
       });
 
       // --- MSME Toggle Logic ---
-      $('#is_msme').change(function() {
+      $('#is_msme').change(function () {
         if ($(this).is(':checked')) {
           $('#msme_div').removeClass('d-none');
         } else {
