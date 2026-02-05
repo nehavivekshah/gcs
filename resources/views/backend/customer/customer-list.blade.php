@@ -57,7 +57,7 @@
 
                         <div class="d-flex justify-content-center align-items-center gap-2">
 
-                          <a href="javascript:void(0)" class="viewCustomer btn btn-sm-custom btn-dark"
+                          <a href="javascript:void(0)" class="viewCustomer btn btn-sm-custom btn-outline-primary"
                             data-id="{{ $customers->id }}" data-uuid="{{ $customers->uuid }}"
                             data-company_name="{{ $customers->company_name }}"
                             data-customer_code="{{ $customers->customer_code }}"
@@ -80,12 +80,12 @@
                           </a>
 
                           <a href="{{ route('admin.customer.edit', ['uuid' => $customers->uuid]) }}"
-                            class="btn btn-sm-custom btn-info" data-bs-toggle="tooltip" title="Edit">
+                            class="btn btn-sm-custom btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
                             <i class="icon-pencil-alt"></i>
                           </a>
 
                           <a href="{{ route('admin.customer.delete', ['uuid' => $customers->uuid]) }}"
-                            class="btn btn-sm-custom btn-danger"
+                            class="btn btn-sm-custom btn-outline-primary"
                             onclick="return confirm('Are you sure you want to delete this record?');"
                             data-bs-toggle="tooltip" title="Delete">
                             <i class="icon-trash"></i>
