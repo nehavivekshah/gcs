@@ -178,8 +178,8 @@ body {
   vertical-align: middle;
   border-bottom: 1px solid #f1f3f5;
   color: #2d3436;
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 400;
+  font-size: 15px;
   background: #fff;
   transition: background 0.2s;
 }
