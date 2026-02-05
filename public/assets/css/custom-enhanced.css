@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   color: var(--text-dark);
   background-color: #f0f2f5;
   /* Slightly darker for contrast with white cards */

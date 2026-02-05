@@ -5994,7 +5994,7 @@ a.badge:hover.badge-dark:hover {
 
 .badge {
   padding: 8px 16px;
-  font-family: "Montserrat", sans-serif, sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-weight: 500;
 }
 .badge + .badge {
@@ -6960,7 +6960,7 @@ button.button-primary:hover {
 }
 
 .page-body-wrapper .card .sub-title {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: normal;
   color: #051A1A;
 }
@@ -7837,7 +7837,7 @@ table.dataTable.display tbody tr.even .badge {
   width: 218px;
 }
 .dropdown .dropdown-menu {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   z-index: 4;
 }
 
@@ -10425,13 +10425,13 @@ textarea {
 .icon-hover-bottom span,
 .icon-hover-bottom label,
 .icon-hover-bottom .btn {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .icon-hover-bottom .form-group input {
   display: inline-block;
   width: 300px;
   background-color: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .fa-fa-icon-show-div,
@@ -13933,7 +13933,7 @@ tbody tr:last-child {
   position: relative;
 }
 .bootstrap-touchspin .input-group {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .bootstrap-touchspin .input-group .btn {
   border-radius: 0 !important;
@@ -16271,7 +16271,7 @@ input[type=number] {
   color: #898989;
   background: #fff;
   border: solid 1px #ecf3fa;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -16292,7 +16292,7 @@ input[type=number] {
   background: rgba(49, 49, 49, 0.7);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
   color: #fff;
-  font: 10px "Montserrat", sans-serif, "Montserrat", sans-serif;
+  font: 10px "Poppins", sans-serif, "Poppins", sans-serif;
   text-align: left;
   white-space: nowrap;
   padding: 5px;
@@ -16304,7 +16304,7 @@ input[type=number] {
 }
 .chart-sparkline .jqsfield {
   color: #fff;
-  font: 10px "Montserrat", sans-serif, "Montserrat", sans-serif;
+  font: 10px "Poppins", sans-serif, "Poppins", sans-serif;
   text-align: left;
 }
 
@@ -17818,7 +17818,7 @@ p.data-attributes svg {
 }
 
 .list-persons p {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .list-persons .profile-mail {
   padding: 30px 0;
@@ -18294,7 +18294,7 @@ p.data-attributes svg {
 .monthly-profit .apexcharts-canvas .apexcharts-datalabels-group .apexcharts-datalabel-value {
   font-size: 14px;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
   fill: var(--chart-text-color);
 }
 
@@ -22908,7 +22908,7 @@ p.data-attributes svg {
   text-align: center;
 }
 .appointment-sec .bottom-btn a {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
@@ -24837,7 +24837,7 @@ footer.blockquote-footer {
   margin-bottom: 0;
   margin-top: 5px;
   font-size: 20px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .product-box .product-details h6 {
   color: #051A1A;
@@ -29200,7 +29200,7 @@ html:hover .cursor {
 }
 .demo-section .demo-box.dashboard-images .demo-detail .demo-title h3 {
   font-size: 22px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   text-transform: capitalize;
   font-weight: 400;
   margin-bottom: -7px;
@@ -29248,7 +29248,7 @@ html:hover .cursor {
   margin-bottom: 0px;
   font-weight: 700;
   font-size: 60px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   color: #fff;
   -webkit-background-clip: text;
@@ -30055,7 +30055,7 @@ html:hover .cursor {
 .landing-home .content p {
   font-size: calc(14px + 4 * (100vw - 300px) / 1620);
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #fff;
   opacity: 0.8;
   width: 64%;
@@ -31229,7 +31229,7 @@ footer .license-list h6 {
   font-weight: 600;
   margin-bottom: 0px;
   line-height: 1.4;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   width: 100%;
   color: #fff;
   margin-left: auto;
@@ -31301,11 +31301,11 @@ footer .license-list h6 {
 }
 .pricing-section .landing-title h5 {
   font-weight: 700;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #d40306;
 }
 .pricing-section .landing-title h4 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   margin: 10px 0px;
 }
@@ -35628,7 +35628,7 @@ html {
 .user-profile .follow .follow-num {
   font-size: 20px;
   color: #242934;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 .user-profile .follow span {
@@ -35662,7 +35662,7 @@ html {
   color: #FE6A49;
 }
 .user-profile .like-comment span {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .user-profile .social-media a {
   padding: 0 15px;
@@ -41505,7 +41505,7 @@ body[class*=dark-] .for-light {
   width: 100%;
   text-align: left;
   letter-spacing: 0.7px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   border: 1px solid #efefef;
   border-radius: 0;
   border-top-left-radius: 5px;
@@ -43263,7 +43263,7 @@ table.table-bordered thead tr th p {
   margin: 0 auto;
 }
 .page-wrapper .page-header .header-wrapper .nav-right .bookmark-flip .bookmark-dropdown .bookmark-content span {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -43373,7 +43373,7 @@ table.table-bordered thead tr th p {
 }
 .page-wrapper .page-header .header-wrapper .nav-right .onhover-show-div li a {
   letter-spacing: 0.3px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .page-wrapper .page-header .header-wrapper .nav-right .onhover-show-div li + li {
   margin-top: 15px;
@@ -43480,7 +43480,7 @@ table.table-bordered thead tr th p {
 .page-wrapper .page-header .header-wrapper .nav-right .cart-dropdown .qty-box .input-group input,
 .page-wrapper .page-header .header-wrapper .nav-right .cart-dropdown .qty-box .input-group .btn {
   font-size: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 .page-wrapper .page-header .header-wrapper .nav-right .cart-dropdown .qty-box .input-group .btn {
@@ -43498,7 +43498,7 @@ table.table-bordered thead tr th p {
   border: none;
 }
 .page-wrapper .page-header .header-wrapper .nav-right .cart-dropdown .total h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
@@ -43647,7 +43647,7 @@ table.table-bordered thead tr th p {
 .page-wrapper .page-body-wrapper .page-title .breadcrumb li {
   font-size: 13px;
   letter-spacing: 1px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .page-wrapper .page-body-wrapper .page-title .breadcrumb .breadcrumb-item + .breadcrumb-item:before {
   content: "/";
@@ -43908,7 +43908,7 @@ table.table-bordered thead tr th p {
   color: rgba(43, 43, 43, 0.6);
   letter-spacing: 0.06em;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
@@ -44422,7 +44422,7 @@ table.table-bordered thead tr th p {
   font-size: 10px;
   letter-spacing: 0.7px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   border-radius: 10px;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > a:hover {
@@ -44565,7 +44565,7 @@ table.table-bordered thead tr th p {
   display: block;
   letter-spacing: 0.06em;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container .mega-box .link-section .submenu-title h5:after {
@@ -44591,7 +44591,7 @@ table.table-bordered thead tr th p {
   display: block;
   letter-spacing: 0.06em;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container .mega-box .link-section .submenu-content.opensubmegamenu li a:after {
   display: none;
