@@ -112,39 +112,44 @@
       background: #fdfdfd;
       padding: 24px;
       border-radius: 8px;
-      /* Slightly sharper corners for flat look */
       margin-bottom: 25px;
       border: 1px solid #e1e7ec;
       border-left: 5px solid var(--theme-default);
     }
 
     .view-item-wrapper {
-      border-bottom: 1px solid #f1f4f8;
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-    }
-
-    .view-item-wrapper:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
+      margin-bottom: 16px;
     }
 
     .view-label {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
+      /* Increased from 0.7rem */
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #889097;
-      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+      color: #7f8c8d;
+      /* Slightly darker for better contrast */
+      margin-bottom: 6px;
       display: block;
       font-weight: 700;
     }
 
     .view-value {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1b2533;
+      font-size: 1.05rem;
+      /* Increased from 1rem */
+      font-weight: 500;
+      color: #2c3e50;
       word-break: break-word;
-      line-height: 1.5;
+      line-height: 1.6;
+      min-height: 24px;
+      /* Ensure height even if empty */
+    }
+
+    /* Address Box Style */
+    .address-box {
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      padding: 15px;
+      border: 1px solid #e9ecef;
     }
 
     .view-section-title {
@@ -162,7 +167,6 @@
       margin-right: 12px;
       color: var(--theme-default);
       background: #f0f3f6;
-      /* Flat background */
       padding: 10px;
       border-radius: 6px;
       width: 36px;
@@ -178,13 +182,14 @@
       border-radius: 8px;
       padding: 24px;
       height: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      /* Subtle shadow for depth */
     }
 
     /* Modern Line Tabs with clear highlight */
     .nav-tabs-premium {
       border-bottom: 2px solid #eef2f7;
       gap: 5px;
-      /* Reduced gap to keep them close */
       margin-bottom: 28px;
       padding-left: 0;
     }
@@ -197,11 +202,9 @@
       border: none;
       border-bottom: 3px solid transparent;
       color: #98a6ad;
-      /* Light gray for inactive */
       font-weight: 600;
       padding: 12px 20px;
       border-radius: 4px 4px 0 0;
-      /* Slight top round */
       transition: all 0.2s;
       background: transparent;
       font-size: 0.95rem;
@@ -209,11 +212,9 @@
 
     .nav-tabs-premium .nav-link.active {
       color: #d40306;
-      /* Strong red for active text */
-      background-color: rgba(212, 3, 6, 0.1);
-      /* Very light red bg for active */
+      background-color: rgba(212, 3, 6, 0.05);
+      /* Lighter bg */
       border-bottom-color: #d40306;
-      /* Match text */
       font-weight: 800;
     }
 
@@ -301,116 +302,96 @@
 
               <div class="row g-4">
                 <!-- Basic Information Card -->
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                   <div class="info-card">
                     <h6 class="view-section-title"><i class="icon-user"></i> Basic Information</h6>
-                    <div class="row g-0"> <!-- g-0 for list style -->
-                      <div class="col-12 view-item-wrapper">
+                    <div class="row">
+                      <div class="col-md-6 view-item-wrapper">
                         <small class="view-label">Customer Name</small>
                         <div class="view-value" id="v_customer_name">-</div>
                       </div>
-                      <div class="col-12 view-item-wrapper">
+                      <div class="col-md-6 view-item-wrapper">
                         <small class="view-label">Designation</small>
                         <div class="view-value" id="v_customer_degination">-</div>
                       </div>
-                      <div class="col-12 view-item-wrapper">
+                      <div class="col-md-6 view-item-wrapper">
                         <small class="view-label">Contact Person</small>
                         <div class="view-value" id="v_contact_person">-</div>
                       </div>
-                      <div class="col-12 view-item-wrapper">
+                      <div class="col-md-6 view-item-wrapper">
                         <small class="view-label">Date of Birth</small>
                         <div class="view-value" id="v_date_of_birth">-</div>
                       </div>
+                      <div class="col-12 mt-2">
+                        <div class="address-box">
+                          <h6 class="text-uppercase text-secondary fw-bold fs-7 mb-2"><i
+                              class="icon-location-pin me-1"></i> Address</h6>
+                          <div class="view-value mb-2" id="v_address"></div>
+                          <div class="text-muted small">
+                            <span id="v_area_id"></span><span id="v_city_separator">, </span>
+                            <span id="v_city_id" class="fw-bold text-dark"></span><span id="v_state_separator">, </span>
+                            <span id="v_state_id"></span>
+                            <span id="v_pincode_separator"> - </span>
+                            <span id="v_pincode" class="fw-bold text-dark"></span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Contact Details Card -->
-                <div class="col-lg-6">
-                  <div class="info-card">
-                    <h6 class="view-section-title"><i class="icon-headphone-alt"></i> Contact Details</h6>
-                    <div class="row g-0">
-                      <div class="col-12 view-item-wrapper">
-                        <small class="view-label">Mobile Number</small>
-                        <div class="view-value text-primary font-code" id="v_mobile_no">-</div>
-                      </div>
-                      <div class="col-12 view-item-wrapper">
-                        <small class="view-label">Email Address</small>
-                        <div class="view-value text-primary" id="v_email">-</div>
-                      </div>
-                      <div class="col-12 view-item-wrapper">
+                <!-- Contact Details & Financial Card -->
+                <div class="col-lg-5">
+                  <div class="row g-4 h-100">
+                    <div class="col-12">
+                      <div class="info-card">
+                        <h6 class="view-section-title"><i class="icon-headphone-alt"></i> Contact Details</h6>
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-12 view-item-wrapper">
+                            <small class="view-label">Mobile Number</small>
+                            <div class="view-value text-primary font-code fs-5" id="v_mobile_no">-</div>
+                          </div>
+                          <div class="col-12 view-item-wrapper">
+                            <small class="view-label">Email Address</small>
+                            <div class="view-value text-primary" id="v_email">-</div>
+                          </div>
+                          <div class="col-6 view-item-wrapper">
                             <small class="view-label">Phone 1</small>
                             <div class="view-value" id="v_phone_1">-</div>
                           </div>
-                          <div class="col-6 border-start ps-3">
+                          <div class="col-6 view-item-wrapper">
                             <small class="view-label">Phone 2</small>
                             <div class="view-value" id="v_phone_2">-</div>
                           </div>
+                          <div class="col-12 view-item-wrapper">
+                            <small class="view-label">Website</small>
+                            <div class="view-value text-info" id="v_web_sites">-</div>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-12 view-item-wrapper">
-                        <small class="view-label">Website</small>
-                        <div class="view-value text-info" id="v_web_sites">-</div>
-                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <!-- Address Card -->
-                <div class="col-lg-12">
-                  <div class="info-card">
-                    <h6 class="view-section-title"><i class="icon-location-pin"></i> Address & Location</h6>
-                    <div class="row g-0">
-                      <div class="col-12 view-item-wrapper">
-                        <small class="view-label">Address</small>
-                        <div class="view-value" id="v_address">-</div>
-                      </div>
-                      <div class="col-12 view-item-wrapper">
+                    <div class="col-12">
+                      <div class="info-card">
+                        <h6 class="view-section-title"><i class="icon-receipt"></i> Financial Info</h6>
                         <div class="row">
-                          <div class="col-md-3">
-                            <small class="view-label">Area</small>
-                            <div class="view-value" id="v_area_id">-</div>
+                          <div class="col-6 view-item-wrapper">
+                            <small class="view-label">GST No</small>
+                            <div class="view-value font-code" id="v_gst">-</div>
                           </div>
-                          <div class="col-md-3 border-start ps-md-3">
-                            <small class="view-label">City</small>
-                            <div class="view-value" id="v_city_id">-</div>
+                          <div class="col-6 view-item-wrapper">
+                            <small class="view-label">PAN No</small>
+                            <div class="view-value font-code" id="v_pan">-</div>
                           </div>
-                          <div class="col-md-3 border-start ps-md-3">
-                            <small class="view-label">State</small>
-                            <div class="view-value" id="v_state_id">-</div>
+                          <div class="col-6 view-item-wrapper">
+                            <small class="view-label">CST No</small>
+                            <div class="view-value" id="v_cst">-</div>
                           </div>
-                          <div class="col-md-3 border-start ps-md-3">
-                            <small class="view-label">Pincode</small>
-                            <div class="view-value" id="v_pincode">-</div>
+                          <div class="col-6 view-item-wrapper">
+                            <small class="view-label">VAT No</small>
+                            <div class="view-value" id="v_vat">-</div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Financial Card -->
-                <div class="col-lg-12">
-                  <div class="info-card">
-                    <h6 class="view-section-title"><i class="icon-receipt"></i> Tax & Financial Info</h6>
-                    <div class="row g-4">
-                      <div class="col-md-3">
-                        <small class="view-label">GST No</small>
-                        <div class="view-value font-code" id="v_gst">-</div>
-                      </div>
-                      <div class="col-md-3 border-start ps-md-3">
-                        <small class="view-label">PAN No</small>
-                        <div class="view-value font-code" id="v_pan">-</div>
-                      </div>
-                      <div class="col-md-3 border-start ps-md-3">
-                        <small class="view-label">CST No</small>
-                        <div class="view-value" id="v_cst">-</div>
-                      </div>
-                      <div class="col-md-3 border-start ps-md-3">
-                        <small class="view-label">VAT No</small>
-                        <div class="view-value" id="v_vat">-</div>
                       </div>
                     </div>
                   </div>
@@ -419,7 +400,6 @@
               </div>
 
             </div>
-
             <!-- Tab 2: Branches -->
             <div class="tab-pane fade" id="branch-info" role="tabpanel" aria-labelledby="branch-tab">
               <div class="d-flex justify-content-between align-items-center mb-3">
