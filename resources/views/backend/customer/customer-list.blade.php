@@ -57,69 +57,40 @@
 
                         <div class="d-flex justify-content-center align-items-center gap-2">
 
-                          <button type="button" class="btn btn-sm-custom btn-outline-custom viewBranchBtn"
-                            data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->company_name }}">
-                            Branch
-                          </button>
+                          <a href="javascript:void(0)" class="viewCustomer btn btn-sm-custom btn-outline-primary"
+                            data-id="{{ $customers->id }}" data-uuid="{{ $customers->uuid }}"
+                            data-company_name="{{ $customers->company_name }}"
+                            data-customer_code="{{ $customers->customer_code }}"
+                            data-customer_type="{{ $customers->customer_type }}"
+                            data-customer_category="{{ $customers->customer_category }}"
+                            data-contact_person="{{ $customers->contact_person }}"
+                            data-mobile_no="{{ $customers->mobile_no }}" data-email="{{ $customers->email }}"
+                            data-website="{{ $customers->website }}" data-address_line_1="{{ $customers->address_line_1 }}"
+                            data-address_line_2="{{ $customers->address_line_2 }}"
+                            data-area_id="{{ $customers->area_name }}" data-city_id="{{ $customers->city_name }}"
+                            data-state_id="{{ $customers->state_name }}" data-pincode="{{ $customers->pincode }}"
+                            data-phone_1="{{ $customers->phone_1 }}" data-phone_2="{{ $customers->phone_2 }}"
+                            data-gst="{{ $customers->gst }}" data-fax="{{ $customers->fax }}"
+                            data-cst="{{ $customers->cst }}" data-vat="{{ $customers->vat }}"
+                            data-pan="{{ $customers->pan }}" data-credit_days="{{ $customers->credit_days }}"
+                            data-date_of_birth="{{ $customers->date_of_birth }}" data-ac_key="{{ $customers->ac_key }}"
+                            data-created_by="{{ $customers->created_by }}" data-modified_by="{{ $customers->modified_by }}"
+                            data-bs-toggle="tooltip" title="View">
+                            <i class="icon-eye"></i>
+                          </a>
 
-                          <button type="button" class="btn btn-sm-custom btn-outline-custom viewProductBtn"
-                            data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->company_name }}">
-                            Product
-                          </button>
+                          <a href="{{ route('admin.customer.edit', ['uuid' => $customers->uuid]) }}"
+                            class="btn btn-sm-custom btn-outline-warning" data-bs-toggle="tooltip" title="Edit">
+                            <i class="icon-pencil-alt"></i>
+                          </a>
 
-                          <button type="button" class="btn btn-sm-custom btn-outline-custom viewContactBtn"
-                            data-customer-id="{{ $customers->id }}" data-customer-uuid="{{ $customers->uuid }}"
-                            data-customer-name="{{ $customers->company_name }}">
-                            Contact
-                          </button>
+                          <a href="{{ route('admin.customer.delete', ['uuid' => $customers->uuid]) }}"
+                            class="btn btn-sm-custom btn-outline-danger"
+                            onclick="return confirm('Are you sure you want to delete this record?');"
+                            data-bs-toggle="tooltip" title="Delete">
+                            <i class="icon-trash"></i>
+                          </a>
 
-                          <div class="dropdown">
-                            <button class="btn btn-sm-custom btn-outline-custom" type="button" data-bs-toggle="dropdown"
-                              aria-expanded="false" data-bs-boundary="viewport">
-                              <i class="icon-more-alt" style="font-size: 18px; transform: rotate(90deg); color: #666;"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
-                              <li>
-                                <a class="dropdown-item viewCustomer py-2" href="javascript:void(0)"
-                                  data-id="{{ $customers->id }}" data-uuid="{{ $customers->uuid }}"
-                                  data-company_name="{{ $customers->company_name }}"
-                                  data-customer_code="{{ $customers->customer_code }}"
-                                  data-customer_type="{{ $customers->customer_type }}"
-                                  data-customer_category="{{ $customers->customer_category }}"
-                                  data-contact_person="{{ $customers->contact_person }}"
-                                  data-mobile_no="{{ $customers->mobile_no }}" data-email="{{ $customers->email }}"
-                                  data-website="{{ $customers->website }}"
-                                  data-address_line_1="{{ $customers->address_line_1 }}"
-                                  data-address_line_2="{{ $customers->address_line_2 }}"
-                                  data-area_id="{{ $customers->area_name }}" data-city_id="{{ $customers->city_name }}"
-                                  data-state_id="{{ $customers->state_name }}" data-pincode="{{ $customers->pincode }}"
-                                  data-phone_1="{{ $customers->phone_1 }}" data-phone_2="{{ $customers->phone_2 }}"
-                                  data-gst="{{ $customers->gst }}" data-fax="{{ $customers->fax }}"
-                                  data-cst="{{ $customers->cst }}" data-vat="{{ $customers->vat }}"
-                                  data-pan="{{ $customers->pan }}" data-credit_days="{{ $customers->credit_days }}"
-                                  data-date_of_birth="{{ $customers->date_of_birth }}"
-                                  data-ac_key="{{ $customers->ac_key }}" data-created_by="{{ $customers->created_by }}"
-                                  data-modified_by="{{ $customers->modified_by }}">
-                                  <i class="icon-eye me-2 text-primary"></i> View
-                                </a>
-                              </li>
-                              <li>
-                                <a class="dropdown-item py-2"
-                                  href="{{ route('admin.customer.edit', ['uuid' => $customers->uuid]) }}">
-                                  <i class="icon-pencil-alt me-2 text-warning"></i> Edit
-                                </a>
-                              </li>
-                              <li>
-                                <a class="dropdown-item py-2 text-danger"
-                                  href="{{ route('admin.customer.delete', ['uuid' => $customers->uuid]) }}"
-                                  onclick="return confirm('Are you sure you want to delete this record?');">
-                                  <i class="icon-trash me-2"></i> Delete
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
                         </div>
                       </td>
                     </tr>
@@ -1380,43 +1351,43 @@
       }
 
       function loadViewProducts(customerId) {
-            $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
-            $.ajax({
-              url: "{{ route('admin.customer.get.products') }}",
-              type: 'POST',
-              data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
-              success: function (res) {
-                var html = '';
-                var list = (res.status !== undefined && res.data) ? res.data : (Array.isArray(res) ? res : []);
+        $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+        $.ajax({
+          url: "{{ route('admin.customer.get.products') }}",
+          type: 'POST',
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            var html = '';
+            var list = (res.status !== undefined && res.data) ? res.data : (Array.isArray(res) ? res : []);
 
-                if (list.length > 0) {
-                  $.each(list, function (k, v) {
-                    html += '<tr>' +
-                      '<td>' + (k + 1) + '</td>' +
-                      '<td>' + (v.product_name ?? '-') + '</td>' +
-                      '<td>' + (v.description ?? '-') + '</td>' +
-                      '<td>' + (v.branch_id ?? '-') + '</td>' + 
-                      '<td>' + (v.product_type ?? '-') + '</td>' +
-                      '<td>' + (v.amc_start_date ?? '-') + '</td>' +
-                      '<td>' + (v.amc_end_date ?? '-') + '</td>' +
-                      '<td class="text-center">' +
-                      '<div class="d-flex align-items-center gap-2 justify-content-center">' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
-                      '</div>' +
-                      '</td>' +
-                      '</tr>';
-                  });
-                } else {
-                  html = '<tr><td colspan="8" class="text-center">No Products Found</td></tr>';
-                }
-                $('#viewProductTable tbody').html(html);
-              },
-              error: function (err) {
-                console.error('Product Load Error', err);
-                $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center text-danger">Error loading products</td></tr>');
-              }
-            });
+            if (list.length > 0) {
+              $.each(list, function (k, v) {
+                html += '<tr>' +
+                  '<td>' + (k + 1) + '</td>' +
+                  '<td>' + (v.product_name ?? '-') + '</td>' +
+                  '<td>' + (v.description ?? '-') + '</td>' +
+                  '<td>' + (v.branch_id ?? '-') + '</td>' +
+                  '<td>' + (v.product_type ?? '-') + '</td>' +
+                  '<td>' + (v.amc_start_date ?? '-') + '</td>' +
+                  '<td>' + (v.amc_end_date ?? '-') + '</td>' +
+                  '<td class="text-center">' +
+                  '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
+                  '</div>' +
+                  '</td>' +
+                  '</tr>';
+              });
+            } else {
+              html = '<tr><td colspan="8" class="text-center">No Products Found</td></tr>';
+            }
+            $('#viewProductTable tbody').html(html);
+          },
+          error: function (err) {
+            console.error('Product Load Error', err);
+            $('#viewProductTable tbody').html('<tr><td colspan="8" class="text-center text-danger">Error loading products</td></tr>');
+          }
+        });
       }
 
       // --- Handlers for "Add" Buttons inside View Modal ---
@@ -1585,581 +1556,415 @@
         dropdownParent: $('#editContactModal')
       });
 
-      $(document).on('click', '.viewBranchBtn', function () {
-        var customerId = $(this).data('customer-id');
-        var customerName = $(this).data('customer-name');
-        var customerUuid = $(this).data('customer-uuid');
+      // viewBranchBtn handler removed
 
-        $('#branchCustomerName').text(customerName);
-        $('#addbranchCustomerName').text(customerName);
-        $('#editbranchCustomerName').text(customerName);
 
-        // $('#branchTable tbody').html('');
-        $('#branch_customer_id').val(customerId);
-        $('#branch_customer_uuid').val(customerUuid);
 
-        $('#branchTable tbody').html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
+        $(document).on('click', '.editBranchBtn', function () {
+          var data = $(this).data('data');
+          $('#edit_branch_id').val(data.id);
+          $('#edit_branch_name').val(data.branch_name);
+          $('#edit_contact_person').val(data.contact_person);
+          $('#edit_mobile_no').val(data.mobile_no);
+          $('#edit_email').val(data.email);
+          $('#edit_phone').val(data.phone);
+          $('#edit_fax').val(data.fax);
+          $('#edit_address_line_1').val(data.address_line_1);
+          $('#edit_address_line_2').val(data.address_line_2);
+          $('#edit_pincode').val(data.pincode);
 
-        $.ajax({
-          url: "{{ route('admin.customer.get.customer.branch') }}",
-          type: "POST",
-          data: {
-            customer_id: customerId,
-            _token: "{{ csrf_token() }}"
-          },
-          dataType: "json",
-          success: function (res) {
-            if (res.status == true) {
-              var html = '';
-              var data = res.data;
-              if (data.length > 0) {
-                $.each(data, function (key, val) {
-                  html += '<tr>' +
-                    '<td>' + (key + 1) + '</td>' +
-                    '<td>' + val.branch_name + '</td>' +
-                    '<td>' + (val.contact_person ?? '-') + '</td>' +
-                    '<td>' + (val.mobile_no ?? '-') + '</td>' +
-                    '<td>' + (val.email ?? '-') + '</td>' +
-                    '<td>' + (val.phone ?? '-') + '</td>' +
-                    '<td>' + (val.address_line_1 ?? '-') + '</td>' +
-                    '<td>' + (val.state_name ?? '-') + '</td>' +
-                    '<td>' + (val.city_name ?? '-') + '</td>' +
-                    '<td>' + (val.area_name ?? '-') + '</td>' +
-                    '<td>' + (val.pincode ?? '-') + '</td>' +
-                    '<td>' + (val.created_by ?? '-') + '</td>' +
-                    '<td class="text-center">' +
-                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
-                    '<button type="button" class="btn btn-sm-custom btn-outline-primary editBranchBtn" data-data=\'' + JSON.stringify(val) + '\'><i class="icon-pencil"></i></button>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-                });
-              } else {
-                html += '<tr><td colspan="13" class="text-center">No Branches Found</td></tr>';
-              }
-              $('#branchTable tbody').html(html);
-            }
-          }
+          // Pre-select dropdowns
+          $('#edit_branch_area_id').val(data.area_id).trigger('change');
+
+          // We need to fetch cities for selected area? Or assuming cities are loaded.
+          // For simplicity reusing global lists if available.
+          // NOTE: Ideally we should trigger change on Area to load cities.
+          // However, if we just want to show edit modal quickly, we might need logic here.
+          // For now setting direct values if options exist.
+
+          $('#edit_branch_city_id').val(data.city_id).trigger('change');
+          $('#edit_branch_state_id').val(data.state_id).trigger('change');
+
+          $('#branchModal').modal('hide');
+          $('#editBranchModal').modal('show');
         });
 
-        $('#branchModal').modal('show');
-      });
-
-
-      $(document).on('click', '.editBranchBtn', function () {
-        var data = $(this).data('data');
-        $('#edit_branch_id').val(data.id);
-        $('#edit_branch_name').val(data.branch_name);
-        $('#edit_contact_person').val(data.contact_person);
-        $('#edit_mobile_no').val(data.mobile_no);
-        $('#edit_email').val(data.email);
-        $('#edit_phone').val(data.phone);
-        $('#edit_fax').val(data.fax);
-        $('#edit_address_line_1').val(data.address_line_1);
-        $('#edit_address_line_2').val(data.address_line_2);
-        $('#edit_pincode').val(data.pincode);
-
-        // Pre-select dropdowns
-        $('#edit_branch_area_id').val(data.area_id).trigger('change');
-
-        // We need to fetch cities for selected area? Or assuming cities are loaded.
-        // For simplicity reusing global lists if available.
-        // NOTE: Ideally we should trigger change on Area to load cities.
-        // However, if we just want to show edit modal quickly, we might need logic here.
-        // For now setting direct values if options exist.
-
-        $('#edit_branch_city_id').val(data.city_id).trigger('change');
-        $('#edit_branch_state_id').val(data.state_id).trigger('change');
-
-        $('#branchModal').modal('hide');
-        $('#editBranchModal').modal('show');
-      });
-
-      $('#addBranchBtn').click(function () {
-        $('#branchModal').modal('hide');
-        $('#addBranchModal').modal('show');
-      });
-
-      // Contact Modal
-      var currentCustomerId = '';
-      var currentCustomerUuid = '';
-
-      $(document).on('click', '.viewContactBtn', function () {
-        var customerId = $(this).data('customer-id');
-        var customerUuid = $(this).data('customer-uuid'); // Assuming you have this data attribute, checking line 720 next
-        var customerName = $(this).data('customer-name');
-
-        // Store for Add Contact
-        currentCustomerId = customerId;
-        currentCustomerUuid = customerUuid;
-
-        $('#contactCustomerName').text(customerName);
-        $('#addcontactCustomerName').text(customerName);
-        $('#editcontactCustomerName').text(customerName);
-
-        $('#contact_customer_id').val(customerId);
-        $('#contact_customer_uuid').val(customerUuid);
-
-        $('#contactTable tbody').html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
-
-        $.ajax({
-          url: "{{ route('admin.customer.get.customer.contact') }}",
-          type: "POST",
-          data: {
-            customer_id: customerId,
-            _token: "{{ csrf_token() }}"
-          },
-          dataType: "json",
-          success: function (res) {
-            if (res.status == true) {
-              var html = '';
-              var data = res.data;
-              if (data.length > 0) {
-                $.each(data, function (key, val) {
-                  html += '<tr>' +
-                    '<td>' + (key + 1) + '</td>' +
-                    '<td>' + val.contact_name + '</td>' +
-                    '<td>' + (val.branch_name ?? 'Main Branch') + '</td>' +
-                    '<td>' + (val.department ?? '-') + '</td>' +
-                    '<td>' + (val.designation ?? '-') + '</td>' +
-                    '<td>' + (val.date_of_birth ?? '-') + '</td>' +
-                    '<td>' + (val.mobile_no ?? '-') + '</td>' +
-                    '<td>' + (val.email_id ?? '-') + '</td>' +
-                    '<td>' + (val.created_by ?? '-') + '</td>' +
-                    '<td class="text-center">' +
-                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
-                    '<button type="button" class="btn btn-sm-custom btn-outline-primary editContactBtn" data-data=\'' + JSON.stringify(val) + '\'><i class="icon-pencil"></i></button>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-                });
-              } else {
-                html += '<tr><td colspan="10" class="text-center">No Contacts Found</td></tr>';
-              }
-
-              // Populate Branch Filter
-              var branchOptions = '<option value="">All Branches</option>';
-              // Use a Set to store unique branches
-              var uniqueBranches = new Set();
-              var branchesMap = {};
-
-              $.each(data, function (key, val) {
-                if (val.branch_name) {
-                  if (!uniqueBranches.has(val.branch_name)) {
-                    uniqueBranches.add(val.branch_name);
-                    branchOptions += '<option value="' + val.branch_name + '">' + val.branch_name + '</option>';
-                  }
-                } else {
-                  if (!uniqueBranches.has('Main Branch')) {
-                    uniqueBranches.add('Main Branch');
-                    branchOptions += '<option value="Main Branch">Main Branch</option>';
-                  }
-                }
-              });
-              $('#contactBranchFilter').html(branchOptions);
-
-              $('#contactTable tbody').html(html);
-            }
-          }
+        $('#addBranchBtn').click(function () {
+          $('#branchModal').modal('hide');
+          $('#addBranchModal').modal('show');
         });
 
-        $('#contactModal').modal('show');
+        // Contact Modal
+        var currentCustomerId = '';
+        var currentCustomerUuid = '';
 
-        // Fetch Branches for the dropdowns in Add/Edit Contact
-        $.ajax({
-          url: "{{ route('admin.customer.get.customer.branch') }}",
-          type: "POST",
-          data: {
-            customer_id: customerId,
-            _token: "{{ csrf_token() }}"
-          },
-          dataType: "json",
-          success: function (res) {
-            if (res.status == true) {
-              var options = '<option value="">Select Branch</option>';
-              $.each(res.data, function (key, val) {
-                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
-              });
-              $('#add_contact_branch_id').html(options);
-              $('#edit_contact_branch_id').html(options);
-            }
-          }
+        // viewContactBtn handler removed
+
+
+        // Initialize Select2 for the Branch Filter in the modal
+        $('#contactBranchFilter').select2({
+          placeholder: "All Branches",
+          allowClear: true,
+          dropdownParent: $('#contactModal'),
+          width: '100%'
         });
-      });
 
-      // Initialize Select2 for the Branch Filter in the modal
-      $('#contactBranchFilter').select2({
-        placeholder: "All Branches",
-        allowClear: true,
-        dropdownParent: $('#contactModal'),
-        width: '100%'
-      });
-
-      // Branch Filter Logic
-      $('#contactBranchFilter').off('change').on('change', function () {
-        var selectedBranch = $(this).val().toLowerCase();
-        $('#contactTable tbody tr').filter(function () {
-          $(this).toggle($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(selectedBranch) > -1)
+        // Branch Filter Logic
+        $('#contactBranchFilter').off('change').on('change', function () {
+          var selectedBranch = $(this).val().toLowerCase();
+          $('#contactTable tbody tr').filter(function () {
+            $(this).toggle($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(selectedBranch) > -1)
+          });
         });
-      });
 
-      $('#addContactBtn').click(function () {
-        // Set hidden fields
-        $('#contact_customer_id').val(currentCustomerId);
-        $('#contact_customer_uuid').val(currentCustomerUuid);
+        $('#addContactBtn').click(function () {
+          // Set hidden fields
+          $('#contact_customer_id').val(currentCustomerId);
+          $('#contact_customer_uuid').val(currentCustomerUuid);
 
-        // Reset form and select2
-        $('#addBranchForm')[0].reset();
-        $('#add_contact_branch_id').val('').trigger('change');
+          // Reset form and select2
+          $('#addBranchForm')[0].reset();
+          $('#add_contact_branch_id').val('').trigger('change');
 
-        $('#contactModal').modal('hide');
-        $('#addContactModal').modal('show');
-      });
-
-      $(document).on('click', '.editContactBtn', function () {
-        var data = $(this).data('data');
-        $('#edit_id').val(data.id);
-        $('#edit_contact_name').val(data.contact_name);
-        $('#edit_department').val(data.department);
-        $('#edit_designation').val(data.designation);
-        $('#edit_mobile').val(data.mobile_no);
-        $('#edit_email_id').val(data.email_id);
-        $('#edit_dob').val(data.date_of_birth);
-        $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
-
-        $('#contactModal').modal('hide');
-        $('#editContactModal').modal('show');
-      });
-
-    });
-  </script>
-
-
-  <!-- Product Management JS -->
-  <script>
-    $(document).ready(function () {
-      var prodCustomerId = '';
-      var prodCustomerUuid = '';
-
-      // Helper to load dropdowns
-      function loadProductDropdowns(targetModal) {
-        $.ajax({
-          url: "{{ route('admin.customer.get.product.form.data') }}",
-          type: 'GET',
-          dataType: 'json',
-          success: function (res) {
-            if (res.status) {
-              // Populate AMC Products
-              var amcOpts = '<option value="">Select Product</option>';
-              $.each(res.amc_products, function (k, v) {
-                amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
-              });
-              $(targetModal).find('select[name="amc_product_id"]').html(amcOpts);
-
-              // Populate Engineers
-              var engOpts = '<option value="">Select Engineer</option>';
-              $.each(res.engineers, function (k, v) {
-                engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
-              });
-              $(targetModal).find('select[name="service_engineer_1"]').html(engOpts);
-              $(targetModal).find('select[name="service_engineer_2"]').html(engOpts);
-              // Engineer 3 if needed
-            }
-          }
+          $('#contactModal').modal('hide');
+          $('#addContactModal').modal('show');
         });
-      }
 
-      // Helper to fetch Branches for specific customer
-      function loadCustomerBranches(customerId, targetModal) {
-        $.ajax({
-          url: "{{ route('admin.customer.get.customer.branch') }}",
-          type: "POST",
-          data: {
-            customer_id: customerId,
-            _token: "{{ csrf_token() }}"
-          },
-          dataType: "json",
-          success: function (res) {
-            if (res.status == true) {
-              var options = '<option value="">Select Branch</option>';
-              $.each(res.data, function (key, val) {
-                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
-              });
-              $(targetModal).find('select[name="branch_id"]').html(options);
-            }
-          }
+        $(document).on('click', '.editContactBtn', function () {
+          var data = $(this).data('data');
+          $('#edit_id').val(data.id);
+          $('#edit_contact_name').val(data.contact_name);
+          $('#edit_department').val(data.department);
+          $('#edit_designation').val(data.designation);
+          $('#edit_mobile').val(data.mobile_no);
+          $('#edit_email_id').val(data.email_id);
+          $('#edit_dob').val(data.date_of_birth);
+          $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
+
+          $('#contactModal').modal('hide');
+          $('#editContactModal').modal('show');
         });
-      }
 
-      // 1. View Product List
-      $(document).on('click', '.viewProductBtn', function () {
-        prodCustomerId = $(this).data('customer-id');
-        prodCustomerUuid = $(this).data('customer-uuid');
-        var customerName = $(this).data('customer-name');
-
-        $('#productCustomerName').text(customerName);
-        $('#productTable tbody').html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
-        $('#productModal').modal('show');
-
-        loadProducts(prodCustomerId);
       });
+    </script>
 
-      function loadProducts(customerId) {
-        $.ajax({
-          url: "{{ route('admin.customer.get.products') }}",
-          type: 'POST',
-          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
-          success: function (res) {
-            if (res.status) {
-              var html = '';
-              if (res.data.length > 0) {
-                $.each(res.data, function (k, v) {
-                  html += '<tr>' +
-                    '<td>' + (k + 1) + '</td>' +
-                    '<td>' + (v.product_name ?? '-') + '</td>' + // Joined in service
-                    '<td>' + (v.description ?? '-') + '</td>' +
-                    '<td>' + (v.branch_id ?? '-') + '</td>' + // Ideal: Join branch name
-                    '<td>' + (v.product_type ?? '-') + '</td>' + // Using Type column placeholder
-                    '<td>' +
-                    '<div class="d-flex gap-2">' +
-                    '<button class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
-                    '<button class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-                });
-              } else {
-                html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
-              }
-              $('#productTable tbody').html(html);
-            }
-          }
-        });
-      }
 
-      // 2. Open Add Modal
-      $('#addProductBtn').click(function () {
-        $('#productModal').modal('hide');
-        $('#addProductModal').modal('show');
+    <!-- Product Management JS -->
+    <script>
+      $(document).ready(function () {
+        var prodCustomerId = '';
+        var prodCustomerUuid = '';
 
-        // Set Hidden ID
-        $('#add_product_customer_id').val(prodCustomerId);
-
-        // Reset Form
-        $('#addProductForm')[0].reset();
-        $('.select2').val('').trigger('change');
-
-        // Load Data
-        loadProductDropdowns('#addProductModal');
-        loadCustomerBranches(prodCustomerId, '#addProductModal');
-      });
-
-      // 3. Save Product
-      $('#saveProductBtn').click(function (e) {
-        e.preventDefault();
-        // Validate form? (HTML5 required works if button type submit)
-        // But we are using ajax.
-        // Using basic serialization
-        var formData = $('#addProductForm').serialize();
-        formData += '&_token={{ csrf_token() }}';
-
-        $.ajax({
-          url: "{{ route('admin.customer.add.product') }}",
-          type: 'POST',
-          data: formData,
-          success: function (res) {
-            if (res.status) {
-              // Success
-              $('#addProductModal').modal('hide');
-              $('#productModal').modal('show');
-              loadProducts(prodCustomerId);
-              // Optional: Show toast
-            } else {
-              alert('Error: ' + res.message);
-            }
-          },
-          error: function (err) {
-            console.error(err);
-            alert('An error occurred');
-          }
-        });
-      });
-
-      // 4. Edit Product
-      $(document).on('click', '.editProductBtn', function () {
-        var data = $(this).data('data');
-
-        $('#productModal').modal('hide');
-        $('#editProductModal').modal('show');
-
-        // Load Dropdowns first then set value
-        // We need async handling or just load and set.
-        // For simplicity, calling load then setting values after delay or blindly.
-        // ideally we wait.
-        // Let's load dropdowns and assume they populate. 
-        // Setting values in Select2 requires option to exist.
-
-        // Trigger Load
-        loadProductDropdowns('#editProductModal');
-        loadCustomerBranches(prodCustomerId, '#editProductModal');
-
-        // Set Values
-        $('#edit_product_id').val(data.id);
-        $('#edit_prod_quantity').val(data.quantity);
-        $('#edit_prod_type').val(data.product_type);
-        $('#edit_prod_category').val(data.product_category);
-        $('#edit_prod_department').val(data.department);
-        $('#edit_prod_description').val(data.description);
-        $('#edit_prod_user_name').val(data.user_name);
-        $('#edit_prod_amc_start').val(data.amc_start_date);
-        $('#edit_prod_amc_end').val(data.amc_end_date);
-        $('#edit_prod_sdate_1').val(data.service_date_1);
-        $('#edit_prod_sdate_2').val(data.service_date_2);
-
-        // Select2 Values - Need a timeout or callback if data loading is async
-        // Helper function is async ajax.
-        // Quick fix: Set timeout
-        setTimeout(function () {
-          $('#edit_prod_branch_id').val(data.branch_id).trigger('change');
-          $('#edit_prod_amc_product_id').val(data.amc_product_id).trigger('change');
-          $('#edit_prod_eng_1').val(data.service_engineer_1).trigger('change');
-          $('#edit_prod_eng_2').val(data.service_engineer_2).trigger('change');
-        }, 1000);
-      });
-
-      // 5. Update Product
-      $('#updateProductBtn').click(function (e) {
-        e.preventDefault();
-        var formData = $('#editProductForm').serialize();
-        formData += '&_token={{ csrf_token() }}';
-
-        $.ajax({
-          url: "{{ route('admin.customer.edit.product') }}",
-          type: 'POST',
-          data: formData,
-          success: function (res) {
-            if (res.status) {
-              $('#editProductModal').modal('hide');
-              
-              // Refresh View Product Table if View Modal is open
-              if($('#viewCustomerModal').hasClass('show')){
-                 var custId = $('#viewCustomerModal').data('id');
-                 loadViewProducts(custId);
-              } else {
-                 $('#productModal').modal('show');
-                 loadProducts(prodCustomerId);
-              }
-            } else {
-              alert('Error: ' + res.message);
-            }
-          }
-        });
-      });
-
-      // 6. Delete Product
-      $(document).on('click', '.deleteProductBtn', function () {
-        if (confirm('Are you sure you want to delete this product?')) {
-          var uuid = $(this).data('uuid');
+        // Helper to load dropdowns
+        function loadProductDropdowns(targetModal) {
           $.ajax({
-            url: "{{ route('admin.customer.delete.product') }}",
-            type: 'POST',
-            data: { uuid: uuid, _token: "{{ csrf_token() }}" },
+            url: "{{ route('admin.customer.get.product.form.data') }}",
+            type: 'GET',
+            dataType: 'json',
             success: function (res) {
               if (res.status) {
-                 if($('#viewCustomerModal').hasClass('show')){
-                     var custId = $('#viewCustomerModal').data('id');
-                     loadViewProducts(custId);
-                 } else {
-                     loadProducts(prodCustomerId);
-                 }
+                // Populate AMC Products
+                var amcOpts = '<option value="">Select Product</option>';
+                $.each(res.amc_products, function (k, v) {
+                  amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
+                });
+                $(targetModal).find('select[name="amc_product_id"]').html(amcOpts);
+
+                // Populate Engineers
+                var engOpts = '<option value="">Select Engineer</option>';
+                $.each(res.engineers, function (k, v) {
+                  engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
+                });
+                $(targetModal).find('select[name="service_engineer_1"]').html(engOpts);
+                $(targetModal).find('select[name="service_engineer_2"]').html(engOpts);
+                // Engineer 3 if needed
+              }
+            }
+          });
+        }
+
+        // Helper to fetch Branches for specific customer
+        function loadCustomerBranches(customerId, targetModal) {
+          $.ajax({
+            url: "{{ route('admin.customer.get.customer.branch') }}",
+            type: "POST",
+            data: {
+              customer_id: customerId,
+              _token: "{{ csrf_token() }}"
+            },
+            dataType: "json",
+            success: function (res) {
+              if (res.status == true) {
+                var options = '<option value="">Select Branch</option>';
+                $.each(res.data, function (key, val) {
+                  options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
+                });
+                $(targetModal).find('select[name="branch_id"]').html(options);
+              }
+            }
+          });
+        }
+
+        // 1. View Product List
+        // viewProductBtn handler removed
+
+
+        function loadProducts(customerId) {
+          $.ajax({
+            url: "{{ route('admin.customer.get.products') }}",
+            type: 'POST',
+            data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+            success: function (res) {
+              if (res.status) {
+                var html = '';
+                if (res.data.length > 0) {
+                  $.each(res.data, function (k, v) {
+                    html += '<tr>' +
+                      '<td>' + (k + 1) + '</td>' +
+                      '<td>' + (v.product_name ?? '-') + '</td>' + // Joined in service
+                      '<td>' + (v.description ?? '-') + '</td>' +
+                      '<td>' + (v.branch_id ?? '-') + '</td>' + // Ideal: Join branch name
+                      '<td>' + (v.product_type ?? '-') + '</td>' + // Using Type column placeholder
+                      '<td>' +
+                      '<div class="d-flex gap-2">' +
+                      '<button class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                      '<button class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
+                      '</div>' +
+                      '</td>' +
+                      '</tr>';
+                  });
+                } else {
+                  html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
+                }
+                $('#productTable tbody').html(html);
+              }
+            }
+          });
+        }
+
+        // 2. Open Add Modal
+        $('#addProductBtn').click(function () {
+          $('#productModal').modal('hide');
+          $('#addProductModal').modal('show');
+
+          // Set Hidden ID
+          $('#add_product_customer_id').val(prodCustomerId);
+
+          // Reset Form
+          $('#addProductForm')[0].reset();
+          $('.select2').val('').trigger('change');
+
+          // Load Data
+          loadProductDropdowns('#addProductModal');
+          loadCustomerBranches(prodCustomerId, '#addProductModal');
+        });
+
+        // 3. Save Product
+        $('#saveProductBtn').click(function (e) {
+          e.preventDefault();
+          // Validate form? (HTML5 required works if button type submit)
+          // But we are using ajax.
+          // Using basic serialization
+          var formData = $('#addProductForm').serialize();
+          formData += '&_token={{ csrf_token() }}';
+
+          $.ajax({
+            url: "{{ route('admin.customer.add.product') }}",
+            type: 'POST',
+            data: formData,
+            success: function (res) {
+              if (res.status) {
+                // Success
+                $('#addProductModal').modal('hide');
+                $('#productModal').modal('show');
+                loadProducts(prodCustomerId);
+                // Optional: Show toast
+              } else {
+                alert('Error: ' + res.message);
+              }
+            },
+            error: function (err) {
+              console.error(err);
+              alert('An error occurred');
+            }
+          });
+        });
+
+        // 4. Edit Product
+        $(document).on('click', '.editProductBtn', function () {
+          var data = $(this).data('data');
+
+          $('#productModal').modal('hide');
+          $('#editProductModal').modal('show');
+
+          // Load Dropdowns first then set value
+          // We need async handling or just load and set.
+          // For simplicity, calling load then setting values after delay or blindly.
+          // ideally we wait.
+          // Let's load dropdowns and assume they populate. 
+          // Setting values in Select2 requires option to exist.
+
+          // Trigger Load
+          loadProductDropdowns('#editProductModal');
+          loadCustomerBranches(prodCustomerId, '#editProductModal');
+
+          // Set Values
+          $('#edit_product_id').val(data.id);
+          $('#edit_prod_quantity').val(data.quantity);
+          $('#edit_prod_type').val(data.product_type);
+          $('#edit_prod_category').val(data.product_category);
+          $('#edit_prod_department').val(data.department);
+          $('#edit_prod_description').val(data.description);
+          $('#edit_prod_user_name').val(data.user_name);
+          $('#edit_prod_amc_start').val(data.amc_start_date);
+          $('#edit_prod_amc_end').val(data.amc_end_date);
+          $('#edit_prod_sdate_1').val(data.service_date_1);
+          $('#edit_prod_sdate_2').val(data.service_date_2);
+
+          // Select2 Values - Need a timeout or callback if data loading is async
+          // Helper function is async ajax.
+          // Quick fix: Set timeout
+          setTimeout(function () {
+            $('#edit_prod_branch_id').val(data.branch_id).trigger('change');
+            $('#edit_prod_amc_product_id').val(data.amc_product_id).trigger('change');
+            $('#edit_prod_eng_1').val(data.service_engineer_1).trigger('change');
+            $('#edit_prod_eng_2').val(data.service_engineer_2).trigger('change');
+          }, 1000);
+        });
+
+        // 5. Update Product
+        $('#updateProductBtn').click(function (e) {
+          e.preventDefault();
+          var formData = $('#editProductForm').serialize();
+          formData += '&_token={{ csrf_token() }}';
+
+          $.ajax({
+            url: "{{ route('admin.customer.edit.product') }}",
+            type: 'POST',
+            data: formData,
+            success: function (res) {
+              if (res.status) {
+                $('#editProductModal').modal('hide');
+
+                // Refresh View Product Table if View Modal is open
+                if ($('#viewCustomerModal').hasClass('show')) {
+                  var custId = $('#viewCustomerModal').data('id');
+                  loadViewProducts(custId);
+                } else {
+                  $('#productModal').modal('show');
+                  loadProducts(prodCustomerId);
+                }
               } else {
                 alert('Error: ' + res.message);
               }
             }
           });
-        }
-      });
+        });
 
-
-      // Initialize Select2 in new modals
-      $('#addProductModal .select2').select2({
-        dropdownParent: $('#addProductModal')
-      });
-      $('#editProductModal .select2').select2({
-        dropdownParent: $('#editProductModal')
-      });
-
-      // --- Location AJAX for Branch Modal ---
-      $('#branch_area_id').on('change', function () {
-        var areaID = $(this).val();
-        if (areaID) {
-          fetchCityState(areaID, '#branch_city_id', '#branch_state_id');
-        }
-      });
-
-      function fetchCityState(areaID, citySelector, stateSelector) {
-        $.ajax({
-          url: "{{ route('admin.customer.area.city') }}",
-          type: "POST",
-          data: { areaID: areaID, _token: "{{ csrf_token() }}" },
-          dataType: "json",
-          success: function (res) {
-            if (res.status) {
-              $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
-              $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
-            }
+        // 6. Delete Product
+        $(document).on('click', '.deleteProductBtn', function () {
+          if (confirm('Are you sure you want to delete this product?')) {
+            var uuid = $(this).data('uuid');
+            $.ajax({
+              url: "{{ route('admin.customer.delete.product') }}",
+              type: 'POST',
+              data: { uuid: uuid, _token: "{{ csrf_token() }}" },
+              success: function (res) {
+                if (res.status) {
+                  if ($('#viewCustomerModal').hasClass('show')) {
+                    var custId = $('#viewCustomerModal').data('id');
+                    loadViewProducts(custId);
+                  } else {
+                    loadProducts(prodCustomerId);
+                  }
+                } else {
+                  alert('Error: ' + res.message);
+                }
+              }
+            });
           }
         });
-      }
 
-      // --- Service Date Logic (From Add Customer) ---
-      // Auto-calculate Service Dates
-      $('input[name="amc_start_date"]').on('change', function () {
-        var startDate = $(this).val();
-        if (!startDate) return;
 
-        var date = new Date(startDate);
+        // Initialize Select2 in new modals
+        $('#addProductModal .select2').select2({
+          dropdownParent: $('#addProductModal')
+        });
+        $('#editProductModal .select2').select2({
+          dropdownParent: $('#editProductModal')
+        });
 
-        // Service Date 1: +4 months
-        date.setMonth(date.getMonth() + 4);
-        var sd1 = date.toISOString().split('T')[0];
-        $('input[name="service_date_1"]').val(sd1).trigger('change');
+        // --- Location AJAX for Branch Modal ---
+        $('#branch_area_id').on('change', function () {
+          var areaID = $(this).val();
+          if (areaID) {
+            fetchCityState(areaID, '#branch_city_id', '#branch_state_id');
+          }
+        });
 
-        // Service Date 2: +4 months from SD1 (total +8)
-        date.setMonth(date.getMonth() + 4);
-        var sd2 = date.toISOString().split('T')[0];
-        $('input[name="service_date_2"]').val(sd2).trigger('change');
-
-        // Service Date 3: +4 months from SD2 (total +12)
-        date.setMonth(date.getMonth() + 4);
-        var sd3 = date.toISOString().split('T')[0];
-        $('input[name="service_date_3"]').val(sd3).trigger('change');
-      });
-
-      // Sequential Enabling Logic
-      $('input[name="service_date_1"]').on('change keyup', function () {
-        let val = $(this).val();
-        let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
-        if (val) {
-          inputs2.prop('disabled', false);
-        } else {
-          inputs2.prop('disabled', true).val('');
+        function fetchCityState(areaID, citySelector, stateSelector) {
+          $.ajax({
+            url: "{{ route('admin.customer.area.city') }}",
+            type: "POST",
+            data: { areaID: areaID, _token: "{{ csrf_token() }}" },
+            dataType: "json",
+            success: function (res) {
+              if (res.status) {
+                $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
+                $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
+              }
+            }
+          });
         }
-        // Trigger change on dependent
-        $('input[name="service_date_2"]').trigger('change');
-      });
 
-      $('input[name="service_date_2"]').on('change keyup', function () {
-        let val = $(this).val();
-        let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
-        if (val) {
-          inputs3.prop('disabled', false);
-        } else {
-          inputs3.prop('disabled', true).val('');
-        }
-      });
+        // --- Service Date Logic (From Add Customer) ---
+        // Auto-calculate Service Dates
+        $('input[name="amc_start_date"]').on('change', function () {
+          var startDate = $(this).val();
+          if (!startDate) return;
 
-    });
-  </script>
+          var date = new Date(startDate);
+
+          // Service Date 1: +4 months
+          date.setMonth(date.getMonth() + 4);
+          var sd1 = date.toISOString().split('T')[0];
+          $('input[name="service_date_1"]').val(sd1).trigger('change');
+
+          // Service Date 2: +4 months from SD1 (total +8)
+          date.setMonth(date.getMonth() + 4);
+          var sd2 = date.toISOString().split('T')[0];
+          $('input[name="service_date_2"]').val(sd2).trigger('change');
+
+          // Service Date 3: +4 months from SD2 (total +12)
+          date.setMonth(date.getMonth() + 4);
+          var sd3 = date.toISOString().split('T')[0];
+          $('input[name="service_date_3"]').val(sd3).trigger('change');
+        });
+
+        // Sequential Enabling Logic
+        $('input[name="service_date_1"]').on('change keyup', function () {
+          let val = $(this).val();
+          let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
+          if (val) {
+            inputs2.prop('disabled', false);
+          } else {
+            inputs2.prop('disabled', true).val('');
+          }
+          // Trigger change on dependent
+          $('input[name="service_date_2"]').trigger('change');
+        });
+
+        $('input[name="service_date_2"]').on('change keyup', function () {
+          let val = $(this).val();
+          let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
+          if (val) {
+            inputs3.prop('disabled', false);
+          } else {
+            inputs3.prop('disabled', true).val('');
+          }
+        });
+
+      });
+    </script>
 
 @endpush
