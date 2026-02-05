@@ -57,7 +57,7 @@
 
                         <div class="d-flex justify-content-center align-items-center gap-2">
 
-                          <a href="javascript:void(0)" class="viewCustomer btn btn-sm-custom btn-outline-primary"
+                          <a href="javascript:void(0)" class="viewCustomer btn btn-sm-custom btn-primary"
                             data-id="{{ $customers->id }}" data-uuid="{{ $customers->uuid }}"
                             data-company_name="{{ $customers->company_name }}"
                             data-customer_code="{{ $customers->customer_code }}"
@@ -80,12 +80,12 @@
                           </a>
 
                           <a href="{{ route('admin.customer.edit', ['uuid' => $customers->uuid]) }}"
-                            class="btn btn-sm-custom btn-outline-warning" data-bs-toggle="tooltip" title="Edit">
+                            class="btn btn-sm-custom btn-warning" data-bs-toggle="tooltip" title="Edit">
                             <i class="icon-pencil-alt"></i>
                           </a>
 
                           <a href="{{ route('admin.customer.delete', ['uuid' => $customers->uuid]) }}"
-                            class="btn btn-sm-custom btn-outline-danger"
+                            class="btn btn-sm-custom btn-danger"
                             onclick="return confirm('Are you sure you want to delete this record?');"
                             data-bs-toggle="tooltip" title="Delete">
                             <i class="icon-trash"></i>
@@ -1560,298 +1560,321 @@
 
 
 
-        $(document).on('click', '.editBranchBtn', function () {
-          var data = $(this).data('data');
-          $('#edit_branch_id').val(data.id);
-          $('#edit_branch_name').val(data.branch_name);
-          $('#edit_contact_person').val(data.contact_person);
-          $('#edit_mobile_no').val(data.mobile_no);
-          $('#edit_email').val(data.email);
-          $('#edit_phone').val(data.phone);
-          $('#edit_fax').val(data.fax);
-          $('#edit_address_line_1').val(data.address_line_1);
-          $('#edit_address_line_2').val(data.address_line_2);
-          $('#edit_pincode').val(data.pincode);
+      $(document).on('click', '.editBranchBtn', function () {
+        var data = $(this).data('data');
+        $('#edit_branch_id').val(data.id);
+        $('#edit_branch_name').val(data.branch_name);
+        $('#edit_contact_person').val(data.contact_person);
+        $('#edit_mobile_no').val(data.mobile_no);
+        $('#edit_email').val(data.email);
+        $('#edit_phone').val(data.phone);
+        $('#edit_fax').val(data.fax);
+        $('#edit_address_line_1').val(data.address_line_1);
+        $('#edit_address_line_2').val(data.address_line_2);
+        $('#edit_pincode').val(data.pincode);
 
-          // Pre-select dropdowns
-          $('#edit_branch_area_id').val(data.area_id).trigger('change');
+        // Pre-select dropdowns
+        $('#edit_branch_area_id').val(data.area_id).trigger('change');
 
-          // We need to fetch cities for selected area? Or assuming cities are loaded.
-          // For simplicity reusing global lists if available.
-          // NOTE: Ideally we should trigger change on Area to load cities.
-          // However, if we just want to show edit modal quickly, we might need logic here.
-          // For now setting direct values if options exist.
+        // We need to fetch cities for selected area? Or assuming cities are loaded.
+        // For simplicity reusing global lists if available.
+        // NOTE: Ideally we should trigger change on Area to load cities.
+        // However, if we just want to show edit modal quickly, we might need logic here.
+        // For now setting direct values if options exist.
 
-          $('#edit_branch_city_id').val(data.city_id).trigger('change');
-          $('#edit_branch_state_id').val(data.state_id).trigger('change');
+        $('#edit_branch_city_id').val(data.city_id).trigger('change');
+        $('#edit_branch_state_id').val(data.state_id).trigger('change');
 
-          $('#branchModal').modal('hide');
-          $('#editBranchModal').modal('show');
-        });
-
-        $('#addBranchBtn').click(function () {
-          $('#branchModal').modal('hide');
-          $('#addBranchModal').modal('show');
-        });
-
-        // Contact Modal
-        var currentCustomerId = '';
-        var currentCustomerUuid = '';
-
-        // viewContactBtn handler removed
-
-
-        // Initialize Select2 for the Branch Filter in the modal
-        $('#contactBranchFilter').select2({
-          placeholder: "All Branches",
-          allowClear: true,
-          dropdownParent: $('#contactModal'),
-          width: '100%'
-        });
-
-        // Branch Filter Logic
-        $('#contactBranchFilter').off('change').on('change', function () {
-          var selectedBranch = $(this).val().toLowerCase();
-          $('#contactTable tbody tr').filter(function () {
-            $(this).toggle($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(selectedBranch) > -1)
-          });
-        });
-
-        $('#addContactBtn').click(function () {
-          // Set hidden fields
-          $('#contact_customer_id').val(currentCustomerId);
-          $('#contact_customer_uuid').val(currentCustomerUuid);
-
-          // Reset form and select2
-          $('#addBranchForm')[0].reset();
-          $('#add_contact_branch_id').val('').trigger('change');
-
-          $('#contactModal').modal('hide');
-          $('#addContactModal').modal('show');
-        });
-
-        $(document).on('click', '.editContactBtn', function () {
-          var data = $(this).data('data');
-          $('#edit_id').val(data.id);
-          $('#edit_contact_name').val(data.contact_name);
-          $('#edit_department').val(data.department);
-          $('#edit_designation').val(data.designation);
-          $('#edit_mobile').val(data.mobile_no);
-          $('#edit_email_id').val(data.email_id);
-          $('#edit_dob').val(data.date_of_birth);
-          $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
-
-          $('#contactModal').modal('hide');
-          $('#editContactModal').modal('show');
-        });
-
+        $('#branchModal').modal('hide');
+        $('#editBranchModal').modal('show');
       });
-    </script>
+
+      $('#addBranchBtn').click(function () {
+        $('#branchModal').modal('hide');
+        $('#addBranchModal').modal('show');
+      });
+
+      // Contact Modal
+      var currentCustomerId = '';
+      var currentCustomerUuid = '';
+
+      // viewContactBtn handler removed
 
 
-    <!-- Product Management JS -->
-    <script>
-      $(document).ready(function () {
-        var prodCustomerId = '';
-        var prodCustomerUuid = '';
+      // Initialize Select2 for the Branch Filter in the modal
+      $('#contactBranchFilter').select2({
+        placeholder: "All Branches",
+        allowClear: true,
+        dropdownParent: $('#contactModal'),
+        width: '100%'
+      });
 
-        // Helper to load dropdowns
-        function loadProductDropdowns(targetModal) {
-          $.ajax({
-            url: "{{ route('admin.customer.get.product.form.data') }}",
-            type: 'GET',
-            dataType: 'json',
-            success: function (res) {
-              if (res.status) {
-                // Populate AMC Products
-                var amcOpts = '<option value="">Select Product</option>';
-                $.each(res.amc_products, function (k, v) {
-                  amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
-                });
-                $(targetModal).find('select[name="amc_product_id"]').html(amcOpts);
-
-                // Populate Engineers
-                var engOpts = '<option value="">Select Engineer</option>';
-                $.each(res.engineers, function (k, v) {
-                  engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
-                });
-                $(targetModal).find('select[name="service_engineer_1"]').html(engOpts);
-                $(targetModal).find('select[name="service_engineer_2"]').html(engOpts);
-                // Engineer 3 if needed
-              }
-            }
-          });
-        }
-
-        // Helper to fetch Branches for specific customer
-        function loadCustomerBranches(customerId, targetModal) {
-          $.ajax({
-            url: "{{ route('admin.customer.get.customer.branch') }}",
-            type: "POST",
-            data: {
-              customer_id: customerId,
-              _token: "{{ csrf_token() }}"
-            },
-            dataType: "json",
-            success: function (res) {
-              if (res.status == true) {
-                var options = '<option value="">Select Branch</option>';
-                $.each(res.data, function (key, val) {
-                  options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
-                });
-                $(targetModal).find('select[name="branch_id"]').html(options);
-              }
-            }
-          });
-        }
-
-        // 1. View Product List
-        // viewProductBtn handler removed
-
-
-        function loadProducts(customerId) {
-          $.ajax({
-            url: "{{ route('admin.customer.get.products') }}",
-            type: 'POST',
-            data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
-            success: function (res) {
-              if (res.status) {
-                var html = '';
-                if (res.data.length > 0) {
-                  $.each(res.data, function (k, v) {
-                    html += '<tr>' +
-                      '<td>' + (k + 1) + '</td>' +
-                      '<td>' + (v.product_name ?? '-') + '</td>' + // Joined in service
-                      '<td>' + (v.description ?? '-') + '</td>' +
-                      '<td>' + (v.branch_id ?? '-') + '</td>' + // Ideal: Join branch name
-                      '<td>' + (v.product_type ?? '-') + '</td>' + // Using Type column placeholder
-                      '<td>' +
-                      '<div class="d-flex gap-2">' +
-                      '<button class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
-                      '<button class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
-                      '</div>' +
-                      '</td>' +
-                      '</tr>';
-                  });
-                } else {
-                  html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
-                }
-                $('#productTable tbody').html(html);
-              }
-            }
-          });
-        }
-
-        // 2. Open Add Modal
-        $('#addProductBtn').click(function () {
-          $('#productModal').modal('hide');
-          $('#addProductModal').modal('show');
-
-          // Set Hidden ID
-          $('#add_product_customer_id').val(prodCustomerId);
-
-          // Reset Form
-          $('#addProductForm')[0].reset();
-          $('.select2').val('').trigger('change');
-
-          // Load Data
-          loadProductDropdowns('#addProductModal');
-          loadCustomerBranches(prodCustomerId, '#addProductModal');
+      // Branch Filter Logic
+      $('#contactBranchFilter').off('change').on('change', function () {
+        var selectedBranch = $(this).val().toLowerCase();
+        $('#contactTable tbody tr').filter(function () {
+          $(this).toggle($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(selectedBranch) > -1)
         });
+      });
 
-        // 3. Save Product
-        $('#saveProductBtn').click(function (e) {
-          e.preventDefault();
-          // Validate form? (HTML5 required works if button type submit)
-          // But we are using ajax.
-          // Using basic serialization
-          var formData = $('#addProductForm').serialize();
-          formData += '&_token={{ csrf_token() }}';
+      $('#addContactBtn').click(function () {
+        // Set hidden fields
+        $('#contact_customer_id').val(currentCustomerId);
+        $('#contact_customer_uuid').val(currentCustomerUuid);
 
-          $.ajax({
-            url: "{{ route('admin.customer.add.product') }}",
-            type: 'POST',
-            data: formData,
-            success: function (res) {
-              if (res.status) {
-                // Success
-                $('#addProductModal').modal('hide');
+        // Reset form and select2
+        $('#addBranchForm')[0].reset();
+        $('#add_contact_branch_id').val('').trigger('change');
+
+        $('#contactModal').modal('hide');
+        $('#addContactModal').modal('show');
+      });
+
+      $(document).on('click', '.editContactBtn', function () {
+        var data = $(this).data('data');
+        $('#edit_id').val(data.id);
+        $('#edit_contact_name').val(data.contact_name);
+        $('#edit_department').val(data.department);
+        $('#edit_designation').val(data.designation);
+        $('#edit_mobile').val(data.mobile_no);
+        $('#edit_email_id').val(data.email_id);
+        $('#edit_dob').val(data.date_of_birth);
+        $('#edit_contact_branch_id').val(data.branch_id).trigger('change');
+
+        $('#contactModal').modal('hide');
+        $('#editContactModal').modal('show');
+      });
+
+    });
+  </script>
+
+
+  <!-- Product Management JS -->
+  <script>
+    $(document).ready(function () {
+      var prodCustomerId = '';
+      var prodCustomerUuid = '';
+
+      // Helper to load dropdowns
+      function loadProductDropdowns(targetModal) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.product.form.data') }}",
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              // Populate AMC Products
+              var amcOpts = '<option value="">Select Product</option>';
+              $.each(res.amc_products, function (k, v) {
+                amcOpts += '<option value="' + v.id + '">' + v.amc_product + '</option>';
+              });
+              $(targetModal).find('select[name="amc_product_id"]').html(amcOpts);
+
+              // Populate Engineers
+              var engOpts = '<option value="">Select Engineer</option>';
+              $.each(res.engineers, function (k, v) {
+                engOpts += '<option value="' + v.id + '">' + v.name + '</option>';
+              });
+              $(targetModal).find('select[name="service_engineer_1"]').html(engOpts);
+              $(targetModal).find('select[name="service_engineer_2"]').html(engOpts);
+              // Engineer 3 if needed
+            }
+          }
+        });
+      }
+
+      // Helper to fetch Branches for specific customer
+      function loadCustomerBranches(customerId, targetModal) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.customer.branch') }}",
+          type: "POST",
+          data: {
+            customer_id: customerId,
+            _token: "{{ csrf_token() }}"
+          },
+          dataType: "json",
+          success: function (res) {
+            if (res.status == true) {
+              var options = '<option value="">Select Branch</option>';
+              $.each(res.data, function (key, val) {
+                options += '<option value="' + val.id + '">' + val.branch_name + '</option>';
+              });
+              $(targetModal).find('select[name="branch_id"]').html(options);
+            }
+          }
+        });
+      }
+
+      // 1. View Product List
+      // viewProductBtn handler removed
+
+
+      function loadProducts(customerId) {
+        $.ajax({
+          url: "{{ route('admin.customer.get.products') }}",
+          type: 'POST',
+          data: { customer_id: customerId, _token: "{{ csrf_token() }}" },
+          success: function (res) {
+            if (res.status) {
+              var html = '';
+              if (res.data.length > 0) {
+                $.each(res.data, function (k, v) {
+                  html += '<tr>' +
+                    '<td>' + (k + 1) + '</td>' +
+                    '<td>' + (v.product_name ?? '-') + '</td>' + // Joined in service
+                    '<td>' + (v.description ?? '-') + '</td>' +
+                    '<td>' + (v.branch_id ?? '-') + '</td>' + // Ideal: Join branch name
+                    '<td>' + (v.product_type ?? '-') + '</td>' + // Using Type column placeholder
+                    '<td>' +
+                    '<div class="d-flex gap-2">' +
+                    '<button class="btn btn-sm-custom btn-outline-primary editProductBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                    '<button class="btn btn-sm-custom btn-outline-danger deleteProductBtn" data-uuid="' + v.uuid + '"><i class="icon-trash"></i></button>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>';
+                });
+              } else {
+                html = '<tr><td colspan="7" class="text-center">No Products Found</td></tr>';
+              }
+              $('#productTable tbody').html(html);
+            }
+          }
+        });
+      }
+
+      // 2. Open Add Modal
+      $('#addProductBtn').click(function () {
+        $('#productModal').modal('hide');
+        $('#addProductModal').modal('show');
+
+        // Set Hidden ID
+        $('#add_product_customer_id').val(prodCustomerId);
+
+        // Reset Form
+        $('#addProductForm')[0].reset();
+        $('.select2').val('').trigger('change');
+
+        // Load Data
+        loadProductDropdowns('#addProductModal');
+        loadCustomerBranches(prodCustomerId, '#addProductModal');
+      });
+
+      // 3. Save Product
+      $('#saveProductBtn').click(function (e) {
+        e.preventDefault();
+        // Validate form? (HTML5 required works if button type submit)
+        // But we are using ajax.
+        // Using basic serialization
+        var formData = $('#addProductForm').serialize();
+        formData += '&_token={{ csrf_token() }}';
+
+        $.ajax({
+          url: "{{ route('admin.customer.add.product') }}",
+          type: 'POST',
+          data: formData,
+          success: function (res) {
+            if (res.status) {
+              // Success
+              $('#addProductModal').modal('hide');
+              $('#productModal').modal('show');
+              loadProducts(prodCustomerId);
+              // Optional: Show toast
+            } else {
+              alert('Error: ' + res.message);
+            }
+          },
+          error: function (err) {
+            console.error(err);
+            alert('An error occurred');
+          }
+        });
+      });
+
+      // 4. Edit Product
+      $(document).on('click', '.editProductBtn', function () {
+        var data = $(this).data('data');
+
+        $('#productModal').modal('hide');
+        $('#editProductModal').modal('show');
+
+        // Load Dropdowns first then set value
+        // We need async handling or just load and set.
+        // For simplicity, calling load then setting values after delay or blindly.
+        // ideally we wait.
+        // Let's load dropdowns and assume they populate. 
+        // Setting values in Select2 requires option to exist.
+
+        // Trigger Load
+        loadProductDropdowns('#editProductModal');
+        loadCustomerBranches(prodCustomerId, '#editProductModal');
+
+        // Set Values
+        $('#edit_product_id').val(data.id);
+        $('#edit_prod_quantity').val(data.quantity);
+        $('#edit_prod_type').val(data.product_type);
+        $('#edit_prod_category').val(data.product_category);
+        $('#edit_prod_department').val(data.department);
+        $('#edit_prod_description').val(data.description);
+        $('#edit_prod_user_name').val(data.user_name);
+        $('#edit_prod_amc_start').val(data.amc_start_date);
+        $('#edit_prod_amc_end').val(data.amc_end_date);
+        $('#edit_prod_sdate_1').val(data.service_date_1);
+        $('#edit_prod_sdate_2').val(data.service_date_2);
+
+        // Select2 Values - Need a timeout or callback if data loading is async
+        // Helper function is async ajax.
+        // Quick fix: Set timeout
+        setTimeout(function () {
+          $('#edit_prod_branch_id').val(data.branch_id).trigger('change');
+          $('#edit_prod_amc_product_id').val(data.amc_product_id).trigger('change');
+          $('#edit_prod_eng_1').val(data.service_engineer_1).trigger('change');
+          $('#edit_prod_eng_2').val(data.service_engineer_2).trigger('change');
+        }, 1000);
+      });
+
+      // 5. Update Product
+      $('#updateProductBtn').click(function (e) {
+        e.preventDefault();
+        var formData = $('#editProductForm').serialize();
+        formData += '&_token={{ csrf_token() }}';
+
+        $.ajax({
+          url: "{{ route('admin.customer.edit.product') }}",
+          type: 'POST',
+          data: formData,
+          success: function (res) {
+            if (res.status) {
+              $('#editProductModal').modal('hide');
+
+              // Refresh View Product Table if View Modal is open
+              if ($('#viewCustomerModal').hasClass('show')) {
+                var custId = $('#viewCustomerModal').data('id');
+                loadViewProducts(custId);
+              } else {
                 $('#productModal').modal('show');
                 loadProducts(prodCustomerId);
-                // Optional: Show toast
-              } else {
-                alert('Error: ' + res.message);
               }
-            },
-            error: function (err) {
-              console.error(err);
-              alert('An error occurred');
+            } else {
+              alert('Error: ' + res.message);
             }
-          });
+          }
         });
+      });
 
-        // 4. Edit Product
-        $(document).on('click', '.editProductBtn', function () {
-          var data = $(this).data('data');
-
-          $('#productModal').modal('hide');
-          $('#editProductModal').modal('show');
-
-          // Load Dropdowns first then set value
-          // We need async handling or just load and set.
-          // For simplicity, calling load then setting values after delay or blindly.
-          // ideally we wait.
-          // Let's load dropdowns and assume they populate. 
-          // Setting values in Select2 requires option to exist.
-
-          // Trigger Load
-          loadProductDropdowns('#editProductModal');
-          loadCustomerBranches(prodCustomerId, '#editProductModal');
-
-          // Set Values
-          $('#edit_product_id').val(data.id);
-          $('#edit_prod_quantity').val(data.quantity);
-          $('#edit_prod_type').val(data.product_type);
-          $('#edit_prod_category').val(data.product_category);
-          $('#edit_prod_department').val(data.department);
-          $('#edit_prod_description').val(data.description);
-          $('#edit_prod_user_name').val(data.user_name);
-          $('#edit_prod_amc_start').val(data.amc_start_date);
-          $('#edit_prod_amc_end').val(data.amc_end_date);
-          $('#edit_prod_sdate_1').val(data.service_date_1);
-          $('#edit_prod_sdate_2').val(data.service_date_2);
-
-          // Select2 Values - Need a timeout or callback if data loading is async
-          // Helper function is async ajax.
-          // Quick fix: Set timeout
-          setTimeout(function () {
-            $('#edit_prod_branch_id').val(data.branch_id).trigger('change');
-            $('#edit_prod_amc_product_id').val(data.amc_product_id).trigger('change');
-            $('#edit_prod_eng_1').val(data.service_engineer_1).trigger('change');
-            $('#edit_prod_eng_2').val(data.service_engineer_2).trigger('change');
-          }, 1000);
-        });
-
-        // 5. Update Product
-        $('#updateProductBtn').click(function (e) {
-          e.preventDefault();
-          var formData = $('#editProductForm').serialize();
-          formData += '&_token={{ csrf_token() }}';
-
+      // 6. Delete Product
+      $(document).on('click', '.deleteProductBtn', function () {
+        if (confirm('Are you sure you want to delete this product?')) {
+          var uuid = $(this).data('uuid');
           $.ajax({
-            url: "{{ route('admin.customer.edit.product') }}",
+            url: "{{ route('admin.customer.delete.product') }}",
             type: 'POST',
-            data: formData,
+            data: { uuid: uuid, _token: "{{ csrf_token() }}" },
             success: function (res) {
               if (res.status) {
-                $('#editProductModal').modal('hide');
-
-                // Refresh View Product Table if View Modal is open
                 if ($('#viewCustomerModal').hasClass('show')) {
                   var custId = $('#viewCustomerModal').data('id');
                   loadViewProducts(custId);
                 } else {
-                  $('#productModal').modal('show');
                   loadProducts(prodCustomerId);
                 }
               } else {
@@ -1859,112 +1882,89 @@
               }
             }
           });
-        });
-
-        // 6. Delete Product
-        $(document).on('click', '.deleteProductBtn', function () {
-          if (confirm('Are you sure you want to delete this product?')) {
-            var uuid = $(this).data('uuid');
-            $.ajax({
-              url: "{{ route('admin.customer.delete.product') }}",
-              type: 'POST',
-              data: { uuid: uuid, _token: "{{ csrf_token() }}" },
-              success: function (res) {
-                if (res.status) {
-                  if ($('#viewCustomerModal').hasClass('show')) {
-                    var custId = $('#viewCustomerModal').data('id');
-                    loadViewProducts(custId);
-                  } else {
-                    loadProducts(prodCustomerId);
-                  }
-                } else {
-                  alert('Error: ' + res.message);
-                }
-              }
-            });
-          }
-        });
-
-
-        // Initialize Select2 in new modals
-        $('#addProductModal .select2').select2({
-          dropdownParent: $('#addProductModal')
-        });
-        $('#editProductModal .select2').select2({
-          dropdownParent: $('#editProductModal')
-        });
-
-        // --- Location AJAX for Branch Modal ---
-        $('#branch_area_id').on('change', function () {
-          var areaID = $(this).val();
-          if (areaID) {
-            fetchCityState(areaID, '#branch_city_id', '#branch_state_id');
-          }
-        });
-
-        function fetchCityState(areaID, citySelector, stateSelector) {
-          $.ajax({
-            url: "{{ route('admin.customer.area.city') }}",
-            type: "POST",
-            data: { areaID: areaID, _token: "{{ csrf_token() }}" },
-            dataType: "json",
-            success: function (res) {
-              if (res.status) {
-                $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
-                $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
-              }
-            }
-          });
         }
-
-        // --- Service Date Logic (From Add Customer) ---
-        // Auto-calculate Service Dates
-        $('input[name="amc_start_date"]').on('change', function () {
-          var startDate = $(this).val();
-          if (!startDate) return;
-
-          var date = new Date(startDate);
-
-          // Service Date 1: +4 months
-          date.setMonth(date.getMonth() + 4);
-          var sd1 = date.toISOString().split('T')[0];
-          $('input[name="service_date_1"]').val(sd1).trigger('change');
-
-          // Service Date 2: +4 months from SD1 (total +8)
-          date.setMonth(date.getMonth() + 4);
-          var sd2 = date.toISOString().split('T')[0];
-          $('input[name="service_date_2"]').val(sd2).trigger('change');
-
-          // Service Date 3: +4 months from SD2 (total +12)
-          date.setMonth(date.getMonth() + 4);
-          var sd3 = date.toISOString().split('T')[0];
-          $('input[name="service_date_3"]').val(sd3).trigger('change');
-        });
-
-        // Sequential Enabling Logic
-        $('input[name="service_date_1"]').on('change keyup', function () {
-          let val = $(this).val();
-          let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
-          if (val) {
-            inputs2.prop('disabled', false);
-          } else {
-            inputs2.prop('disabled', true).val('');
-          }
-          // Trigger change on dependent
-          $('input[name="service_date_2"]').trigger('change');
-        });
-
-        $('input[name="service_date_2"]').on('change keyup', function () {
-          let val = $(this).val();
-          let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
-          if (val) {
-            inputs3.prop('disabled', false);
-          } else {
-            inputs3.prop('disabled', true).val('');
-          }
-        });
-
       });
-    </script>
+
+
+      // Initialize Select2 in new modals
+      $('#addProductModal .select2').select2({
+        dropdownParent: $('#addProductModal')
+      });
+      $('#editProductModal .select2').select2({
+        dropdownParent: $('#editProductModal')
+      });
+
+      // --- Location AJAX for Branch Modal ---
+      $('#branch_area_id').on('change', function () {
+        var areaID = $(this).val();
+        if (areaID) {
+          fetchCityState(areaID, '#branch_city_id', '#branch_state_id');
+        }
+      });
+
+      function fetchCityState(areaID, citySelector, stateSelector) {
+        $.ajax({
+          url: "{{ route('admin.customer.area.city') }}",
+          type: "POST",
+          data: { areaID: areaID, _token: "{{ csrf_token() }}" },
+          dataType: "json",
+          success: function (res) {
+            if (res.status) {
+              $(citySelector).empty().append('<option value="' + res.city.id + '">' + res.city.name + '</option>');
+              $(stateSelector).empty().append('<option value="' + res.state.id + '">' + res.state.name + '</option>');
+            }
+          }
+        });
+      }
+
+      // --- Service Date Logic (From Add Customer) ---
+      // Auto-calculate Service Dates
+      $('input[name="amc_start_date"]').on('change', function () {
+        var startDate = $(this).val();
+        if (!startDate) return;
+
+        var date = new Date(startDate);
+
+        // Service Date 1: +4 months
+        date.setMonth(date.getMonth() + 4);
+        var sd1 = date.toISOString().split('T')[0];
+        $('input[name="service_date_1"]').val(sd1).trigger('change');
+
+        // Service Date 2: +4 months from SD1 (total +8)
+        date.setMonth(date.getMonth() + 4);
+        var sd2 = date.toISOString().split('T')[0];
+        $('input[name="service_date_2"]').val(sd2).trigger('change');
+
+        // Service Date 3: +4 months from SD2 (total +12)
+        date.setMonth(date.getMonth() + 4);
+        var sd3 = date.toISOString().split('T')[0];
+        $('input[name="service_date_3"]').val(sd3).trigger('change');
+      });
+
+      // Sequential Enabling Logic
+      $('input[name="service_date_1"]').on('change keyup', function () {
+        let val = $(this).val();
+        let inputs2 = $('input[name="service_date_2"], select[name="service_engineer_2"]');
+        if (val) {
+          inputs2.prop('disabled', false);
+        } else {
+          inputs2.prop('disabled', true).val('');
+        }
+        // Trigger change on dependent
+        $('input[name="service_date_2"]').trigger('change');
+      });
+
+      $('input[name="service_date_2"]').on('change keyup', function () {
+        let val = $(this).val();
+        let inputs3 = $('input[name="service_date_3"], select[name="service_engineer_3"]');
+        if (val) {
+          inputs3.prop('disabled', false);
+        } else {
+          inputs3.prop('disabled', true).val('');
+        }
+      });
+
+    });
+  </script>
 
 @endpush
