@@ -246,8 +246,8 @@
         <div class="modal-header modal-header-premium bg-white border-bottom p-4">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                              <i class="icon-user fs-4 text-secondary"></i>
-                            </div> -->
+                                                  <i class="icon-user fs-4 text-secondary"></i>
+                                                </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-1 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
@@ -316,13 +316,11 @@
                         <small class="view-label">Address</small>
                         <div class="view-value">
                           <span id="v_address"></span>
-                          <div class="mt-1 fs-6 text-muted">
-                            <span id="v_area_id"></span><span id="v_city_separator">, </span>
-                            <span id="v_city_id"></span><span id="v_state_separator">, </span>
-                            <span id="v_state_id"></span>
-                            <span id="v_pincode_separator"> - </span>
-                            <span id="v_pincode"></span>
-                          </div>
+                          <span id="v_area_id"></span><span id="v_city_separator">, </span>
+                          <span id="v_city_id"></span><span id="v_state_separator">, </span>
+                          <span id="v_state_id"></span>
+                          <span id="v_pincode_separator"> - </span>
+                          <span id="v_pincode"></span>
                         </div>
                       </div>
                     </div>
@@ -354,11 +352,16 @@
                           </div>
                           <div class="col-12 view-item-wrapper">
                             <small class="view-label">Website</small>
-                            <div class="view-value text-info" id="v_web_sites">-</div>
+                            <div class="view-value" id="v_web_sites">-</div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-5">
+                  <div class="row g-4 h-100">
 
                     <div class="col-12">
                       <div class="info-card">
