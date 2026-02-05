@@ -246,14 +246,14 @@
         <div class="modal-header modal-header-premium bg-white border-bottom p-4">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                    <i class="icon-user fs-4 text-secondary"></i>
-                  </div> -->
+                              <i class="icon-user fs-4 text-secondary"></i>
+                            </div> -->
             <div>
-              <h5 class="modal-title fw-bold mb-1 text-white">Customer Details</h5>
+              <h4 class="modal-title fw-bold mb-1 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
             </div>
           </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
         </div>
 
         <div class="modal-body p-4 bg-white">
@@ -312,17 +312,16 @@
                         <small class="view-label">Date of Birth</small>
                         <div class="view-value" id="v_date_of_birth">-</div>
                       </div>
-                      <div class="col-12 mt-2">
-                        <div class="address-box">
-                          <h6 class="text-uppercase text-secondary fw-bold fs-7 mb-2"><i
-                              class="icon-location-pin me-1"></i> Address</h6>
-                          <div class="view-value mb-2" id="v_address"></div>
-                          <div class="text-muted small">
+                      <div class="col-12 view-item-wrapper">
+                        <small class="view-label">Address</small>
+                        <div class="view-value">
+                          <span id="v_address"></span>
+                          <div class="mt-1 fs-6 text-muted">
                             <span id="v_area_id"></span><span id="v_city_separator">, </span>
-                            <span id="v_city_id" class="fw-bold text-dark"></span><span id="v_state_separator">, </span>
+                            <span id="v_city_id"></span><span id="v_state_separator">, </span>
                             <span id="v_state_id"></span>
                             <span id="v_pincode_separator"> - </span>
-                            <span id="v_pincode" class="fw-bold text-dark"></span>
+                            <span id="v_pincode"></span>
                           </div>
                         </div>
                       </div>
@@ -339,11 +338,11 @@
                         <div class="row">
                           <div class="col-12 view-item-wrapper">
                             <small class="view-label">Mobile Number</small>
-                            <div class="view-value text-primary font-code fs-5" id="v_mobile_no">-</div>
+                            <div class="view-value font-code fs-5" id="v_mobile_no">-</div>
                           </div>
                           <div class="col-12 view-item-wrapper">
                             <small class="view-label">Email Address</small>
-                            <div class="view-value text-primary" id="v_email">-</div>
+                            <div class="view-value" id="v_email">-</div>
                           </div>
                           <div class="col-6 view-item-wrapper">
                             <small class="view-label">Phone 1</small>
