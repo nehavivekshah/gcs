@@ -246,14 +246,14 @@
         <div class="modal-header modal-header-premium bg-white border-bottom px-4 py-3">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                                                                                                        <i class="icon-user fs-4 text-secondary"></i>
-                                                                                                      </div> -->
+                                                                                                          <i class="icon-user fs-4 text-secondary"></i>
+                                                                                                        </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-0 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
             </div>
           </div>
-          <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
         <div class="modal-body p-4 bg-white">
