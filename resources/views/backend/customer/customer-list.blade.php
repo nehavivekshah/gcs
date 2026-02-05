@@ -246,8 +246,8 @@
         <div class="modal-header modal-header-premium bg-white border-bottom px-4 py-3">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                                                                                                    <i class="icon-user fs-4 text-secondary"></i>
-                                                                                                  </div> -->
+                                                                                                        <i class="icon-user fs-4 text-secondary"></i>
+                                                                                                      </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-0 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
@@ -402,7 +402,7 @@
               </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
-                  <table class="table table-hover table-striped align-middle mb-0" id="viewBranchTable">
+                  <table class="table table-hover table-striped border align-middle mb-0" id="viewBranchTable">
                     <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
@@ -429,7 +429,7 @@
               </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
-                  <table class="table table-hover table-striped align-middle mb-0" id="viewContactTable">
+                  <table class="table table-hover table-striped border align-middle mb-0" id="viewContactTable">
                     <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
@@ -456,7 +456,7 @@
               </div>
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
-                  <table class="table table-hover table-striped align-middle mb-0" id="viewProductTable">
+                  <table class="table table-hover table-striped border align-middle mb-0" id="viewProductTable">
                     <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
@@ -501,7 +501,7 @@
           </div>
 
           <div class="table-responsive custom-scrollbar">
-            <table class="table table-premium table-striped" id="branchTable">
+            <table class="table table-premium table-striped border" id="branchTable">
               <thead>
                 <tr>
                   <th>Sr.no</th>
@@ -556,7 +556,7 @@
             </div>
           </div>
           <div class="table-responsive custom-scrollbar">
-            <table class="table table-premium table-striped table-hover" id="contactTable">
+            <table class="table table-premium table-striped border table-hover" id="contactTable">
               <thead>
                 <tr>
                   <th>No</th>
@@ -923,7 +923,7 @@
             </button>
           </div>
           <div class="table-responsive custom-scrollbar">
-            <table class="table table-premium table-striped" id="productTable">
+            <table class="table table-premium table-striped border" id="productTable">
               <thead>
                 <tr>
                   <th>Sr.no</th>
