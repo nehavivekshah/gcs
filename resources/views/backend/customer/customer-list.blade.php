@@ -243,11 +243,11 @@
   <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modal-content-premium border-0 overflow-hidden">
-        <div class="modal-header modal-header-premium bg-white border-bottom p-4">
+        <div class="modal-header modal-header-premium bg-white border-bottom px-4 py-2">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                                                  <i class="icon-user fs-4 text-secondary"></i>
-                                                </div> -->
+                                                          <i class="icon-user fs-4 text-secondary"></i>
+                                                        </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-1 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
@@ -268,7 +268,7 @@
               </div>
               <div class="col-md-6 text-md-end mt-3 mt-md-0">
                 <span
-                  class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fs-6 border border-primary border-opacity-25"
+                  class="badge bg-light-danger text-danger px-3 py-2 rounded-pill fs-6 border border-danger border-opacity-25"
                   id="v_header_code">Code: -</span>
               </div>
             </div>
