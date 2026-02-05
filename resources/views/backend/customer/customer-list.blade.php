@@ -246,8 +246,8 @@
         <div class="modal-header modal-header-premium bg-white border-bottom px-4 py-3">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                                                                  <i class="icon-user fs-4 text-secondary"></i>
-                                                                </div> -->
+                                                                      <i class="icon-user fs-4 text-secondary"></i>
+                                                                    </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-0 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
@@ -360,7 +360,7 @@
                   </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="col-lg-12 mt-0">
                   <div class="row g-4 h-100">
 
                     <div class="col-12">
