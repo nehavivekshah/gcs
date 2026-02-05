@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Services\CustomerService;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\CustomerBranch;
+use App\Models\CustomerContact;
 
 class CustomerController extends Controller
 {
@@ -818,5 +820,19 @@ class CustomerController extends Controller
     {
         $delete = $this->customerService->deleteCustomerProduct($request->uuid);
         return response()->json(['status' => (bool) $delete, 'message' => $delete ? 'Product deleted successfully' : 'Failed to delete product']);
+    }
+
+    public function deleteCustomerBranch(Request $request)
+    {
+        $id = $request->id;
+        $delete = CustomerBranch::where('id', $id)->delete();
+        return response()->json(['status' => (bool) $delete, 'message' => $delete ? 'Branch deleted successfully' : 'Failed to delete branch']);
+    }
+
+    public function deleteCustomerContact(Request $request)
+    {
+        $id = $request->id;
+        $delete = CustomerContact::where('id', $id)->delete();
+        return response()->json(['status' => (bool) $delete, 'message' => $delete ? 'Contact deleted successfully' : 'Failed to delete contact']);
     }
 }

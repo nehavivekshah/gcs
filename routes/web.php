@@ -232,6 +232,8 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
     Route::post('/get-customer-contact', 'getCustomerContact')->name('get.customer.contact');
     Route::post('/add-customer-contact', 'addCustomerContact')->name('add.contact');
     Route::post('/edit-customer-contact', 'editCustomerContact')->name('edit.contact');
+    Route::post('/delete-customer-branch', 'deleteCustomerBranch')->name('delete.branch');
+    Route::post('/delete-customer-contact', 'deleteCustomerContact')->name('delete.contact');
 
     Route::get('/customer-amc-product/{uuid}', 'CustomerAmcProduct')->name('amc.product');
     Route::get('/customer-amc-product-list/{customer_id}/{branch_id}/{amc_product_id}', 'getCustomerAmcProduct')->name('amc.product.list');

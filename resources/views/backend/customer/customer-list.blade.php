@@ -418,6 +418,7 @@
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Contact Person</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Mobile</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">City</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
@@ -444,6 +445,7 @@
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Branch</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Designation</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Mobile</th>
+                        <th class="py-3 text-secondary text-uppercase fs-7 fw-bold text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
@@ -1266,7 +1268,7 @@
 
       // --- Helper Functions for View Modal ---
       function loadViewBranches(customerId) {
-        $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $('#viewBranchTable tbody').html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
         $.ajax({
           url: "{{ route('admin.customer.get.customer.branch') }}",
           type: "POST",
@@ -1284,22 +1286,28 @@
                   '<td>' + (v.contact_person ?? '-') + '</td>' +
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
                   '<td>' + (v.city_name ?? '-') + '</td>' +
+                  '<td class="text-center">' +
+                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editBranchBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteBranchBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
+                    '</div>' +
+                  '</td>' +
                   '</tr>';
               });
             } else {
-              html = '<tr><td colspan="5" class="text-center">No Branches Found</td></tr>';
+              html = '<tr><td colspan="6" class="text-center">No Branches Found</td></tr>';
             }
             $('#viewBranchTable tbody').html(html);
           },
           error: function (err) {
             console.error('Branch Load Error', err);
-            $('#viewBranchTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading branches</td></tr>');
+            $('#viewBranchTable tbody').html('<tr><td colspan="6" class="text-center text-danger">Error loading branches</td></tr>');
           }
         });
       }
 
       function loadViewContacts(customerId) {
-        $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $('#viewContactTable tbody').html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
         $.ajax({
           url: "{{ route('admin.customer.get.customer.contact') }}",
           type: "POST",
@@ -1316,16 +1324,22 @@
                   '<td>' + (v.branch_name ?? 'Main Branch') + '</td>' +
                   '<td>' + (v.designation ?? '-') + '</td>' +
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
+                  '<td class="text-center">' +
+                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editContactBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteContactBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
+                    '</div>' +
+                  '</td>' +
                   '</tr>';
               });
             } else {
-              html = '<tr><td colspan="5" class="text-center">No Contacts Found</td></tr>';
+              html = '<tr><td colspan="6" class="text-center">No Contacts Found</td></tr>';
             }
             $('#viewContactTable tbody').html(html);
           },
           error: function (err) {
             console.error('Contact Load Error', err);
-            $('#viewContactTable tbody').html('<tr><td colspan="5" class="text-center text-danger">Error loading contacts</td></tr>');
+            $('#viewContactTable tbody').html('<tr><td colspan="6" class="text-center text-danger">Error loading contacts</td></tr>');
           }
         });
       }
@@ -1623,6 +1637,54 @@
 
         $('#contactModal').modal('hide');
         $('#editContactModal').modal('show');
+      });
+
+      // Delete Branch Handler
+      $(document).on('click', '.deleteBranchBtn', function() {
+        if(confirm('Are you sure you want to delete this branch?')) {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('admin.customer.delete.branch') }}",
+                type: "POST",
+                data: { id: id, _token: "{{ csrf_token() }}" },
+                success: function(res) {
+                    if(res.status) {
+                        var custId = $('#viewCustomerModal').data('id');
+                        loadViewBranches(custId);
+                    } else {
+                        alert(res.message);
+                    }
+                },
+                error: function(err) {
+                    console.error('Delete Branch Error', err);
+                    alert('An error occurred while deleting the branch.');
+                }
+            });
+        }
+      });
+
+      // Delete Contact Handler
+      $(document).on('click', '.deleteContactBtn', function() {
+        if(confirm('Are you sure you want to delete this contact?')) {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('admin.customer.delete.contact') }}",
+                type: "POST",
+                data: { id: id, _token: "{{ csrf_token() }}" },
+                success: function(res) {
+                    if(res.status) {
+                        var custId = $('#viewCustomerModal').data('id');
+                        loadViewContacts(custId);
+                    } else {
+                        alert(res.message);
+                    }
+                },
+                error: function(err) {
+                    console.error('Delete Contact Error', err);
+                    alert('An error occurred while deleting the contact.');
+                }
+            });
+        }
       });
 
     });
