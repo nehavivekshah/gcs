@@ -47,6 +47,17 @@ Route::prefix('admin/user')->name('admin.user.')->controller(UserController::cla
 
 });
 
+Route::prefix('admin/coordinator')->name('admin.coordinator.')->controller(CoordinatorController::class)->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/{uuid}/edit', 'edit')->name('edit');
+    Route::patch('/{uuid}', 'update')->name('update');
+    Route::get('/{uuid}', 'destroy')->name('delete');
+
+});
+
 
 // Amc Product Master 
 Route::prefix('admin/amc-product')->name('admin.amc-product.')->controller(AmcProductController::class)->group(function () {

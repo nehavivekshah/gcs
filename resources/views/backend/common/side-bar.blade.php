@@ -47,8 +47,9 @@
             </svg><span>Master</span>
           </a>
           <ul class="sidebar-submenu">
-            <li><a href="{{ route('admin.user.index') }}">User List</a></li>
             <li><a href="{{ route('admin.user-type.index') }}">User Type</a></li>
+            <li><a href="{{ route('admin.user.index') }}">User List</a></li>
+            <li><a href="{{ route('admin.coordinator.index') }}">Coordinator List</a></li>
             <li><a href="{{ route('admin.engineer.index') }}">Engineer</a></li>
             <li><a href="{{ route('admin.year.index') }}">year</a></li>
             <li><a href="{{ route('admin.product.index') }}"> Product</a></li>
