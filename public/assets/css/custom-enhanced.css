@@ -455,6 +455,6 @@ button.btn.btn-secondary:hover {
 
 div.dataTables_wrapper {
   position: relative;
-  font-family: "Poppins", sans-serif;
-  letter-spacing: normal;
+  font-family: "Poppins", sans-serif !important;
+  letter-spacing: normal !important;
 }

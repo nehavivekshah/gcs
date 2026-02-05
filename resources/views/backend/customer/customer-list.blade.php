@@ -130,11 +130,11 @@
       /* Slightly darker for better contrast */
       margin-bottom: 6px;
       display: block;
-      font-weight: 700;
+      font-weight: 400;
     }
 
     .view-value {
-      font-size: 1.05rem;
+      font-size: 15px;
       /* Increased from 1rem */
       font-weight: 500;
       color: #2c3e50;
@@ -246,8 +246,8 @@
         <div class="modal-header modal-header-premium bg-white border-bottom px-4 py-3">
           <div class="d-flex align-items-center">
             <!-- <div class="bg-light p-3 rounded-circle me-3 border">
-                                                                      <i class="icon-user fs-4 text-secondary"></i>
-                                                                    </div> -->
+                                                                                <i class="icon-user fs-4 text-secondary"></i>
+                                                                              </div> -->
             <div>
               <h4 class="modal-title fw-bold mb-0 text-white">Customer Details</h4>
               <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
@@ -403,7 +403,7 @@
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewBranchTable">
-                    <thead class="bg-light">
+                    <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Branch Name</th>
@@ -430,7 +430,7 @@
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewContactTable">
-                    <thead class="bg-light">
+                    <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Name</th>
@@ -457,7 +457,7 @@
               <div class="info-card p-0 overflow-hidden">
                 <div class="table-responsive custom-scrollbar">
                   <table class="table table-hover table-striped align-middle mb-0" id="viewProductTable">
-                    <thead class="bg-light">
+                    <thead class="">
                       <tr>
                         <th class="py-3 ps-4 text-secondary text-uppercase fs-7 fw-bold">#</th>
                         <th class="py-3 text-secondary text-uppercase fs-7 fw-bold">Product Name</th>
