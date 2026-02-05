@@ -146,44 +146,34 @@
 
     /* Address Box Style */
     .address-box {
-      background-color: #f8f9fa;
-      border-radius: 6px;
+      background-color: #fff;
+      border-radius: 4px;
       padding: 15px;
-      border: 1px solid #e9ecef;
+      border: 1px solid #eee;
     }
 
     .view-section-title {
       display: flex;
       align-items: center;
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #1b2533;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #eef2f7;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
     }
 
     .view-section-title i {
-      margin-right: 12px;
-      color: var(--theme-default);
-      background: #f0f3f6;
-      padding: 10px;
-      border-radius: 6px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-right: 10px;
+      color: #333;
+      font-size: 1.2rem;
     }
 
     .info-card {
       background: #fff;
-      border: 1px solid #e1e7ec;
-      border-radius: 8px;
-      padding: 24px;
+      /* Removed border, radius, shadow for flat look */
+      padding: 15px 0;
       height: 100%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-      /* Subtle shadow for depth */
     }
 
     /* Modern Line Tabs with clear highlight */
@@ -255,12 +245,12 @@
       <div class="modal-content modal-content-premium border-0 overflow-hidden">
         <div class="modal-header modal-header-premium bg-white border-bottom p-4">
           <div class="d-flex align-items-center">
-            <div class="bg-light p-3 rounded-circle me-3 border">
-              <i class="icon-user fs-4 text-secondary"></i>
-            </div>
+            <!-- <div class="bg-light p-3 rounded-circle me-3 border">
+                    <i class="icon-user fs-4 text-secondary"></i>
+                  </div> -->
             <div>
-              <h5 class="modal-title fw-bold mb-1 text-dark">Customer Details</h5>
-              <p class="mb-0 text-muted fs-6">Complete profile information</p>
+              <h5 class="modal-title fw-bold mb-1 text-white">Customer Details</h5>
+              <!-- <p class="mb-0 text-muted fs-6">Complete profile information</p> -->
             </div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -1287,10 +1277,10 @@
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
                   '<td>' + (v.city_name ?? '-') + '</td>' +
                   '<td class="text-center">' +
-                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editBranchBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteBranchBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
-                    '</div>' +
+                  '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-primary editBranchBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteBranchBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
+                  '</div>' +
                   '</td>' +
                   '</tr>';
               });
@@ -1325,10 +1315,10 @@
                   '<td>' + (v.designation ?? '-') + '</td>' +
                   '<td>' + (v.mobile_no ?? '-') + '</td>' +
                   '<td class="text-center">' +
-                    '<div class="d-flex align-items-center gap-2 justify-content-center">' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-primary editContactBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
-                      '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteContactBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
-                    '</div>' +
+                  '<div class="d-flex align-items-center gap-2 justify-content-center">' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-primary editContactBtn" data-data=\'' + JSON.stringify(v) + '\'><i class="icon-pencil"></i></button>' +
+                  '<button type="button" class="btn btn-sm-custom btn-outline-danger deleteContactBtn" data-id="' + v.id + '"><i class="icon-trash"></i></button>' +
+                  '</div>' +
                   '</td>' +
                   '</tr>';
               });
@@ -1640,50 +1630,50 @@
       });
 
       // Delete Branch Handler
-      $(document).on('click', '.deleteBranchBtn', function() {
-        if(confirm('Are you sure you want to delete this branch?')) {
-            var id = $(this).data('id');
-            $.ajax({
-                url: "{{ route('admin.customer.delete.branch') }}",
-                type: "POST",
-                data: { id: id, _token: "{{ csrf_token() }}" },
-                success: function(res) {
-                    if(res.status) {
-                        var custId = $('#viewCustomerModal').data('id');
-                        loadViewBranches(custId);
-                    } else {
-                        alert(res.message);
-                    }
-                },
-                error: function(err) {
-                    console.error('Delete Branch Error', err);
-                    alert('An error occurred while deleting the branch.');
-                }
-            });
+      $(document).on('click', '.deleteBranchBtn', function () {
+        if (confirm('Are you sure you want to delete this branch?')) {
+          var id = $(this).data('id');
+          $.ajax({
+            url: "{{ route('admin.customer.delete.branch') }}",
+            type: "POST",
+            data: { id: id, _token: "{{ csrf_token() }}" },
+            success: function (res) {
+              if (res.status) {
+                var custId = $('#viewCustomerModal').data('id');
+                loadViewBranches(custId);
+              } else {
+                alert(res.message);
+              }
+            },
+            error: function (err) {
+              console.error('Delete Branch Error', err);
+              alert('An error occurred while deleting the branch.');
+            }
+          });
         }
       });
 
       // Delete Contact Handler
-      $(document).on('click', '.deleteContactBtn', function() {
-        if(confirm('Are you sure you want to delete this contact?')) {
-            var id = $(this).data('id');
-            $.ajax({
-                url: "{{ route('admin.customer.delete.contact') }}",
-                type: "POST",
-                data: { id: id, _token: "{{ csrf_token() }}" },
-                success: function(res) {
-                    if(res.status) {
-                        var custId = $('#viewCustomerModal').data('id');
-                        loadViewContacts(custId);
-                    } else {
-                        alert(res.message);
-                    }
-                },
-                error: function(err) {
-                    console.error('Delete Contact Error', err);
-                    alert('An error occurred while deleting the contact.');
-                }
-            });
+      $(document).on('click', '.deleteContactBtn', function () {
+        if (confirm('Are you sure you want to delete this contact?')) {
+          var id = $(this).data('id');
+          $.ajax({
+            url: "{{ route('admin.customer.delete.contact') }}",
+            type: "POST",
+            data: { id: id, _token: "{{ csrf_token() }}" },
+            success: function (res) {
+              if (res.status) {
+                var custId = $('#viewCustomerModal').data('id');
+                loadViewContacts(custId);
+              } else {
+                alert(res.message);
+              }
+            },
+            error: function (err) {
+              console.error('Delete Contact Error', err);
+              alert('An error occurred while deleting the contact.');
+            }
+          });
         }
       });
 
