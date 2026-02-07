@@ -204,7 +204,7 @@
           const cityID = $(this).val();
           if (cityID) {
             $.ajax({
-              url: "{{ route('admin.area.city-states') }}",
+              url: "{{ route('admin.area.city.state') }}",
               type: "POST",
               data: {
                 cityID: cityID,
