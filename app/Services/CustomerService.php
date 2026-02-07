@@ -14,6 +14,7 @@ use App\Models\CustomerContact;
 use App\Models\UserCredential;
 use App\Models\Engineer;
 use App\Models\CustomerBranchContact;
+use App\Models\CustomerDepartment;
 
 
 class CustomerService
@@ -104,23 +105,57 @@ class CustomerService
                     'S.state as state_name',
                     'C.city as city_name',
                     'A.area as area_name',
+                    'CD.department'
                )
                ->leftJoin('states as S', 'S.id', '=', 'customer_branches.state_id')
                ->leftJoin('cities as C', 'C.id', '=', 'customer_branches.city_id')
                ->leftJoin('areas as A', 'A.id', '=', 'customer_branches.area_id')
+               ->leftJoin('customer_departments as CD', 'CD.branch_id', '=', 'customer_branches.id')
                ->get();
      }
 
 
      public function addCustomerBranch($data)
      {
-          return CustomerBranch::create($data);
+          $branch = CustomerBranch::create($data);
+
+          if (isset($data['department']) && !empty($data['department'])) {
+               CustomerDepartment::create([
+                    'customer_id' => $data['customer_id'],
+                    'branch_id' => $branch->id,
+                    'department' => $data['department'],
+                    'created_by' => $data['created_by'] ?? 'System'
+               ]);
+          }
+
+          return $branch;
      }
 
 
      function editCustomerBranch($id, $data)
      {
-          return CustomerBranch::where('id', $id)->update($data);
+          $update = CustomerBranch::where('id', $id)->update(\Illuminate\Support\Arr::except($data, ['department']));
+
+          if ($update && isset($data['department'])) {
+               $dept = CustomerDepartment::where('branch_id', $id)->first();
+               if ($dept) {
+                    $dept->update([
+                         'department' => $data['department'],
+                         'modified_by' => $data['modified_by'] ?? 'System'
+                    ]);
+               } else {
+                    $branch = CustomerBranch::find($id);
+                    if ($branch) {
+                         CustomerDepartment::create([
+                              'customer_id' => $branch->customer_id,
+                              'branch_id' => $id,
+                              'department' => $data['department'],
+                              'created_by' => $data['modified_by'] ?? 'System'
+                         ]);
+                    }
+               }
+          }
+          return $update;
      }
 
      function getCustomerId()

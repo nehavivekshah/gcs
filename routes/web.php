@@ -17,6 +17,7 @@ use App\Http\Controllers\backend\YearController;
 use App\Http\Controllers\backend\SupplierController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\CoordinatorController;
+use App\Http\Controllers\backend\CompanyComplaintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -273,6 +274,24 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
     Route::post('/edit-product', 'editProduct')->name('edit.product');
     Route::post('/delete-product', 'deleteProduct')->name('delete.product');
     Route::get('/get-product-form-data', 'getProductFormData')->name('get.product.form.data');
+});
+
+Route::prefix('admin/company-complaint')->name('admin.company.complaint.')->controller(CompanyComplaintController::class)->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::patch('/update', 'update')->name('update');
+    Route::get('/{uuid}', 'destroy')->name('delete');
+    Route::post('/visit-details', 'getVisitDetails')->name('visit.details');
+    Route::post('/add-visit', 'addComplaintVisit')->name('add.visit');
+    Route::post('/update-visit', 'updateComplaintVisit')->name('update.visit');
+    Route::get('/{id}/delete-visit', 'deleteComplaintVisit')->name('delete.visit');
+    Route::post('/get-customer-product', 'getCustomerProduct')->name('get.customer.product');
+    Route::post('/get-customer-branch', 'getCustomerBranch')->name('get.customer.branch');
+    Route::post('/get-customer-department', 'getCustomerDepartment')->name('get.customer.department');
+    Route::post('/get-customer-department-product', 'getCustomerDepartmentProduct')->name('get.customer.department.product');
+    Route::post('/get-products', 'getProducts')->name('get.products');
+
 });
 
 Route::get('/clear-cache', function () {

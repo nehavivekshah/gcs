@@ -198,14 +198,14 @@
                 </div>
 
                 <!-- <div class="col-md-3">
-                                  <label class="form-label-premium">Customer Category</label>
-                                  <select class="form-control form-control-premium" name="customer_category">
-                                    <option value="">Select Category</option>
-                                    <option value="Corporate">Corporate</option>
-                                    <option value="Semi-Corporate">Semi-Corporate</option>
-                                    <option value="In-House">In-House</option>
-                                  </select>
-                                </div> -->
+                                    <label class="form-label-premium">Customer Category</label>
+                                    <select class="form-control form-control-premium" name="customer_category">
+                                      <option value="">Select Category</option>
+                                      <option value="Corporate">Corporate</option>
+                                      <option value="Semi-Corporate">Semi-Corporate</option>
+                                      <option value="In-House">In-House</option>
+                                    </select>
+                                  </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
@@ -362,6 +362,7 @@
                   <thead>
                     <tr>
                       <th>Branch Name</th>
+                      <th>Department</th>
                       <th>Contact Person</th>
                       <th>Mobile</th>
                       <th>City</th>
@@ -370,7 +371,7 @@
                   </thead>
                   <tbody>
                     <tr class="empty-row">
-                      <td colspan="4" class="text-center">No branches added yet.</td>
+                      <td colspan="6" class="text-center">No branches added yet.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -394,6 +395,7 @@
                     <tr>
                       <th>Name</th>
                       <th>Branch</th>
+                      <th>Department</th>
                       <th>Designation</th>
                       <th>Mobile</th>
                       <th>Action</th>
@@ -401,7 +403,7 @@
                   </thead>
                   <tbody>
                     <tr class="empty-row">
-                      <td colspan="4" class="text-center">No contacts added yet.</td>
+                      <td colspan="6" class="text-center">No contacts added yet.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -425,6 +427,7 @@
                     <tr>
                       <th>Product</th>
                       <th>Branch</th>
+                      <th>Department</th>
                       <th>Type</th>
                       <th>Quantity</th>
                       <th>Action</th>
@@ -432,7 +435,7 @@
                   </thead>
                   <tbody>
                     <tr class="empty-row">
-                      <td colspan="4" class="text-center">No products added yet.</td>
+                      <td colspan="6" class="text-center">No products added yet.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -864,6 +867,7 @@
           success: function (res) {
             if (res.status) {
               var branchName = $('#branchForm input[name="branch_name"]').val();
+              var department = $('#branchForm input[name="department"]').val();
               var contact = $('#branchForm input[name="contact_person"]').val();
               var mobile = $('#branchForm input[name="mobile_no"]').val();
               var city = $('#modal_branch_city option:selected').text();
@@ -875,6 +879,7 @@
                 if (idx !== -1) savedBranches[idx] = {
                   id: branchId,
                   name: branchName,
+                  department: department,
                   contact: contact,
                   mobile: mobile,
                   city: city,
@@ -885,6 +890,7 @@
                 savedBranches.push({
                   id: branchId,
                   name: branchName,
+                  department: department,
                   contact: contact,
                   mobile: mobile,
                   city: city,
@@ -925,6 +931,7 @@
               var name = $('#contactForm input[name="contact_name"]').val();
               // Fix: Use scoped selector for branch select
               var branchName = $('#contactForm .select-branch option:selected').text();
+              var department = $('#contactForm input[name="department"]').val();
               // Fix: Use scoped selector for designation
               var desig = $('#contactForm input[name="designation"]').val();
               var mob = $('#contactForm input[name="mobile_no"]').val();
@@ -934,6 +941,7 @@
                 id: contactId,
                 name: name,
                 branchName: branchName,
+                department: department,
                 desig: desig,
                 mob: mob,
                 fullData: form.serializeArray()
@@ -976,6 +984,7 @@
             if (res.status) {
               var prodName = $('select[name="amc_product_id"] option:selected').text();
               var branchName = $('#productForm .select-branch option:selected').text();
+              var department = $('#productForm input[name="department"]').val();
               var type = $('#productForm select[name="product_type"]').val(); // Use select (it's a select in HTML)
               var qty = $('#productForm input[name="quantity"]').val();
               var prodId = id ? id : (res.product_id || Date.now());
@@ -994,6 +1003,7 @@
                 id: prodId,
                 prodName: prodName,
                 branchName: branchName,
+                department: department,
                 type: type,
                 qty: qty,
                 fullData: formData
@@ -1027,10 +1037,10 @@
       var tbody = $('#branchTable tbody');
       tbody.empty();
       if (savedBranches.length === 0) {
-        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No branches added yet.</td></tr>');
+        tbody.append('<tr class="empty-row"><td colspan="6" class="text-center">No branches added yet.</td></tr>');
       } else {
         savedBranches.forEach(b => {
-          tbody.append('<tr><td>' + b.name + '</td><td>' + b.contact + '</td><td>' + b.mobile + '</td><td>' + b.city + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editBranch(' + b.id + ')">Edit</button></td></tr>');
+          tbody.append('<tr><td>' + b.name + '</td><td>' + (b.department || '-') + '</td><td>' + b.contact + '</td><td>' + b.mobile + '</td><td>' + b.city + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editBranch(' + b.id + ')">Edit</button></td></tr>');
         });
       }
       prepareContactModal(); // Update branch list for contacts
@@ -1040,10 +1050,10 @@
       var tbody = $('#contactTable tbody');
       tbody.empty();
       if (savedContacts.length === 0) {
-        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No contacts added yet.</td></tr>');
+        tbody.append('<tr class="empty-row"><td colspan="6" class="text-center">No contacts added yet.</td></tr>');
       } else {
         savedContacts.forEach(c => {
-          tbody.append('<tr><td>' + c.name + '</td><td>' + c.branchName + '</td><td>' + c.desig + '</td><td>' + c.mob + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editContact(' + c.id + ')">Edit</button></td></tr>');
+          tbody.append('<tr><td>' + c.name + '</td><td>' + c.branchName + '</td><td>' + (c.department || '-') + '</td><td>' + c.desig + '</td><td>' + c.mob + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editContact(' + c.id + ')">Edit</button></td></tr>');
         });
       }
     }
@@ -1052,10 +1062,10 @@
       var tbody = $('#productTable tbody');
       tbody.empty();
       if (savedProducts.length === 0) {
-        tbody.append('<tr class="empty-row"><td colspan="5" class="text-center">No products added yet.</td></tr>');
+        tbody.append('<tr class="empty-row"><td colspan="6" class="text-center">No products added yet.</td></tr>');
       } else {
         savedProducts.forEach(p => {
-          tbody.append('<tr><td>' + p.prodName + '</td><td>' + p.branchName + '</td><td>' + p.type + '</td><td>' + p.qty + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editProduct(' + p.id + ')">Edit</button></td></tr>');
+          tbody.append('<tr><td>' + p.prodName + '</td><td>' + p.branchName + '</td><td>' + (p.department || '-') + '</td><td>' + p.type + '</td><td>' + p.qty + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editProduct(' + p.id + ')">Edit</button></td></tr>');
         });
       }
     }

@@ -293,6 +293,7 @@ class CustomerController extends Controller
         $data = [
             'customer_id' => $customer_id,
             'branch_name' => $branch_name,
+            'department' => $req->department,
             'contact_person' => $contact_person,
             'mobile_no' => $mobile_no,
             'customer_code' => $customer_code,
@@ -314,7 +315,8 @@ class CustomerController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Branch added successfully',
-                'branch_id' => $branch->id
+                'branch_id' => $branch->id,
+                'department' => $req->department
             ]);
         }
 
@@ -342,6 +344,7 @@ class CustomerController extends Controller
 
         $data = [
             'branch_name' => $branch_name,
+            'department' => $req->department,
             'contact_person' => $contact_person,
             'mobile_no' => $mobile_no,
             'customer_code' => $customer_code,
@@ -362,7 +365,9 @@ class CustomerController extends Controller
         if ($req->wantsJson()) {
             return response()->json([
                 'status' => (bool) $update,
-                'message' => $update ? 'Branch updated successfully' : 'Failed to update branch'
+                'message' => $update ? 'Branch updated successfully' : 'Failed to update branch',
+                'branch_id' => $id,
+                'department' => $req->department
             ]);
         }
 
