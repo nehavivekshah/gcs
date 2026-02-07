@@ -87,18 +87,23 @@
           </ul>
         </li>
 
+        <li class="sidebar-list">
+          <i class="fa fa-thumb-tack"></i>
+          <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.logout') }}">
+            <svg class="stroke-icon">
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-file') }}"></use>
+            </svg>
+            <svg class="fill-icon">
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-file') }}"></use>
+            </svg>
+            <span>Logout</span>
+            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
+          </a>
+        </li>
+
+
       </ul>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
     </div>
   </nav>
-  <div class="sidebar-footer">
-    <div class="sidebar-list">
-      <a class="sidebar-link" href="{{ route('admin.logout') }}">
-        <svg>
-          <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-file') }}"></use>
-        </svg>
-        <span>Logout</span>
-      </a>
-    </div>
-  </div>
 </div>
