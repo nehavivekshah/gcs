@@ -51,13 +51,13 @@
             <li><a href="{{ route('admin.user.index') }}">User List</a></li>
             <li><a href="{{ route('admin.coordinator.index') }}">Coordinator List</a></li>
             <li><a href="{{ route('admin.engineer.index') }}">Engineer</a></li>
-            <li><a href="{{ route('admin.year.index') }}">year</a></li>
-            <li><a href="{{ route('admin.product.index') }}"> Product</a></li>
-            <li><a href="{{ route('admin.supplier.index') }}"> Supplier </a></li>
+            <li><a href="{{ route('admin.year.index') }}">Year</a></li>
+            <li><a href="{{ route('admin.product.index') }}">Product</a></li>
+            <li><a href="{{ route('admin.supplier.index') }}">Supplier</a></li>
             <li><a href="{{ route('admin.product-type.index') }}">Product Type</a></li>
             <li><a href="{{ route('admin.manufacture.index') }}">Manufacture</a></li>
-            <li><a href="{{ route('admin.amc-product.index') }}">Amc Product</a></li>
-            <li><a href="{{ route('admin.product-accessories.index') }}">product-accessories</a></li>
+            <li><a href="{{ route('admin.amc-product.index') }}">AMC Product</a></li>
+            <li><a href="{{ route('admin.product-accessories.index') }}">Product Accessories</a></li>
             <li><a href="{{ route('admin.state.index') }}">State</a></li>
             <li><a href="{{ route('admin.city.index') }}">City</a></li>
             <li><a href="{{ route('admin.area.index') }}">Area</a></li>
@@ -82,10 +82,10 @@
           <i class="fa fa-thumb-tack"></i>
           <a class="sidebar-link sidebar-title link-nav active" href="{{ route('admin.company.complaint.index') }}">
             <svg class="stroke-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-chat') }}"></use>
             </svg>
             <svg class="fill-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-user') }}"></use>
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-chat') }}"></use>
             </svg>
             <span>Customer Complaint</span>
             <div class="according-menu"><i class="fa fa-angle-right"></i></div>
@@ -97,10 +97,10 @@
           <a class="sidebar-link sidebar-title link-nav active"
             href="{{ route('admin.product.inward.outward.index') }}">
             <svg class="stroke-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-ecommerce') }}"></use>
             </svg>
             <svg class="fill-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-user') }}"></use>
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
             </svg>
             <span>Product Inward Outward</span>
             <div class="according-menu"><i class="fa fa-angle-right"></i></div>
