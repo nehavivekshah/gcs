@@ -162,10 +162,14 @@
               </div>
               <div class="step-item" id="step-nav-3">
                 <div class="step-circle">3</div>
-                <div class="step-label">Contacts</div>
+                <div class="step-label">Departments</div>
               </div>
               <div class="step-item" id="step-nav-4">
                 <div class="step-circle">4</div>
+                <div class="step-label">Contacts</div>
+              </div>
+              <div class="step-item" id="step-nav-5">
+                <div class="step-circle">5</div>
                 <div class="step-label">Products</div>
               </div>
             </div>
@@ -198,14 +202,14 @@
                 </div>
 
                 <!-- <div class="col-md-3">
-                                    <label class="form-label-premium">Customer Category</label>
-                                    <select class="form-control form-control-premium" name="customer_category">
-                                      <option value="">Select Category</option>
-                                      <option value="Corporate">Corporate</option>
-                                      <option value="Semi-Corporate">Semi-Corporate</option>
-                                      <option value="In-House">In-House</option>
-                                    </select>
-                                  </div> -->
+                                          <label class="form-label-premium">Customer Category</label>
+                                          <select class="form-control form-control-premium" name="customer_category">
+                                            <option value="">Select Category</option>
+                                            <option value="Corporate">Corporate</option>
+                                            <option value="Semi-Corporate">Semi-Corporate</option>
+                                            <option value="In-House">In-House</option>
+                                          </select>
+                                        </div> -->
 
                 <div class="col-md-3">
                   <label class="form-label-premium">Phone 1</label>
@@ -382,8 +386,37 @@
               </div>
             </div>
 
-            <!-- STEP 3: CONTACTS -->
+            <!-- STEP 3: DEPARTMENTS -->
             <div id="step-content-3" class="step-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title">Department List</h5>
+                <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
+                  data-bs-target="#addDepartmentModal" onclick="prepareAddDepartment()">+ Add Department</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="departmentTable">
+                  <thead>
+                    <tr>
+                      <th>Department Name</th>
+                      <th>Branch</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="empty-row">
+                      <td colspan="3" class="text-center">No departments added yet.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 text-end">
+                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(2)">Previous</button>
+                <button type="button" class="btn btn-primary-custom" onclick="goToStep(4)">Next</button>
+              </div>
+            </div>
+
+            <!-- STEP 4: CONTACTS -->
+            <div id="step-content-4" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Contact List</h5>
                 <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
@@ -409,13 +442,13 @@
                 </table>
               </div>
               <div class="mt-4 text-end">
-                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(2)">Previous</button>
-                <button type="button" class="btn btn-primary-custom" onclick="goToStep(4)">Next</button>
+                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
+                <button type="button" class="btn btn-primary-custom" onclick="goToStep(5)">Next</button>
               </div>
             </div>
 
-            <!-- STEP 4: PRODUCTS -->
-            <div id="step-content-4" class="step-content">
+            <!-- STEP 5: PRODUCTS -->
+            <div id="step-content-5" class="step-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="section-title">Product List</h5>
                 <button class="btn btn-sm btn-outline-primary-custom" data-bs-toggle="modal"
@@ -441,7 +474,7 @@
                 </table>
               </div>
               <div class="mt-4 text-end">
-                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(3)">Previous</button>
+                <button type="button" class="btn btn-secondary me-2" onclick="goToStep(4)">Previous</button>
                 <a href="{{ route('admin.customer.index') }}" class="btn btn-success px-4 me-2">Finish</a>
               </div>
             </div>
@@ -544,6 +577,46 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary-custom" id="btn-save-branch">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Department Modal -->
+  <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content modal-content-premium">
+        <div class="modal-header modal-header-premium">
+          <h5 class="modal-title modal-title-premium">Add Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="departmentForm">
+            @csrf
+            <input type="hidden" name="customer_id" class="modal_customer_id">
+            <input type="hidden" name="id" id="modal_department_id">
+
+            <div class="row g-3">
+              <div class="col-md-12">
+                <label class="form-label">Branch <span class="text-danger">*</span></label>
+                <select name="branch_id" class="form-control select-branch" required>
+                  <option value="">Select Branch</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <label class="form-label">Department Name <span class="text-danger">*</span></label>
+                <input type="text" name="department" class="form-control" required>
+              </div>
+              <div class="col-md-12">
+                <label class="form-label">Remark</label>
+                <textarea name="remarks" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary-custom" id="btn-save-department">Save</button>
         </div>
       </div>
     </div>
@@ -755,6 +828,9 @@
   <script>
     var savedBranches = [];
     var savedContacts = [];
+    var savedBranches = [];
+    var savedDepartments = [];
+    var savedContacts = [];
     var savedProducts = [];
 
     $(document).ready(function () {
@@ -915,6 +991,52 @@
         });
       });
 
+      // --- DEPARTMENT MODAL SAVE ---
+      $('#btn-save-department').click(function () {
+        var form = $('#departmentForm');
+        var id = $('#modal_department_id').val();
+        var url = id ? "{{ route('admin.customer.edit.department') }}" : "{{ route('admin.customer.add.department') }}";
+
+        $.ajax({
+          url: url,
+          method: "POST",
+          data: form.serialize(),
+          dataType: 'json',
+          success: function (res) {
+            if (res.status) {
+              var branchName = $('#departmentForm .select-branch option:selected').text();
+              var departmentName = $('#departmentForm input[name="department"]').val();
+              var deptId = id ? id : (res.department_id || Date.now());
+
+              var dataObj = {
+                id: deptId,
+                branchName: branchName,
+                name: departmentName,
+                fullData: form.serializeArray()
+              };
+
+              if (id) {
+                var idx = savedDepartments.findIndex(x => x.id == id);
+                if (idx !== -1) savedDepartments[idx] = dataObj;
+              } else {
+                savedDepartments.push(dataObj);
+              }
+
+              renderDepartmentTable();
+              $('#addDepartmentModal').modal('hide');
+              form[0].reset();
+              $('#modal_department_id').val('');
+              $('#btn-save-department').text('Save');
+            } else {
+              alert('Failed to save department');
+            }
+          },
+          error: function () {
+            alert('Error saving department.');
+          }
+        });
+      });
+
       // --- CONTACT MODAL SAVE ---
       $('#btn-save-contact').click(function () {
         var form = $('#contactForm');
@@ -1044,6 +1166,19 @@
         });
       }
       prepareContactModal(); // Update branch list for contacts
+      prepareDepartmentModal();
+    }
+
+    function renderDepartmentTable() {
+      var tbody = $('#departmentTable tbody');
+      tbody.empty();
+      if (savedDepartments.length === 0) {
+        tbody.append('<tr class="empty-row"><td colspan="3" class="text-center">No departments added yet.</td></tr>');
+      } else {
+        savedDepartments.forEach(d => {
+          tbody.append('<tr><td>' + d.name + '</td><td>' + d.branchName + '</td><td><button class="btn btn-sm btn-primary-custom" onclick="editDepartment(' + d.id + ')">Edit</button></td></tr>');
+        });
+      }
     }
 
     function renderContactTable() {
@@ -1096,6 +1231,22 @@
       $('#modal_branch_city').empty().append('<option value="">Select City</option>');
       $('#modal_branch_state').empty().append('<option value="">Select State</option>');
       $('#modal_branch_area').val('').trigger('change');
+    }
+
+    function prepareDepartmentModal() {
+       var opts = '<option value="">Select Branch</option>';
+       savedBranches.forEach(b => {
+         opts += '<option value="' + b.id + '">' + b.name + '</option>';
+       });
+       $('#departmentForm .select-branch').html(opts);
+    }
+
+    function prepareAddDepartment() {
+      prepareDepartmentModal();
+      $('#departmentForm')[0].reset();
+      $('#modal_department_id').val('');
+      $('#btn-save-department').text('Save');
+      $('#departmentForm .select-branch').val('').trigger('change');
     }
 
     function prepareAddContact() {
@@ -1169,6 +1320,21 @@
       $('#modal_product_id').val(item.id);
       $('#addProductModal').modal('show');
       $('#btn-save-product').text('Update');
+    }
+
+    window.editDepartment = function (id) {
+      var item = savedDepartments.find(x => x.id == id);
+      if (!item) return;
+
+      var form = $('#departmentForm');
+      item.fullData.forEach(field => {
+        var input = form.find('[name="' + field.name + '"]');
+        if (input.length) input.val(field.value).trigger('change');
+      });
+
+      $('#modal_department_id').val(item.id);
+      $('#addDepartmentModal').modal('show');
+      $('#btn-save-department').text('Update');
     }
 
     // Auto-calculate Service Dates

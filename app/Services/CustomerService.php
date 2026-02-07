@@ -276,4 +276,22 @@ class CustomerService
      {
           return CustomerBranchContact::create($data);
      }
+
+     public function addCustomerDepartment($data)
+     {
+          return CustomerDepartment::create($data);
+     }
+
+     public function editCustomerDepartment($id, $data)
+     {
+          return CustomerDepartment::where('id', $id)->update($data);
+     }
+
+     public function getCustomerDepartments($customer_id)
+     {
+          return CustomerDepartment::select('customer_departments.*', 'customer_branches.branch_name')
+               ->leftJoin('customer_branches', 'customer_branches.id', '=', 'customer_departments.branch_id')
+               ->where('customer_departments.customer_id', $customer_id)
+               ->get();
+     }
 }

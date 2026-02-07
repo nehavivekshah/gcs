@@ -254,6 +254,10 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
     Route::post('/add-customer-branch', 'addCustomerBranch')->name('add.branch');
     Route::post('/edit-customer-branch', 'editCustomerBranch')->name('edit.customer.branch');
 
+    Route::post('/get-customer-department', 'getCustomerDepartment')->name('get.customer.department');
+    Route::post('/add-customer-department', 'addCustomerDepartment')->name('add.department');
+    Route::post('/edit-customer-department', 'editCustomerDepartment')->name('edit.department');
+
     Route::post('/get-customer-contact', 'getCustomerContact')->name('get.customer.contact');
     Route::post('/add-customer-contact', 'addCustomerContact')->name('add.contact');
     Route::post('/edit-customer-contact', 'editCustomerContact')->name('edit.contact');

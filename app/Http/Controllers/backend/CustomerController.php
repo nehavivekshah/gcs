@@ -672,6 +672,47 @@ class CustomerController extends Controller
     }
 
 
+    public function getCustomerDepartment(Request $request)
+    {
+        $departments = $this->customerService->getCustomerDepartments($request->customer_id);
+        return response()->json($departments);
+    }
+
+    public function addCustomerDepartment(Request $req)
+    {
+        $data = [
+            'customer_id' => $req->customer_id,
+            'branch_id' => $req->branch_id,
+            'department' => $req->department,
+            'created_by' => session('user_name', 'Guest')
+        ];
+
+        $dept = $this->customerService->addCustomerDepartment($data);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Department added successfully',
+            'department_id' => $dept->id
+        ]);
+    }
+
+    public function editCustomerDepartment(Request $req)
+    {
+        $id = $req->id;
+        $data = [
+            'branch_id' => $req->branch_id,
+            'department' => $req->department,
+            'modified_by' => session('user_name', 'Guest')
+        ];
+
+        $update = $this->customerService->editCustomerDepartment($id, $data);
+
+        return response()->json([
+            'status' => (bool) $update,
+            'message' => $update ? 'Department updated successfully' : 'Failed to update department'
+        ]);
+    }
+
     public function getCustomerContact(Request $request)
     {
         $customers = $this->customerService->getCustomerContact($request->customer_id);
