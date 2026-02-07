@@ -66,45 +66,20 @@
 
         <li class="sidebar-list">
           <i class="fa fa-thumb-tack"></i>
-          <a class="sidebar-link sidebar-title link-nav active" href="{{ route('admin.customer.index') }}">
+          <a class="sidebar-link sidebar-title" href="#">
             <svg class="stroke-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
             </svg>
             <svg class="fill-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-user') }}"></use>
             </svg>
-            <span>Customer</span>
-            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
+            <span>GCS Customer</span>
           </a>
-        </li>
-
-        <li class="sidebar-list">
-          <i class="fa fa-thumb-tack"></i>
-          <a class="sidebar-link sidebar-title link-nav active" href="{{ route('admin.company.complaint.index') }}">
-            <svg class="stroke-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-chat') }}"></use>
-            </svg>
-            <svg class="fill-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-chat') }}"></use>
-            </svg>
-            <span>Complaints</span>
-            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
-          </a>
-        </li>
-
-        <li class="sidebar-list">
-          <i class="fa fa-thumb-tack"></i>
-          <a class="sidebar-link sidebar-title link-nav active"
-            href="{{ route('admin.product.inward.outward.index') }}">
-            <svg class="stroke-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-ecommerce') }}"></use>
-            </svg>
-            <svg class="fill-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
-            </svg>
-            <span>Product In/Out</span>
-            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
-          </a>
+          <ul class="sidebar-submenu">
+            <li><a href="{{ route('admin.customer.index') }}">Customer</a></li>
+            <li><a href="{{ route('admin.company.complaint.index') }}">Complaints</a></li>
+            <li><a href="{{ route('admin.product.inward.outward.index') }}">Product In/Out</a></li>
+          </ul>
         </li>
 
         <li class="sidebar-list">
