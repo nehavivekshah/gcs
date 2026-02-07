@@ -54,7 +54,7 @@
                       <td class="text-center">
                         <div class="d-flex justify-content-center align-items-center gap-2">
                           <a href="javascript:void(0);" class="btn btn-sm-custom btn-outline-dark editAreaBtn"
-                            data-area="{{ json_encode($area) }}" data-bs-toggle="tooltip" title="Edit">
+                            data-area='@json($area)' data-bs-toggle="tooltip" title="Edit">
                             <i class="icon-pencil-alt"></i>
                           </a>
                           <a href="{{ route('admin.area.delete', ['uuid' => $area->uuid]) }}"
@@ -223,12 +223,19 @@
       handleCityStateDependency('#add_city_id', '#add_state_id');
       handleCityStateDependency('#edit_city_id', '#edit_state_id');
 
-      // Handle Edit Click
-      $('.editAreaBtn').on('click', function () {
+      // Handle Edit Click using event delegation for DataTables
+      $(document).on('click', '.editAreaBtn', function () {
         const area = $(this).data('area');
+        
+        // Temporarily disable the change listener to prevent AJAX overwrite
+        $('#edit_city_id').off('change');
+        
         $('#edit_city_id').val(area.city_id).trigger('change');
         $('#edit_state_id').val(area.state_id).trigger('change');
         $('#edit_area_name').val(area.area);
+
+        // Re-enable the change listener
+        handleCityStateDependency('#edit_city_id', '#edit_state_id');
 
         let updateUrl = "{{ route('admin.area.update', ['uuid' => ':uuid']) }}";
         $('#editAreaForm').attr('action', updateUrl.replace(':uuid', area.uuid));
