@@ -3,35 +3,27 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use App\Services\UserService;
-
 use Illuminate\Http\Request;
+use App\Services\CoordinatorService;
 
 class CoordinatorController extends Controller
 {
-
-    function __construct(protected UserService $userService)
-    {
-    }
-
-    function index()
-    {
-
-        $usersList = $this->userService->index();
-        return view('backend/coordinator/coordinator-list', compact('usersList'));
+    function __construct(protected CoordinatorService $coordinatorService){}
+    
+    function index(){
+       
+        $coordinatorList = $this->coordinatorService->index();
+        return view('backend/coordinator/coordinator-list', compact('coordinatorList'));
     }
 
 
-    function create()
-    {
+    function create(){
 
-        $userTypeList = $this->userService->gatAllUserType();
-        return view('backend/coordinator/add-coordinator', compact('userTypeList'));
+       $userTypeList = $this->coordinatorService->gatAllUserType();
+       return view('backend/coordinator/add-coordinator', compact('userTypeList'));
     }
 
-    function store(Request $req)
-    {
+    function store(Request $req){
 
         $userName = $req->user_name;
         $userPassword = $req->user_password;
@@ -42,54 +34,50 @@ class CoordinatorController extends Controller
 
         $created_by = session('user_name', 'Guest');
 
-        $data = ['user_name' => $userName, 'password' => $userPassword, 'outlook_email' => $outlookEmail, 'outlook_password' => $outlookPassword, 'user_type' => $userType, 'host' => $host, 'created_by' => $created_by];
-        $this->userService->store($data);
-
-        return redirect()->route('admin.user.index');
+        $data = ['user_name' => $userName, 'password' => $userPassword, 'outlook_email' => $outlookEmail, 'outlook_password' => $outlookPassword, 'user_type' => $userType, 'host'=> $host, 'created_by' => $created_by];
+        $this->coordinatorService->store($data);
+        
+        return redirect()->route('admin.coordinator.index');
 
     }
 
 
-    function edit(Request $req)
-    {
+    function edit(Request $req){
 
         $uuid = $req->uuid;
-        $users = $this->userService->edit($uuid);
-        $userTypeList = $this->userService->gatAllUserType();
-        return view('backend/user/edit-user', compact('users', 'userTypeList'));
+        $coordinators = $this->coordinatorService->edit($uuid);
+        $userTypeList = $this->coordinatorService->gatAllUserType();
+        return view('backend/coordinator/edit-coordinator', compact('coordinators'));
     }
 
-    function update(Request $req, $uuid)
-    {
+    function update(Request $req, $uuid){
 
         $userName = $req->user_name;
         $userPassword = $req->user_password;
         $outlookEmail = $req->outlook_email;
         $outlookPassword = $req->outlook_password;
-        $userType = $req->user_type;
-
+       
         $modified_by = session('user_name', 'Guest');
 
-        $data = ['user_name' => $userName, 'password' => $userPassword, 'outlook_email' => $outlookEmail, 'outlook_password' => $outlookPassword, 'user_type' => $userType, 'modified_by' => $modified_by];
+        $data = ['user_name' => $userName, 'password' => $userPassword, 'outlook_email' => $outlookEmail, 'outlook_password' => $outlookPassword, 'modified_by' => $modified_by];
+        
+        $update = $this->coordinatorService->update($uuid, $data);
 
-        $update = $this->userService->update($uuid, $data);
-
-        if ($update) {
-            return redirect()->route('admin.user.index')->with('success', 'Update Success ...');
-        } else {
-            return redirect()->route('admin.user.index')->with('error', 'Not Update ...');
+        if($update) {
+            return redirect()->route('admin.coordinator.index')->with('success','Update Success ...');
+        }else{
+            return redirect()->route('admin.coordinator.index')->with('error','Not Update ...');
         }
     }
 
-    function destroy($uuid)
-    {
+    function destroy($uuid){
 
-        $delete = $this->userService->destroy($uuid);
+        $delete = $this->coordinatorService->destroy($uuid);
 
-        if ($delete) {
-            return redirect()->route('admin.user.index')->with('success', 'Delete Success ...');
-        } else {
-            return redirect()->route('admin.user.index')->with('error', 'Not Delete ...');
+        if($delete) {
+            return redirect()->route('admin.coordinator.index')->with('success','Delete Success ...');
+        }else{
+            return redirect()->route('admin.coordinator.index')->with('error','Not Delete ...');
         }
 
     }

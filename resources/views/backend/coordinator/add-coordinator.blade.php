@@ -5,7 +5,7 @@
   <div class="page-title">
     <div class="row">
       <div class="col-6">
-        <h4>Add User</h4>
+        <h4>Add Coordinator</h4>
       </div>
       <div class="col-6">
         
@@ -21,8 +21,10 @@
       <div class="card height-equal">
 
         <div class="card-body">
-          <form class="row g-3 needs-validation custom-input" novalidate="" method="post" action="{{ route('admin.user.store') }}">
+          <form class="row g-3 needs-validation custom-input" novalidate="" method="post" action="{{ route('admin.coordinator.store') }}">
             @csrf
+
+            <input type="text" name="user_type" value="4" hidden>
 
             <div class="col-4">
               <label class="form-label" for="user_name">User name</label>
@@ -70,21 +72,6 @@
             </div>
 
 
-            <div class="col-4">
-              <label class="form-label" for="user_type">User Type</label>
-              <select class="form-control" id="user_type" name="user_type">
-                <option value=""> Select Type </option>
-                  @foreach($userTypeList as $userType)
-                    <option value="{{ $userType->id }}"> {{ $userType->user_type}} </option>
-                  @endforeach
-              </select>
-              <div class="invalid-feedback">
-                @error('user_type')
-                {{ $message }}
-                @enderror
-              </div>
-
-            </div>
 
             <div class="col-12">
               <div class="d-flex justify-content-end">

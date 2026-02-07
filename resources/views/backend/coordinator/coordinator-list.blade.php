@@ -4,12 +4,12 @@
   <div class="page-title">
     <div class="row">
       <div class="col-6">
-        <h4>User List</h4>
+        <h4>Coordinator List</h4>
       </div>
       <div class="col-6">
         <ol class="breadcrumb">
-          <a href="{{ route('admin.user.create') }}">
-            <button type="button" class="btn btn-lg" data-bs-toggle="tooltip" title="Add User" style="background:#bf0103;color:white;">  Add User </button>
+          <a href="{{ route('admin.coordinator.create') }}">
+            <button type="button" class="btn btn-lg" data-bs-toggle="tooltip" title="Add Coordinator" style="background:#bf0103;color:white;">  Add Coordinator </button>
           </a>
         </ol>
       </div>
@@ -34,34 +34,34 @@
                   <th>Password</th>
                   <th>Outlook Email</th>
                   <th>Outlook Password</th>
-                  <th>Host</th>
-                  <th>User Type</th>
+                  <th>Created By</th>
+                  <th>Modified By</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
 
               @php $i=0; @endphp
-                @foreach($usersList as $users)
+                @foreach($coordinatorList as $coordinators)
                   @php $i++; @endphp
                 <tr>
                   <td>{{ $i }}</td>
-                  <td>{{ $users->user_name }}</td>
-                  <td>{{ $users->password }}</td>
-                  <td>{{ $users->outlook_email }}</td>
-                  <td>{{ $users->outlook_password }}</td>
-                  <td>{{ $users->host }}</td>
-                  <td>{{ $users->type }}</td>
+                  <td>{{ $coordinators->user_name }}</td>
+                  <td>{{ $coordinators->password }}</td>
+                  <td>{{ $coordinators->outlook_email }}</td>
+                  <td>{{ $coordinators->outlook_password }}</td>
+                  <td>{{ $coordinators->created_by }}</td>
+                  <td>{{ $coordinators->modified_by }}</td>
                   <td>
                     <ul class="action">
                       <li class="edit">
-                        <a href="{{ route('admin.user.edit',['uuid' => $users->uuid]) }}">
+                        <a href="{{ route('admin.coordinator.edit',['uuid' => $coordinators->uuid]) }}">
                           <i class="icon-pencil-alt"></i>
                         </a>
                       </li>
                       <li class="delete">
                         
-                        <a href="{{ route('admin.user.delete',['uuid' => $users->uuid]) }}"><i class="icon-trash"></i></a>
+                        <a href="{{ route('admin.coordinator.delete',['uuid' => $coordinators->uuid]) }}"><i class="icon-trash"></i></a>
                       </li>
                     </ul>
                   </td>
@@ -74,16 +74,7 @@
         </div>
       </div>
     </div>
-    <!-- Zero Configuration  Ends-->
-    <!-- Complex headers (rowspan and colspan) Starts-->
-
-    <!-- Complex headers (rowspan and colspan) Ends-->
-    <!-- State saving Starts-->
-
-    <!-- State saving Ends-->
-    <!-- Scroll - vertical dynamic Starts-->
-
-    <!-- Scroll - vertical dynamic Ends-->
+   
   </div>
 </div>
 <!-- Container-fluid Ends-->
