@@ -48,8 +48,8 @@
           </a>
           <ul class="sidebar-submenu">
             <li><a href="{{ route('admin.user-type.index') }}">User Type</a></li>
-            <li><a href="{{ route('admin.user.index') }}">User List</a></li>
-            <li><a href="{{ route('admin.coordinator.index') }}">Coordinator List</a></li>
+            <li><a href="{{ route('admin.user.index') }}">Users</a></li>
+            <li><a href="{{ route('admin.coordinator.index') }}">Coordinators</a></li>
             <li><a href="{{ route('admin.engineer.index') }}">Engineer</a></li>
             <li><a href="{{ route('admin.year.index') }}">Year</a></li>
             <li><a href="{{ route('admin.product.index') }}">Product</a></li>
@@ -87,7 +87,7 @@
             <svg class="fill-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-chat') }}"></use>
             </svg>
-            <span>Customer Complaint</span>
+            <span>Complaints</span>
             <div class="according-menu"><i class="fa fa-angle-right"></i></div>
           </a>
         </li>
@@ -102,7 +102,7 @@
             <svg class="fill-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-ecommerce') }}"></use>
             </svg>
-            <span>Product Inward Outward</span>
+            <span>Product In/Out</span>
             <div class="according-menu"><i class="fa fa-angle-right"></i></div>
           </a>
         </li>

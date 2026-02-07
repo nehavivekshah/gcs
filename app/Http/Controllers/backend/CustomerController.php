@@ -150,6 +150,29 @@ class CustomerController extends Controller
 
         $customer = $this->customerService->store($data);
 
+        // Auto-create Headquarter branch if department is provided
+        if (!empty($department)) {
+            $branchData = [
+                'customer_id' => $customer->id,
+                'branch_name' => 'Headquarter',
+                'department' => $department,
+                'contact_person' => $contact_person,
+                'mobile_no' => $mobile_no,
+                'customer_code' => $customer_code,
+                'email' => $email,
+                'phone' => $phone_1,
+                'address_line_1' => $address_line_1,
+                'address_line_2' => $address_line_2,
+                'state_id' => $state_id,
+                'city_id' => $city_id,
+                'area_id' => $area_id,
+                'pincode' => $pincode,
+                'fax' => $fax,
+                'created_by' => $created_by
+            ];
+            $this->customerService->addCustomerBranch($branchData);
+        }
+
         if ($req->wantsJson()) {
             return response()->json([
                 'status' => true,
