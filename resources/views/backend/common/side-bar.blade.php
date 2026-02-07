@@ -94,6 +94,21 @@
 
         <li class="sidebar-list">
           <i class="fa fa-thumb-tack"></i>
+          <a class="sidebar-link sidebar-title link-nav active"
+            href="{{ route('admin.product.inward.outward.index') }}">
+            <svg class="stroke-icon">
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
+            </svg>
+            <svg class="fill-icon">
+              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-user') }}"></use>
+            </svg>
+            <span>Product Inward Outward</span>
+            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
+          </a>
+        </li>
+
+        <li class="sidebar-list">
+          <i class="fa fa-thumb-tack"></i>
           <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.logout') }}">
             <svg class="stroke-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-file') }}"></use>

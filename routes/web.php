@@ -18,6 +18,7 @@ use App\Http\Controllers\backend\SupplierController;
 use App\Http\Controllers\backend\CustomerController;
 use App\Http\Controllers\backend\CoordinatorController;
 use App\Http\Controllers\backend\CompanyComplaintController;
+use App\Http\Controllers\backend\ProductInwardOutwardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -291,6 +292,20 @@ Route::prefix('admin/company-complaint')->name('admin.company.complaint.')->cont
     Route::post('/get-customer-department', 'getCustomerDepartment')->name('get.customer.department');
     Route::post('/get-customer-department-product', 'getCustomerDepartmentProduct')->name('get.customer.department.product');
     Route::post('/get-products', 'getProducts')->name('get.products');
+
+});
+
+// Engineer Master 
+Route::prefix('admin/product-inward-outward')->name('admin.product.inward.outward.')->controller(ProductInwardOutwardController::class)->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::patch('/update', 'update')->name('update');
+    Route::get('/{uuid}', 'destroy')->name('delete');
+
+    Route::post('/get-customer-branch', 'getCustomerBranch')->name('get.customer.branch');
+    Route::post('/get-customer-department', 'getCustomerDepartment')->name('get.customer.department');
+    Route::post('/get-customer-department-product', 'getCustomerDepartmentProduct')->name('get.customer.department.product');
 
 });
 
