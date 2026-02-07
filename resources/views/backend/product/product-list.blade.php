@@ -101,7 +101,7 @@
                 <label class="form-label-premium">Manufacture <span class="text-danger">*</span></label>
                 <div class="d-flex gap-2">
                   <div class="flex-grow-1">
-                    <select name="manufacture" class="form-control form-control-premium select2-modal" required>
+                    <select name="manufacture" class="select2-modal" required>
                       <option value="">Select Manufacture</option>
                       @foreach($manufactureList as $manufacture)
                         <option value="{{ $manufacture->id }}">{{ $manufacture->manufacture }}</option>
@@ -117,7 +117,8 @@
                 <label class="form-label-premium">Product Type <span class="text-danger">*</span></label>
                 <div class="d-flex gap-2">
                   <div class="flex-grow-1">
-                    <select name="product_type" id="add_product_type" class="form-control form-control-premium select2-modal" required>
+                    <select name="product_type" id="add_product_type"
+                      class="select2-modal" required>
                       <option value="">Select Product Type</option>
                       @foreach($productTypeList as $type)
                         <option value="{{ $type->id }}">{{ $type->product_type }}</option>
@@ -131,7 +132,8 @@
               </div>
               <div class="col-md-4">
                 <label class="form-label-premium">Sub Product Type <span class="text-danger">*</span></label>
-                <select name="sub_product_type" id="add_sub_product_type" class="form-control form-control-premium select2-modal" required>
+                <select name="sub_product_type" id="add_sub_product_type"
+                  class="select2-modal" required>
                   <option value="">Select Sub Product</option>
                 </select>
               </div>
@@ -169,7 +171,8 @@
             <div class="row g-3">
               <div class="col-md-4">
                 <label class="form-label-premium">Manufacture <span class="text-danger">*</span></label>
-                <select name="manufacture" id="edit_manufacture" class="form-control form-control-premium select2-modal" required>
+                <select name="manufacture" id="edit_manufacture" class="select2-modal"
+                  required>
                   <option value="">Select Manufacture</option>
                   @foreach($manufactureList as $manufacture)
                     <option value="{{ $manufacture->id }}">{{ $manufacture->manufacture }}</option>
@@ -178,7 +181,8 @@
               </div>
               <div class="col-md-4">
                 <label class="form-label-premium">Product Type <span class="text-danger">*</span></label>
-                <select name="product_type" id="edit_product_type" class="form-control form-control-premium select2-modal" required>
+                <select name="product_type" id="edit_product_type" class="select2-modal"
+                  required>
                   <option value="">Select Product Type</option>
                   @foreach($productTypeList as $type)
                     <option value="{{ $type->id }}">{{ $type->product_type }}</option>
@@ -187,7 +191,8 @@
               </div>
               <div class="col-md-4">
                 <label class="form-label-premium">Sub Product Type <span class="text-danger">*</span></label>
-                <select name="sub_product_type" id="edit_sub_product_type" class="form-control form-control-premium select2-modal" required>
+                <select name="sub_product_type" id="edit_sub_product_type"
+                  class="select2-modal" required>
                   <option value="">Select Sub Product</option>
                 </select>
               </div>
