@@ -35,7 +35,9 @@
                                 <input type="text" class="form-control form-control-premium" id="area" name="area"
                                     placeholder="Area" value="{{ old('area') }}" required>
                                 <div class="invalid-feedback">
-                                    @error('area') {{ $message }} @enderror
+                                    @error('area')
+                                        {{ $message }}
+                                    @enderror
                                 </div>
                             </div>
 
@@ -53,7 +55,9 @@
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    @error('city_id') {{ $message }} @enderror
+                                    @error('city_id')
+                                        {{ $message }}
+                                    @enderror
                                 </div>
                             </div>
 
@@ -66,7 +70,9 @@
                                     <option value="">Select State</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    @error('state_id') {{ $message }} @enderror
+                                    @error('state_id')
+                                        {{ $message }}
+                                    @enderror
                                 </div>
                             </div>
 
