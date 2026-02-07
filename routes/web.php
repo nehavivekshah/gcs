@@ -275,12 +275,10 @@ Route::prefix('admin/customer')->name('admin.customer.')->controller(CustomerCon
     Route::get('/get-product-form-data', 'getProductFormData')->name('get.product.form.data');
 });
 
-Route::get('admin/clear-cache', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
-    Artisan::call('route:clear');
-    return 'DONE';
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('route:clear');
+    return 'DONE'; //Return anything
 });
-
-
