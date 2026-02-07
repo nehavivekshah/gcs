@@ -88,9 +88,14 @@
           <div class="modal-body p-4">
             <div class="row g-3">
               <div class="col-12">
+                <label class="form-label-premium">Area Name <span class="text-danger">*</span></label>
+                <input type="text" name="area" class="form-control form-control-premium" required
+                  placeholder="Enter area name">
+              </div>
+              <div class="col-12">
                 <label class="form-label-premium">City <span class="text-danger">*</span></label>
                 <select name="city_id" id="add_city_id" class="form-select select2-modal" required>
-                  <option value="">Select City</option>
+                  <option value="">Select City (Searchable)</option>
                   @foreach($cityList as $city)
                     <option value="{{ $city->id }}">{{ $city->city }}</option>
                   @endforeach
@@ -105,11 +110,6 @@
                   @endforeach
                 </select>
                 <div class="form-text mt-1 text-muted small">State is auto-selected based on city.</div>
-              </div>
-              <div class="col-12">
-                <label class="form-label-premium">Area Name <span class="text-danger">*</span></label>
-                <input type="text" name="area" class="form-control form-control-premium" required
-                  placeholder="Enter area name">
               </div>
             </div>
           </div>
@@ -135,9 +135,13 @@
           <div class="modal-body p-4">
             <div class="row g-3">
               <div class="col-12">
+                <label class="form-label-premium">Area Name <span class="text-danger">*</span></label>
+                <input type="text" name="area" id="edit_area_name" class="form-control form-control-premium" required>
+              </div>
+              <div class="col-12">
                 <label class="form-label-premium">City <span class="text-danger">*</span></label>
                 <select name="city_id" id="edit_city_id" class="form-select select2-modal" required>
-                  <option value="">Select City</option>
+                  <option value="">Select City (Searchable)</option>
                   @foreach($cityList as $city)
                     <option value="{{ $city->id }}">{{ $city->city }}</option>
                   @endforeach
@@ -151,10 +155,6 @@
                     <option value="{{ $state->id }}">{{ $state->state }}</option>
                   @endforeach
                 </select>
-              </div>
-              <div class="col-12">
-                <label class="form-label-premium">Area Name <span class="text-danger">*</span></label>
-                <input type="text" name="area" id="edit_area_name" class="form-control form-control-premium" required>
               </div>
             </div>
           </div>

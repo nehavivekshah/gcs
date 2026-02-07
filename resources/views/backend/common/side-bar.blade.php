@@ -66,7 +66,8 @@
 
         <li class="sidebar-list">
           <i class="fa fa-thumb-tack"></i>
-          <a class="sidebar-link sidebar-title" href="#">
+          <a class="sidebar-link sidebar-title {{ request()->is('admin/customer*', 'admin/company-complaint*', 'admin/product-inward-outward*') ? 'active' : '' }}"
+            href="#">
             <svg class="stroke-icon">
               <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-user') }}"></use>
             </svg>
@@ -75,30 +76,29 @@
             </svg>
             <span>GCS Customer</span>
           </a>
-          <ul class="sidebar-submenu">
-            <li><a href="{{ route('admin.customer.index') }}">Customer</a></li>
-            <li><a href="{{ route('admin.company.complaint.index') }}">Complaints</a></li>
-            <li><a href="{{ route('admin.product.inward.outward.index') }}">Product In/Out</a></li>
+          <ul class="sidebar-submenu"
+            style="{{ request()->is('admin/customer*', 'admin/company-complaint*', 'admin/product-inward-outward*') ? 'display: block;' : '' }}">
+            <li><a class="{{ request()->is('admin/customer*') ? 'active' : '' }}"
+                href="{{ route('admin.customer.index') }}">Customer</a></li>
+            <li><a class="{{ request()->is('admin/company-complaint*') ? 'active' : '' }}"
+                href="{{ route('admin.company.complaint.index') }}">Complaints</a></li>
+            <li><a class="{{ request()->is('admin/product-inward-outward*') ? 'active' : '' }}"
+                href="{{ route('admin.product.inward.outward.index') }}">Product In/Out</a></li>
           </ul>
         </li>
-
-        <li class="sidebar-list">
-          <i class="fa fa-thumb-tack"></i>
-          <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.logout') }}">
-            <svg class="stroke-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-file') }}"></use>
-            </svg>
-            <svg class="fill-icon">
-              <use href="{{ url('public/assets/svg/icon-sprite.svg#fill-file') }}"></use>
-            </svg>
-            <span>Logout</span>
-            <div class="according-menu"><i class="fa fa-angle-right"></i></div>
-          </a>
-        </li>
-
 
       </ul>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
     </div>
   </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-list">
+      <a class="sidebar-link" href="{{ route('admin.logout') }}">
+        <svg>
+          <use href="{{ url('public/assets/svg/icon-sprite.svg#stroke-file') }}"></use>
+        </svg>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
 </div>
