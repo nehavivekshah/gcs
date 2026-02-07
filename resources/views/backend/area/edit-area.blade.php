@@ -1,64 +1,5 @@
 @extends('backend.common.master')
 
-@push('styles')
-  <style>
-    /* ===============================
-     ALL FORM INPUT TEXT COLOR BLACK
-     =============================== */
-
-    /* Text inputs, textarea */
-    input,
-    textarea {
-      color: #000 !important;
-    }
-
-    /* Normal select dropdown */
-    select {
-      color: #000 !important;
-    }
-
-    /* Placeholder color */
-    ::placeholder {
-      color: #000 !important;
-      opacity: 1;
-    }
-
-    /* Select2 selected value */
-    .select2-container--default .select2-selection--single {
-      color: #000 !important;
-    }
-
-    /* Select2 dropdown options */
-    .select2-container--default .select2-results__option {
-      color: #000 !important;
-    }
-
-    /* Select2 highlighted option */
-    .select2-container--default .select2-results__option--highlighted {
-      color: #000 !important;
-      background-color: #e9ecef !important;
-    }
-
-    /* Select2 dropdown background */
-    .select2-dropdown {
-      background-color: #fff !important;
-    }
-
-    /* Disabled inputs */
-    input:disabled,
-    select:disabled,
-    textarea:disabled {
-      color: #000 !important;
-    }
-
-    /* Validation text color fix */
-    .was-validated .form-control:invalid,
-    .form-control.is-invalid {
-      color: #000 !important;
-    }
-  </style>
-@endpush
-
 @section('main-section')
 
   <div class="container-fluid">
@@ -68,7 +9,10 @@
           <h4>Edit Area</h4>
         </div>
         <div class="col-6">
-
+          <ol class="breadcrumb justify-content-end">
+            <li class="breadcrumb-item"><a href="{{ route('admin.area.index') }}">Area List</a></li>
+            <li class="breadcrumb-item active">Edit Area</li>
+          </ol>
         </div>
       </div>
     </div>
@@ -78,7 +22,7 @@
     <div class="row">
 
       <div class="col-xl-12">
-        <div class="card height-equal">
+        <div class="card card-premium">
 
           <div class="card-body">
             <form class="row g-3 needs-validation custom-input" novalidate="" method="post"
@@ -86,21 +30,21 @@
               @csrf
               @method('PATCH')
 
-              <div class="col-4">
-                <label class="form-label" for="area">Area</label>
-                <input type="text" class="form-control" id="area" name="area" placeholder="Area" required_
-                  value="{{ $area->area }}">
+              <div class="col-md-4">
+                <label class="form-label-premium" for="area">Area <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-premium" id="area" name="area" placeholder="Area"
+                  required value="{{ $area->area }}">
                 <div class="invalid-feedback">
-                  @error('amc_product')
+                  @error('area')
                     {{ $message }}
                   @enderror
                 </div>
 
               </div>
 
-              <div class="col-4">
-                <label class="form-label" for="city_id">City</label>
-                <select class="form-control select2" id="city_id" name="city_id" required>
+              <div class="col-md-4">
+                <label class="form-label-premium" for="city_id">City <span class="text-danger">*</span></label>
+                <select class="form-control form-control-premium select2" id="city_id" name="city_id" required>
                   <option value="">Select City</option>
                   @foreach($cityList as $cities)
                     <option value="{{ $cities->id }}" @selected($cities->id == $area->city_id)>
@@ -113,9 +57,9 @@
                 </div>
               </div>
 
-              <div class="col-4">
-                <label class="form-label" for="state_id">State</label>
-                <select class="form-control select2" id="state_id" name="state_id" required>
+              <div class="col-md-4">
+                <label class="form-label-premium" for="state_id">State <span class="text-danger">*</span></label>
+                <select class="form-control form-control-premium select2" id="state_id" name="state_id" required>
                   <option value="">Select State</option>
                   @foreach($stateList as $states)
                     <option value="{{ $states->id }}" @selected($states->id == $area->state_id)>
@@ -130,7 +74,7 @@
 
               <div class="col-12">
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-lg" type="submit" style="background:#bf0103;color:white;">
+                  <button class="btn btn-primary-custom" type="submit">
                     Submit
                   </button>
                 </div>

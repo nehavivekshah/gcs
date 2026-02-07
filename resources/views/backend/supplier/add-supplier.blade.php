@@ -3,8 +3,8 @@
 @push('styles')
   <style>
     /* ===============================
-     ALL FORM INPUT TEXT COLOR BLACK
-     =============================== */
+         ALL FORM INPUT TEXT COLOR BLACK
+         =============================== */
 
     /* Text inputs, textarea */
     input,
@@ -67,10 +67,11 @@
         <div class="col-6">
           <h4>Add Supplier</h4>
         </div>
-        <div class="col-6 text-end">
-          <a href="{{ route('admin.supplier.index') }}">
-            <button type="button" class="btn" style="background:#bf0103;color:white;"> Back</button>
-          </a>
+        <div class="col-6">
+          <ol class="breadcrumb justify-content-end">
+            <li class="breadcrumb-item"><a href="{{ route('admin.supplier.index') }}">Supplier List</a></li>
+            <li class="breadcrumb-item active">Add Supplier</li>
+          </ol>
         </div>
       </div>
     </div>
@@ -80,7 +81,7 @@
     <div class="row">
 
       <div class="col-xl-12">
-        <div class="card height-equal">
+        <div class="card card-premium">
 
           <div class="card-body">
             <form class="row g-3 needs-validation custom-input" novalidate="" method="post"
@@ -92,60 +93,64 @@
               <div class="row gy-3">
 
                 <div class="col-4">
-                  <label class="form-label" for="supplier_name">Supplier Name</label>
-                  <input type="text" class="form-control" id="supplier_name" name="supplier_name"
+                  <label class="form-label-premium" for="supplier_name">Supplier Name</label>
+                  <input type="text" class="form-control form-control-premium" id="supplier_name" name="supplier_name"
                     value="{{ old('supplier_name') }}">
                   <div class="invalid-feedback">@error('supplier_name') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="mobile_no">Mobile No</label>
-                  <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ old('mobile_no') }}">
+                  <label class="form-label-premium" for="mobile_no">Mobile No</label>
+                  <input type="text" class="form-control form-control-premium" id="mobile_no" name="mobile_no"
+                    value="{{ old('mobile_no') }}">
                   <div class="invalid-feedback">@error('mobile_no') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="contact_person">Contact Person</label>
-                  <input type="text" class="form-control" id="contact_person" name="contact_person"
+                  <label class="form-label-premium" for="contact_person">Contact Person</label>
+                  <input type="text" class="form-control form-control-premium" id="contact_person" name="contact_person"
                     value="{{ old('contact_person') }}">
                   <div class="invalid-feedback">@error('contact_person') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="email">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                  <label class="form-label-premium" for="email">Email</label>
+                  <input type="email" class="form-control form-control-premium" id="email" name="email"
+                    value="{{ old('email') }}">
                   <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="phone_1">Phone 1</label>
-                  <input type="text" class="form-control" id="phone_1" name="phone_1" value="{{ old('phone_1') }}">
+                  <label class="form-label-premium" for="phone_1">Phone 1</label>
+                  <input type="text" class="form-control form-control-premium" id="phone_1" name="phone_1"
+                    value="{{ old('phone_1') }}">
                   <div class="invalid-feedback">@error('phone_1') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="phone_2">Phone 2</label>
-                  <input type="text" class="form-control" id="phone_2" name="phone_2" value="{{ old('phone_2') }}">
+                  <label class="form-label-premium" for="phone_2">Phone 2</label>
+                  <input type="text" class="form-control form-control-premium" id="phone_2" name="phone_2"
+                    value="{{ old('phone_2') }}">
                   <div class="invalid-feedback">@error('phone_2') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-6">
-                  <label class="form-label" for="address_line_1">Address Line 1</label>
-                  <input type="text" class="form-control" id="address_line_1" name="address_line_1"
+                  <label class="form-label-premium" for="address_line_1">Address Line 1</label>
+                  <input type="text" class="form-control form-control-premium" id="address_line_1" name="address_line_1"
                     value="{{ old('address_line_1') }}">
                   <div class="invalid-feedback">@error('address_line_1') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-6">
-                  <label class="form-label" for="address_line_2">Address Line 2</label>
-                  <input type="text" class="form-control" id="address_line_2" name="address_line_2"
+                  <label class="form-label-premium" for="address_line_2">Address Line 2</label>
+                  <input type="text" class="form-control form-control-premium" id="address_line_2" name="address_line_2"
                     value="{{ old('address_line_2') }}">
                   <div class="invalid-feedback">@error('address_line_2') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="area_id">Area</label>
-                  <select class="form-control select2" id="area_id" name="area_id" required>
+                  <label class="form-label-premium" for="area_id">Area</label>
+                  <select class="form-control form-control-premium select2" id="area_id" name="area_id" required>
                     <option value=""> Select Area</option>
                     @foreach($areaList as $areas)
                       <option value="{{ $areas->id }}">{{ $areas->area }}</option>
@@ -160,8 +165,8 @@
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="city_id">City</label>
-                  <select class="form-control select2" id="city_id" name="city_id" required>
+                  <label class="form-label-premium" for="city_id">City</label>
+                  <select class="form-control form-control-premium select2" id="city_id" name="city_id" required>
                     <option value=""> Select City</option>
                   </select>
                   <div class="invalid-feedback">
@@ -173,8 +178,8 @@
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="state_id">State</label>
-                  <select class="form-control select2" id="state_id" name="state_id">
+                  <label class="form-label-premium" for="state_id">State</label>
+                  <select class="form-control form-control-premium select2" id="state_id" name="state_id">
                     <option value=""> Select State</option>
                   </select>
                   <div class="invalid-feedback">@error('state_id') {{ $message }} @enderror</div>
@@ -182,50 +187,30 @@
 
 
                 <div class="col-4">
-                  <label class="form-label" for="pincode">Pincode</label>
-                  <input type="text" class="form-control" id="pincode" name="pincode" value="{{ old('pincode') }}">
+                  <label class="form-label-premium" for="pincode">Pincode</label>
+                  <input type="text" class="form-control form-control-premium" id="pincode" name="pincode"
+                    value="{{ old('pincode') }}">
                   <div class="invalid-feedback">@error('pincode') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="pan">PAN</label>
-                  <input type="text" class="form-control" id="pan" name="pan" value="{{ old('pan') }}">
+                  <label class="form-label-premium" for="pan">PAN</label>
+                  <input type="text" class="form-control form-control-premium" id="pan" name="pan"
+                    value="{{ old('pan') }}">
                   <div class="invalid-feedback">@error('pan') {{ $message }} @enderror</div>
                 </div>
 
                 <div class="col-4">
-                  <label class="form-label" for="gst">GST</label>
-                  <input type="text" class="form-control" id="gst" name="gst" value="{{ old('gst') }}">
+                  <label class="form-label-premium" for="gst">GST</label>
+                  <input type="text" class="form-control form-control-premium" id="gst" name="gst"
+                    value="{{ old('gst') }}">
                   <div class="invalid-feedback">@error('gst') {{ $message }} @enderror</div>
                 </div>
 
-                <!-- <div class="col-4">
-                  <label class="form-label" for="vat">VAT</label>
-                  <input type="text" class="form-control" id="vat" name="vat" value="{{ old('vat') }}">
-                  <div class="invalid-feedback">@error('vat') {{ $message }} @enderror</div>
-                </div> -->
-
-                <!-- <div class="col-4">
-                  <label class="form-label" for="tin">TIN</label>
-                  <input type="text" class="form-control" id="tin" name="tin" value="{{ old('tin') }}">
-                  <div class="invalid-feedback">@error('tin') {{ $message }} @enderror</div>
-                </div> -->
-
-                <!-- <div class="col-4">
-                  <label class="form-label" for="cst">CST</label>
-                  <input type="text" class="form-control" id="cst" name="cst" value="{{ old('cst') }}">
-                  <div class="invalid-feedback">@error('cst') {{ $message }} @enderror</div>
-                </div>
-
                 <div class="col-4">
-                  <label class="form-label" for="fax">Fax</label>
-                  <input type="text" class="form-control" id="fax" name="fax" value="{{ old('fax') }}">
-                  <div class="invalid-feedback">@error('fax') {{ $message }} @enderror</div>
-                </div> -->
-
-                <div class="col-4">
-                  <label class="form-label" for="web_sites">Website</label>
-                  <input type="text" class="form-control" id="web_sites" name="web_sites" value="{{ old('web_sites') }}">
+                  <label class="form-label-premium" for="web_sites">Website</label>
+                  <input type="text" class="form-control form-control-premium" id="web_sites" name="web_sites"
+                    value="{{ old('web_sites') }}">
                   <div class="invalid-feedback">@error('web_sites') {{ $message }} @enderror</div>
                 </div>
 
@@ -235,7 +220,7 @@
 
               <div class="col-12">
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-lg" type="submit" style="background:#bf0103;color:white;">
+                  <button class="btn btn-primary-custom" type="submit">
                     Submit
                   </button>
                 </div>
