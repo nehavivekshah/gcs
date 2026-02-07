@@ -568,6 +568,9 @@
               </select>
             </div>
 
+            <input type="text" name="company_selected_name" id="company_selected_name" class="form-control">
+            <input type="text" name="product_selected_name" id="product_selected_name" class="form-control">
+
             <div class="col-md-6">
               <label class="form-label-premium">Category Type</label>
               <select name="category_type" id="category_type"
@@ -593,12 +596,6 @@
               <input type="text" name="branch_name" id="branch_name"
                 class="form-control form-control-premium">
             </div> -->
-
-            <div class="col-md-6">
-              <label class="form-label-premium">Product UIN</label>
-              <input type="text" name="product_uin" id="product_uin"
-                class="form-control form-control-premium">
-            </div>
 
             <div class="col-md-12">
               <label class="form-label-premium">Description</label>
@@ -744,6 +741,9 @@
               </select>
             </div>
 
+            <input type="hidden" name="company_selected_name" id="edit_company_selected_name" class="form-control">
+            <input type="hidden" name="product_selected_name" id="edit_product_selected_name" class="form-control">
+
             <div class="col-md-6">
               <label class="form-label-premium">Category Type</label>
               <select name="category_type" id="edit_category_type"
@@ -760,12 +760,6 @@
                 <option value="Software">Software</option>
                 <option value="Hardware">Hardware</option>
               </select>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label-premium">Product UIN</label>
-              <input type="text" name="product_uin" id="edit_product_uin"
-                class="form-control form-control-premium">
             </div>
 
             <div class="col-md-12">
@@ -1266,6 +1260,7 @@
     $('#edit_call_status').val($(this).data('call-status'));
     $('#edit_confirm_by').val($(this).data('confirm-by'));
 
+    
     // 🔥 Load products and auto-select
     if (companyID) {
       $.ajax({
@@ -1340,6 +1335,8 @@
             );
           });
 
+          let productText = $('#edit_product_id option:selected').text();
+        $("#edit_product_selected_name").val(productText);
 
         },
         error: function() {
@@ -1347,6 +1344,14 @@
         }
       });
     }
+
+    let customerFull = $('#edit_company_id option:selected').text(); // Rahul Panchal
+    let productText  = $('#edit_product_id option:selected').text();
+
+   
+    let customerFirstName = customerFull.split(' ')[0];
+
+    $("#edit_company_selected_name").val(customerFirstName);
 
     $('#editCustomerComplaintModal').modal('show');
   });
@@ -1600,5 +1605,37 @@
 
   });
 </script>
+
+<script>
+$('#product_id').on('change', function () {
+
+    let customerFull = $('#company_id option:selected').text(); // Rahul Panchal
+    let productText  = $('#product_id option:selected').text();
+
+   
+    let customerFirstName = customerFull.split(' ')[0];
+
+    $("#company_selected_name").val(customerFirstName);
+    $("#product_selected_name").val(productText);
+
+});
+
+
+$('#edit_product_id').on('change', function () {
+
+    let customerFull = $('#edit_company_id option:selected').text(); // Rahul Panchal
+    let productText  = $('#edit_product_id option:selected').text();
+
+   
+    let customerFirstName = customerFull.split(' ')[0];
+
+    $("#edit_company_selected_name").val(customerFirstName);
+    $("#edit_product_selected_name").val(productText);
+
+});
+
+</script>
+
+
 
 @endpush

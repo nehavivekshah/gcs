@@ -31,7 +31,6 @@ class CompanyComplaintController extends Controller
         $department_id  = $request->department_id;
         $category_type  = $request->category_type;
         $complaint_mode  = $request->complaint_mode;
-        $product_uin  = $request->product_uin;
         $description  = $request->description;
         $user_name  = $request->user_name;
         $expected_time  = $request->expected_time;
@@ -41,6 +40,13 @@ class CompanyComplaintController extends Controller
         $call_status  = $request->call_status;
         $confirm_by  = $request->confirm_by;
         $created_by = session('user_name', 'Guest');
+
+        $company_selected_name = $request->company_selected_name;
+        $product_selected_name = $request->product_selected_name;
+
+        $count = $this->customerComplaintService->getProductCount($company_id,$product_id);
+
+        $product_uin = $company_selected_name . '-' . $product_selected_name . '-' . ($count + 1);
 
         $data = [
             'customer_id' => $company_id,
@@ -77,7 +83,6 @@ class CompanyComplaintController extends Controller
         $product_id  = $request->product_id;
         $category_type  = $request->category_type;
         $complaint_mode  = $request->complaint_mode;
-        $product_uin  = $request->product_uin;
         $description  = $request->description;
         $user_name  = $request->user_name;
         $expected_time  = $request->expected_time;
@@ -88,6 +93,13 @@ class CompanyComplaintController extends Controller
         $call_status  = $request->call_status;
         $confirm_by  = $request->confirm_by;
         $modified_by = session('user_name', 'Guest');
+
+        $company_selected_name = $request->company_selected_name;
+        $product_selected_name = $request->product_selected_name;
+
+        $count = $this->customerComplaintService->getProductCount($company_id,$product_id);
+
+        $product_uin = $company_selected_name . '-' . $product_selected_name . '-' . ($count + 1);
 
         $data = [
             'company_id' => $company_id,

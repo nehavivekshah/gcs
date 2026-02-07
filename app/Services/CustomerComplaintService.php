@@ -8,6 +8,7 @@ use App\Models\CustomerComplaintVisit;
 use App\Models\CustomerProduct;
 use App\Models\CustomerBranch;
 use App\Models\CustomerDepartment;
+use App\Models\CustomerComplaint;
 
 
 use App\Repository\CustomerComplaintRepository;
@@ -109,6 +110,13 @@ class CustomerComplaintService
          ->select('customer_products.*','amc_products.id as product_id', 'amc_products.amc_product')
          ->leftJoin('amc_products', 'customer_products.amc_product_id', '=', 'amc_products.id')
          ->get();
+   }
+
+   function getProductCount($company_id,$product_id)
+   {
+      return CustomerComplaint::where('customer_complaints.product_id', $product_id)
+         ->where('customer_complaints.customer_id', $company_id)
+         ->count();
    }
 
 }
