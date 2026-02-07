@@ -16,8 +16,7 @@ class CoordinatorController extends Controller
     {
 
         $coordinatorList = $this->coordinatorService->index();
-        $userTypeList = $this->coordinatorService->gatAllUserType();
-        return view('backend/coordinator/coordinator-list', compact('coordinatorList', 'userTypeList'));
+        return view('backend/coordinator/coordinator-list', compact('coordinatorList'));
     }
 
 
@@ -35,7 +34,7 @@ class CoordinatorController extends Controller
         $userPassword = $req->user_password;
         $outlookEmail = $req->outlook_email;
         $outlookPassword = $req->outlook_password;
-        $userType = $req->user_type;
+        $userType = 4;
         $host = 'localhost';
 
         $created_by = session('user_name', 'Guest');

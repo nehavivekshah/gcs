@@ -121,16 +121,7 @@
                   placeholder="Enter Outlook Password" required>
                 <div class="invalid-feedback">Please enter outlook password.</div>
               </div>
-              <div class="col-md-12">
-                <label class="form-label-premium">User Type <span class="text-danger">*</span></label>
-                <select class="form-control form-control-premium select2" name="user_type" required>
-                  <option value="">Select User Type</option>
-                  @foreach($userTypeList as $userType)
-                    <option value="{{ $userType->id }}">{{ $userType->user_type }}</option>
-                  @endforeach
-                </select>
-                <div class="invalid-feedback">Please select user type.</div>
-              </div>
+
             </div>
           </div>
           <div class="modal-footer border-0 p-4 pt-0">
