@@ -53,10 +53,10 @@
                       <td>{{ $area->modified_by }}</td>
                       <td class="text-center">
                         <div class="d-flex justify-content-center align-items-center gap-2">
-                          <a href="javascript:void(0);" class="btn btn-sm-custom btn-outline-dark editAreaBtn"
-                            data-area='@json($area)' data-bs-toggle="tooltip" title="Edit">
+                          <button type="button" class="btn btn-sm-custom btn-outline-dark editAreaBtn"
+                            data-area='@json($area)' data-bs-toggle="modal" data-bs-target="#editAreaModal" title="Edit">
                             <i class="icon-pencil-alt"></i>
-                          </a>
+                          </button>
                           <a href="{{ route('admin.area.delete', ['uuid' => $area->uuid]) }}"
                             class="btn btn-sm-custom btn-outline-dark" data-bs-toggle="tooltip" title="Delete"
                             onclick="return confirm('Are you sure you want to delete this record?');">
@@ -223,23 +223,27 @@
       handleCityStateDependency('#add_city_id', '#add_state_id');
       handleCityStateDependency('#edit_city_id', '#edit_state_id');
 
-      // Handle Edit Click using event delegation for DataTables
-      $(document).on('click', '.editAreaBtn', function () {
-        const area = $(this).data('area');
-        
-        // Temporarily disable the change listener to prevent AJAX overwrite
+      handleCityStateDependency('#add_city_id', '#add_state_id');
+      handleCityStateDependency('#edit_city_id', '#edit_state_id');
+
+      // Handle Edit Modal Population
+      $('#editAreaModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var area = button.data('area'); // Extract info from data-* attributes
+
+        var modal = $(this);
+        // Temporarily disable the change listener
         $('#edit_city_id').off('change');
-        
-        $('#edit_city_id').val(area.city_id).trigger('change');
-        $('#edit_state_id').val(area.state_id).trigger('change');
-        $('#edit_area_name').val(area.area);
+
+        modal.find('#edit_city_id').val(area.city_id).trigger('change');
+        modal.find('#edit_state_id').val(area.state_id).trigger('change');
+        modal.find('#edit_area_name').val(area.area);
 
         // Re-enable the change listener
         handleCityStateDependency('#edit_city_id', '#edit_state_id');
 
-        let updateUrl = "{{ route('admin.area.update', ['uuid' => ':uuid']) }}";
-        $('#editAreaForm').attr('action', updateUrl.replace(':uuid', area.uuid));
-        $('#editAreaModal').modal('show');
+        var updateUrl = "{{ route('admin.area.update', ['uuid' => ':uuid']) }}";
+        modal.find('#editAreaForm').attr('action', updateUrl.replace(':uuid', area.uuid));
       });
     });
   </script>
